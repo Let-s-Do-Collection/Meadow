@@ -8,14 +8,14 @@ import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
-import net.satisfy.meadow.util.MeadowIdentifier;
+import net.satisfy.meadow.Meadow;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
 public class MeadowStandardItem extends StandardItem {
     public MeadowStandardItem(Properties properties) {
-        super(properties, new MeadowIdentifier("textures/standard/meadow_standard.png"), () -> new MobEffectInstance(MobEffects.DIG_SPEED, 200, 1, true, false, true));
+        super(properties, Meadow.identifier("textures/standard/meadow_standard.png"), () -> new MobEffectInstance(MobEffects.DIG_SPEED, 200, 1, true, false, true));
     }
 
     @Override

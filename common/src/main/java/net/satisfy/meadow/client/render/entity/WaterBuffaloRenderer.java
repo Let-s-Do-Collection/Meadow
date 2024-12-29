@@ -5,16 +5,15 @@ import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;
+import net.satisfy.meadow.Meadow;
 import net.satisfy.meadow.client.MeadowClient;
 import net.satisfy.meadow.client.model.WaterBuffaloModel;
 import net.satisfy.meadow.entity.WaterBuffalo;
 import org.jetbrains.annotations.NotNull;
 
-import static net.satisfy.meadow.Meadow.MOD_ID;
-
 public class WaterBuffaloRenderer extends MobRenderer<WaterBuffalo, WaterBuffaloModel> {
 
-    private static final ResourceLocation TEXTURE = new ResourceLocation(MOD_ID, "textures/entity/buffalo/water_buffalo.png");
+    private static final ResourceLocation TEXTURE = Meadow.identifier("textures/entity/buffalo/water_buffalo.png");
 
     public WaterBuffaloRenderer(EntityRendererProvider.Context context) {
         super(context, new WaterBuffaloModel(context.bakeLayer(MeadowClient.WATER_BUFFALO_MODEL_LAYER)), 1.0f);

@@ -2,12 +2,12 @@ package net.satisfy.meadow.forge.networking;
 
 import dev.architectury.networking.NetworkManager;
 import net.minecraft.resources.ResourceLocation;
-import net.satisfy.meadow.util.MeadowIdentifier;
+import net.satisfy.meadow.Meadow;
 
 public class MeadowNetworkForge {
 
-    public static final ResourceLocation VAR_S2C = new MeadowIdentifier("var");
-    public static final ResourceLocation VAR_REQUEST_S2C = new MeadowIdentifier("var_request");
+    public static final ResourceLocation VAR_S2C = Meadow.identifier("var");
+    public static final ResourceLocation VAR_REQUEST_S2C = Meadow.identifier("var_request");
 
     public static void registerC2SPackets() {
         registerReceiver(NetworkManager.Side.C2S, VAR_REQUEST_S2C, new VarRequestC2SPacket());

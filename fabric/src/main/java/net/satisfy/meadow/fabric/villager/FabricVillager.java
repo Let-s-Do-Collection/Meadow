@@ -20,17 +20,17 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.trading.MerchantOffer;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
+import net.satisfy.meadow.Meadow;
 import net.satisfy.meadow.registry.ObjectRegistry;
-import net.satisfy.meadow.util.MeadowIdentifier;
 
 @SuppressWarnings("deprecation")
 public class FabricVillager {
 
-    private static final MeadowIdentifier CHEESEMAKER_POI_IDENTIFIER = new MeadowIdentifier("cheesemaker_poi");
+    private static final ResourceLocation CHEESEMAKER_POI_IDENTIFIER = Meadow.identifier("cheesemaker_poi");
     public static final PoiType CHEESEMAKER_POI = PointOfInterestHelper.register(CHEESEMAKER_POI_IDENTIFIER, 1, 12, ObjectRegistry.CHEESE_FORM.get());
     public static final VillagerProfession CHEESEMAKER = Registry.register(BuiltInRegistries.VILLAGER_PROFESSION, new ResourceLocation("meadow", "cheesemaker"), VillagerProfessionBuilder.create().id(new ResourceLocation("meadow", "cheesemaker")).workstation(ResourceKey.create(Registries.POINT_OF_INTEREST_TYPE, CHEESEMAKER_POI_IDENTIFIER)).build());
 
-    private static final MeadowIdentifier HERMIT_POI_IDENTIFIER = new MeadowIdentifier("hermit_poi");
+    private static final ResourceLocation HERMIT_POI_IDENTIFIER = Meadow.identifier("hermit_poi");
     public static final PoiType HERMIT_POI = PointOfInterestHelper.register(HERMIT_POI_IDENTIFIER, 1, 12, ObjectRegistry.WOODCUTTER.get());
     public static final VillagerProfession HERMIT = Registry.register(BuiltInRegistries.VILLAGER_PROFESSION, new ResourceLocation("meadow", "hermit"), VillagerProfessionBuilder.create().id(new ResourceLocation("meadow", "hermit")).workstation(ResourceKey.create(Registries.POINT_OF_INTEREST_TYPE, HERMIT_POI_IDENTIFIER)).build());
 

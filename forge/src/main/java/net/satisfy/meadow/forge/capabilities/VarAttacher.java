@@ -12,13 +12,13 @@ import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.common.util.INBTSerializable;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
-import net.satisfy.meadow.util.MeadowIdentifier;
+import net.satisfy.meadow.Meadow;
 import org.jetbrains.annotations.NotNull;
 
 public final class VarAttacher {
     private static class VarCapabilityProvider implements ICapabilityProvider, INBTSerializable<CompoundTag> {
 
-        public static final ResourceLocation IDENTIFIER = new MeadowIdentifier("var");
+        public static final ResourceLocation IDENTIFIER = Meadow.identifier("var");
         private final VarHolder backend = new VarHolder();
         private final LazyOptional<VarHolder> optionalData = LazyOptional.of(() -> backend);
 

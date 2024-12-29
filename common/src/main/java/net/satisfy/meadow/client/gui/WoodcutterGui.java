@@ -11,14 +11,14 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.player.Inventory;
+import net.satisfy.meadow.Meadow;
 import net.satisfy.meadow.client.gui.handler.WoodcutterGuiHandler;
 import net.satisfy.meadow.recipes.WoodcuttingRecipe;
-import net.satisfy.meadow.util.MeadowIdentifier;
 
 import java.util.List;
 
 public class WoodcutterGui extends AbstractContainerScreen<WoodcutterGuiHandler> {
-    private static final ResourceLocation TEXTURE = new MeadowIdentifier( "textures/gui/woodcutter.png");
+    private static final ResourceLocation TEXTURE = Meadow.identifier( "textures/gui/woodcutter.png");
     private final int recipeIconPosX = 58;
     private final int recipeIconPosY = 15;
     private final int maxRecipeIcons = 12;

@@ -5,7 +5,7 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
-import net.satisfy.meadow.util.MeadowIdentifier;
+import net.satisfy.meadow.Meadow;
 
 
 public class MeadowPlacedFeature {
@@ -31,7 +31,7 @@ public class MeadowPlacedFeature {
     public static final ResourceKey<PlacedFeature> MEADOW_MC_TREES = registerMCKey("trees_meadow");
 
     public static ResourceKey<PlacedFeature> registerKey(String name) {
-        return ResourceKey.create(Registries.PLACED_FEATURE, new MeadowIdentifier(name));
+        return ResourceKey.create(Registries.PLACED_FEATURE, Meadow.identifier(name));
     }
 
     public static ResourceKey<PlacedFeature> registerMCKey(String name) {

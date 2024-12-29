@@ -7,7 +7,6 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.satisfy.meadow.Meadow;
-import net.satisfy.meadow.util.MeadowIdentifier;
 
 public class SoundRegistry {
     public static final Registrar<SoundEvent> SOUND_EVENTS = DeferredRegister.create(Meadow.MOD_ID, Registries.SOUND_EVENT).getRegistrar();
@@ -19,7 +18,7 @@ public class SoundRegistry {
     public static final RegistrySupplier<SoundEvent> BUFFALO_DEATH = create("buffalo_death");
 
     private static RegistrySupplier<SoundEvent> create(String name) {
-        final ResourceLocation id = new MeadowIdentifier(name);
+        final ResourceLocation id = Meadow.identifier(name);
         return SOUND_EVENTS.register(id, () -> SoundEvent.createVariableRangeEvent(id));
     }
 

@@ -19,11 +19,11 @@ public class EntityRegistry {
     private static final DeferredRegister<EntityType<?>> ENTITY_TYPES = DeferredRegister.create(Meadow.MOD_ID, Registries.ENTITY_TYPE);
 
     public static final RegistrySupplier<EntityType<WaterBuffalo>> WATER_BUFFALO = create("water_buffalo",
-            () -> EntityType.Builder.of(WaterBuffalo::new, MobCategory.CREATURE).sized(0.9f, 1.4f).build(new ResourceLocation(Meadow.MOD_ID, "water_buffalo").toString())
+            () -> EntityType.Builder.of(WaterBuffalo::new, MobCategory.CREATURE).sized(0.9f, 1.4f).build(Meadow.identifier("water_buffalo").toString())
     );
 
     public static final RegistrySupplier<EntityType<ShearableVarCow>> SHEARABLE_MEADOW_VAR_COW = create("wooly_cow",
-            () -> EntityType.Builder.of(ShearableVarCow::new, MobCategory.CREATURE).sized(0.9f, 1.4f).build(new ResourceLocation(Meadow.MOD_ID, "wooly_cow").toString())
+            () -> EntityType.Builder.of(ShearableVarCow::new, MobCategory.CREATURE).sized(0.9f, 1.4f).build(Meadow.identifier("wooly_cow").toString())
     );
 
     public static void registerCow(Supplier<? extends EntityType<? extends Animal>> typeSupplier) {
@@ -31,7 +31,7 @@ public class EntityRegistry {
     }
 
     public static <T extends EntityType<?>> RegistrySupplier<T> create(final String path, final Supplier<T> type) {
-        return ENTITY_TYPES.register(new ResourceLocation(Meadow.MOD_ID, path), type);
+        return ENTITY_TYPES.register(Meadow.identifier(path), type);
     }
 
     public static void init() {

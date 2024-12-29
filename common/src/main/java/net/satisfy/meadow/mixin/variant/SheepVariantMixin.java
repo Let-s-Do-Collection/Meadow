@@ -16,8 +16,8 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.ServerLevelAccessor;
+import net.satisfy.meadow.Meadow;
 import net.satisfy.meadow.entity.var.SheepVar;
-import net.satisfy.meadow.util.MeadowIdentifier;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
@@ -69,7 +69,7 @@ public abstract class SheepVariantMixin extends MobVariantMixin {
 
         ResourceLocation location = BuiltInRegistries.ITEM.getKey(wool);
         String s = location.getPath().replace("_wool", "");
-        cir.setReturnValue(new MeadowIdentifier("entities/sheep/" + s));
+        cir.setReturnValue(Meadow.identifier("entities/sheep/" + s));
     }
 
     @Unique

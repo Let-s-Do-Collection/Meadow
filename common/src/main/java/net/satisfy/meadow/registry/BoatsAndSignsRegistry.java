@@ -10,14 +10,14 @@ import net.minecraft.world.item.HangingSignItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.SignItem;
 import net.minecraft.world.level.block.Block;
-import net.satisfy.meadow.util.MeadowIdentifier;
+import net.satisfy.meadow.Meadow;
 
 @SuppressWarnings("unused")
 public class BoatsAndSignsRegistry {
-    public static final ResourceLocation PINE_BOAT_TYPE = new MeadowIdentifier("pine");
-    public static final ResourceLocation PINE_SIGN_TEXTURE = new MeadowIdentifier("entity/signs/pine");
-    public static final ResourceLocation PINE_HANGING_SIGN_TEXTURE = new MeadowIdentifier("entity/signs/hanging/pine");
-    public static final ResourceLocation PINE_HANGING_SIGN_GUI_TEXTURE = new MeadowIdentifier("textures/gui/hanging_signs/pine");
+    public static final ResourceLocation PINE_BOAT_TYPE = Meadow.identifier("pine");
+    public static final ResourceLocation PINE_SIGN_TEXTURE = Meadow.identifier("entity/signs/pine");
+    public static final ResourceLocation PINE_HANGING_SIGN_TEXTURE = Meadow.identifier("entity/signs/hanging/pine");
+    public static final ResourceLocation PINE_HANGING_SIGN_GUI_TEXTURE = Meadow.identifier("textures/gui/hanging_signs/pine");
 
     public static final RegistrySupplier<Block> PINE_SIGN = registerPineSign();
     public static final RegistrySupplier<Block> PINE_WALL_SIGN = registerPineWallSign();

@@ -3,8 +3,8 @@ package net.satisfy.meadow.mixin.variant.client;
 import net.minecraft.client.renderer.entity.SheepRenderer;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.animal.Sheep;
+import net.satisfy.meadow.Meadow;
 import net.satisfy.meadow.entity.var.SheepVar;
-import net.satisfy.meadow.util.MeadowIdentifier;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -17,6 +17,6 @@ public class SheepRendererMixin {
     private void onGetTexture(Sheep sheep, CallbackInfoReturnable<ResourceLocation> cir) {
         SheepVar var = SheepVar.getVariant(sheep);
         if(var.equals(SheepVar.DEFAULT)) return;
-        cir.setReturnValue(new MeadowIdentifier(String.format("textures/entity/sheep/%s_sheep.png", var.getSerializedName())));
+        cir.setReturnValue(Meadow.identifier(String.format("textures/entity/sheep/%s_sheep.png", var.getSerializedName())));
     }
 }

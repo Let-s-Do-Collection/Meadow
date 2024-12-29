@@ -30,10 +30,10 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
+import net.satisfy.meadow.Meadow;
 import net.satisfy.meadow.entity.var.ShearableCowVar;
 import net.satisfy.meadow.registry.EntityRegistry;
 import net.satisfy.meadow.registry.ObjectRegistry;
-import net.satisfy.meadow.util.MeadowIdentifier;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -57,7 +57,7 @@ public class ShearableVarCow extends Animal implements Shearable, VariantHolder<
         ResourceLocation location = BuiltInRegistries.ITEM.getKey(getVariant().getWool());
         String s = location.getPath().replace("_wool", "");
 
-        return new MeadowIdentifier("entities/wooly_cow/" + s);
+        return Meadow.identifier("entities/wooly_cow/" + s);
     }
 
     @Override

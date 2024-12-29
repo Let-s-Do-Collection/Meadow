@@ -45,7 +45,6 @@ import net.satisfy.meadow.item.armor.FurBoots;
 import net.satisfy.meadow.item.armor.FurChest;
 import net.satisfy.meadow.item.armor.FurHead;
 import net.satisfy.meadow.item.armor.FurLegs;
-import net.satisfy.meadow.util.MeadowIdentifier;
 import net.satisfy.meadow.util.WoodenCauldronBehavior;
 import org.jetbrains.annotations.NotNull;
 
@@ -168,7 +167,7 @@ public class ObjectRegistry {
     public static final RegistrySupplier<Block> WOODEN_FLOWER_POT_BIG = registerWithItem("wooden_flower_pot_big", () -> new MeadowFlowerPotBigBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).instabreak()));
     public static final RegistrySupplier<Block> WOODEN_FLOWER_POT_SMALL = registerWithItem("wooden_flower_pot_small", () -> new FlowerPotSmallBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).instabreak()));
     public static final RegistrySupplier<Block> WOODEN_FLOWER_BOX = registerWithItem("wooden_flower_box", () -> new FlowerBoxBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).instabreak()));
-    public static final RegistrySupplier<Item> FUR_HELMET = registerItem("fur_helmet", () -> new FurHead(ArmorMaterialRegistry.FUR_ARMOR, ArmorItem.Type.HELMET, getSettings().rarity(Rarity.EPIC), new MeadowIdentifier("textures/models/armor/fur.png")));
+    public static final RegistrySupplier<Item> FUR_HELMET = registerItem("fur_helmet", () -> new FurHead(ArmorMaterialRegistry.FUR_ARMOR, ArmorItem.Type.HELMET, getSettings().rarity(Rarity.EPIC), Meadow.identifier("textures/models/armor/fur.png")));
     public static final RegistrySupplier<Item> FUR_CHESTPLATE = registerItem("fur_chestplate", () -> new FurChest(ArmorMaterialRegistry.FUR_ARMOR, getSettings().rarity(Rarity.RARE)));
     public static final RegistrySupplier<Item> FUR_LEGGINGS = registerItem("fur_leggings", () -> new FurLegs(ArmorMaterialRegistry.FUR_ARMOR, getSettings().rarity(Rarity.RARE)));
     public static final RegistrySupplier<Item> FUR_BOOTS = registerItem("fur_boots", () -> new FurBoots(ArmorMaterialRegistry.FUR_ARMOR, getSettings().rarity(Rarity.RARE)));
@@ -276,7 +275,7 @@ public class ObjectRegistry {
     }
 
     public static ResourceKey<ConfiguredFeature<?, ?>> configuredFeatureKey(String name) {
-        return ResourceKey.create(Registries.CONFIGURED_FEATURE, new ResourceLocation(Meadow.MOD_ID, name));
+        return ResourceKey.create(Registries.CONFIGURED_FEATURE, Meadow.identifier(name));
     }
 
     private static ButtonBlock woodenButton(FeatureFlag... featureFlags) {
@@ -290,15 +289,15 @@ public class ObjectRegistry {
 
     
     public static <T extends Block> RegistrySupplier<T> registerWithItem(String name, Supplier<T> block) {
-        return Util.registerWithItem(BLOCKS, BLOCK_REGISTRAR, ITEMS, ITEM_REGISTRAR, new MeadowIdentifier(name), block);
+        return Util.registerWithItem(BLOCKS, BLOCK_REGISTRAR, ITEMS, ITEM_REGISTRAR, Meadow.identifier(name), block);
     }
 
     public static <T extends Block> RegistrySupplier<T> registerWithoutItem(String path, Supplier<T> block) {
-        return Util.registerWithoutItem(BLOCKS, BLOCK_REGISTRAR, new MeadowIdentifier(path), block);
+        return Util.registerWithoutItem(BLOCKS, BLOCK_REGISTRAR, Meadow.identifier(path), block);
     }
 
     public static <T extends Item> RegistrySupplier<T> registerItem(String path, Supplier<T> itemSupplier) {
-        return Util.registerItem(ITEMS, ITEM_REGISTRAR, new MeadowIdentifier(path), itemSupplier);
+        return Util.registerItem(ITEMS, ITEM_REGISTRAR, Meadow.identifier(path), itemSupplier);
     }
 }
 
