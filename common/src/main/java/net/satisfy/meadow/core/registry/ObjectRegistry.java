@@ -32,7 +32,6 @@ import net.satisfy.meadow.core.block.*;
 import net.satisfy.meadow.core.entity.PineBoatEntity;
 import net.satisfy.meadow.core.item.*;
 import net.satisfy.meadow.core.util.GeneralUtil;
-import net.satisfy.meadow.core.util.MeadowIdentifier;
 import net.satisfy.meadow.core.util.MeadowWoodType;
 import net.satisfy.meadow.core.util.WoodenCauldronBehavior;
 import org.jetbrains.annotations.NotNull;
@@ -157,10 +156,10 @@ public class ObjectRegistry {
     public static final RegistrySupplier<Block> WOODEN_FLOWER_POT_BIG = registerWithItem("wooden_flower_pot_big", () -> new FlowerPotBigBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).instabreak()));
     public static final RegistrySupplier<Block> WOODEN_FLOWER_POT_SMALL = registerWithItem("wooden_flower_pot_small", () -> new FlowerPotSmallBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).instabreak()));
     public static final RegistrySupplier<Block> WOODEN_FLOWER_BOX = registerWithItem("wooden_flower_box", () -> new FlowerBoxBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).instabreak()));
-    public static final RegistrySupplier<Item> FUR_HELMET = registerItem("fur_helmet", () -> new FurHelmetItem(ArmorMaterialRegistry.FUR_ARMOR, ArmorItem.Type.HELMET, getSettings().rarity(Rarity.EPIC), new MeadowIdentifier("textures/models/armor/fur.png")));
-    public static final RegistrySupplier<Item> FUR_CHESTPLATE = registerItem("fur_chestplate", () -> new FurChestItem(ArmorMaterialRegistry.FUR_ARMOR, ArmorItem.Type.CHESTPLATE, getSettings().rarity(Rarity.RARE), new MeadowIdentifier("textures/models/armor/fur.png")));
-    public static final RegistrySupplier<Item> FUR_LEGGINGS = registerItem("fur_leggings", () -> new FurLegsItem(ArmorMaterialRegistry.FUR_ARMOR, ArmorItem.Type.LEGGINGS, getSettings().rarity(Rarity.RARE), new MeadowIdentifier("textures/models/armor/fur.png")));
-    public static final RegistrySupplier<Item> FUR_BOOTS = registerItem("fur_boots", () -> new FurBootsItem(ArmorMaterialRegistry.FUR_ARMOR, ArmorItem.Type.BOOTS, getSettings().rarity(Rarity.RARE), new MeadowIdentifier("textures/models/armor/fur.png")));
+    public static final RegistrySupplier<Item> FUR_HELMET = registerItem("fur_helmet", () -> new FurHelmetItem(ArmorMaterialRegistry.FUR_ARMOR, ArmorItem.Type.HELMET, getSettings().rarity(Rarity.EPIC), Meadow.identifier("textures/models/armor/fur.png")));
+    public static final RegistrySupplier<Item> FUR_CHESTPLATE = registerItem("fur_chestplate", () -> new FurChestItem(ArmorMaterialRegistry.FUR_ARMOR, ArmorItem.Type.CHESTPLATE, getSettings().rarity(Rarity.RARE), Meadow.identifier("textures/models/armor/fur.png")));
+    public static final RegistrySupplier<Item> FUR_LEGGINGS = registerItem("fur_leggings", () -> new FurLegsItem(ArmorMaterialRegistry.FUR_ARMOR, ArmorItem.Type.LEGGINGS, getSettings().rarity(Rarity.RARE), Meadow.identifier("textures/models/armor/fur.png")));
+    public static final RegistrySupplier<Item> FUR_BOOTS = registerItem("fur_boots", () -> new FurBootsItem(ArmorMaterialRegistry.FUR_ARMOR, ArmorItem.Type.BOOTS, getSettings().rarity(Rarity.RARE), Meadow.identifier("textures/models/armor/fur.png")));
     public static final RegistrySupplier<Block> SMALL_FIR = registerWithItem("small_fir", () -> new DoublePlantBlock(BlockBehaviour.Properties.copy(Blocks.ROSE_BUSH)));
     public static final RegistrySupplier<Block> PINE_SAPLING = registerWithItem("pine_sapling", () -> new SaplingBlock(new AbstractTreeGrower() {
         @Override
@@ -271,7 +270,7 @@ public class ObjectRegistry {
     }
 
     public static ResourceKey<ConfiguredFeature<?, ?>> configuredFeatureKey(String name) {
-        return ResourceKey.create(Registries.CONFIGURED_FEATURE, new ResourceLocation(Meadow.MOD_ID, name));
+        return ResourceKey.create(Registries.CONFIGURED_FEATURE, Meadow.identifier(name));
     }
 
     private static ButtonBlock woodenButton(FeatureFlag... featureFlags) {
@@ -284,15 +283,15 @@ public class ObjectRegistry {
     }
 
     public static <T extends Block> RegistrySupplier<T> registerWithItem(String name, Supplier<T> block) {
-        return GeneralUtil.registerWithItem(BLOCKS, BLOCK_REGISTRAR, ITEMS, ITEM_REGISTRAR, new MeadowIdentifier(name), block);
+        return GeneralUtil.registerWithItem(BLOCKS, BLOCK_REGISTRAR, ITEMS, ITEM_REGISTRAR, Meadow.identifier(name), block);
     }
 
     public static <T extends Block> RegistrySupplier<T> registerWithoutItem(String path, Supplier<T> block) {
-        return GeneralUtil.registerWithoutItem(BLOCKS, BLOCK_REGISTRAR, new MeadowIdentifier(path), block);
+        return GeneralUtil.registerWithoutItem(BLOCKS, BLOCK_REGISTRAR, Meadow.identifier(path), block);
     }
 
     public static <T extends Item> RegistrySupplier<T> registerItem(String path, Supplier<T> itemSupplier) {
-        return GeneralUtil.registerItem(ITEMS, ITEM_REGISTRAR, new MeadowIdentifier(path), itemSupplier);
+        return GeneralUtil.registerItem(ITEMS, ITEM_REGISTRAR, Meadow.identifier(path), itemSupplier);
     }
 }
 

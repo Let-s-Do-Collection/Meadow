@@ -12,6 +12,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeManager;
+import net.satisfy.meadow.Meadow;
 import net.satisfy.meadow.client.gui.handler.CheeseFormGuiHandler;
 import net.satisfy.meadow.client.gui.handler.CookingCauldronGuiHandler;
 import net.satisfy.meadow.core.compat.jei.category.CheesePressCategory;
@@ -23,7 +24,6 @@ import net.satisfy.meadow.core.recipes.WoodcuttingRecipe;
 import net.satisfy.meadow.core.registry.ObjectRegistry;
 import net.satisfy.meadow.core.registry.RecipeRegistry;
 import net.satisfy.meadow.core.registry.ScreenHandlerRegistry;
-import net.satisfy.meadow.core.util.MeadowIdentifier;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
@@ -58,7 +58,7 @@ public class MeadowJEIPlugin implements IModPlugin {
 
     @Override
     public @NotNull ResourceLocation getPluginUid() {
-        return new MeadowIdentifier("jei_plugin");
+        return Meadow.identifier("jei_plugin");
     }
 
     @Override

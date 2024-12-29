@@ -7,18 +7,18 @@ import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.client.renderer.entity.layers.RenderLayer;
 import net.minecraft.resources.ResourceLocation;
+import net.satisfy.meadow.Meadow;
 import net.satisfy.meadow.client.model.WoolySheepFurModel;
 import net.satisfy.meadow.client.model.WoolySheepModel;
 import net.satisfy.meadow.core.entity.WoolySheepEntity;
-import net.satisfy.meadow.core.util.MeadowIdentifier;
 
 public class WoolySheepFurLayerRenderer extends RenderLayer<WoolySheepEntity, WoolySheepModel<WoolySheepEntity>> {
-    private static final ResourceLocation FLECKED_FUR_LOCATION = new MeadowIdentifier("textures/entity/sheep/flecked_sheep_fur.png");
-    private static final ResourceLocation PATCHED_FUR_LOCATION = new MeadowIdentifier("textures/entity/sheep/patched_sheep_fur.png");
-    private static final ResourceLocation ROCKY_FUR_LOCATION = new MeadowIdentifier("textures/entity/sheep/rocky_sheep_fur.png");
-    private static final ResourceLocation INKY_FUR_LOCATION = new MeadowIdentifier("textures/entity/sheep/inky_sheep_fur.png");
-    private static final ResourceLocation FUZZY_FUR_LOCATION = new MeadowIdentifier("textures/entity/sheep/fuzzy_sheep_fur.png");
-    private static final ResourceLocation LONG_NOSED_FUR_LOCATION = new MeadowIdentifier("textures/entity/sheep/long_nosed_sheep_fur.png");
+    private static final ResourceLocation FLECKED_FUR_LOCATION = Meadow.identifier("textures/entity/sheep/flecked_sheep_fur.png");
+    private static final ResourceLocation PATCHED_FUR_LOCATION = Meadow.identifier("textures/entity/sheep/patched_sheep_fur.png");
+    private static final ResourceLocation ROCKY_FUR_LOCATION = Meadow.identifier("textures/entity/sheep/rocky_sheep_fur.png");
+    private static final ResourceLocation INKY_FUR_LOCATION = Meadow.identifier("textures/entity/sheep/inky_sheep_fur.png");
+    private static final ResourceLocation FUZZY_FUR_LOCATION = Meadow.identifier("textures/entity/sheep/fuzzy_sheep_fur.png");
+    private static final ResourceLocation LONG_NOSED_FUR_LOCATION = Meadow.identifier("textures/entity/sheep/long_nosed_sheep_fur.png");
     private final WoolySheepFurModel<WoolySheepEntity> sheepModel;
 
     public WoolySheepFurLayerRenderer(RenderLayerParent<WoolySheepEntity, WoolySheepModel<WoolySheepEntity>> parent, EntityRendererProvider.Context context) {
