@@ -16,8 +16,10 @@ import net.satisfy.meadow.client.gui.handler.CheeseFormGuiHandler;
 import net.satisfy.meadow.client.gui.handler.CookingCauldronGuiHandler;
 import net.satisfy.meadow.core.compat.jei.category.CheesePressCategory;
 import net.satisfy.meadow.core.compat.jei.category.CookingCauldronCategory;
+import net.satisfy.meadow.core.compat.jei.category.WoodCutterCategory;
 import net.satisfy.meadow.core.recipes.CheeseFormRecipe;
 import net.satisfy.meadow.core.recipes.CookingCauldronRecipe;
+import net.satisfy.meadow.core.recipes.WoodcuttingRecipe;
 import net.satisfy.meadow.core.registry.ObjectRegistry;
 import net.satisfy.meadow.core.registry.RecipeRegistry;
 import net.satisfy.meadow.core.registry.ScreenHandlerRegistry;
@@ -35,6 +37,7 @@ public class MeadowJEIPlugin implements IModPlugin {
     public void registerCategories(IRecipeCategoryRegistration registration) {
         registration.addRecipeCategories(new CookingCauldronCategory(registration.getJeiHelpers().getGuiHelper()));
         registration.addRecipeCategories(new CheesePressCategory(registration.getJeiHelpers().getGuiHelper()));
+        registration.addRecipeCategories(new WoodCutterCategory(registration.getJeiHelpers().getGuiHelper()));
     }
 
 
@@ -47,6 +50,9 @@ public class MeadowJEIPlugin implements IModPlugin {
 
         List<CheeseFormRecipe> cheesePressRecipes = rm.getAllRecipesFor(RecipeRegistry.CHEESE.get());
         registration.addRecipes(CheesePressCategory.CHEESE_PRESS, cheesePressRecipes);
+
+        List<WoodcuttingRecipe> woodcuttingRecipes = rm.getAllRecipesFor(RecipeRegistry.WOODCUTTING.get());
+        registration.addRecipes(WoodCutterCategory.WOODCUTTER, woodcuttingRecipes);
 
     }
 
@@ -66,6 +72,7 @@ public class MeadowJEIPlugin implements IModPlugin {
 
     @Override
     public void registerRecipeCatalysts(IRecipeCatalystRegistration registration) {
+        registration.addRecipeCatalyst(ObjectRegistry.WOODCUTTER.get().asItem().getDefaultInstance(), WoodCutterCategory.WOODCUTTER);
         registration.addRecipeCatalyst(ObjectRegistry.COOKING_CAULDRON.get().asItem().getDefaultInstance(), CookingCauldronCategory.COOKING_CAULDRON);
         registration.addRecipeCatalyst(ObjectRegistry.CHEESE_FORM.get().asItem().getDefaultInstance(), CheesePressCategory.CHEESE_PRESS);
     }
