@@ -11,7 +11,7 @@
       "item": "meadow:raw_buffalo_meat"
     },
     {
-      "item": "meadow:alpine_salt"
+      "tag": "meadow:salt"
     },
     {
       "item": "minecraft:potato"

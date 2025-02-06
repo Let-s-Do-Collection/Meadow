@@ -5,7 +5,7 @@
       "item": "minecraft:potato"
     },
     {
-      "item": "meadow:alpine_salt"
+      "tag": "meadow:salt"
     }
   ],
   "fluid_amount": 10,

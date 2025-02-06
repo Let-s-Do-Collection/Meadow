@@ -2,10 +2,10 @@
   "type": "meadow:cooking",
   "ingredients": [
     {
-      "item": "minecraft:egg"
+      "tag": "meadow:egg"
     },
     {
-      "item": "meadow:alpine_salt"
+      "tag": "meadow:salt"
     },
     {
       "item": "minecraft:glass_bottle"
