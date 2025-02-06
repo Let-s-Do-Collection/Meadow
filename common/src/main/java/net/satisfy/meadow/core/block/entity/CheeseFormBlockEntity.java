@@ -219,7 +219,7 @@ public class CheeseFormBlockEntity extends BlockEntity implements BlockEntityTic
 
     @Override
     public @NotNull Component getDisplayName() {
-        return Component.literal("Cheese Form");
+        return ObjectRegistry.CHEESE_FORM.get().getName();
     }
 
     @Nullable

@@ -2,7 +2,7 @@
   "credit": "Made by Satisfy",
   "textures": {
     "0": "meadow:block/can_side",
-    "1": "block/water_still",
+    "1": "meadow:block/water_still",
     "particle": "meadow:block/can_side"
   },
   "elements": [
