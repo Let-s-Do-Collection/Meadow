@@ -213,12 +213,12 @@
   "advancement.meadow.rennet": "Большой шаг в сыроварении",
   "advancement.meadow.rennet.desc": "Приготовьте сычужный фермент в котелке",
   "advancement.meadow.root": "Добро пожаловать в Meadow!",
-  "advancement.meadow.root.desc": "Спасибо, что играете с Meadow",
+  "advancement.meadow.root.desc": "Спасибо, что играете с Meadow!",
   "advancement.meadow.salt": "Горы соли",
   "advancement.meadow.salt.desc": "Горную соль можно найти в биомах горных лугов и их подвидах",
   "advancement.meadow.spyglass_at_buffalo": "Это корова?",
   "advancement.meadow.spyglass_at_buffalo.desc": "Взгляните на буйвола через подзорную трубу",
-  "advancement.meadow.straw_bed": "Прощай спина",
+  "advancement.meadow.straw_bed": "Прощай, спина",
   "advancement.meadow.straw_bed.desc": "Проведите ночь в соломенной кровати",
   "advancement.meadow.wool_collector": "Мягкий коллекционер",
   "advancement.meadow.wool_collector.desc": "Соберите все 7 видов шерсти",
@@ -231,7 +231,7 @@
   "rei.meadow.fondue_category.amount": "%s за 1 сыр",
   "rei.meadow.wood_cutter_category": "Колода",
   "subtitles.meadow.click_camera": "Щелчок фотоаппарата",
-  "subtitles.meadow.woodcutter": "Расколото полено",
+  "subtitles.meadow.woodcutter": "Полено расколото",
   "subtitles.meadow.buffalo_ambient": "Буйвол мычит",
   "subtitles.meadow.buffalo_hurt": "Буйвол ранен",
   "subtitles.meadow.buffalo_death": "Буйвол погибает",
@@ -240,4 +240,6 @@
   "tooltip.meadow.thankyou_2": "При размещении:",
   "tooltip.meadow.thankyou_3": "Спасибо, что играете с Meadow!",
   "tooltip.meadow.thankyou_4": "Наделяет Спешкой II в радиусе 8 блоков"
+  "entity.minecraft.villager.meadow.hermit": "Отшельник",
+  "entity.minecraft.villager.meadow.cheesemaker": "Сыровар"
 }
