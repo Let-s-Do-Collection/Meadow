@@ -19,41 +19,33 @@ public class ChairEntity extends Entity {
         super(type, world);
     }
 
-    @Override
     protected void defineSynchedData() {
     }
 
-    @Override
     public @NotNull Vec3 getDismountLocationForPassenger(LivingEntity passenger) {
         if (passenger instanceof Player p) {
             BlockPos pos = GeneralUtil.getPreviousPlayerPosition(p, this);
             if (pos != null) {
-                discard();
-                return new Vec3(pos.getX() + 0.5D, pos.getY(), pos.getZ() + 0.5D);
+                this.discard();
+                return new Vec3((double)pos.getX() + 0.5, pos.getY(), (double)pos.getZ() + 0.5);
             }
         }
 
-        discard();
+        this.discard();
         return super.getDismountLocationForPassenger(passenger);
     }
 
-    @Override
     public void remove(RemovalReason reason) {
         super.remove(reason);
-        GeneralUtil.removeChairEntity(level(), blockPosition());
+        GeneralUtil.removeChairEntity(this.level(), this.blockPosition());
     }
 
-    @Override
     protected void readAdditionalSaveData(CompoundTag nbt) {
-
     }
 
-    @Override
     protected void addAdditionalSaveData(CompoundTag nbt) {
-
     }
 
-    @Override
     public @NotNull Packet<ClientGamePacketListener> getAddEntityPacket() {
         return new ClientboundAddEntityPacket(this);
     }

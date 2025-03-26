@@ -11,7 +11,6 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import net.satisfy.meadow.core.registry.ObjectRegistry;
 import org.jetbrains.annotations.NotNull;
 
-@SuppressWarnings("deprecation")
 public class ClimbingRopeBlock extends Block {
 
     protected static final VoxelShape SHAPE = Block.box(7, 0, 7, 9, 16, 9);

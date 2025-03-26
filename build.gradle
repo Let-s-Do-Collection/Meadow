@@ -1,11 +1,6 @@
 plugins {
     id "architectury-plugin" version "3.4-SNAPSHOT"
     id "dev.architectury.loom" version "1.7-SNAPSHOT" apply false
-    id "maven-publish"
-}
-
-architectury {
-    minecraft = rootProject.minecraft_version
 }
 
 subprojects {
@@ -42,18 +37,15 @@ allprojects {
                 includeGroup "maven.modrinth"
             }
         }
-
         maven {
             name = "Jared's maven"
             url = "https://maven.blamejared.com/"
         }
-        maven { url = "https://jitpack.io" }
-        maven { url "https://maven.shedaniel.me/" }
     }
 
     tasks.withType(JavaCompile) {
         options.encoding = "UTF-8"
-        options.release = 17
+        options.release = 21
     }
 
     java {

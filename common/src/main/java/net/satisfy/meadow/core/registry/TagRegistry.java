@@ -20,8 +20,6 @@ public class TagRegistry {
     public static final TagKey<Item> MILK_BUCKET = TagKey.create(Registries.ITEM, new MeadowIdentifier("milk_bucket"));
     public static final TagKey<Item> SMALL_WATER_FILL = TagKey.create(Registries.ITEM, new MeadowIdentifier("small_water_fill"));
     public static final TagKey<Item> LARGE_WATER_FILL = TagKey.create(Registries.ITEM, new MeadowIdentifier("large_water_fill"));
-    public static final TagKey<Item> IS_WOODCUTTER_USABLE = TagKey.create(Registries.ITEM, new MeadowIdentifier("is_woodcutter_usable"));
     public static final TagKey<Item> BREAD = TagKey.create(Registries.ITEM, new MeadowIdentifier("bread"));
     public static final TagKey<Item> SHEARS = TagKey.create(Registries.ITEM, new MeadowIdentifier("shears"));
-
 }

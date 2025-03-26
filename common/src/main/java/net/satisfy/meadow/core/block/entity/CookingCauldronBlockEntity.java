@@ -2,6 +2,7 @@ package net.satisfy.meadow.core.block.entity;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
@@ -93,23 +94,23 @@ public class CookingCauldronBlockEntity extends BlockEntity implements Implement
     }
 
     @Override
-    public void load(@NotNull CompoundTag nbt) {
-        super.load(nbt);
-        ContainerHelper.loadAllItems(nbt, inventory);
-        cookingTime = nbt.getInt("CookingTime");
-        isBeingBurned = nbt.getBoolean("IsBeingBurned");
-        fluidLevel = nbt.getInt("FluidLevel");
-        currentCraftingDuration = nbt.getInt("CurrentCraftingDuration");
+    protected void loadAdditional(CompoundTag compoundTag, HolderLookup.Provider provider) {
+        super.loadAdditional(compoundTag, provider);
+        ContainerHelper.loadAllItems(compoundTag, inventory, provider);
+        cookingTime = compoundTag.getInt("CookingTime");
+        isBeingBurned = compoundTag.getBoolean("IsBeingBurned");
+        fluidLevel = compoundTag.getInt("FluidLevel");
+        currentCraftingDuration = compoundTag.getInt("CurrentCraftingDuration");
     }
 
     @Override
-    protected void saveAdditional(@NotNull CompoundTag nbt) {
-        super.saveAdditional(nbt);
-        ContainerHelper.saveAllItems(nbt, inventory);
-        nbt.putInt("CookingTime", cookingTime);
-        nbt.putBoolean("IsBeingBurned", isBeingBurned);
-        nbt.putInt("FluidLevel", fluidLevel);
-        nbt.putInt("CurrentCraftingDuration", currentCraftingDuration);
+    protected void saveAdditional(CompoundTag compoundTag, HolderLookup.Provider provider) {
+        super.saveAdditional(compoundTag, provider);
+        ContainerHelper.saveAllItems(compoundTag, inventory, provider);
+        compoundTag.putInt("CookingTime", cookingTime);
+        compoundTag.putBoolean("IsBeingBurned", isBeingBurned);
+        compoundTag.putInt("FluidLevel", fluidLevel);
+        compoundTag.putInt("CurrentCraftingDuration", currentCraftingDuration);
     }
 
     public boolean isBeingBurned() {

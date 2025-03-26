@@ -6,14 +6,15 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.WoodType;
 import net.satisfy.meadow.core.block.entity.ModSignBlockEntity;
+import org.jetbrains.annotations.NotNull;
 
 public class ModStandingSignBlock extends StandingSignBlock {
-    public ModStandingSignBlock(Properties pProperties, WoodType pType) {
-        super(pProperties, pType);
+    public ModStandingSignBlock(WoodType woodType, Properties properties) {
+        super(woodType, properties);
     }
 
     @Override
-    public BlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
-        return new ModSignBlockEntity(pPos, pState);
+    public @NotNull BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+        return new ModSignBlockEntity(pos, state);
     }
 }

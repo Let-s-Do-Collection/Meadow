@@ -1,5 +1,6 @@
 package net.satisfy.meadow.core.item;
 
+import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -17,7 +18,7 @@ import java.util.List;
 public class FurLegsItem extends ArmorItem {
     private final ResourceLocation leggingsTexture;
 
-    public FurLegsItem(ArmorMaterial armorMaterial, Type type, Properties properties, ResourceLocation leggingsTexture) {
+    public FurLegsItem(Holder<ArmorMaterial> armorMaterial, Type type, Properties properties, ResourceLocation leggingsTexture) {
         super(armorMaterial, type, properties);
         this.leggingsTexture = leggingsTexture;
     }
@@ -32,9 +33,7 @@ public class FurLegsItem extends ArmorItem {
     }
 
     @Override
-    public void appendHoverText(@NotNull ItemStack stack, @Nullable Level world, @NotNull List<Component> tooltip, @NotNull TooltipFlag context) {
-        if (world != null && world.isClientSide()) {
-            ArmorRegistry.appendToolTip(tooltip);
-        }
+    public void appendHoverText(ItemStack itemStack, TooltipContext tooltipContext, List<Component> list, TooltipFlag tooltipFlag) {
+        ArmorRegistry.appendToolTip(list);
     }
 }

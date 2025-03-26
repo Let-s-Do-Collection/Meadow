@@ -1,18 +1,14 @@
 package net.satisfy.meadow.core.recipes;
 
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
+import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;
-import net.minecraft.core.RegistryAccess;
-import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.GsonHelper;
-import net.minecraft.world.Container;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraft.world.item.crafting.Recipe;
-import net.minecraft.world.item.crafting.RecipeSerializer;
-import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
 import net.satisfy.meadow.core.registry.RecipeRegistry;
 import org.jetbrains.annotations.NotNull;
@@ -20,21 +16,40 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CheeseFormRecipe implements Recipe<Container> {
-    private final ResourceLocation id;
+public class CheeseFormRecipe implements Recipe<RecipeInput> {
     private final Ingredient bucket;
     private final Ingredient ingredient;
     private final ItemStack result;
 
-    public CheeseFormRecipe(ResourceLocation id, Ingredient bucket, Ingredient ingredient, ItemStack result) {
-        this.id = id;
+    public CheeseFormRecipe(Ingredient bucket, Ingredient ingredient, ItemStack result) {
         this.bucket = bucket;
         this.ingredient = ingredient;
         this.result = result;
     }
 
+    public ItemStack assemble() {
+        return assemble(null, null);
+    }
+
+
     @Override
-    public boolean matches(Container inventory, Level world) {
+    public @NotNull NonNullList<Ingredient> getIngredients() {
+        NonNullList<Ingredient> defaultedList = NonNullList.create();
+        defaultedList.add(this.bucket);
+        defaultedList.add(this.ingredient);
+        return defaultedList;
+    }
+
+    public Ingredient bucket() {
+        return this.bucket;
+    }
+
+    public Ingredient ingredient() {
+        return this.ingredient;
+    }
+
+    @Override
+    public boolean matches(RecipeInput inventory, Level level) {
         NonNullList<Ingredient> ingredients = getIngredients();
         List<ItemStack> items = new ArrayList<>(List.of(inventory.getItem(1), inventory.getItem(2)));
         for (Ingredient ingredient : ingredients) {
@@ -53,17 +68,8 @@ public class CheeseFormRecipe implements Recipe<Container> {
     }
 
     @Override
-    public @NotNull ItemStack assemble(Container inventory, RegistryAccess registryManager) {
+    public @NotNull ItemStack assemble(RecipeInput recipeInput, HolderLookup.Provider provider) {
         return this.result.copy();
-    }
-
-
-    @Override
-    public @NotNull NonNullList<Ingredient> getIngredients() {
-        NonNullList<Ingredient> defaultedList = NonNullList.create();
-        defaultedList.add(this.bucket);
-        defaultedList.add(this.ingredient);
-        return defaultedList;
     }
 
     @Override
@@ -71,19 +77,17 @@ public class CheeseFormRecipe implements Recipe<Container> {
         return true;
     }
 
+    @Override
+    public @NotNull ItemStack getResultItem(HolderLookup.Provider provider) {
+        return this.result.copy();
+    }
+
     public ItemStack getResultItem() {
         return getResultItem(null);
     }
 
-    @Override
-    public @NotNull ItemStack getResultItem(RegistryAccess registryManager) {
-        return result;
-    }
-
-
-    @Override
-    public @NotNull ResourceLocation getId() {
-        return id;
+    public ResourceLocation getId() {
+        return ResourceLocation.fromNamespaceAndPath("meadow", "cheese_form");
     }
 
     @Override
@@ -102,34 +106,28 @@ public class CheeseFormRecipe implements Recipe<Container> {
     }
 
     public static class Serializer implements RecipeSerializer<CheeseFormRecipe> {
+        public static final MapCodec<CheeseFormRecipe> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
+                        Ingredient.CODEC.fieldOf("bucket").forGetter(CheeseFormRecipe::bucket),
+                        Ingredient.CODEC.fieldOf("ingredient").forGetter(CheeseFormRecipe::ingredient),
+                        ItemStack.CODEC.fieldOf("result").forGetter(recipe -> recipe.result)
+                ).apply(instance, CheeseFormRecipe::new)
+        );
+
+        public static final StreamCodec<RegistryFriendlyByteBuf, CheeseFormRecipe> STREAM_CODEC = StreamCodec.composite(
+                Ingredient.CONTENTS_STREAM_CODEC, CheeseFormRecipe::bucket,
+                Ingredient.CONTENTS_STREAM_CODEC, CheeseFormRecipe::ingredient,
+                ItemStack.OPTIONAL_STREAM_CODEC, CheeseFormRecipe::getResultItem,
+                CheeseFormRecipe::new
+        );
 
         @Override
-        public @NotNull CheeseFormRecipe fromJson(ResourceLocation id, JsonObject json) {
-            JsonElement jsonResultElement = json.get("result");
-            ItemStack resultItem = GsonHelper.convertToItem(jsonResultElement, jsonResultElement.getAsString()).getDefaultInstance();
-
-            JsonObject jsonBucketObject = json.getAsJsonObject("bucket");
-            Ingredient bucket = Ingredient.fromJson(jsonBucketObject);
-
-            JsonObject jsonIngredientObject = json.getAsJsonObject("ingredient");
-            Ingredient ingredient = Ingredient.fromJson(jsonIngredientObject);
-
-            return new CheeseFormRecipe(id, bucket, ingredient, resultItem);
+        public @NotNull MapCodec<CheeseFormRecipe> codec() {
+            return CODEC;
         }
 
         @Override
-        public @NotNull CheeseFormRecipe fromNetwork(ResourceLocation id, FriendlyByteBuf packetData) {
-            Ingredient bucket = Ingredient.fromNetwork(packetData);
-            Ingredient input = Ingredient.fromNetwork(packetData);
-            ItemStack output = packetData.readItem();
-            return new CheeseFormRecipe(id, bucket, input, output);
-        }
-
-        @Override
-        public void toNetwork(FriendlyByteBuf friendlyByteBuf, CheeseFormRecipe recipe) {
-            recipe.getIngredients().forEach(ingredient -> ingredient.toNetwork(friendlyByteBuf));
-            friendlyByteBuf.writeItem(recipe.result);
+        public @NotNull StreamCodec<RegistryFriendlyByteBuf, CheeseFormRecipe> streamCodec() {
+            return STREAM_CODEC;
         }
     }
-
 }

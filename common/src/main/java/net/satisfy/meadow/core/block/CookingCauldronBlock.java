@@ -1,5 +1,6 @@
 package net.satisfy.meadow.core.block;
 
+import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
@@ -7,7 +8,6 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.Containers;
-import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.entity.player.Player;
@@ -41,7 +41,6 @@ import org.jetbrains.annotations.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
-@SuppressWarnings("deprecation")
 public class CookingCauldronBlock extends BaseEntityBlock {
     private static final VoxelShape LOWER_SHAPE = Shapes.box(0.25, 0, 0.25, 0.75, 0.0625, 0.75);
     private static final VoxelShape UPPER_SHAPE = Shapes.box(0.1875, 0.0625, 0.1875, 0.8125, 0.5625, 0.8125);
@@ -52,10 +51,16 @@ public class CookingCauldronBlock extends BaseEntityBlock {
     public static final BooleanProperty LIT = BooleanProperty.create("lit");
     public static final BooleanProperty COOKING = BooleanProperty.create("cooking");
     public static final BooleanProperty HANGING = BooleanProperty.create("hanging");
+    public static final MapCodec<CookingCauldronBlock> CODEC = simpleCodec(CookingCauldronBlock::new);
 
     public CookingCauldronBlock(Properties settings) {
         super(settings);
         this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(HANGING, false).setValue(COOKING, false).setValue(LIT, false));
+    }
+
+    @Override
+    protected @NotNull MapCodec<? extends BaseEntityBlock> codec() {
+        return CODEC;
     }
 
     @Override
@@ -74,13 +79,13 @@ public class CookingCauldronBlock extends BaseEntityBlock {
     }
 
     @Override
-    public @NotNull InteractionResult use(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
+    protected @NotNull InteractionResult useWithoutItem(BlockState state, Level world, BlockPos pos, Player player, BlockHitResult hit) {
         BlockEntity entity = world.getBlockEntity(pos);
         if (entity instanceof MenuProvider factory) {
             player.openMenu(factory);
             return InteractionResult.SUCCESS;
         } else {
-            return super.use(state, world, pos, player, hand, hit);
+            return super.useWithoutItem(state, world, pos, player, hit);
         }
     }
 

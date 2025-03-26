@@ -18,7 +18,6 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-@SuppressWarnings("deprecation")
 public class StoveBlock extends FacingBlock {
 
     public static final BooleanProperty CONNECTED = BooleanProperty.create("connected");

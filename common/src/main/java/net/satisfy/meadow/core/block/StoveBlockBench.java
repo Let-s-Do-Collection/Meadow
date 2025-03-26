@@ -1,7 +1,6 @@
 package net.satisfy.meadow.core.block;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.BlockGetter;
@@ -15,7 +14,6 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import net.satisfy.meadow.core.util.GeneralUtil;
 import org.jetbrains.annotations.NotNull;
 
-@SuppressWarnings("deprecation")
 public class StoveBlockBench extends Block {
     public static final VoxelShape SHAPE = Shapes.or(Block.box(0, 0, 0, 4, 2, 4), Block.box(12, 0, 0, 16, 2, 4), Block.box(0, 0, 12, 4, 2, 16), Block.box(12, 0, 12, 16, 2, 16));
     public static final VoxelShape SHAPE_SMALL = Shapes.or(SHAPE, Block.box(0, 2, 0, 16, 6, 16));
@@ -31,8 +29,8 @@ public class StoveBlockBench extends Block {
     }
 
     @Override
-    public @NotNull InteractionResult use(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
-        return GeneralUtil.onUse(world, player, hand, hit, -0.1);
+    protected @NotNull InteractionResult useWithoutItem(BlockState blockState, Level level, BlockPos blockPos, Player player, BlockHitResult blockHitResult) {
+        return GeneralUtil.onUse(level, player, player.getUsedItemHand(), blockHitResult, -0.1);
     }
 
     @Override

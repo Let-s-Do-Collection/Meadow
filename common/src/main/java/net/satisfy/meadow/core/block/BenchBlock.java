@@ -17,7 +17,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import net.satisfy.meadow.core.util.GeneralUtil;
 import org.jetbrains.annotations.NotNull;
 
-@SuppressWarnings("deprecation, unused")
+@SuppressWarnings("unused")
 public class BenchBlock extends LineConnectingBlock {
     public BenchBlock(BlockBehaviour.Properties settings) {
         super(settings);

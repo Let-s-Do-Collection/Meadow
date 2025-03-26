@@ -19,9 +19,9 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.satisfy.meadow.Meadow;
 import net.satisfy.meadow.core.block.CompletionistBannerBlock;
 import net.satisfy.meadow.core.block.CompletionistWallBannerBlock;
-import net.satisfy.meadow.core.block.entity.CompletionistBannerEntity;
+import net.satisfy.meadow.core.block.entity.CompletionistBannerBlockEntity;
 
-public class CompletionistBannerRenderer implements BlockEntityRenderer<CompletionistBannerEntity> {
+public class CompletionistBannerRenderer implements BlockEntityRenderer<CompletionistBannerBlockEntity> {
     public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation(Meadow.MOD_ID, "banner"), "main");
 
     public static final String FLAG = "flag";
@@ -47,7 +47,7 @@ public class CompletionistBannerRenderer implements BlockEntityRenderer<Completi
         return LayerDefinition.create(meshDefinition, 64, 64);
     }
 
-    public static void renderBanner(PoseStack poseStack, MultiBufferSource multiBufferSource, int i, int j, ModelPart modelPart, CompletionistBannerEntity banner) {
+    public static void renderBanner(PoseStack poseStack, MultiBufferSource multiBufferSource, int i, int j, ModelPart modelPart, CompletionistBannerBlockEntity banner) {
         ResourceLocation location = ((CompletionistBannerBlock) banner.getBlockState().getBlock()).getRenderTexture();
         VertexConsumer vc = multiBufferSource.getBuffer(RenderType.entitySolid(location));
 
@@ -55,7 +55,7 @@ public class CompletionistBannerRenderer implements BlockEntityRenderer<Completi
     }
 
     @Override
-    public void render(CompletionistBannerEntity banner, float f, PoseStack poseStack, MultiBufferSource multiBufferSource, int i, int j) {
+    public void render(CompletionistBannerBlockEntity banner, float f, PoseStack poseStack, MultiBufferSource multiBufferSource, int i, int j) {
         long time;
         float scale = 0.66f;
         boolean inInventory = banner.getLevel() == null;

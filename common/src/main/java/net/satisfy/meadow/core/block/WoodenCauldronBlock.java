@@ -1,5 +1,6 @@
 package net.satisfy.meadow.core.block;
 
+import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.biome.Biome;
@@ -11,13 +12,20 @@ import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.Fluids;
 import net.satisfy.meadow.core.registry.ObjectRegistry;
-import net.satisfy.meadow.core.util.WoodenCauldronBehavior;
+import net.satisfy.meadow.core.util.GeneralUtil;
+import org.jetbrains.annotations.NotNull;
 
 public class WoodenCauldronBlock
         extends AbstractCauldronBlock {
+    public static final MapCodec<WoodenCauldronBlock> CODEC = simpleCodec(WoodenCauldronBlock::new);
 
-    public WoodenCauldronBlock(Properties settings) {
-        super(settings, WoodenCauldronBehavior.EMPTY);
+    public WoodenCauldronBlock(Properties properties) {
+        super(properties, GeneralUtil.WoodenCauldronBehavior.EMPTY);
+    }
+
+    @Override
+    protected @NotNull MapCodec<? extends AbstractCauldronBlock> codec() {
+        return CODEC;
     }
 
     @Override
@@ -64,4 +72,3 @@ public class WoodenCauldronBlock
         }
     }
 }
-

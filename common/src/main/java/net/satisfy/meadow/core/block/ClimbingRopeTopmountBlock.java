@@ -17,7 +17,6 @@ import net.satisfy.meadow.core.registry.ObjectRegistry;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-@SuppressWarnings("deprecation")
 public class ClimbingRopeTopmountBlock extends Block {
     protected static final VoxelShape SHAPE = Shapes.or(Block.box(7, 0, 7, 9, 16, 9), Block.box(6, 8, 6, 10, 12, 10));
 

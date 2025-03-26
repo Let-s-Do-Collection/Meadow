@@ -6,7 +6,6 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.LayeredCauldronBlock;
-import net.minecraft.world.level.block.PowderSnowCauldronBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.satisfy.meadow.core.registry.ObjectRegistry;
@@ -23,7 +22,7 @@ public class FluidDecrementMixin {
     @Inject(method = "lowerFillLevel", at = @At(value = "HEAD"), cancellable = true)
     private static void register(BlockState state, Level world, BlockPos pos, CallbackInfo ci) {
         Block b = state.getBlock();
-        if (b.equals(ObjectRegistry.WOODEN_WATER_CAULDRON.get())) {
+        if(b.equals(ObjectRegistry.WOODEN_WATER_CAULDRON.get())){
             int i = state.getValue(LEVEL) - 1;
             BlockState blockState = i == 0 ? ObjectRegistry.WOODEN_CAULDRON.get().defaultBlockState() : state.setValue(LEVEL, i);
 
@@ -39,9 +38,9 @@ public class FluidDecrementMixin {
         LayeredCauldronBlock block = (LayeredCauldronBlock) o;
 
         if (!world.isClientSide && block.isEntityInsideContent(state, pos, entity)) {
-            if (entity.isOnFire()) return;
-            if (block instanceof PowderSnowCauldronBlock) {
-                Blocks.POWDER_SNOW.entityInside(state, world, pos, entity);
+            if(entity.isOnFire()) return;
+            if(block == Blocks.POWDER_SNOW_CAULDRON){
+                Blocks.POWDER_SNOW.defaultBlockState().entityInside(world, pos, entity);
             }
         }
     }

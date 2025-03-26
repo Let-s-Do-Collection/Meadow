@@ -7,7 +7,6 @@ import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -32,7 +31,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Supplier;
 
-@SuppressWarnings("deprecation")
 public class FrameBlock extends Block {
 
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
@@ -54,15 +52,13 @@ public class FrameBlock extends Block {
         return SHAPE.get(state.getValue(FACING));
     }
 
-
     public FrameBlock(Properties settings) {
         super(settings);
     }
 
-
     @Override
-    public @NotNull InteractionResult use(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
-        ItemStack stack = player.getItemInHand(hand);
+    protected @NotNull InteractionResult useWithoutItem(BlockState state, Level world, BlockPos pos, Player player, BlockHitResult hit) {
+        ItemStack stack = player.getMainHandItem();
         if (stack.getItem().equals(ObjectRegistry.COOKING_CAULDRON.get().asItem())) {
             if (!world.isClientSide()) {
                 if (!player.getAbilities().instabuild) stack.shrink(1);

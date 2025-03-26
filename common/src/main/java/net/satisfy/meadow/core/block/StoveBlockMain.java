@@ -15,7 +15,6 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-@SuppressWarnings("deprecation")
 public class StoveBlockMain extends FacingBlock {
 
     public static final BooleanProperty CONNECTED_UP = BooleanProperty.create("connected_up");

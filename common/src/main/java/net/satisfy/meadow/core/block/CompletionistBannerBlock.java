@@ -1,17 +1,14 @@
 package net.satisfy.meadow.core.block;
 
+import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TextColor;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.Mth;
+import net.minecraft.world.Containers;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
-import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.LevelAccessor;
-import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.*;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
@@ -20,20 +17,18 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
+import net.minecraft.world.level.block.state.properties.RotationSegment;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.satisfy.meadow.core.block.entity.CompletionistBannerEntity;
+import net.satisfy.meadow.core.block.entity.CompletionistBannerBlockEntity;
 import net.satisfy.meadow.core.registry.EntityTypeRegistry;
-import net.satisfy.meadow.core.registry.ObjectRegistry;
-import net.satisfy.meadow.core.util.MeadowIdentifier;
-import net.satisfy.meadow.platform.PlatformHelper;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.List;
+import java.util.Optional;
 
-@SuppressWarnings("deprecation")
 public class CompletionistBannerBlock extends BaseEntityBlock {
+    public static final MapCodec<CompletionistBannerBlock> CODEC = simpleCodec(CompletionistBannerBlock::new);
     public static final IntegerProperty ROTATION = BlockStateProperties.ROTATION_16;
     private static final VoxelShape SHAPE = Block.box(4.0D, 0.0D, 4.0D, 12.0D, 16.0D, 12.0D);
 
@@ -42,10 +37,23 @@ public class CompletionistBannerBlock extends BaseEntityBlock {
         makeDefaultState();
     }
 
-    @Nullable
     @Override
-    public BlockEntity newBlockEntity(@NotNull BlockPos blockPos, @NotNull BlockState blockState) {
-        return new CompletionistBannerEntity(blockPos, blockState);
+    protected @NotNull MapCodec<? extends BaseEntityBlock> codec() {
+        return CODEC;
+    }
+
+    @Override
+    public void onRemove(BlockState state, Level world, BlockPos pos, BlockState newState, boolean moved) {
+        if (world.getGameRules().getRule(GameRules.RULE_DOBLOCKDROPS).get() && state.getBlock() != newState.getBlock()) {
+            BlockEntity blockEntity = world.getBlockEntity(pos);
+            if (blockEntity instanceof CompletionistBannerBlockEntity entity) {
+                Item item = entity.getItem();
+                if(item != null){
+                    Containers.dropItemStack(world, pos.getX(), pos.getY(), pos.getZ(), new ItemStack(item));
+                }
+            }
+            super.onRemove(state, world, pos, newState, moved);
+        }
     }
 
     protected void makeDefaultState() {
@@ -53,34 +61,49 @@ public class CompletionistBannerBlock extends BaseEntityBlock {
     }
 
     @Override
-    public boolean canSurvive(@NotNull BlockState blockState, LevelReader levelReader, BlockPos blockPos) {
-        BlockState belowBlockState = levelReader.getBlockState(blockPos.below());
-        return belowBlockState.isSolid();
+    public @NotNull ItemStack getCloneItemStack(LevelReader levelReader, BlockPos blockPos, BlockState blockState) {
+        Optional<CompletionistBannerBlockEntity> entity = levelReader.getBlockEntity(blockPos, DoApiBlockEntityTypes.COMPLETIONISTBANNER.get());
+        if(entity.isPresent()){
+            Item item = entity.get().getItem();
+            if(item != null){
+                return new ItemStack(item);
+            }
+        }
+        return super.getCloneItemStack(levelReader, blockPos, blockState);
+    }
+
+    @Nullable
+    @Override
+    public BlockEntity newBlockEntity(BlockPos blockPos, BlockState blockState) {
+        return new CompletionistBannerBlockEntity(blockPos, blockState);
     }
 
     @Override
-    public boolean isPossibleToRespawnInThis(@NotNull BlockState blockState) {
+    public void setPlacedBy(Level level, BlockPos blockPos, BlockState blockState, @Nullable LivingEntity livingEntity, ItemStack itemStack) {
+        level.getBlockEntity(blockPos, EntityTypeRegistry.MEADOW_BANNER.get()).ifPresent(entity -> entity.fromItem(itemStack));
+    }
+
+    @Override
+    @SuppressWarnings("deprecation")
+    public boolean canSurvive(BlockState blockState, LevelReader levelReader, BlockPos blockPos) {
+        return levelReader.getBlockState(blockPos.below()).isSolid();
+    }
+
+    @Override
+    public boolean isPossibleToRespawnInThis(BlockState blockState)
+    {
         return true;
     }
 
     @Override
-    public @NotNull VoxelShape getShape(@NotNull BlockState blockState, @NotNull BlockGetter blockGetter, @NotNull BlockPos blockPos, @NotNull CollisionContext collisionContext) {
+    public @NotNull VoxelShape getShape(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, CollisionContext collisionContext) {
         return SHAPE;
     }
 
     @Override
-    public BlockState getStateForPlacement(BlockPlaceContext context) {
-        Direction clickedFace = context.getClickedFace();
-        if (clickedFace == Direction.UP || clickedFace == Direction.DOWN) {
-            return this.defaultBlockState().setValue(ROTATION, Mth.floor((double) ((180.0f + context.getRotation()) * 16.0f / 360.0f) + 0.5) & 0xF);
-        } else {
-            if (this == ObjectRegistry.MEADOW_BANNER.get()) {
-                return ObjectRegistry.MEADOW_WALL_BANNER.get().defaultBlockState().setValue(HorizontalDirectionalBlock.FACING, clickedFace.getOpposite());
-            }
-        }
-        return this.defaultBlockState();
+    public BlockState getStateForPlacement(BlockPlaceContext blockPlaceContext) {
+        return this.defaultBlockState().setValue(ROTATION, RotationSegment.convertToSegment(blockPlaceContext.getRotation() + 180.0F));
     }
-
 
     @Override
     public @NotNull BlockState rotate(BlockState blockState, Rotation rotation) {
@@ -97,33 +120,17 @@ public class CompletionistBannerBlock extends BaseEntityBlock {
         builder.add(ROTATION);
     }
 
-    @Override
     @Nullable
-    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
-        return level.isClientSide ? null : createTickerHelper(type, EntityTypeRegistry.MEADOW_BANNER.get(), (level1, pos, state1, entity) -> CompletionistBannerEntity.tick(level1, pos));
+    @Override
+    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level world, BlockState state, BlockEntityType<T> type) {
+        return createTickerHelper(type, EntityTypeRegistry.MEADOW_BANNER.get(), (world1, pos, state1, be) -> be.tick(world1, pos, state1, be));
     }
 
     @Override
-    public @NotNull BlockState updateShape(@NotNull BlockState blockState, @NotNull Direction direction, @NotNull BlockState blockState2, @NotNull LevelAccessor levelAccessor, @NotNull BlockPos blockPos, @NotNull BlockPos blockPos2) {
+    public @NotNull BlockState updateShape(BlockState blockState, Direction direction, BlockState blockState2, LevelAccessor levelAccessor, BlockPos blockPos, BlockPos blockPos2) {
         if (direction == Direction.DOWN && !blockState.canSurvive(levelAccessor, blockPos)) {
             return Blocks.AIR.defaultBlockState();
         }
         return super.updateShape(blockState, direction, blockState2, levelAccessor, blockPos, blockPos2);
-    }
-
-    public ResourceLocation getRenderTexture() {
-        return new MeadowIdentifier("textures/banner/meadow_banner.png");
-    }
-
-    @Override
-    public void appendHoverText(ItemStack stack, @Nullable BlockGetter level, List<Component> tooltip, net.minecraft.world.item.TooltipFlag flag) {
-        if (PlatformHelper.shouldShowTooltip()) {
-            tooltip.add(Component.translatable("tooltip.meadow.banner.thankyou_1").withStyle(style -> style.withColor(TextColor.fromRgb(0x513A8B))));
-            tooltip.add(Component.empty());
-            tooltip.add(Component.translatable("tooltip.meadow.banner.thankyou_2").withStyle(style -> style.withColor(TextColor.fromRgb(0x513A8B))));
-            tooltip.add(Component.translatable("tooltip.meadow.banner.thankyou_4").withStyle(style -> style.withColor(TextColor.fromRgb(0x513A8B))));
-            tooltip.add(Component.empty());
-            tooltip.add(Component.translatable("tooltip.meadow.banner.thankyou_3").withStyle(style -> style.withColor(TextColor.fromRgb(0x513A8B))));
-        }
     }
 }

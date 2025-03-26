@@ -25,7 +25,6 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-@SuppressWarnings("deprecation")
 public class StoveBlockSmoker extends SmokerBlock {
     public static final BooleanProperty CONNECTED = BooleanProperty.create("connected");
     public static final VoxelShape SHAPE_BIG = Shapes.or(StoveBlockBench.SHAPE, Block.box(0, 2, 0, 16, 16, 16));
@@ -46,7 +45,7 @@ public class StoveBlockSmoker extends SmokerBlock {
     }
 
     @Override
-    public @Nullable BlockState getStateForPlacement(BlockPlaceContext ctx) {
+    public @NotNull BlockState getStateForPlacement(BlockPlaceContext ctx) {
         List<Block> block = getBlocksToCheck();
         if (!block.isEmpty()) {
             if (block.contains(ctx.getLevel().getBlockState(ctx.getClickedPos().relative(directionToCheck)).getBlock())) {
@@ -86,7 +85,7 @@ public class StoveBlockSmoker extends SmokerBlock {
     }
 
     @Override
-    public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+    public @NotNull BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
         return new StoveBlockEntity(pos, state);
     }
 

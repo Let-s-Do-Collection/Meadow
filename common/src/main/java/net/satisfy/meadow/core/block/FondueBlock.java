@@ -34,7 +34,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Supplier;
 
-@SuppressWarnings("deprecation")
 public class FondueBlock extends FacingBlock {
     public static final IntegerProperty FILL_AMOUNT = IntegerProperty.create("fill_amount", 0, 3);
     private static final Supplier<VoxelShape> voxelShapeSupplier = () -> {
@@ -72,14 +71,15 @@ public class FondueBlock extends FacingBlock {
     }
 
     @Override
-    public @NotNull InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
+    protected @NotNull InteractionResult useWithoutItem(BlockState state, Level world, BlockPos pos, Player player, BlockHitResult blockHitResult) {
+        InteractionHand hand = player.getUsedItemHand();
         ItemStack itemStack = player.getItemInHand(hand);
 
-        if (!level.isClientSide) {
+        if (!world.isClientSide) {
             if (itemStack.is(TagRegistry.BREAD)) {
                 int currentAmount = state.getValue(FILL_AMOUNT);
                 if (currentAmount > 0) {
-                    level.setBlock(pos, state.setValue(FILL_AMOUNT, currentAmount - 1), 3);
+                    world.setBlock(pos, state.setValue(FILL_AMOUNT, currentAmount - 1), 3);
                     ItemStack cheeseStick = ObjectRegistry.CHEESE_STICK.get().getDefaultInstance();
                     player.addItem(cheeseStick);
                     player.addItem(cheeseStick);
@@ -93,13 +93,13 @@ public class FondueBlock extends FacingBlock {
             int currentAmount = state.getValue(FILL_AMOUNT);
             if (currentAmount < 3) {
                 if (itemStack.is(TagRegistry.CHEESE_BLOCKS)) {
-                    level.setBlock(pos, state.setValue(FILL_AMOUNT, 3), 3);
+                    world.setBlock(pos, state.setValue(FILL_AMOUNT, 3), 3);
                     if (!player.getAbilities().instabuild) {
                         itemStack.shrink(1);
                     }
                     return InteractionResult.SUCCESS;
                 } else if (itemStack.is(TagRegistry.CHEESE)) {
-                    level.setBlock(pos, state.setValue(FILL_AMOUNT, currentAmount + 1), 3);
+                    world.setBlock(pos, state.setValue(FILL_AMOUNT, currentAmount + 1), 3);
                     if (!player.getAbilities().instabuild) {
                         itemStack.shrink(1);
                     }

@@ -5,6 +5,7 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.entity.SignBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.satisfy.meadow.core.registry.EntityTypeRegistry;
+import org.jetbrains.annotations.NotNull;
 
 public class ModSignBlockEntity extends SignBlockEntity {
 
@@ -17,7 +18,7 @@ public class ModSignBlockEntity extends SignBlockEntity {
     }
 
     @Override
-    public BlockEntityType<?> getType() {
+    public @NotNull BlockEntityType<?> getType() {
         return EntityTypeRegistry.MOD_SIGN.get();
     }
 }

@@ -3,7 +3,6 @@ package net.satisfy.meadow.core.block;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
-import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.SimpleMenuProvider;
@@ -23,7 +22,6 @@ import net.satisfy.meadow.client.gui.handler.WoodcutterGuiHandler;
 import net.satisfy.meadow.core.registry.ObjectRegistry;
 import org.jetbrains.annotations.NotNull;
 
-@SuppressWarnings("deprecation")
 public class WoodcutterBlock extends Block {
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
     protected static final VoxelShape SHAPE = Block.box(2, 0, 2, 14, 16, 14);
@@ -39,7 +37,7 @@ public class WoodcutterBlock extends Block {
     }
 
     @Override
-    public @NotNull InteractionResult use(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
+    protected @NotNull InteractionResult useWithoutItem(BlockState state, Level world, BlockPos pos, Player player, BlockHitResult blockHitResult) {
         if (world.isClientSide) {
             return InteractionResult.SUCCESS;
         }

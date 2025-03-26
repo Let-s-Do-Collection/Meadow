@@ -5,7 +5,6 @@ import net.minecraft.core.Direction;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.context.BlockPlaceContext;
@@ -31,7 +30,6 @@ import net.satisfy.meadow.core.util.GeneralUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-@SuppressWarnings("deprecation")
 public class ShutterBlock extends Block implements SimpleWaterloggedBlock {
     public static final DirectionProperty FACING;
     public static final EnumProperty<GeneralUtil.ShutterType> TYPE;
@@ -103,10 +101,9 @@ public class ShutterBlock extends Block implements SimpleWaterloggedBlock {
         world.setBlock(pos, state, 3);
     }
 
-
     @Override
-    public @NotNull InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
-        return toggleShutters(state, level, pos, player);
+    protected @NotNull InteractionResult useWithoutItem(BlockState blockState, Level level, BlockPos blockPos, Player player, BlockHitResult blockHitResult) {
+        return toggleShutters(blockState, level, blockPos, player);
     }
 
     public InteractionResult toggleShutters(BlockState state, Level level, BlockPos pos, Player player) {

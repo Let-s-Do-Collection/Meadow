@@ -4,6 +4,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.satisfy.meadow.core.registry.EntityTypeRegistry;
+import org.jetbrains.annotations.NotNull;
 
 public class ModHangingSignBlockEntity extends ModSignBlockEntity {
 
@@ -12,7 +13,7 @@ public class ModHangingSignBlockEntity extends ModSignBlockEntity {
     }
 
     @Override
-    public BlockEntityType<?> getType() {
+    public @NotNull BlockEntityType<?> getType() {
         return EntityTypeRegistry.MOD_HANGING_SIGN.get();
     }
 }
