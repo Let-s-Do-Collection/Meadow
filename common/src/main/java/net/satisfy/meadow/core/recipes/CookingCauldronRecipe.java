@@ -56,7 +56,7 @@ public class CookingCauldronRecipe implements Recipe<Container> {
 
     @Override
     public @NotNull ItemStack getResultItem(RegistryAccess registryManager) {
-        return this.output;
+        return output.copy();
     }
 
     public int getFluidAmount() {

@@ -58,26 +58,29 @@ public class GeneralUtil {
     }
 
     public static boolean matchesRecipe(Container inventory, NonNullList<Ingredient> recipe, int startIndex, int endIndex) {
-        final List<ItemStack> validStacks = new ArrayList<>();
+        List<ItemStack> inputStacks = new ArrayList<>();
         for (int i = startIndex; i <= endIndex; i++) {
-            final ItemStack stackInSlot = inventory.getItem(i);
-            if (!stackInSlot.isEmpty())
-                validStacks.add(stackInSlot);
+            ItemStack stack = inventory.getItem(i);
+            if (!stack.isEmpty()) inputStacks.add(stack.copy());
         }
-        for (Ingredient entry : recipe) {
-            boolean matches = false;
-            for (ItemStack item : validStacks) {
-                if (entry.test(item)) {
-                    matches = true;
-                    validStacks.remove(item);
+
+        if (inputStacks.size() != recipe.size()) return false;
+
+        List<Ingredient> unmatched = new ArrayList<>(recipe);
+        for (ItemStack input : inputStacks) {
+            boolean matched = false;
+            Iterator<Ingredient> iter = unmatched.iterator();
+            while (iter.hasNext()) {
+                if (iter.next().test(input)) {
+                    iter.remove();
+                    matched = true;
                     break;
                 }
             }
-            if (!matches) {
-                return false;
-            }
+            if (!matched) return false;
         }
-        return true;
+
+        return unmatched.isEmpty();
     }
 
     public static Collection<ServerPlayer> tracking(ServerLevel world, ChunkPos pos) {

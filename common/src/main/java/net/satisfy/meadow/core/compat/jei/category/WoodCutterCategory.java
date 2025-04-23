@@ -1,6 +1,5 @@
 package net.satisfy.meadow.core.compat.jei.category;
 
-import mezz.jei.api.constants.ModIds;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.drawable.IDrawable;
 import mezz.jei.api.helpers.IGuiHelper;
@@ -25,7 +24,7 @@ public class WoodCutterCategory implements IRecipeCategory<WoodcuttingRecipe> {
     private final Component localizedName;
 
     public WoodCutterCategory(IGuiHelper helper) {
-        ResourceLocation location = new ResourceLocation(ModIds.JEI_ID, "textures/jei/gui/gui_vanilla.png");
+        ResourceLocation location = new ResourceLocation(Meadow.MOD_ID, "textures/gui/cooking_cauldron_gui.png");
         background = helper.createDrawable(location, 0, 220, width, height);
         icon = helper.createDrawableItemStack(ObjectRegistry.WOODCUTTER.get().asItem().getDefaultInstance());
         this.localizedName = ObjectRegistry.WOODCUTTER.get().getName();

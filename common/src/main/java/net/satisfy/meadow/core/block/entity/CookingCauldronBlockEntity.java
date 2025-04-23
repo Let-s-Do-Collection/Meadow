@@ -122,8 +122,14 @@ public class CookingCauldronBlockEntity extends BlockEntity implements Implement
 
     private boolean canCraft(CookingCauldronRecipe recipe) {
         if (recipe == null || recipe.getResultItem().isEmpty()) return false;
+
         ItemStack outputSlotStack = getItem(OUTPUT_SLOT);
-        return outputSlotStack.isEmpty() || (ItemStack.isSameItem(outputSlotStack, recipe.getResultItem()) && outputSlotStack.getCount() < outputSlotStack.getMaxStackSize());
+        ItemStack result = recipe.getResultItem().copy();
+
+        if (outputSlotStack.isEmpty()) return true;
+        if (!ItemStack.isSameItemSameTags(outputSlotStack, result)) return false;
+
+        return outputSlotStack.getCount() + result.getCount() <= outputSlotStack.getMaxStackSize();
     }
 
     private void craft(CookingCauldronRecipe recipe) {
@@ -252,24 +258,27 @@ public class CookingCauldronBlockEntity extends BlockEntity implements Implement
         CookingCauldronRecipe recipe = world.getRecipeManager().getRecipeFor(RecipeRegistry.COOKING.get(), this, world).orElse(null);
 
         if (canCraft(recipe) && fluidLevel >= recipe.getFluidAmount()) {
-            if (currentCraftingDuration == 0 && cookingTime == 0) {
+            if (currentCraftingDuration == 0) {
                 currentCraftingDuration = recipe.getCraftingDuration() * 20;
                 delegate.set(3, currentCraftingDuration);
             }
+
             cookingTime++;
             delegate.set(0, cookingTime);
+
             if (cookingTime >= currentCraftingDuration) {
                 cookingTime = 0;
                 currentCraftingDuration = 0;
-                delegate.set(3, currentCraftingDuration);
+                delegate.set(3, 0);
                 craft(recipe);
             }
+
             world.setBlock(pos, state.setValue(CookingCauldronBlock.COOKING, true).setValue(CookingCauldronBlock.LIT, true), Block.UPDATE_ALL);
         } else {
             cookingTime = 0;
             currentCraftingDuration = 0;
-            delegate.set(0, cookingTime);
-            delegate.set(3, currentCraftingDuration);
+            delegate.set(0, 0);
+            delegate.set(3, 0);
             if (state.getValue(CookingCauldronBlock.COOKING)) {
                 world.setBlock(pos, state.setValue(CookingCauldronBlock.COOKING, false).setValue(CookingCauldronBlock.LIT, true), Block.UPDATE_ALL);
             }
