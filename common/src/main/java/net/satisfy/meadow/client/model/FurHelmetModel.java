@@ -8,11 +8,11 @@ import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.world.entity.Entity;
-import net.satisfy.meadow.core.util.MeadowIdentifier;
+import net.satisfy.meadow.Meadow;
 import org.jetbrains.annotations.NotNull;
 
 public class FurHelmetModel<T extends Entity> extends EntityModel<T> {
-    public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new MeadowIdentifier("fur_hat"), "main");
+    public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(Meadow.identifier("fur_hat"), "main");
     private final ModelPart top_part;
 
     public FurHelmetModel(ModelPart root) {

@@ -32,7 +32,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.satisfy.meadow.core.registry.EntityTypeRegistry;
 import net.satisfy.meadow.core.registry.ObjectRegistry;
-import net.satisfy.meadow.core.util.MeadowIdentifier;
+import net.satisfy.meadow.Meadow;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -56,7 +56,7 @@ public class WoolyCowEntity extends Animal implements Shearable, VariantHolder<W
         ResourceLocation location = BuiltInRegistries.ITEM.getKey(getVariant().getWool());
         String s = location.getPath().replace("_wool", "");
 
-        return new MeadowIdentifier("entities/wooly_cow/" + s);
+        return Meadow.identifier("entities/wooly_cow/" + s);
     }
 
     @Override

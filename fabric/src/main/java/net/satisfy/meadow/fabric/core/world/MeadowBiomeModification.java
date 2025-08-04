@@ -7,8 +7,8 @@ import net.minecraft.world.entity.SpawnPlacements;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.level.levelgen.GenerationStep;
 import net.minecraft.world.level.levelgen.Heightmap;
+import net.satisfy.meadow.Meadow;
 import net.satisfy.meadow.core.registry.EntityTypeRegistry;
-import net.satisfy.meadow.core.util.MeadowIdentifier;
 import net.satisfy.meadow.core.world.MeadowPlacedFeature;
 
 import java.util.function.Predicate;
@@ -16,7 +16,7 @@ import java.util.function.Predicate;
 public class MeadowBiomeModification {
 
     public static void init() {
-        BiomeModifications.create(new MeadowIdentifier("world_features"))
+        BiomeModifications.create(Meadow.identifier("world_features"))
                 .add(ModificationPhase.ADDITIONS, getMeadowSelector(), ctx -> {
                     var gen = ctx.getGenerationSettings();
                     gen.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, MeadowPlacedFeature.FOREST_TREES_KEY);
@@ -51,7 +51,7 @@ public class MeadowBiomeModification {
     }
 
     private static Predicate<BiomeSelectionContext> getMeadowSelector() {
-        return BiomeSelectors.tag(TagKey.create(Registries.BIOME, new MeadowIdentifier("meadow_biomes")));
+        return BiomeSelectors.tag(TagKey.create(Registries.BIOME, Meadow.identifier("meadow_biomes")));
     }
 
     public static class FabricEntitySpawn {

@@ -14,7 +14,6 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.satisfy.meadow.Meadow;
 import net.satisfy.meadow.core.block.entity.*;
 import net.satisfy.meadow.core.entity.*;
-import net.satisfy.meadow.core.util.MeadowIdentifier;
 import net.satisfy.meadow.platform.PlatformHelper;
 
 import java.util.HashSet;
@@ -36,7 +35,7 @@ public class EntityTypeRegistry {
 
     public static final RegistrySupplier<EntityType<WaterBuffaloEntity>> WATER_BUFFALO = registerEntity("water_buffalo", () -> EntityType.Builder.of(WaterBuffaloEntity::new, MobCategory.CREATURE).sized(0.9f, 1.4f).build(new ResourceLocation(Meadow.MOD_ID, "water_buffalo").toString()));
     public static final RegistrySupplier<EntityType<WoolyCowEntity>> WOOLY_COW = registerEntity("wooly_cow", () -> EntityType.Builder.of(WoolyCowEntity::new, MobCategory.CREATURE).sized(0.9f, 1.4f).build(new ResourceLocation(Meadow.MOD_ID, "wooly_cow").toString()));
-    public static final RegistrySupplier<EntityType<ChairEntity>> CHAIR = registerEntity("chair", () -> EntityType.Builder.of(ChairEntity::new, MobCategory.MISC).sized(0.001F, 0.001F).build((new MeadowIdentifier("chair")).toString()));
+    public static final RegistrySupplier<EntityType<ChairEntity>> CHAIR = registerEntity("chair", () -> EntityType.Builder.of(ChairEntity::new, MobCategory.MISC).sized(0.001F, 0.001F).build((Meadow.identifier("chair")).toString()));
     public static final RegistrySupplier<EntityType<WoolySheepEntity>> WOOLY_SHEEP = registerEntity("wooly_sheep", () -> EntityType.Builder.of(WoolySheepEntity::new, MobCategory.CREATURE).sized(1.0f, 1.1f).build(new ResourceLocation(Meadow.MOD_ID, "meadow_sheep").toString()));
 
     public static final Supplier<EntityType<PineBoatEntity>> PINE_BOAT = PlatformHelper.registerBoatType("pine_boat", PineBoatEntity::new, MobCategory.MISC, 1.375F, 0.5625F, 10);
@@ -51,11 +50,11 @@ public class EntityTypeRegistry {
     }
 
     public static <T extends EntityType<?>> RegistrySupplier<T> registerEntity(final String path, final Supplier<T> type) {
-        return ENTITY_TYPES.register(new MeadowIdentifier(path), type);
+        return ENTITY_TYPES.register(Meadow.identifier(path), type);
     }
 
     private static <T extends BlockEntityType<?>> RegistrySupplier<T> registerBlockEntity(final String path, final Supplier<T> type) {
-        return BLOCK_ENTITY_TYPES.register(new MeadowIdentifier(path), type);
+        return BLOCK_ENTITY_TYPES.register(Meadow.identifier(path), type);
     }
 
     public static void init() {
