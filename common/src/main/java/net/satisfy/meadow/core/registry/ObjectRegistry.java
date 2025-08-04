@@ -174,8 +174,8 @@ public class ObjectRegistry {
     public static final RegistrySupplier<Block> FIRE_LILY = registerWithItem("fire_lily", () -> new FlowerBlock(MobEffects.HEAL, 1, BlockBehaviour.Properties.copy(Blocks.DANDELION)));
     public static final RegistrySupplier<Block> ERIOPHORUM = registerWithItem("eriophorum", () -> new FlowerBlock(MobEffects.HEAL, 1, BlockBehaviour.Properties.copy(Blocks.DANDELION)));
     public static final RegistrySupplier<Block> ERIOPHORUM_TALL = registerWithItem("eriophorum_tall", () -> new TallFlowerBlock(BlockBehaviour.Properties.copy(Blocks.ROSE_BUSH)));
-    public static final RegistrySupplier<Block> PINE_LEAVES = registerWithItem("pine_leaves", () -> new LeavesBlock(BlockBehaviour.Properties.of().strength(0.2f).randomTicks().sound(SoundType.GRASS).noOcclusion().isViewBlocking((state, world, pos) -> false).mapColor(MapColor.COLOR_YELLOW).isSuffocating((state, world, pos) -> false)));
-    public static final RegistrySupplier<Block> ALPINE_BIRCH_LEAVES_HANGING = registerWithItem("alpine_birch_leaves_hanging", () -> new LeavesBlock(BlockBehaviour.Properties.of().strength(0.2f).randomTicks().sound(SoundType.GRASS).noOcclusion().mapColor(MapColor.GRASS).isViewBlocking((state, world, pos) -> false).isSuffocating((state, world, pos) -> false)));
+    public static final RegistrySupplier<Block> PINE_LEAVES = registerWithItem("pine_leaves", () -> new LeavesBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LEAVES)));
+    public static final RegistrySupplier<Block> ALPINE_BIRCH_LEAVES_HANGING = registerWithItem("alpine_birch_leaves_hanging", () -> new LeavesBlock(BlockBehaviour.Properties.copy(Blocks.BIRCH_LEAVES)));
     public static final RegistrySupplier<Item> CHEESECAKE_SLICE = registerItem("cheesecake_slice", () -> new Item(getSettings().food(new FoodProperties.Builder().nutrition(7).saturationMod(0.8f).build())));
     public static final RegistrySupplier<Item> CHEESE_TART_SLICE = registerItem("cheese_tart_slice", () -> new Item(getSettings().food(new FoodProperties.Builder().nutrition(7).saturationMod(0.8f).build())));
     public static final RegistrySupplier<Item> PIECE_OF_CHEESE = registerItem("piece_of_cheese", () -> new Item(getSettings().food(new FoodProperties.Builder().nutrition(6).saturationMod(0.8f).build())));
@@ -224,7 +224,7 @@ public class ObjectRegistry {
     public static final RegistrySupplier<Block> POTTED_PINE_SAPLING = registerWithoutItem("potted_pine_sapling", () -> new FlowerPotBlock(ObjectRegistry.PINE_SAPLING.get(), BlockBehaviour.Properties.copy(Blocks.POTTED_POPPY)));
     public static final RegistrySupplier<Block> ALPINE_OAK_LOG = registerWithItem("alpine_oak_log", () -> new RotatedPillarBlock(BlockBehaviour.Properties.of().sound(SoundType.WOOD).strength(2.0f)));
     public static final RegistrySupplier<Block> ALPINE_BIRCH_LOG = registerWithItem("alpine_birch_log", () -> new RotatedPillarBlock(BlockBehaviour.Properties.of().sound(SoundType.WOOD).strength(2.0f)));
-    public static final RegistrySupplier<Block> PINE_LEAVES_2 = registerWithoutItem("pine_leaves_2", () -> new LeavesBlock(BlockBehaviour.Properties.copy(Blocks.SPRUCE_LEAVES)));
+    public static final RegistrySupplier<Block> PINE_LEAVES_2 = registerWithoutItem("pine_leaves_2", () -> new LeavesBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LEAVES)));
     public static final RegistrySupplier<Item> PINE_BOAT = ITEMS.register("pine_boat", () -> new PineBoatItem(false, PineBoatEntity.Type.PINE, new Item.Properties()));
     public static final RegistrySupplier<Item> PINE_CHEST_BOAT = ITEMS.register("pine_chest_boat", () -> new PineBoatItem(true, PineBoatEntity.Type.PINE, new Item.Properties()));
     public static final RegistrySupplier<Block> MEADOW_BANNER = registerWithItem("meadow_banner", () -> new CompletionistBannerBlock(BlockBehaviour.Properties.of().strength(1F).instrument(NoteBlockInstrument.BASS).noCollission().sound(SoundType.WOOD)));

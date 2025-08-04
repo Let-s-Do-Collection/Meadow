@@ -27,7 +27,6 @@ public class BenchBlock extends LineConnectingBlock {
     public static final VoxelShape[] BOTTOM_SINGLE_SHAPE;
     public static final VoxelShape[] BOTTOM_MULTI_SHAPE;
 
-
     @Override
     public @NotNull VoxelShape getShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
         boolean isX = state.getValue(FACING).getAxis() == Direction.Axis.X;

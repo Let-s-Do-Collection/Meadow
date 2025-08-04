@@ -38,20 +38,8 @@ public class MeadowForge {
 
     @SubscribeEvent
     public static void spawnEvent(SpawnPlacementRegisterEvent event) {
-        event.register(EntityTypeRegistry.WOOLY_COW.get(),
-                SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
-                Animal::checkAnimalSpawnRules,
-                SpawnPlacementRegisterEvent.Operation.AND
-        );
-        event.register(EntityTypeRegistry.WATER_BUFFALO.get(),
-                SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
-                Animal::checkAnimalSpawnRules,
-                SpawnPlacementRegisterEvent.Operation.AND
-        );
-        event.register(EntityTypeRegistry.WOOLY_SHEEP.get(),
-                SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
-                Animal::checkAnimalSpawnRules,
-                SpawnPlacementRegisterEvent.Operation.AND
-        );
+        event.register(EntityTypeRegistry.WOOLY_COW.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Animal::checkAnimalSpawnRules, SpawnPlacementRegisterEvent.Operation.AND);
+        event.register(EntityTypeRegistry.WATER_BUFFALO.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Animal::checkAnimalSpawnRules, SpawnPlacementRegisterEvent.Operation.AND);
+        event.register(EntityTypeRegistry.WOOLY_SHEEP.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Animal::checkAnimalSpawnRules, SpawnPlacementRegisterEvent.Operation.AND);
     }
 }

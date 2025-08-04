@@ -269,6 +269,16 @@ public class WoolySheepEntity extends Animal implements Shearable {
     }
 
     @Override
+    protected boolean shouldDropLoot() {
+        return true;
+    }
+
+    @Override
+    protected void dropCustomDeathLoot(@NotNull DamageSource source, int lootingMultiplier, boolean recentlyHit) {
+        this.dropFromLootTable(source, recentlyHit);
+    }
+
+    @Override
     protected SoundEvent getHurtSound(@NotNull DamageSource damageSource) {
         return SoundEvents.SHEEP_HURT;
     }

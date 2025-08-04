@@ -1,7 +1,6 @@
 package net.satisfy.meadow.core.entity;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
@@ -40,8 +39,6 @@ public class WoolyCowEntity extends Animal implements Shearable, VariantHolder<W
     private static final EntityDataAccessor<Boolean> IS_SHEARED = SynchedEntityData.defineId(WoolyCowEntity.class, EntityDataSerializers.BOOLEAN);
     private static final EntityDataAccessor<Integer> DATA_ID_TYPE_VARIANT = SynchedEntityData.defineId(WoolyCowEntity.class, EntityDataSerializers.INT);
 
-    private static final ResourceLocation COW_LOOT_TABLE = new ResourceLocation("entities/cow");
-
     private int eatGrassTimer;
     private EatBlockGoal eatGrassGoal;
 
@@ -51,12 +48,7 @@ public class WoolyCowEntity extends Animal implements Shearable, VariantHolder<W
 
     @Override
     protected @NotNull ResourceLocation getDefaultLootTable() {
-        if (isSheared()) return COW_LOOT_TABLE;
-
-        ResourceLocation location = BuiltInRegistries.ITEM.getKey(getVariant().getWool());
-        String s = location.getPath().replace("_wool", "");
-
-        return Meadow.identifier("entities/wooly_cow/" + s);
+        return Meadow.identifier("entities/wooly_cow");
     }
 
     @Override
@@ -269,6 +261,16 @@ public class WoolyCowEntity extends Animal implements Shearable, VariantHolder<W
     @Override
     protected void playStepSound(@NotNull BlockPos blockPos, @NotNull BlockState blockState) {
         this.playSound(SoundEvents.COW_STEP, 0.15F, 1.0F);
+    }
+
+    @Override
+    protected boolean shouldDropLoot() {
+        return true;
+    }
+
+    @Override
+    protected void dropCustomDeathLoot(@NotNull DamageSource source, int lootingMultiplier, boolean recentlyHit) {
+        this.dropFromLootTable(source, recentlyHit);
     }
 
     @Override

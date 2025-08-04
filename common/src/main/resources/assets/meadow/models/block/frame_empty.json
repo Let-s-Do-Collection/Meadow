@@ -534,7 +534,7 @@
         13,
         13
       ],
-      "shade": false,
+      ,
       "rotation": {
         "angle": 45,
         "axis": "y",
@@ -630,7 +630,7 @@
         13,
         7.8
       ],
-      "shade": false,
+      ,
       "rotation": {
         "angle": 45,
         "axis": "y",
