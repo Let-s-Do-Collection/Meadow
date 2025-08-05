@@ -244,4 +244,7 @@
   "advancement.meadow.woodcutter.desc": "Platziere den Holzstamm, setze die Axt ein, füge Stämme oder Holz hinzu und lass den Holzstamm mit Axt die Arbeit für dich erledigen!",
   "advancement.meadow.woodcutter": "Verdammte Axt!",
   "advancement.meadow.fondue": "Käseglück am Spieß",
-  "advancement.meadow.fondue.desc": "Platziere ein Fondue"}
+  "entity.meadow.wooly_sheep": "Wooly Sheep",
+  "item.meadow.felting_needle": "Filznadel",
+  "advancement.meadow.fondue.desc": "Platziere ein Fondue"
+}

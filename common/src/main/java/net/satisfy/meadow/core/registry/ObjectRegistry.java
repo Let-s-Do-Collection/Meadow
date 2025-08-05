@@ -8,7 +8,6 @@ import dev.architectury.registry.registries.RegistrySupplier;
 import net.minecraft.core.Direction;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.RandomSource;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -235,6 +234,7 @@ public class ObjectRegistry {
     public static final RegistrySupplier<Block> PINE_WALL_HANGING_SIGN = registerWithoutItem("pine_wall_hanging_sign", () -> new ModWallHangingSignBlock(BlockBehaviour.Properties.copy(Blocks.OAK_WALL_HANGING_SIGN), MeadowWoodType.PINE));
     public static final RegistrySupplier<Item> PINE_SIGN_ITEM = ITEMS.register("pine_sign", () -> new SignItem(new Item.Properties().stacksTo(16), ObjectRegistry.PINE_SIGN.get(), ObjectRegistry.PINE_WALL_SIGN.get()));
     public static final RegistrySupplier<Item> PINE_HANGING_SIGN_ITEM = ITEMS.register("pine_hanging_sign", () -> new HangingSignItem(ObjectRegistry.PINE_HANGING_SIGN.get(), ObjectRegistry.PINE_WALL_HANGING_SIGN.get(), new Item.Properties().stacksTo(16)));
+    public static final RegistrySupplier<Item> FELTING_NEEDLE = registerItem("felting_needle", () -> new FeltingNeedleItem(getSettings()));
 
     private static RegistrySupplier<Block> registerLog(String path) {
         return registerWithItem(path, () -> new RotatedPillarBlock(getLogBlockSettings()));

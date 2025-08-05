@@ -7,3 +7,4 @@ accessible field net/minecraft/client/renderer/entity/layers/SheepFurLayer SHEEP
 mutable field net/minecraft/client/renderer/entity/layers/SheepFurLayer SHEEP_FUR_LOCATION Lnet/minecraft/resources/ResourceLocation;
 accessible method net/minecraft/world/level/block/state/properties/WoodType register (Lnet/minecraft/world/level/block/state/properties/WoodType;)Lnet/minecraft/world/level/block/state/properties/WoodType;
 accessible method net/minecraft/world/level/block/FireBlock setFlammable (Lnet/minecraft/world/level/block/Block;II)V
+accessible field net/minecraft/util/GsonHelper GSON Lcom/google/gson/Gson;

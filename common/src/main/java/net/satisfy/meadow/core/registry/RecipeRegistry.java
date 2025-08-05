@@ -7,10 +7,7 @@ import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.satisfy.meadow.Meadow;
-import net.satisfy.meadow.core.recipes.CheeseFormRecipe;
-import net.satisfy.meadow.core.recipes.CookingCauldronRecipe;
-import net.satisfy.meadow.core.recipes.SimpleConditionalRecipe;
-import net.satisfy.meadow.core.recipes.WoodcuttingRecipe;
+import net.satisfy.meadow.core.recipes.*;
 
 import java.util.function.Supplier;
 
@@ -26,6 +23,8 @@ public class RecipeRegistry {
     public static final RegistrySupplier<RecipeSerializer<Recipe<?>>> CONDITIONAL_RECIPE_SERIALIZER = create("conditional", SimpleConditionalRecipe.Serializer::new);
     public static final RegistrySupplier<RecipeType<WoodcuttingRecipe>> WOODCUTTING = create("woodcutting");
     public static final RegistrySupplier<RecipeSerializer<WoodcuttingRecipe>> WOODCUTTING_SERIALIZER = create("woodcutting", WoodcuttingRecipe.Serializer::new);
+    public static final RegistrySupplier<RecipeType<FeltingRecipe>> FELTING = create("felting");
+    public static final RegistrySupplier<RecipeSerializer<FeltingRecipe>> FELTING_SERIALIZER = create("felting", FeltingRecipe.Serializer::new);
 
     public static void init() {
         RECIPE_SERIALIZERS.register();

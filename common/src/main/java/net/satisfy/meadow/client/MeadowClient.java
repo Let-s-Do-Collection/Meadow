@@ -48,7 +48,6 @@ public class MeadowClient {
         );
 
         registerBlockEntityRenderer();
-
     }
 
     public static void preInitClient() {
