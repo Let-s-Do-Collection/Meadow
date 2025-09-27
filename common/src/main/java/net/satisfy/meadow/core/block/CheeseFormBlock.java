@@ -1,12 +1,12 @@
 package net.satisfy.meadow.core.block;
 
+import com.mojang.serialization.MapCodec;
 import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.Containers;
-import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.BlockGetter;
@@ -36,15 +36,20 @@ import org.jetbrains.annotations.Nullable;
 import java.util.HashMap;
 import java.util.Map;
 
-@SuppressWarnings("deprecation")
 public class CheeseFormBlock extends BaseEntityBlock {
     public static final BooleanProperty WORKING = BooleanProperty.create("working");
     public static final BooleanProperty DONE = BooleanProperty.create("done");
     public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
+    public static final MapCodec<CheeseFormBlock> CODEC = simpleCodec(CheeseFormBlock::new);
 
     public CheeseFormBlock(Properties settings) {
         super(settings);
         this.registerDefaultState(this.stateDefinition.any().setValue(DONE, false).setValue(WORKING, false).setValue(FACING, Direction.NORTH));
+    }
+
+    @Override
+    protected @NotNull MapCodec<? extends BaseEntityBlock> codec() {
+        return CODEC;
     }
 
     private static final VoxelShape BASE_SHAPE = Shapes.or(
@@ -77,7 +82,7 @@ public class CheeseFormBlock extends BaseEntityBlock {
     }
 
     @Override
-    public @NotNull InteractionResult use(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
+    protected @NotNull InteractionResult useWithoutItem(BlockState state, Level world, BlockPos pos, Player player, BlockHitResult blockHitResult) {
         if (!world.isClientSide) {
             player.openMenu(state.getMenuProvider(world, pos));
         }

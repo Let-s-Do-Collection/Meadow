@@ -1,0 +1,18 @@
+{
+  "type": "meadow:cooking",
+  "ingredients": [
+    {
+      "item": "minecraft:amethyst_cluster"
+    },
+    {
+      "item": "meadow:alpine_salt"
+    },
+    {
+      "tag": "meadow:milk"
+    }
+  ],
+  "result": {
+    "id": "meadow:wooden_amethyst_milk_bucket",
+    "count": 1
+  }
+}

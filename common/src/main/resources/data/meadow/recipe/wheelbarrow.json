@@ -1,0 +1,23 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        " / ",
+        " M/",
+        "W  "
+    ],
+    "key": {
+        "/": {
+            "item": "minecraft:stick"
+        },
+        "M": {
+            "item": "meadow:wooden_cauldron"
+        },
+        "W": {
+            "item": "meadow:polished_limestone_bricks"
+        }
+    },
+    "result": {
+        "id": "meadow:wheelbarrow",
+        "count": 1
+    }
+}

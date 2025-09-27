@@ -1,9 +1,10 @@
 package net.satisfy.meadow.core.block;
 
+import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.sounds.SoundEvent;
-import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -21,15 +22,16 @@ import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.phys.BlockHitResult;
 import net.satisfy.meadow.core.block.entity.CabinetBlockEntity;
+import net.satisfy.meadow.core.registry.SoundEventRegistry;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-@SuppressWarnings("deprecation")
 public class CabinetBlock extends BaseEntityBlock {
     public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
     public static final BooleanProperty OPEN = BlockStateProperties.OPEN;
     private final SoundEvent openSound;
     private final SoundEvent closeSound;
+    public static final MapCodec<CabinetBlock> CODEC = simpleCodec(props -> new CabinetBlock(props, SoundEventRegistry.CABINET_OPEN.get(), SoundEventRegistry.CABINET_CLOSE.get()));
 
     public CabinetBlock(BlockBehaviour.Properties settings, SoundEvent openSound, SoundEvent closeSound) {
         super(settings);
@@ -44,16 +46,13 @@ public class CabinetBlock extends BaseEntityBlock {
     }
 
     @Override
-    public @NotNull InteractionResult use(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
-        if (world.isClientSide) {
+    protected @NotNull InteractionResult useWithoutItem(BlockState blockState, Level level, BlockPos blockPos, Player player, BlockHitResult blockHitResult) {
+        if (level.isClientSide) {
             return InteractionResult.SUCCESS;
         } else {
-            BlockEntity blockEntity = world.getBlockEntity(pos);
-            if (blockEntity instanceof CabinetBlockEntity cabinetBlockEntity) {
-                player.openMenu(cabinetBlockEntity);
-                boolean isOpen = state.getValue(OPEN);
-                world.setBlock(pos, state.setValue(OPEN, !isOpen), 3);
-                this.playSound(world, pos, !isOpen);
+            BlockEntity blockEntity = level.getBlockEntity(blockPos);
+            if (blockEntity instanceof CabinetBlockEntity blockEntity1) {
+                player.openMenu(blockEntity1);
             }
             return InteractionResult.CONSUME;
         }
@@ -74,6 +73,7 @@ public class CabinetBlock extends BaseEntityBlock {
         return this.defaultBlockState().setValue(FACING, ctx.getHorizontalDirection().getOpposite());
     }
 
+
     @Override
     public @NotNull RenderShape getRenderShape(BlockState state) {
         return RenderShape.MODEL;
@@ -93,10 +93,10 @@ public class CabinetBlock extends BaseEntityBlock {
 
     @Override
     public void setPlacedBy(Level world, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack itemStack) {
-        if (itemStack.hasCustomHoverName()) {
+        if (itemStack.has(DataComponents.CUSTOM_NAME)) {
             BlockEntity blockEntity = world.getBlockEntity(pos);
-            if (blockEntity instanceof CabinetBlockEntity cabinetBlockEntity) {
-                cabinetBlockEntity.setCustomName(itemStack.getHoverName());
+            if (blockEntity instanceof CabinetBlockEntity blockEntity1) {
+                blockEntity1.getCustomName();
             }
         }
     }
@@ -119,5 +119,10 @@ public class CabinetBlock extends BaseEntityBlock {
     @Override
     public @NotNull BlockState mirror(BlockState state, Mirror mirror) {
         return state.rotate(mirror.getRotation(state.getValue(FACING)));
+    }
+
+    @Override
+    protected @NotNull MapCodec<? extends BaseEntityBlock> codec() {
+        return CODEC;
     }
 }

@@ -1,0 +1,10 @@
+{
+  "type": "meadow:woodcutting",
+  "inputItem": {
+    "tag": "minecraft:dark_oak_logs"
+  },
+  "outputItem": {
+    "count": 1,
+    "id": "minecraft:dark_oak_fence_gate"
+  }
+}

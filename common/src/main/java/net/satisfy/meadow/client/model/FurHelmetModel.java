@@ -37,10 +37,10 @@ public class FurHelmetModel<T extends Entity> extends EntityModel<T> {
     }
 
     @Override
-    public void renderToBuffer(PoseStack poseStack, @NotNull VertexConsumer buffer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
+    public void renderToBuffer(PoseStack poseStack, VertexConsumer vertexConsumer, int packedLight, int packedOverlay, int k) {
         poseStack.pushPose();
         poseStack.scale(1.05F, 1.05F, 1.05F);
-        top_part.render(poseStack, buffer, packedLight, packedOverlay);
+        top_part.render(poseStack, vertexConsumer, packedLight, packedOverlay, k);
         poseStack.popPose();
     }
 

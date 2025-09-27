@@ -5,6 +5,8 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.game.ClientboundAddEntityPacket;
+import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.server.level.ServerEntity;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -20,41 +22,36 @@ public class ChairEntity extends Entity {
     }
 
     @Override
-    protected void defineSynchedData() {
+    protected void defineSynchedData(SynchedEntityData.Builder builder) {
+
     }
 
-    @Override
     public @NotNull Vec3 getDismountLocationForPassenger(LivingEntity passenger) {
         if (passenger instanceof Player p) {
             BlockPos pos = GeneralUtil.getPreviousPlayerPosition(p, this);
             if (pos != null) {
-                discard();
-                return new Vec3(pos.getX() + 0.5D, pos.getY(), pos.getZ() + 0.5D);
+                this.discard();
+                return new Vec3((double)pos.getX() + 0.5, pos.getY(), (double)pos.getZ() + 0.5);
             }
         }
 
-        discard();
+        this.discard();
         return super.getDismountLocationForPassenger(passenger);
     }
 
-    @Override
     public void remove(RemovalReason reason) {
         super.remove(reason);
-        GeneralUtil.removeChairEntity(level(), blockPosition());
+        GeneralUtil.removeChairEntity(this.level(), this.blockPosition());
     }
 
-    @Override
     protected void readAdditionalSaveData(CompoundTag nbt) {
-
     }
 
-    @Override
     protected void addAdditionalSaveData(CompoundTag nbt) {
-
     }
 
     @Override
-    public @NotNull Packet<ClientGamePacketListener> getAddEntityPacket() {
-        return new ClientboundAddEntityPacket(this);
+    public @NotNull Packet<ClientGamePacketListener> getAddEntityPacket(ServerEntity server) {
+        return new ClientboundAddEntityPacket(this, server);
     }
 }

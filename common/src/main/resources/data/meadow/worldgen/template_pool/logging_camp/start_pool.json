@@ -1,15 +1,1 @@
-{
-  "name": "meadow:logging_camp/start_pool",
-  "fallback": "minecraft:empty",
-  "elements": [
-    {
-      "weight": 1,
-      "element": {
-        "location": "meadow:logging_camp",
-        "processors": "minecraft:empty",
-        "projection": "rigid",
-        "element_type": "minecraft:single_pool_element"
-      }
-    }
-  ]
-}
+{"name":"meadow:logging_camp/start_pool","fallback":"minecraft:empty","elements":[{"weight":1,"element":{"location":"meadow:logging_camp","processors":"minecraft:empty","projection":"rigid","element_type":"minecraft:single_pool_element"}}]}

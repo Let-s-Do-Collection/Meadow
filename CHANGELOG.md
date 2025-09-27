@@ -1,0 +1,47 @@
+[1.4.0]
+
+**Ported to 1.21.1**
+
+***
+
+[1.3.26]
+
+**Added**
+* Japanese translation _(Thanks to PExPE3)_
+
+**Changed**
+
+**Fixed**
+* Cooking Pot recipes now work correctly when the result item is already present in the output slot. 
+* Removed the unnecessary subclass of `ResourceLocation`, which caused compatibility issues with some mods (e.g., Xaero's Minimap not displaying sheep faces). 
+* `pine_leaves_2` now correctly belongs to the `#minecraft:leaves` tag
+* Removed unintended `"shade": false` properties from `pine_leaves_1.json` and `pine_leaves_2.json`
+* Pine leaves and hanging birch leaves are now correctly broken by pistons instead of being pushed
+* Wooly Cows & Sheep now correctly dropping meat
+
+***
+
+[1.3.25]
+
+***
+
+[1.3.24] 
+
+**Added**
+
+**Changed**
+
+**Fixed**
+- Cooking `roasted_buffalo_ham` or buffalo_sausage_with_cheese` now correctly results in the intended items instead of always producing `cooked_buffalo_meat`.
+- The JEI Woodcutter background GUI now displays the correct texture.
+
+***
+
+[1.3.24]
+
+**Added**
+
+**Changed**
+
+**Fixed**
+- `CompletionistBanner` giving `Regeneration` instead of `DigSpeed`.

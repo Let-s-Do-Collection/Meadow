@@ -1,0 +1,20 @@
+{
+  "type": "doapi:conditional",
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "farm_and_charm"
+    }
+  ],
+  "recipe": {
+    "type": "farm_and_charm:mincer",
+    "ingredient": {
+      "item": "meadow:pine_log"
+    },
+    "recipe_type": "WOOD",
+    "result": {
+      "id": "meadow:stripped_pine_log",
+      "count": 1
+    }
+  }
+}

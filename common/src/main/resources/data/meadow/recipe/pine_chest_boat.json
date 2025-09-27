@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "chest_boat",
+  "ingredients": [
+    {
+      "item": "minecraft:chest"
+    },
+    {
+      "item": "meadow:pine_boat"
+    }
+  ],
+  "result": {
+    "id": "meadow:pine_chest_boat",
+    "count": 1
+  }
+}

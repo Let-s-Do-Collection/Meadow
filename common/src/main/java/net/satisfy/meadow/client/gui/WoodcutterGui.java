@@ -11,6 +11,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.item.crafting.RecipeHolder;
 import net.satisfy.meadow.Meadow;
 import net.satisfy.meadow.client.gui.handler.WoodcutterGuiHandler;
 import net.satisfy.meadow.core.recipes.WoodcuttingRecipe;
@@ -46,7 +47,7 @@ public class WoodcutterGui extends AbstractContainerScreen<WoodcutterGuiHandler>
 
     @Override
     protected void renderBg(GuiGraphics context, float delta, int mouseX, int mouseY) {
-        this.renderBackground(context);
+        this.renderBackground(context, mouseX, mouseY, delta);
         RenderSystem.setShader(GameRenderer::getPositionTexShader);
         RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f);
         RenderSystem.setShaderTexture(0, TEXTURE);
@@ -82,7 +83,8 @@ public class WoodcutterGui extends AbstractContainerScreen<WoodcutterGuiHandler>
     }
 
     private void renderRecipeIcons(GuiGraphics context, int x, int y, int scrollOffsetOFF) {
-        List<WoodcuttingRecipe> list = this.menu.getAvailableRecipes();
+        List<WoodcuttingRecipe> list = this.menu.getAvailableRecipes()
+                .stream().map(RecipeHolder::value).toList();
         for (int i = this.scrollOffset; i < scrollOffsetOFF && i < this.menu.getAvailableRecipeCount(); i++) {
             int offsetedI = i - this.scrollOffset;
             int k = x + recipeIconWidth * (offsetedI % recipeIconPerLine);
@@ -101,7 +103,8 @@ public class WoodcutterGui extends AbstractContainerScreen<WoodcutterGuiHandler>
             int i = this.leftPos + recipeIconPosX;
             int j = this.topPos + recipeIconPosY;
             int scrollOffsetOFF = this.scrollOffset + maxRecipeIcons;
-            List<WoodcuttingRecipe> list = this.menu.getAvailableRecipes();
+            List<WoodcuttingRecipe> list = this.menu.getAvailableRecipes()
+                    .stream().map(RecipeHolder::value).toList();
             for (int l = scrollOffset; l < scrollOffsetOFF && l < this.menu.getAvailableRecipeCount(); l++) {
                 int offsetedL = l - this.scrollOffset;
 
@@ -162,10 +165,10 @@ public class WoodcutterGui extends AbstractContainerScreen<WoodcutterGuiHandler>
     }
 
     @Override
-    public boolean mouseScrolled(double mouseX, double mouseY, double amount) {
+    public boolean mouseScrolled(double mouseX, double mouseY, double amountX, double amountY) {
         if (this.shouldScroll()) {
             int i = this.getMaxScroll();
-            float f = (float)amount / (float)i;
+            float f = (float)amountY / (float)i;
             this.scrollAmount = Mth.clamp(this.scrollAmount - f, 0.0f, 1.0f);
             this.scrollOffset = (int)((double)(this.scrollAmount * (float)i) + 0.5) * 4;
         }

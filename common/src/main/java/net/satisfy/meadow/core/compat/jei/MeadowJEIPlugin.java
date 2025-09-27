@@ -11,6 +11,7 @@ import mezz.jei.api.registration.IRecipeTransferRegistration;
 import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeManager;
 import net.satisfy.meadow.Meadow;
 import net.satisfy.meadow.client.gui.handler.CheeseFormGuiHandler;
@@ -26,6 +27,7 @@ import net.satisfy.meadow.core.registry.RecipeRegistry;
 import net.satisfy.meadow.core.registry.ScreenHandlerRegistry;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -40,20 +42,24 @@ public class MeadowJEIPlugin implements IModPlugin {
         registration.addRecipeCategories(new WoodCutterCategory(registration.getJeiHelpers().getGuiHelper()));
     }
 
-
     @Override
     public void registerRecipes(IRecipeRegistration registration) {
         RecipeManager rm = Objects.requireNonNull(Minecraft.getInstance().level).getRecipeManager();
 
-        List<CookingCauldronRecipe> cookingCauldronRecipes = rm.getAllRecipesFor(RecipeRegistry.COOKING.get());
-        registration.addRecipes(CookingCauldronCategory.COOKING_CAULDRON, cookingCauldronRecipes);
+        List<RecipeHolder<CookingCauldronRecipe>> cookingHolders = rm.getAllRecipesFor(RecipeRegistry.COOKING.get());
+        List<CookingCauldronRecipe> cookingRecipes = new ArrayList<>();
+        cookingHolders.forEach(h -> cookingRecipes.add(h.value()));
+        registration.addRecipes(CookingCauldronCategory.COOKING_CAULDRON, cookingRecipes);
 
-        List<CheeseFormRecipe> cheesePressRecipes = rm.getAllRecipesFor(RecipeRegistry.CHEESE.get());
-        registration.addRecipes(CheesePressCategory.CHEESE_PRESS, cheesePressRecipes);
+        List<RecipeHolder<CheeseFormRecipe>> cheeseHolders = rm.getAllRecipesFor(RecipeRegistry.CHEESE.get());
+        List<CheeseFormRecipe> cheeseRecipes = new ArrayList<>();
+        cheeseHolders.forEach(h -> cheeseRecipes.add(h.value()));
+        registration.addRecipes(CheesePressCategory.CHEESE_PRESS, cheeseRecipes);
 
-        List<WoodcuttingRecipe> woodcuttingRecipes = rm.getAllRecipesFor(RecipeRegistry.WOODCUTTING.get());
-        registration.addRecipes(WoodCutterCategory.WOODCUTTER, woodcuttingRecipes);
-
+        List<RecipeHolder<WoodcuttingRecipe>> woodHolders = rm.getAllRecipesFor(RecipeRegistry.WOODCUTTING.get());
+        List<WoodcuttingRecipe> woodRecipes = new ArrayList<>();
+        woodHolders.forEach(h -> woodRecipes.add(h.value()));
+        registration.addRecipes(WoodCutterCategory.WOODCUTTER, woodRecipes);
     }
 
     @Override

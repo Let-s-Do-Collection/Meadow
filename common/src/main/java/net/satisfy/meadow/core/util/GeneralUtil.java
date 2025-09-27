@@ -1,7 +1,9 @@
 package net.satisfy.meadow.core.util;
 
 import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
 import com.mojang.datafixers.util.Pair;
+import com.mojang.serialization.JsonOps;
 import dev.architectury.platform.Platform;
 import dev.architectury.registry.registries.DeferredRegister;
 import dev.architectury.registry.registries.Registrar;
@@ -50,11 +52,11 @@ public class GeneralUtil {
     }
 
     public static <T extends Block> RegistrySupplier<T> registerWithoutItem(DeferredRegister<Block> register, Registrar<Block> registrar, ResourceLocation path, Supplier<T> block) {
-        return Platform.isForge() ? register.register(path.getPath(), block) : registrar.register(path, block);
+        return Platform.isNeoForge() ? register.register(path.getPath(), block) : registrar.register(path, block);
     }
 
     public static <T extends Item> RegistrySupplier<T> registerItem(DeferredRegister<Item> register, Registrar<Item> registrar, ResourceLocation path, Supplier<T> itemSupplier) {
-        return Platform.isForge() ? register.register(path.getPath(), itemSupplier) : registrar.register(path, itemSupplier);
+        return Platform.isNeoForge() ? register.register(path.getPath(), itemSupplier) : registrar.register(path, itemSupplier);
     }
 
     public static boolean matchesRecipe(Container inventory, NonNullList<Ingredient> recipe, int startIndex, int endIndex) {
@@ -151,8 +153,10 @@ public class GeneralUtil {
     public static NonNullList<Ingredient> deserializeIngredients(JsonArray json) {
         NonNullList<Ingredient> ingredients = NonNullList.create();
 
-        for (int i = 0; i < json.size(); ++i) {
-            Ingredient ingredient = Ingredient.fromJson(json.get(i));
+        for (JsonElement element : json) {
+            Ingredient ingredient = Ingredient.CODEC.parse(JsonOps.INSTANCE, element)
+                    .result()
+                    .orElse(Ingredient.EMPTY);
             if (!ingredient.isEmpty()) {
                 ingredients.add(ingredient);
             }
@@ -264,7 +268,7 @@ public class GeneralUtil {
     }
 
     private static ResourceLocation getDimensionTypeId(Level world) {
-        return world.dimensionTypeId().location();
+        return world.dimension().location();
     }
 
     public enum ShutterType implements StringRepresentable {

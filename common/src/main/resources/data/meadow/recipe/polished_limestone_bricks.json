@@ -1,0 +1,11 @@
+{
+    "type": "minecraft:smelting",
+    "ingredient": {
+        "item": "meadow:chiseled_limestone_bricks"
+    },
+    "result": {
+        "id": "meadow:polished_limestone_bricks"
+    },
+    "experience": 0.1,
+    "cookingtime": 150
+}

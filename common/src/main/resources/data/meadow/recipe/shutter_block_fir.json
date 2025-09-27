@@ -1,0 +1,18 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "-B "
+    ],
+    "key": {
+        "-": {
+            "item": "meadow:shutter_block"
+        },
+        "B": {
+            "item": "meadow:pine_sapling"
+        }
+    },
+    "result": {
+        "id": "meadow:shutter_block_fir",
+        "count": 1
+    }
+}

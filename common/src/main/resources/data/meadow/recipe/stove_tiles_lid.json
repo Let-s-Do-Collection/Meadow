@@ -1,0 +1,23 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "###",
+        "#I#",
+        "i i"
+    ],
+    "key": {
+        "#": {
+            "item": "meadow:limestone_bricks"
+        },
+        "I": {
+            "item": "minecraft:iron_trapdoor"
+        },
+        "i": {
+            "item": "minecraft:iron_ingot"
+        }
+    },
+    "result": {
+        "id": "meadow:stove_tiles_lid",
+        "count": 1
+    }
+}

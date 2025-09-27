@@ -1,8 +1,0 @@
-{
-  "type": "meadow:woodcutting",
-  "inputItem": {
-    "tag": "minecraft:birch_logs"
-  },
-  "outputItem": "minecraft:birch_sign",
-  "outputAmount": 2
-}

@@ -1,6 +1,7 @@
 package net.satisfy.meadow.core.block.entity;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.Packet;
@@ -17,6 +18,7 @@ import net.satisfy.meadow.core.util.GeneralUtil;
 import org.jetbrains.annotations.NotNull;
 
 public class StorageBlockEntity extends BlockEntity {
+
     private int size;
 
     private NonNullList<ItemStack> inventory;
@@ -31,42 +33,49 @@ public class StorageBlockEntity extends BlockEntity {
         this.inventory = NonNullList.withSize(this.size, ItemStack.EMPTY);
     }
 
-    public ItemStack removeStack(int slot) {
-        ItemStack stack = inventory.set(slot, ItemStack.EMPTY);
-        setChanged();
-        return stack;
+    public void setStack(int slot, ItemStack stack){
+        if (slot >= 0 && slot < inventory.size()) {
+            inventory.set(slot, stack);
+            setChanged();
+        }
     }
 
-    public void setStack(int slot, ItemStack stack) {
-        inventory.set(slot, stack);
-        setChanged();
+    public ItemStack removeStack(int slot){
+        if (slot >= 0 && slot < inventory.size()) {
+            ItemStack stack = inventory.set(slot, ItemStack.EMPTY);
+            setChanged();
+            return stack;
+        }
+        return ItemStack.EMPTY;
     }
 
     @Override
     public void setChanged() {
-        if (level != null && !level.isClientSide()) {
-            Packet<ClientGamePacketListener> updatePacket = getUpdatePacket();
-            for (ServerPlayer player : GeneralUtil.tracking((ServerLevel) level, getBlockPos())) {
-                assert updatePacket != null;
-                player.connection.send(updatePacket);
+        if (level instanceof ServerLevel serverLevel) {
+            if (!level.isClientSide()) {
+                Packet<ClientGamePacketListener> updatePacket = getUpdatePacket();
+                for (ServerPlayer player : GeneralUtil.tracking(serverLevel, getBlockPos())) {
+                    player.connection.send(updatePacket);
+                }
             }
         }
         super.setChanged();
+
     }
 
     @Override
-    public void load(CompoundTag nbt) {
-        super.load(nbt);
-        this.size = nbt.getInt("size");
+    protected void loadAdditional(CompoundTag compoundTag, HolderLookup.Provider provider) {
+        super.loadAdditional(compoundTag, provider);
+        this.size = compoundTag.getInt("size");
         this.inventory = NonNullList.withSize(this.size, ItemStack.EMPTY);
-        ContainerHelper.loadAllItems(nbt, this.inventory);
+        ContainerHelper.loadAllItems(compoundTag, this.inventory, provider);
     }
 
     @Override
-    protected void saveAdditional(CompoundTag nbt) {
-        ContainerHelper.saveAllItems(nbt, this.inventory);
-        nbt.putInt("size", this.size);
-        super.saveAdditional(nbt);
+    protected void saveAdditional(CompoundTag compoundTag, HolderLookup.Provider provider) {
+        ContainerHelper.saveAllItems(compoundTag, this.inventory, provider);
+        compoundTag.putInt("size", this.size);
+        super.saveAdditional(compoundTag, provider);
     }
 
     @Override
@@ -75,8 +84,8 @@ public class StorageBlockEntity extends BlockEntity {
     }
 
     @Override
-    public @NotNull CompoundTag getUpdateTag() {
-        return this.saveWithoutMetadata();
+    public @NotNull CompoundTag getUpdateTag(HolderLookup.Provider provider) {
+        return this.saveWithoutMetadata(provider);
     }
 
     public void setInventory(NonNullList<ItemStack> inventory) {

@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "cooking_cauldron",
+  "pattern": [
+    "III",
+    "B B",
+    "BBB"
+  ],
+  "key": {
+    "I": {
+      "item": "minecraft:copper_ingot"
+    },
+    "B": {
+      "item": "minecraft:iron_ingot"
+    }
+  },
+  "result": {
+    "id": "meadow:cooking_cauldron",
+    "count": 1
+  }
+}

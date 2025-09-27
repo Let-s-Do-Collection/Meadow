@@ -1,0 +1,15 @@
+{
+  "type": "meadow:cooking",
+  "ingredients": [
+    {
+      "tag": "meadow:water_bottles"
+    },
+    {
+      "item": "meadow:limestone"
+    }
+  ],
+  "result": {
+    "id": "meadow:alpine_salt",
+    "count": 4
+  }
+}

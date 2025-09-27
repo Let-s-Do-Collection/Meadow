@@ -1,0 +1,18 @@
+{
+  "type": "meadow:cooking",
+  "ingredients": [
+    {
+      "item": "minecraft:egg"
+    },
+    {
+      "item": "meadow:alpine_salt"
+    },
+    {
+      "item": "minecraft:glass_bottle"
+    }
+  ],
+  "result": {
+    "id":  "meadow:rennet",
+    "count": 2
+  }
+}

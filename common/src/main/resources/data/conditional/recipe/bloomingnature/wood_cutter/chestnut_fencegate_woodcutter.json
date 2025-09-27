@@ -1,0 +1,17 @@
+{
+	"type": "doapi:conditional",
+	"conditions": [
+		{
+			"type": "forge:mod_loaded",
+			"modid": "bloomingnature"
+		}
+	],
+	"recipe": {
+		"type": "meadow:woodcutting",
+		"inputItem": {
+			"item": "bloomingnature:chestnut_log"
+		},
+		"outputItem": "bloomingnature:chestnut_fence_gate",
+		"outputAmount": 1
+	}
+}

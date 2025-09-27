@@ -1,8 +1,0 @@
-{
-  "type": "meadow:woodcutting",
-  "inputItem": {
-    "tag": "meadow:pine_logs"
-  },
-  "outputItem": "meadow:shelf",
-  "outputAmount": 2
-}

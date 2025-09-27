@@ -1,0 +1,20 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "///",
+        "/ /",
+        "/C/"
+    ],
+    "key": {
+        "/": {
+            "item": "minecraft:stick"
+        },
+        "C": {
+            "item": "minecraft:campfire"
+        }
+    },
+    "result": {
+        "id": "meadow:frame",
+        "count": 1
+    }
+}

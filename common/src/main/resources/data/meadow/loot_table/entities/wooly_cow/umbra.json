@@ -1,0 +1,27 @@
+
+{
+  "type": "minecraft:entity",
+  "pools": [
+    {
+      "rolls": 1,
+      "bonus_rolls": 0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "meadow:umbra_wool"
+        }
+      ]
+    },
+    {
+      "rolls": 1,
+      "bonus_rolls": 0,
+      "entries": [
+        {
+          "type": "minecraft:loot_table",
+          "value": "minecraft:entities/cow"
+        }
+      ]
+    }
+  ],
+  "random_sequence": "meadow:entities/wooly_cow/umbra"
+}

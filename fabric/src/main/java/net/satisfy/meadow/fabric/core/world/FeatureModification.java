@@ -13,8 +13,6 @@ import net.satisfy.meadow.core.world.CommonSpawnUtil;
 import java.util.function.Predicate;
 
 public class FeatureModification {
-
-
     public static void init() {
         int meadowSpawnWeight = 3;
         int meadowPackSizeMin = 2;
@@ -30,20 +28,8 @@ public class FeatureModification {
         BiomeModifications.addSpawn(meadowVarCows, MobCategory.CREATURE, EntityType.COW,
                 CommonSpawnUtil.cowSpawnWeight, CommonSpawnUtil.cowPackSizeMin, CommonSpawnUtil.cowPackSizeMax);
 
-        Predicate<BiomeSelectionContext> meadowVarSheep = (ctx -> {
-            if(BiomeSelectors.spawnsOneOf(EntityType.SHEEP).test(ctx)) return false;
-            return ctx.hasTag(TagRegistry.IS_MEADOW) || ctx.hasTag(TagRegistry.SPAWNS_ROCKY_SHEEP);
-        });
-        BiomeModifications.addSpawn(meadowVarSheep, MobCategory.CREATURE, EntityType.SHEEP,
-                CommonSpawnUtil.sheepSpawnWeight, CommonSpawnUtil.sheepPackSizeMin, CommonSpawnUtil.sheepPackSizeMax);
-
-
         Predicate<BiomeSelectionContext> shearableVarCows = (ctx -> ctx.hasTag(TagRegistry.IS_MEADOW) || ctx.hasTag(TagRegistry.SPAWNS_UMBRA_COW));
         BiomeModifications.addSpawn(shearableVarCows, MobCategory.CREATURE, EntityTypeRegistry.WOOLY_COW.get(),
-                10, meadowPackSizeMin, meadowPackSizeMax);
-
-        Predicate<BiomeSelectionContext> shearableVarSheeps = (ctx -> ctx.hasTag(TagRegistry.IS_MEADOW) || ctx.hasTag(TagRegistry.SPAWNS_ROCKY_SHEEP) || ctx.hasTag(BiomeTags.IS_HILL) || ctx.hasTag(BiomeTags.IS_FOREST));
-        BiomeModifications.addSpawn(shearableVarSheeps, MobCategory.CREATURE, EntityTypeRegistry.WOOLY_SHEEP.get(),
                 10, meadowPackSizeMin, meadowPackSizeMax);
 
         BiomeModifications.addSpawn(buffalo, MobCategory.CREATURE, EntityTypeRegistry.WATER_BUFFALO.get(),

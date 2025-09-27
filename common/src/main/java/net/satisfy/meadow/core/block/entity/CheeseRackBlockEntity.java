@@ -1,6 +1,7 @@
 package net.satisfy.meadow.core.block.entity;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.Packet;
@@ -30,16 +31,16 @@ public class CheeseRackBlockEntity extends BlockEntity {
     }
 
     @Override
-    public void saveAdditional(CompoundTag nbt) {
-        ContainerHelper.saveAllItems(nbt, this.inventory);
-        super.saveAdditional(nbt);
+    protected void saveAdditional(CompoundTag compoundTag, HolderLookup.Provider provider) {
+        ContainerHelper.saveAllItems(compoundTag, this.inventory, provider);
+        super.saveAdditional(compoundTag, provider);
     }
 
     @Override
-    public void load(CompoundTag nbt) {
-        super.load(nbt);
+    protected void loadAdditional(CompoundTag compoundTag, HolderLookup.Provider provider) {
+        super.loadAdditional(compoundTag, provider);
         this.inventory = NonNullList.withSize(2, ItemStack.EMPTY);
-        ContainerHelper.loadAllItems(nbt, this.inventory);
+        ContainerHelper.loadAllItems(compoundTag, this.inventory, provider);
     }
 
     public ItemStack removeStack(int slot) {
@@ -77,8 +78,8 @@ public class CheeseRackBlockEntity extends BlockEntity {
     }
 
     @Override
-    public @NotNull CompoundTag getUpdateTag() {
-        return this.saveWithoutMetadata();
+    public @NotNull CompoundTag getUpdateTag(HolderLookup.Provider provider) {
+        return this.saveWithoutMetadata(provider);
     }
 
     @Override

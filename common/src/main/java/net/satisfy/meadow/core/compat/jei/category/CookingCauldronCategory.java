@@ -45,7 +45,7 @@ public class CookingCauldronCategory implements IRecipeCategory<CookingCauldronR
     private static final int FLUID_WIDTH = 8;
     private static final int FLUID_HEIGHT = 43;
 
-    private final ResourceLocation texture = new ResourceLocation(Meadow.MOD_ID, "textures/gui/cooking_cauldron_gui.png");
+    private final ResourceLocation texture = Meadow.identifier("textures/gui/cooking_cauldron_gui.png");
 
     public CookingCauldronCategory(IGuiHelper helper) {
         this.background = helper.createDrawable(texture, X_OFFSET, Y_OFFSET, BACKGROUND_WIDTH, BACKGROUND_HEIGHT);

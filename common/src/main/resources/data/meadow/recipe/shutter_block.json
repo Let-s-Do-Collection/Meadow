@@ -1,0 +1,17 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "-- ",
+        "-- ",
+        "-- "
+    ],
+    "key": {
+        "-": {
+            "item": "meadow:pine_slab"
+        }
+    },
+    "result": {
+        "id": "meadow:shutter_block",
+        "count": 3
+    }
+}

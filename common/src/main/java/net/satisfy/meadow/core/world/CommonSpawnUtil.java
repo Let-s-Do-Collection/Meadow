@@ -14,10 +14,6 @@ public class CommonSpawnUtil {
     public static final int cowPackSizeMin = 2;
     public static final int cowPackSizeMax = 3;
 
-    public static final int sheepSpawnWeight = 6;
-    public static final int sheepPackSizeMin = 2;
-    public static final int sheepPackSizeMax = 3;
-
     public static boolean spawnsInBiome(Holder<Biome> biome, boolean checkForMeadowSpawn, EntityType<?>... entityTypes) {
         return spawnsInBiome(biome, checkForMeadowSpawn, ImmutableSet.copyOf(entityTypes));
     }
@@ -40,8 +36,6 @@ public class CommonSpawnUtil {
 
         if (type.equals(EntityType.COW)) {
             return spawnEntry.maxCount == cowPackSizeMax && spawnEntry.minCount == cowPackSizeMin;
-        } else if (type.equals(EntityType.SHEEP)) {
-            return spawnEntry.maxCount == sheepPackSizeMax && spawnEntry.minCount == sheepPackSizeMin;
         }
 
         return false;

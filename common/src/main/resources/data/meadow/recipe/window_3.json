@@ -1,0 +1,20 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "GGG",
+        "G#G",
+        "GGG"
+    ],
+    "key": {
+        "#": {
+            "item": "minecraft:glass_pane"
+        },
+        "G": {
+            "item": "meadow:pine_planks"
+        }
+    },
+    "result": {
+        "id": "meadow:pine_window",
+        "count": 16
+    }
+}

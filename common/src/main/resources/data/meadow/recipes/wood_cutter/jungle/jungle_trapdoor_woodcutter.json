@@ -1,8 +1,0 @@
-{
-  "type": "meadow:woodcutting",
-  "inputItem": {
-    "tag": "minecraft:jungle_logs"
-  },
-  "outputItem": "minecraft:jungle_trapdoor",
-  "outputAmount": 2
-}

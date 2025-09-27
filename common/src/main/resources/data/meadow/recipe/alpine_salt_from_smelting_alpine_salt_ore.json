@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:smelting",
+  "category": "misc",
+  "cookingtime": 100,
+  "experience": 0.7,
+  "ingredient": {
+    "item": "meadow:alpine_salt_ore"
+  },
+  "result": {
+    "id": "meadow:alpine_salt"
+  }
+}

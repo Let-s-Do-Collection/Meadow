@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "#neoforge:salts",
+    "#neoforge:salt",
+    "#c:salt",
+    "#c:salts",
+    "meadow:alpine_salt"
+  ]
+}

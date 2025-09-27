@@ -1,0 +1,19 @@
+{
+	"type": "doapi:conditional",
+	"conditions": [
+		{
+			"type": "forge:mod_loaded",
+			"modid": "decorative_blocks"
+		}
+	],
+	"recipe": {
+		"type": "meadow:woodcutting",
+		"inputItem": {
+			"tag": "minecraft:birch_logs"
+		},
+		"outputItem": {
+			"id": "decorative_blocks:birch_beam",
+			"count": 2
+		}
+	}
+}

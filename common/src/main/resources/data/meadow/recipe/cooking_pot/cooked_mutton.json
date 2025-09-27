@@ -1,0 +1,15 @@
+{
+  "type": "meadow:cooking",
+  "ingredients": [
+    {
+      "item": "minecraft:mutton"
+    },
+    {
+      "item": "meadow:alpine_salt"
+    }
+  ],
+  "result": {
+    "id": "minecraft:cooked_mutton",
+    "count": 4
+  }
+}

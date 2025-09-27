@@ -1,9 +1,0 @@
-{
-  "type": "minecraft:smoking",
-  "cookingtime": 150,
-  "experience": 0.45,
-  "ingredient": {
-    "item": "meadow:raw_buffalo_meat"
-  },
-  "result": "meadow:cooked_buffalo_meat"
-}

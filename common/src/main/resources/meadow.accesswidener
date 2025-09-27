@@ -8,3 +8,4 @@ mutable field net/minecraft/client/renderer/entity/layers/SheepFurLayer SHEEP_FU
 accessible method net/minecraft/world/level/block/state/properties/WoodType register (Lnet/minecraft/world/level/block/state/properties/WoodType;)Lnet/minecraft/world/level/block/state/properties/WoodType;
 accessible method net/minecraft/world/level/block/FireBlock setFlammable (Lnet/minecraft/world/level/block/Block;II)V
 accessible field net/minecraft/util/GsonHelper GSON Lcom/google/gson/Gson;
+accessible method net/minecraft/world/item/crafting/RecipeManager fromJson (Lnet/minecraft/resources/ResourceLocation;Lcom/google/gson/JsonObject;Lnet/minecraft/core/HolderLookup$Provider;)Lnet/minecraft/world/item/crafting/RecipeHolder;

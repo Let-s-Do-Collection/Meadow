@@ -1,8 +1,0 @@
-{
-  "type": "meadow:woodcutting",
-  "inputItem": {
-    "tag": "minecraft:dark_oak_logs"
-  },
-  "outputItem": "minecraft:dark_oak_pressure_plate",
-  "outputAmount": 2
-}

@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "SSS",
+    "B B",
+    "B B"
+  ],
+  "key": {
+    "S": {
+      "item": "meadow:pine_slab"
+    },
+    "B": {
+      "item": "minecraft:stick"
+    }
+  },
+  "result": {
+    "id": "meadow:table",
+    "count": 1
+  }
+}

@@ -1,0 +1,19 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "#B#",
+        " # "
+    ],
+    "key": {
+        "#": {
+            "tag": "minecraft:planks"
+        },
+        "B": {
+            "item": "minecraft:dirt"
+        }
+    },
+    "result": {
+        "id": "meadow:wooden_flower_pot_small",
+        "count": 1
+    }
+}

@@ -10,6 +10,7 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -27,7 +28,6 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.NotNull;
 
-@SuppressWarnings("deprecation")
 public class FoodBlock extends FacingBlock {
 
     private static final VoxelShape SHAPE = Block.box(1, 0, 1, 15, 8, 15);
@@ -56,18 +56,26 @@ public class FoodBlock extends FacingBlock {
     }
 
     @Override
-    public @NotNull InteractionResult use(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
-        ItemStack itemStack = player.getItemInHand(hand);
-        if (world.isClientSide) {
-            if (tryEat(world, pos, state, player).consumesAction()) {
+    public @NotNull ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
+        InteractionResult r = tryEat(level, pos, state, player);
+        if (r.consumesAction()) {
+            return ItemInteractionResult.sidedSuccess(level.isClientSide);
+        }
+        return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+    }
+
+    @Override
+    public @NotNull InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hit) {
+        if (level.isClientSide) {
+            InteractionResult r = tryEat(level, pos, state, player);
+            if (r.consumesAction()) {
                 return InteractionResult.SUCCESS;
             }
-            if (itemStack.isEmpty()) {
-                return InteractionResult.CONSUME;
-            }
+            return InteractionResult.CONSUME;
         }
-        return tryEat(world, pos, state, player);
+        return tryEat(level, pos, state, player);
     }
+
 
     private InteractionResult tryEat(LevelAccessor world, BlockPos pos, BlockState state, Player player) {
         if (world instanceof Level level) {

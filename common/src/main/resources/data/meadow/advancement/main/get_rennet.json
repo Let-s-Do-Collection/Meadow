@@ -1,0 +1,38 @@
+{
+  "parent": "meadow:main/place_frame",
+  "display": {
+    "icon": {
+      "count": 1,
+      "id": "meadow:cooking_cauldron"
+    },
+    "title": {
+      "translate": "advancement.meadow.rennet"
+    },
+    "description": {
+      "translate": "advancement.meadow.rennet.desc"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "rennet": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "meadow:rennet"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "rennet"
+    ]
+  ]
+}

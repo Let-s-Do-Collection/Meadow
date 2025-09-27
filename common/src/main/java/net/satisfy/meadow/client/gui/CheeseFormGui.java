@@ -46,7 +46,7 @@ public class CheeseFormGui extends AbstractContainerScreen<CheeseFormGuiHandler>
 
     @Override
     public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float delta) {
-        this.renderBackground(guiGraphics);
+        this.renderBackground(guiGraphics, mouseX, mouseY, delta);
         super.render(guiGraphics, mouseX, mouseY, delta);
 
         screenPos.set(leftPos, topPos);
@@ -75,6 +75,6 @@ public class CheeseFormGui extends AbstractContainerScreen<CheeseFormGuiHandler>
     }
 
     static {
-        BACKGROUND = new ResourceLocation(Meadow.MOD_ID, "textures/gui/cheese_form_gui.png");
+        BACKGROUND = Meadow.identifier("textures/gui/cheese_form_gui.png");
     }
 }

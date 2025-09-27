@@ -1,0 +1,15 @@
+{
+  "type": "meadow:cooking",
+  "ingredients": [
+    {
+      "item": "minecraft:beef"
+    },
+    {
+      "item": "meadow:alpine_salt"
+    }
+  ],
+  "result": {
+    "id": "minecraft:cooked_beef",
+    "count": 4
+  }
+}

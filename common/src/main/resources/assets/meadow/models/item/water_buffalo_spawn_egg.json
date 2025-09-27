@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "meadow:item/spawn_eggs/water_buffalo_spawn_egg"
+    "layer0": "meadow:item/water_buffalo_spawn_egg"
   }
 }

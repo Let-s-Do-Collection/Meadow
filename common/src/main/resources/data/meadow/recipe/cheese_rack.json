@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "B B",
+    "###",
+    "B B"
+  ],
+  "key": {
+    "B": {
+      "item": "meadow:pine_planks"
+    },
+    "#": {
+      "item": "meadow:pine_slab"
+    }
+  },
+  "result": {
+    "id": "meadow:cheese_rack",
+    "count": 2
+  }
+}

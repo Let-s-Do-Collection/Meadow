@@ -35,7 +35,7 @@ public class MeadowPlacedFeature {
     }
 
     public static ResourceKey<PlacedFeature> registerMCKey(String name) {
-        return ResourceKey.create(Registries.PLACED_FEATURE, new ResourceLocation("minecraft", name));
+        return ResourceKey.create(Registries.PLACED_FEATURE, ResourceLocation.withDefaultNamespace(name));
     }
 }
 

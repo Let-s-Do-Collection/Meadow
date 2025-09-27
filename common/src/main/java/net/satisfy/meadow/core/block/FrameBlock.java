@@ -8,7 +8,7 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
+import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
@@ -32,7 +32,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Supplier;
 
-@SuppressWarnings("deprecation")
 public class FrameBlock extends Block {
 
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
@@ -59,18 +58,16 @@ public class FrameBlock extends Block {
         super(settings);
     }
 
-
     @Override
-    public @NotNull InteractionResult use(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
-        ItemStack stack = player.getItemInHand(hand);
-        if (stack.getItem().equals(ObjectRegistry.COOKING_CAULDRON.get().asItem())) {
-            if (!world.isClientSide()) {
+    public @NotNull ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
+        if (stack.is(ObjectRegistry.COOKING_CAULDRON.get().asItem())) {
+            if (!level.isClientSide) {
                 if (!player.getAbilities().instabuild) stack.shrink(1);
-                world.setBlockAndUpdate(pos, ObjectRegistry.COOKING_CAULDRON.get().defaultBlockState().setValue(CookingCauldronBlock.HANGING, true).setValue(FACING, state.getValue(FACING)));
+                level.setBlockAndUpdate(pos, ObjectRegistry.COOKING_CAULDRON.get().defaultBlockState().setValue(CookingCauldronBlock.HANGING, true).setValue(FACING, state.getValue(FACING)));
             }
-            return InteractionResult.sidedSuccess(world.isClientSide());
+            return ItemInteractionResult.sidedSuccess(level.isClientSide);
         }
-        return InteractionResult.PASS;
+        return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
     }
 
     @Override

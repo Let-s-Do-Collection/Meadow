@@ -1,8 +1,0 @@
-{
-  "type": "meadow:woodcutting",
-  "inputItem": {
-    "tag": "minecraft:cherry_logs"
-  },
-  "outputItem": "minecraft:cherry_fence_gate",
-  "outputAmount": 1
-}

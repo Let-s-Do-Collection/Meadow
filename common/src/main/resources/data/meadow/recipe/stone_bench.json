@@ -1,0 +1,16 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "BBB",
+        "B B"
+    ],
+    "key": {
+        "B": {
+            "item": "meadow:polished_limestone_bricks"
+        }
+    },
+    "result": {
+        "id": "meadow:stone_bench",
+        "count": 3
+    }
+}

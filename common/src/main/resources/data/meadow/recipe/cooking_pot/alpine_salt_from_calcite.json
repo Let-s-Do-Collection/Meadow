@@ -1,0 +1,15 @@
+{
+  "type": "meadow:cooking",
+  "ingredients": [
+    {
+      "tag": "meadow:water_bottles"
+    },
+    {
+      "item": "minecraft:calcite"
+    }
+  ],
+  "result": {
+    "id": "meadow:alpine_salt",
+    "count": 2
+  }
+}

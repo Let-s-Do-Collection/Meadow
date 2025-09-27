@@ -6,7 +6,6 @@ import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
 import net.minecraft.client.model.BoatModel;
 import net.minecraft.client.model.ChestBoatModel;
 import net.minecraft.client.model.geom.ModelLayerLocation;
-import net.minecraft.resources.ResourceLocation;
 import net.satisfy.meadow.Meadow;
 import net.satisfy.meadow.client.MeadowClient;
 import net.satisfy.meadow.core.entity.PineBoatEntity;
@@ -31,9 +30,8 @@ public class MeadowFabricClient implements ClientModInitializer {
 
     private void registerBoatModels() {
         for (PineBoatEntity.Type type : PineBoatEntity.Type.values()) {
-            String modId = Meadow.MOD_ID;
-            EntityModelLayerRegistry.registerModelLayer(new ModelLayerLocation(new ResourceLocation(modId, type.getModelLocation()), "main"), BoatModel::createBodyModel);
-            EntityModelLayerRegistry.registerModelLayer(new ModelLayerLocation(new ResourceLocation(modId, type.getChestModelLocation()), "main"), ChestBoatModel::createBodyModel);
+            EntityModelLayerRegistry.registerModelLayer(new ModelLayerLocation(Meadow.identifier(type.getModelLocation()), "main"), BoatModel::createBodyModel);
+            EntityModelLayerRegistry.registerModelLayer(new ModelLayerLocation(Meadow.identifier(type.getChestModelLocation()), "main"), ChestBoatModel::createBodyModel);
         }
     }
 }

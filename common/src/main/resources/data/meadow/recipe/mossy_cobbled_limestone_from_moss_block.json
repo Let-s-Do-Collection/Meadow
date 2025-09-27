@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "mossy_cobblestone",
+  "ingredients": [
+    {
+      "item": "meadow:cobbled_limestone"
+    },
+    {
+      "item": "minecraft:moss_block"
+    }
+  ],
+  "result": {
+    "id": "meadow:mossy_cobbled_limestone",
+    "count": 1
+  }
+}

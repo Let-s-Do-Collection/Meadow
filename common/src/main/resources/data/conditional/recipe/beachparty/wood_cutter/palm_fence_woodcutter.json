@@ -1,0 +1,19 @@
+{
+	"type": "doapi:conditional",
+	"conditions": [
+		{
+			"type": "forge:mod_loaded",
+			"modid": "beachparty"
+		}
+	],
+	"recipe": {
+		"type": "meadow:woodcutting",
+		"inputItem": {
+			"tag": "beachparty:palm_logs"
+		},
+		"outputItem": {
+			"id": "beachparty:palm_fence",
+			"count": 4
+		}
+	}
+}

@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "count": 2,
-  "ingredient": {
-    "item": "meadow:mossy_cobbled_limestone"
-  },
-  "result": "meadow:mossy_cobbled_limestone_slab"
-}

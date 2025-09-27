@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "meadow:warped_cheese_block"
+    }
+  ],
+  "result": {
+    "id": "meadow:piece_of_warped_cheese",
+    "count": 4
+  }
+}

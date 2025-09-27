@@ -7,6 +7,7 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
@@ -27,7 +28,6 @@ import org.jetbrains.annotations.NotNull;
 import java.util.HashMap;
 import java.util.Map;
 
-@SuppressWarnings("deprecation")
 public class FireLog extends FacingBlock {
 
     public static final IntegerProperty STAGE = IntegerProperty.create("stage", 0, 3);
@@ -63,34 +63,35 @@ public class FireLog extends FacingBlock {
     }
 
     @Override
-    public @NotNull InteractionResult use(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
-        if (world.isClientSide) {
-            return InteractionResult.SUCCESS;
-        }
-        ItemStack stack = player.getItemInHand(hand);
+    public @NotNull ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
         int stage = state.getValue(STAGE);
-        if (player.isShiftKeyDown() && stack.isEmpty() && stage > 1) {
-            stage--;
-            player.addItem(new ItemStack(ObjectRegistry.FIRE_LOG.get()));
-            world.setBlockAndUpdate(pos, state.setValue(STAGE, stage));
-            world.playSound(null, pos, SoundEvents.WOOD_PLACE, SoundSource.BLOCKS, 1.0f, 1.0f);
-            return InteractionResult.SUCCESS;
-        }
         if (stack.is(this.asItem()) && stage < 3) {
-            stage++;
             if (!player.getAbilities().instabuild) {
                 stack.shrink(1);
             }
-            world.setBlockAndUpdate(pos, state.setValue(STAGE, stage));
-            world.playSound(null, pos, SoundEvents.WOOD_PLACE, SoundSource.BLOCKS, 1.0f, 1.0f);
-            return InteractionResult.SUCCESS;
+            level.setBlockAndUpdate(pos, state.setValue(STAGE, stage + 1));
+            level.playSound(null, pos, SoundEvents.WOOD_PLACE, SoundSource.BLOCKS, 1.0F, 1.0F);
+            return ItemInteractionResult.sidedSuccess(level.isClientSide);
+        }
+        return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+    }
+
+    @Override
+    public @NotNull InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hit) {
+        int stage = state.getValue(STAGE);
+        if (player.isShiftKeyDown() && stage > 1) {
+            player.addItem(new ItemStack(ObjectRegistry.FIRE_LOG.get()));
+            level.setBlockAndUpdate(pos, state.setValue(STAGE, stage - 1));
+            level.playSound(null, pos, SoundEvents.WOOD_PLACE, SoundSource.BLOCKS, 1.0F, 1.0F);
+            return InteractionResult.sidedSuccess(level.isClientSide);
         }
         if (stage == 0) {
-            world.removeBlock(pos, true);
-            return InteractionResult.SUCCESS;
+            level.removeBlock(pos, true);
+            return InteractionResult.sidedSuccess(level.isClientSide);
         }
         return InteractionResult.PASS;
     }
+
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {

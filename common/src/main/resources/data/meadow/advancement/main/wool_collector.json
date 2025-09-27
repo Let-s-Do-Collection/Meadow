@@ -1,0 +1,131 @@
+{
+  "parent": "meadow:main/find_meadow",
+  "display": {
+    "icon": {
+      "count": 1,
+      "id": "meadow:flecked_wool"
+    },
+    "title": {
+      "translate": "advancement.meadow.wool_collector"
+    },
+    "description": {
+      "translate": "advancement.meadow.wool_collector.desc"
+    },
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "rewards": {
+    "experience": 250
+  },
+  "criteria": {
+    "meadow:flecked_wool": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "meadow:flecked_wool"
+            ]
+          }
+        ]
+      }
+    },
+    "meadow:highland_wool": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "meadow:highland_wool"
+            ]
+          }
+        ]
+      }
+    },
+    "meadow:patched_wool": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "meadow:patched_wool"
+            ]
+          }
+        ]
+      }
+    },
+    "meadow:rocky_wool": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "meadow:rocky_wool"
+            ]
+          }
+        ]
+      }
+    },
+    "meadow:umbra_wool": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "meadow:umbra_wool"
+            ]
+          }
+        ]
+      }
+    },
+    "meadow:inky_wool": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "meadow:inky_wool"
+            ]
+          }
+        ]
+      }
+    },
+    "meadow:warped_wool": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "meadow:warped_wool"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "meadow:flecked_wool"
+    ],
+    [
+      "meadow:highland_wool"
+    ],
+    [
+      "meadow:patched_wool"
+    ],
+    [
+      "meadow:rocky_wool"
+    ],
+    [
+      "meadow:umbra_wool"
+    ],
+    [
+      "meadow:inky_wool"
+    ],
+    [
+      "meadow:warped_wool"
+    ]
+  ]
+}

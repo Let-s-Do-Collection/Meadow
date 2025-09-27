@@ -1,8 +1,0 @@
-{
-  "type": "meadow:woodcutting",
-  "inputItem": {
-    "tag": "minecraft:mangrove_logs"
-  },
-  "outputItem": "minecraft:mangrove_fence",
-  "outputAmount": 4
-}

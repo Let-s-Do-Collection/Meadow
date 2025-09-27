@@ -28,7 +28,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Optional;
 
-@SuppressWarnings("deprecation, unused")
+@SuppressWarnings("unused")
 public abstract class StorageBlock extends FacingBlock implements EntityBlock {
     public static final SoundEvent event;
 

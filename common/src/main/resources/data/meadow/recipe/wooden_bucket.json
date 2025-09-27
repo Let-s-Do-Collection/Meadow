@@ -1,0 +1,19 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "# #",
+        " B "
+    ],
+    "key": {
+        "#": {
+            "tag": "minecraft:planks"
+        },
+        "B": {
+            "tag": "minecraft:wooden_slabs"
+        }
+    },
+    "result": {
+        "id": "meadow:wooden_bucket",
+        "count": 1
+    }
+}

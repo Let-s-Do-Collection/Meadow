@@ -1,0 +1,20 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "# #",
+        "# #",
+        "i#i"
+    ],
+    "key": {
+        "#": {
+            "tag": "minecraft:planks"
+        },
+        "i": {
+            "item": "minecraft:iron_ingot"
+        }
+    },
+    "result": {
+        "id": "meadow:wooden_cauldron",
+        "count": 1
+    }
+}

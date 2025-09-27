@@ -1,8 +1,0 @@
-{
-  "type": "meadow:woodcutting",
-  "inputItem": {
-    "tag": "minecraft:warped_stems"
-  },
-  "outputItem": "minecraft:warped_slab",
-  "outputAmount": 9
-}

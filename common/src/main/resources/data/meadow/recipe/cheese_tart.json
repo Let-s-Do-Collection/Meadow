@@ -1,0 +1,25 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "/EM",
+        "WWW"
+    ],
+    "key": {
+        "/": {
+            "tag": "meadow:cheese"
+        },
+        "E": {
+            "tag": "meadow:egg"
+        },
+        "M": {
+            "tag": "meadow:milk"
+        },
+        "W": {
+            "tag": "meadow:wheat"
+        }
+    },
+    "result": {
+        "id": "meadow:cheese_tart",
+        "count": 4
+    }
+}

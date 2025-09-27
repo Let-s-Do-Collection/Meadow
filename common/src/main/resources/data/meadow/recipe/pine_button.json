@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "wooden_button",
+  "ingredients": [
+    {
+      "item": "meadow:pine_planks"
+    }
+  ],
+  "result": {
+    "id": "meadow:pine_button",
+    "count": 1
+  }
+}

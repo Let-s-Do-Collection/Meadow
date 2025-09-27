@@ -1,0 +1,48 @@
+{
+  "parent": "meadow:main/wool_collector",
+  "display": {
+    "icon": {
+      "count": 1,
+      "id": "meadow:fur_helmet"
+    },
+    "title": {
+      "translate": "advancement.meadow.fur_armor"
+    },
+    "description": {
+      "translate": "advancement.meadow.fur_armor.desc"
+    },
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "rewards": {
+    "experience": 200
+  },
+  "criteria": {
+    "fur_armor": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": ["meadow:fur_helmet"]
+          },
+          {
+            "items": ["meadow:fur_chestplate"]
+          },
+          {
+            "items": ["meadow:fur_leggings"]
+          },
+          {
+            "items": ["meadow:fur_boots"]
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "fur_armor"
+    ]
+  ]
+}

@@ -37,7 +37,6 @@ public class DoormatBlock extends LineConnectingBlock {
     }
 
     @Override
-    @SuppressWarnings("deprecation")
     public @NotNull VoxelShape getShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
         Direction facing = state.getValue(FACING);
         GeneralUtil.LineConnectingType type = state.getValue(TYPE);

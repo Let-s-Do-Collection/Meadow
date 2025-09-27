@@ -1,30 +1,33 @@
 package net.satisfy.meadow.core.recipes;
 
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParseException;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;
-import net.minecraft.core.RegistryAccess;
-import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.GsonHelper;
-import net.minecraft.world.Container;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.*;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.world.item.crafting.RecipeInput;
+import net.minecraft.world.item.crafting.RecipeSerializer;
+import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
 import net.satisfy.meadow.core.registry.RecipeRegistry;
-import net.satisfy.meadow.core.util.GeneralUtil;
 import org.jetbrains.annotations.NotNull;
 
-@SuppressWarnings("unused")
-public class CookingCauldronRecipe implements Recipe<Container> {
-    final ResourceLocation id;
+import java.util.ArrayList;
+import java.util.List;
+
+public class CookingCauldronRecipe implements Recipe<RecipeInput> {
     private final NonNullList<Ingredient> inputs;
     private final ItemStack output;
     private final int fluidAmount;
     private final int craftingDuration;
 
-    public CookingCauldronRecipe(ResourceLocation id, NonNullList<Ingredient> inputs, ItemStack output, int fluidAmount, int craftingDuration) {
-        this.id = id;
+    public CookingCauldronRecipe(NonNullList<Ingredient> inputs, ItemStack output, int fluidAmount, int craftingDuration) {
         this.inputs = inputs;
         this.output = output;
         this.fluidAmount = fluidAmount;
@@ -32,8 +35,21 @@ public class CookingCauldronRecipe implements Recipe<Container> {
     }
 
     @Override
-    public boolean matches(Container inventory, Level world) {
-        return GeneralUtil.matchesRecipe(inventory, inputs, 1, 7);
+    public boolean matches(RecipeInput inventory, Level level) {
+        List<ItemStack> items = new ArrayList<>();
+        int max = Math.min(inventory.size() - 1, 7);
+        for (int i = 1; i <= max; i++) items.add(inventory.getItem(i));
+        for (Ingredient ing : inputs) {
+            boolean ok = false;
+            for (ItemStack s : items) {
+                if (ing.test(s)) {
+                    ok = true;
+                    break;
+                }
+            }
+            if (!ok) return false;
+        }
+        return true;
     }
 
     public ItemStack assemble() {
@@ -41,12 +57,12 @@ public class CookingCauldronRecipe implements Recipe<Container> {
     }
 
     @Override
-    public @NotNull ItemStack assemble(Container inventory, RegistryAccess registryManager) {
-        return this.output.copy();
+    public @NotNull ItemStack assemble(RecipeInput input, HolderLookup.Provider provider) {
+        return output.copy();
     }
 
     @Override
-    public boolean canCraftInDimensions(int width, int height) {
+    public boolean canCraftInDimensions(int w, int h) {
         return false;
     }
 
@@ -55,7 +71,7 @@ public class CookingCauldronRecipe implements Recipe<Container> {
     }
 
     @Override
-    public @NotNull ItemStack getResultItem(RegistryAccess registryManager) {
+    public @NotNull ItemStack getResultItem(HolderLookup.Provider provider) {
         return output.copy();
     }
 
@@ -68,8 +84,8 @@ public class CookingCauldronRecipe implements Recipe<Container> {
     }
 
     @Override
-    public @NotNull ResourceLocation getId() {
-        return id;
+    public @NotNull NonNullList<Ingredient> getIngredients() {
+        return inputs;
     }
 
     @Override
@@ -83,63 +99,38 @@ public class CookingCauldronRecipe implements Recipe<Container> {
     }
 
     @Override
-    public @NotNull NonNullList<Ingredient> getIngredients() {
-        return this.inputs;
-    }
-
-    @Override
     public boolean isSpecial() {
         return true;
     }
 
     public static class Serializer implements RecipeSerializer<CookingCauldronRecipe> {
+        public static final MapCodec<CookingCauldronRecipe> CODEC = RecordCodecBuilder.mapCodec(i -> i.group(
+                Ingredient.CODEC.listOf().fieldOf("ingredients").xmap(list -> {
+                    NonNullList<Ingredient> nl = NonNullList.create();
+                    nl.addAll(list);
+                    return nl;
+                }, List::copyOf).forGetter(r -> r.inputs),
+                ItemStack.CODEC.fieldOf("result").forGetter(r -> r.output),
+                Codec.INT.optionalFieldOf("fluid_amount", 0).forGetter(r -> r.fluidAmount),
+                Codec.INT.optionalFieldOf("crafting_duration", 10).forGetter(r -> r.craftingDuration)
+        ).apply(i, CookingCauldronRecipe::new));
+
+        public static final StreamCodec<RegistryFriendlyByteBuf, CookingCauldronRecipe> STREAM_CODEC = StreamCodec.composite(
+                ByteBufCodecs.collection(NonNullList::createWithCapacity, Ingredient.CONTENTS_STREAM_CODEC), r -> r.inputs,
+                ItemStack.STREAM_CODEC, r -> r.output,
+                ByteBufCodecs.VAR_INT, r -> r.fluidAmount,
+                ByteBufCodecs.VAR_INT, r -> r.craftingDuration,
+                CookingCauldronRecipe::new
+        );
 
         @Override
-        public @NotNull CookingCauldronRecipe fromJson(ResourceLocation id, JsonObject json) {
-            final var ingredients = GeneralUtil.deserializeIngredients(GsonHelper.getAsJsonArray(json, "ingredients"));
-            if (ingredients.isEmpty()) {
-                throw new JsonParseException("No ingredients for CookingCauldron Recipe");
-            } else if (ingredients.size() > 6) {
-                throw new JsonParseException("Too many ingredients for CookingCauldron Recipe");
-            } else {
-                int fluidAmount = GsonHelper.getAsInt(json, "fluid_amount", 0);
-                int craftingDuration = GsonHelper.getAsInt(json, "crafting_duration", 10);
-                return new CookingCauldronRecipe(
-                        id,
-                        ingredients,
-                        ShapedRecipe.itemStackFromJson(GsonHelper.getAsJsonObject(json, "result")),
-                        fluidAmount,
-                        craftingDuration
-                );
-            }
-        }
-
-        @Override
-        public @NotNull CookingCauldronRecipe fromNetwork(ResourceLocation id, FriendlyByteBuf buf) {
-            final var ingredients = NonNullList.withSize(buf.readVarInt(), Ingredient.EMPTY);
-            ingredients.replaceAll(ignored -> Ingredient.fromNetwork(buf));
-            ItemStack output = buf.readItem();
-            int fluidAmount = buf.readInt();
-            int craftingDuration = buf.readInt();
-            return new CookingCauldronRecipe(id, ingredients, output, fluidAmount, craftingDuration);
+        public MapCodec<CookingCauldronRecipe> codec() {
+            return CODEC;
         }
 
         @Override
-        public void toNetwork(FriendlyByteBuf buf, CookingCauldronRecipe recipe) {
-            buf.writeVarInt(recipe.inputs.size());
-            recipe.inputs.forEach(entry -> entry.toNetwork(buf));
-            buf.writeItem(recipe.output);
-            buf.writeInt(recipe.fluidAmount);
-            buf.writeInt(recipe.craftingDuration);
+        public @NotNull StreamCodec<RegistryFriendlyByteBuf, CookingCauldronRecipe> streamCodec() {
+            return STREAM_CODEC;
         }
-    }
-
-    public static class Type implements RecipeType<CookingCauldronRecipe> {
-        private Type() {
-        }
-
-        public static final Type INSTANCE = new Type();
-
-        public static final String ID = "cooking";
     }
 }

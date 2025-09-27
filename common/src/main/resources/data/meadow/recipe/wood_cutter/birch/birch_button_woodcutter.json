@@ -1,0 +1,10 @@
+{
+  "type": "meadow:woodcutting",
+  "inputItem": {
+    "tag": "minecraft:birch_logs"
+  },
+  "outputItem": {
+    "count": 5,
+    "id": "minecraft:birch_button"
+  }
+}

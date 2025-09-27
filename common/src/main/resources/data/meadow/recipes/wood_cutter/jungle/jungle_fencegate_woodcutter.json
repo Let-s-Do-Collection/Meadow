@@ -1,8 +1,0 @@
-{
-  "type": "meadow:woodcutting",
-  "inputItem": {
-    "tag": "minecraft:jungle_logs"
-  },
-  "outputItem": "minecraft:jungle_fence_gate",
-  "outputAmount": 1
-}

@@ -1,0 +1,17 @@
+{
+	"type": "doapi:conditional",
+	"conditions": [
+		{
+			"type": "forge:mod_loaded",
+			"modid": "bloomingnature"
+		}
+	],
+	"recipe": {
+		"type": "meadow:woodcutting",
+		"inputItem": {
+			"item": "bloomingnature:swamp_oak_log"
+		},
+		"outputItem": "bloomingnature:swamp_oak_planks",
+		"outputAmount": 4
+	}
+}

@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "mossy_limestone_bricks",
+  "ingredients": [
+    {
+      "item": "meadow:limestone_bricks"
+    },
+    {
+      "item": "minecraft:vine"
+    }
+  ],
+  "result": {
+    "id": "meadow:mossy_limestone_bricks",
+    "count": 1
+  }
+}

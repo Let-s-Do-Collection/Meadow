@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 1,
+  "ingredient": {
+    "item": "meadow:mossy_limestone_bricks"
+  },
+    "result": {
+        "id": "meadow:mossy_limestone_brick_stairs",
+        "count": 1
+    }
+}

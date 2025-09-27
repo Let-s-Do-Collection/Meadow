@@ -1,0 +1,10 @@
+{
+  "type": "meadow:woodcutting",
+  "inputItem": {
+    "tag": "minecraft:warped_stems"
+  },
+  "outputItem": {
+    "count": 5,
+    "id": "minecraft:warped_button"
+  }
+}

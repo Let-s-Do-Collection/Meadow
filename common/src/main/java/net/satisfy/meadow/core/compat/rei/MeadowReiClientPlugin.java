@@ -15,7 +15,6 @@ import net.satisfy.meadow.core.recipes.WoodcuttingRecipe;
 import net.satisfy.meadow.core.registry.ObjectRegistry;
 
 public class MeadowReiClientPlugin {
-
     public static void registerCategories(CategoryRegistry registry) {
         registry.add(new CookingCauldronCategory());
         registry.add(new CheeseFormCategory());

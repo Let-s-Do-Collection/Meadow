@@ -24,7 +24,7 @@ public class WoodCutterCategory implements IRecipeCategory<WoodcuttingRecipe> {
     private final Component localizedName;
 
     public WoodCutterCategory(IGuiHelper helper) {
-        ResourceLocation location = new ResourceLocation(Meadow.MOD_ID, "textures/gui/cooking_cauldron_gui.png");
+        ResourceLocation location = Meadow.identifier( "textures/gui/cooking_cauldron_gui.png");
         background = helper.createDrawable(location, 0, 220, width, height);
         icon = helper.createDrawableItemStack(ObjectRegistry.WOODCUTTER.get().asItem().getDefaultInstance());
         this.localizedName = ObjectRegistry.WOODCUTTER.get().getName();

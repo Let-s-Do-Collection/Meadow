@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "count": 1,
-  "ingredient": {
-    "item": "meadow:limestone_bricks"
-  },
-  "result": "meadow:limestone_brick_stairs"
-}

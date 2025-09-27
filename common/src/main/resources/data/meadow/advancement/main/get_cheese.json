@@ -1,0 +1,128 @@
+{
+  "parent": "meadow:main/place_cheese_form",
+  "display": {
+    "icon": {
+      "count": 1,
+      "id": "meadow:cheese_block"
+    },
+    "title": {
+      "translate": "advancement.meadow.get_cheese"
+    },
+    "description": {
+      "translate": "advancement.meadow.get_cheese.desc"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "cheese_block": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "meadow:cheese_block"
+            ]
+          }
+        ]
+      }
+    },
+    "sheep_cheese_block": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "meadow:sheep_cheese_block"
+            ]
+          }
+        ]
+      }
+    },
+    "grain_cheese_block": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "meadow:grain_cheese_block"
+            ]
+          }
+        ]
+      }
+    },
+    "buffalo_cheese_block": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "meadow:buffalo_cheese_block"
+            ]
+          }
+        ]
+      }
+    },
+    "goat_cheese_block": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "meadow:goat_cheese_block"
+            ]
+          }
+        ]
+      }
+    },
+    "warped_cheese_block": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "meadow:warped_cheese_block"
+            ]
+          }
+        ]
+      }
+    },
+    "amethyst_cheese_block": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "meadow:amethyst_cheese_block"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "cheese_block"
+    ],
+    [
+      "sheep_cheese_block"
+    ],
+    [
+      "grain_cheese_block"
+    ],
+    [
+      "buffalo_cheese_block"
+    ],
+    [
+      "goat_cheese_block"
+    ],
+    [
+      "warped_cheese_block"
+    ],
+    [
+      "amethyst_cheese_block"
+    ]
+  ]
+}

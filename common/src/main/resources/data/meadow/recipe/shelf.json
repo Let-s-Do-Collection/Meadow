@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "wooden_trapdoor",
+  "pattern": [
+    "BBB",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "meadow:pine_planks"
+    },
+    "B": {
+      "item": "meadow:pine_slab"
+    }
+  },
+  "result": {
+    "id": "meadow:shelf",
+    "count": 2
+  }
+}

@@ -22,7 +22,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.Supplier;
 
-@SuppressWarnings("deprecation")
 public class WateringCanBlock extends FacingBlock {
 
     public static final IntegerProperty DAMAGE = IntegerProperty.create("damage", 0, 5);

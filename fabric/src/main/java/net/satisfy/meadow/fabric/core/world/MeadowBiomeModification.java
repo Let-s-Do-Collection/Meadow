@@ -3,6 +3,7 @@ package net.satisfy.meadow.fabric.core.world;
 import net.fabricmc.fabric.api.biome.v1.*;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.tags.TagKey;
+import net.minecraft.world.entity.SpawnPlacementTypes;
 import net.minecraft.world.entity.SpawnPlacements;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.level.levelgen.GenerationStep;
@@ -56,9 +57,8 @@ public class MeadowBiomeModification {
 
     public static class FabricEntitySpawn {
         public static void registerEntitySpawn() {
-            SpawnPlacements.register(EntityTypeRegistry.WATER_BUFFALO.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING, Animal::checkAnimalSpawnRules);
-            SpawnPlacements.register(EntityTypeRegistry.WOOLY_COW.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Animal::checkAnimalSpawnRules);
-            SpawnPlacements.register(EntityTypeRegistry.WOOLY_SHEEP.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Animal::checkAnimalSpawnRules);
+            SpawnPlacements.register(EntityTypeRegistry.WATER_BUFFALO.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING, Animal::checkAnimalSpawnRules);
+            SpawnPlacements.register(EntityTypeRegistry.WOOLY_COW.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Animal::checkAnimalSpawnRules);
         }
     }
 }

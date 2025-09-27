@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "wooden_pressure_plate",
+  "pattern": [
+    "##"
+  ],
+  "key": {
+    "#": {
+      "item": "meadow:pine_planks"
+    }
+  },
+  "result": {
+    "id": "meadow:pine_pressure_plate",
+    "count": 1
+  }
+}

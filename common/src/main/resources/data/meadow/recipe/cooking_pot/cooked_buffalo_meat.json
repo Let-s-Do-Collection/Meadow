@@ -1,0 +1,18 @@
+{
+  "type": "meadow:cooking",
+  "ingredients": [
+    {
+      "item": "meadow:raw_buffalo_meat"
+    },
+    {
+      "item": "meadow:alpine_salt"
+    },
+    {
+      "tag": "meadow:water_bottles"
+    }
+  ],
+  "result": {
+    "id": "meadow:cooked_buffalo_meat",
+    "count": 4
+  }
+}

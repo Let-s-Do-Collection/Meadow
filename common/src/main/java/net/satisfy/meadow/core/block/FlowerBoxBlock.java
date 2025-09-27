@@ -47,7 +47,6 @@ public class FlowerBoxBlock extends StorageBlock {
         super(settings);
     }
 
-    @SuppressWarnings("deprecation")
     public @NotNull VoxelShape getShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
         return SHAPE.get(state.getValue(FACING));
     }

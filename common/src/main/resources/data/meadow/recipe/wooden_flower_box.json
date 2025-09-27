@@ -1,0 +1,18 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "#B#",
+        "###"],
+    "key": {
+        "#": {
+            "tag": "minecraft:planks"
+        },
+        "B": {
+            "item": "minecraft:dirt"
+        }
+    },
+    "result": {
+        "id": "meadow:wooden_flower_box",
+        "count": 2
+    }
+}

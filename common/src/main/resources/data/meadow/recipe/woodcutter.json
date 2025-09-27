@@ -1,0 +1,19 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "#",
+        "O"
+    ],
+    "key": {
+        "#": {
+            "item": "minecraft:iron_axe"
+        },
+        "O": {
+            "tag": "minecraft:logs"
+        }
+    },
+    "result": {
+        "id": "meadow:woodcutter",
+        "count": 1
+    }
+}

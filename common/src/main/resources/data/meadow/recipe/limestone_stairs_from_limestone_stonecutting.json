@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 1,
+  "ingredient": {
+    "item": "meadow:limestone"
+  },
+    "result": {
+        "id": "meadow:limestone_stairs",
+        "count": 1
+    }
+}

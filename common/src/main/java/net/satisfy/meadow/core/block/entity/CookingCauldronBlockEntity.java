@@ -1,8 +1,6 @@
 package net.satisfy.meadow.core.block.entity;
 
-import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
-import net.minecraft.core.NonNullList;
+import net.minecraft.core.*;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -14,7 +12,9 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.CraftingInput;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -31,6 +31,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Objects;
+import java.util.function.Supplier;
 
 @SuppressWarnings("deprecation, unused")
 public class CookingCauldronBlockEntity extends BlockEntity implements ImplementedInventory, MenuProvider {
@@ -82,6 +83,7 @@ public class CookingCauldronBlockEntity extends BlockEntity implements Implement
             return 4;
         }
     };
+    Supplier<RegistryAccess> registries = this.level::registryAccess;
 
     public CookingCauldronBlockEntity(BlockPos pos, BlockState state) {
         super(EntityTypeRegistry.COOKING_CAULDRON.get(), pos, state);
@@ -93,23 +95,23 @@ public class CookingCauldronBlockEntity extends BlockEntity implements Implement
     }
 
     @Override
-    public void load(@NotNull CompoundTag nbt) {
-        super.load(nbt);
-        ContainerHelper.loadAllItems(nbt, inventory);
-        cookingTime = nbt.getInt("CookingTime");
-        isBeingBurned = nbt.getBoolean("IsBeingBurned");
-        fluidLevel = nbt.getInt("FluidLevel");
-        currentCraftingDuration = nbt.getInt("CurrentCraftingDuration");
+    protected void loadAdditional(CompoundTag compoundTag, HolderLookup.Provider provider) {
+        super.loadAdditional(compoundTag, provider);
+        ContainerHelper.loadAllItems(compoundTag, inventory, provider);
+        cookingTime = compoundTag.getInt("CookingTime");
+        isBeingBurned = compoundTag.getBoolean("IsBeingBurned");
+        fluidLevel = compoundTag.getInt("FluidLevel");
+        currentCraftingDuration = compoundTag.getInt("CurrentCraftingDuration");
     }
 
     @Override
-    protected void saveAdditional(@NotNull CompoundTag nbt) {
-        super.saveAdditional(nbt);
-        ContainerHelper.saveAllItems(nbt, inventory);
-        nbt.putInt("CookingTime", cookingTime);
-        nbt.putBoolean("IsBeingBurned", isBeingBurned);
-        nbt.putInt("FluidLevel", fluidLevel);
-        nbt.putInt("CurrentCraftingDuration", currentCraftingDuration);
+    protected void saveAdditional(CompoundTag compoundTag, HolderLookup.Provider provider) {
+        super.saveAdditional(compoundTag, provider);
+        ContainerHelper.saveAllItems(compoundTag, inventory, provider);
+        compoundTag.putInt("CookingTime", cookingTime);
+        compoundTag.putBoolean("IsBeingBurned", isBeingBurned);
+        compoundTag.putInt("FluidLevel", fluidLevel);
+        compoundTag.putInt("CurrentCraftingDuration", currentCraftingDuration);
     }
 
     public boolean isBeingBurned() {
@@ -121,15 +123,9 @@ public class CookingCauldronBlockEntity extends BlockEntity implements Implement
     }
 
     private boolean canCraft(CookingCauldronRecipe recipe) {
-        if (recipe == null || recipe.getResultItem().isEmpty()) return false;
-
+        if (recipe == null || recipe.getResultItem(registries.get()).isEmpty()) return false;
         ItemStack outputSlotStack = getItem(OUTPUT_SLOT);
-        ItemStack result = recipe.getResultItem().copy();
-
-        if (outputSlotStack.isEmpty()) return true;
-        if (!ItemStack.isSameItemSameTags(outputSlotStack, result)) return false;
-
-        return outputSlotStack.getCount() + result.getCount() <= outputSlotStack.getMaxStackSize();
+        return outputSlotStack.isEmpty() || (ItemStack.isSameItem(outputSlotStack, recipe.getResultItem(registries.get())) && outputSlotStack.getCount() < outputSlotStack.getMaxStackSize());
     }
 
     private void craft(CookingCauldronRecipe recipe) {
@@ -138,7 +134,7 @@ public class CookingCauldronBlockEntity extends BlockEntity implements Implement
         ItemStack outputSlotStack = getItem(OUTPUT_SLOT);
         if (outputSlotStack.isEmpty()) {
             setItem(OUTPUT_SLOT, recipeOutput.copy());
-        } else if (ItemStack.isSameItem(outputSlotStack, recipe.getResultItem()) && outputSlotStack.getCount() < outputSlotStack.getMaxStackSize()) {
+        } else if (ItemStack.isSameItem(outputSlotStack, recipe.getResultItem(registries.get())) && outputSlotStack.getCount() < outputSlotStack.getMaxStackSize()) {
             outputSlotStack.grow(recipeOutput.getCount());
         }
         boolean[] ingredientUsed = new boolean[INGREDIENTS_END + 1];
@@ -255,30 +251,27 @@ public class CookingCauldronBlockEntity extends BlockEntity implements Implement
             return;
         }
 
-        CookingCauldronRecipe recipe = world.getRecipeManager().getRecipeFor(RecipeRegistry.COOKING.get(), this, world).orElse(null);
+        RecipeHolder<CookingCauldronRecipe> recipe = world.getRecipeManager().getRecipeFor(RecipeRegistry.COOKING.get(), CraftingInput.of(1, 6, inventory.subList(1, 7)), world).orElse(null);
 
-        if (canCraft(recipe) && fluidLevel >= recipe.getFluidAmount()) {
-            if (currentCraftingDuration == 0) {
-                currentCraftingDuration = recipe.getCraftingDuration() * 20;
+        if (canCraft(recipe.value()) && fluidLevel >= recipe.value().getFluidAmount()) {
+            if (currentCraftingDuration == 0 && cookingTime == 0) {
+                currentCraftingDuration = recipe.value().getCraftingDuration() * 20;
                 delegate.set(3, currentCraftingDuration);
             }
-
             cookingTime++;
             delegate.set(0, cookingTime);
-
             if (cookingTime >= currentCraftingDuration) {
                 cookingTime = 0;
                 currentCraftingDuration = 0;
-                delegate.set(3, 0);
-                craft(recipe);
+                delegate.set(3, currentCraftingDuration);
+                craft(recipe.value());
             }
-
             world.setBlock(pos, state.setValue(CookingCauldronBlock.COOKING, true).setValue(CookingCauldronBlock.LIT, true), Block.UPDATE_ALL);
         } else {
             cookingTime = 0;
             currentCraftingDuration = 0;
-            delegate.set(0, 0);
-            delegate.set(3, 0);
+            delegate.set(0, cookingTime);
+            delegate.set(3, currentCraftingDuration);
             if (state.getValue(CookingCauldronBlock.COOKING)) {
                 world.setBlock(pos, state.setValue(CookingCauldronBlock.COOKING, false).setValue(CookingCauldronBlock.LIT, true), Block.UPDATE_ALL);
             }

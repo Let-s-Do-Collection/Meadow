@@ -1,0 +1,13 @@
+{
+  "type": "meadow:fondue",
+  "fuel": {
+    "tag": "meadow:cheese"
+  },
+  "bread": {
+    "item": "minecraft:bread"
+  },
+  "result": {
+    "count": 1,
+    "id": "meadow:cheese_stick"
+  }
+}

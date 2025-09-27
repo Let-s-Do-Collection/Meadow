@@ -22,7 +22,6 @@ import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.phys.BlockHitResult;
 import org.jetbrains.annotations.NotNull;
 
-@SuppressWarnings("deprecation")
 public class StoveBlockWood extends StoveBlock {
     public static final BooleanProperty LIT = BooleanProperty.create("lit");
 
@@ -32,26 +31,27 @@ public class StoveBlockWood extends StoveBlock {
     }
 
     @Override
-    public @NotNull InteractionResult use(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
+    protected @NotNull InteractionResult useWithoutItem(BlockState state, Level world, BlockPos pos, Player player, BlockHitResult hit) {
         if (world.isClientSide) return InteractionResult.SUCCESS;
+        InteractionHand hand = player.getUsedItemHand();
         boolean lit = state.getValue(LIT);
         ItemStack stack = player.getItemInHand(hand);
         boolean isFlint;
         if (lit && stack.is(ItemTags.SHOVELS)) {
             world.setBlockAndUpdate(pos, state.setValue(LIT, false));
             world.levelEvent(null, LevelEvent.SOUND_EXTINGUISH_FIRE, pos, 0);
-            if (!player.getAbilities().instabuild) stack.hurtAndBreak(1, player, p -> p.broadcastBreakEvent(hand));
+            if (!player.getAbilities().instabuild) stack.hurtAndBreak(1, player, player.getEquipmentSlotForItem(stack));
             return InteractionResult.SUCCESS;
         } else if (!lit && ((isFlint = stack.getItem() instanceof FlintAndSteelItem) || stack.getItem() instanceof FireChargeItem)) {
             world.setBlockAndUpdate(pos, state.setValue(LIT, true));
             if (!player.getAbilities().instabuild) {
-                if (isFlint) stack.hurtAndBreak(1, player, p -> p.broadcastBreakEvent(hand));
+                if (isFlint) stack.hurtAndBreak(1, player, player.getEquipmentSlotForItem(stack));
                 else stack.shrink(1);
             }
             world.playSound(null, pos, isFlint ? SoundEvents.FLINTANDSTEEL_USE : SoundEvents.FIRECHARGE_USE, SoundSource.BLOCKS, 1, 1);
             return InteractionResult.SUCCESS;
         }
-        return super.use(state, world, pos, player, hand, hit);
+        return super.useWithoutItem(state, world, pos, player, hit);
     }
 
     @Override

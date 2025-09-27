@@ -21,7 +21,6 @@ import net.satisfy.meadow.core.util.GeneralUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-@SuppressWarnings("deprecation")
 public class LineConnectingBlock extends Block {
 
     public static final DirectionProperty FACING;

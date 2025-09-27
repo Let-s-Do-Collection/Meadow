@@ -64,10 +64,10 @@ public class WaterBuffaloModel extends QuadrupedModel<WaterBuffaloEntity> {
     }
 
     @Override
-    public void renderToBuffer(PoseStack matrices, VertexConsumer vertexConsumer, int light, int overlay, float red, float green, float blue, float alpha) {
+    public void renderToBuffer(PoseStack poseStack, VertexConsumer vertexConsumer, int i, int j, int k) {
         List<ModelPart> partsToScale = getPartsToScale();
         for (ModelPart part : partsToScale) {
-            part.render(matrices, vertexConsumer, light, overlay, red, green, blue, alpha);
+            part.render(poseStack, vertexConsumer, i, j, k);
         }
     }
 

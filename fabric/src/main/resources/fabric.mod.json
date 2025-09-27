@@ -32,7 +32,6 @@
     ]
   },
   "mixins": [
-    "meadow-common.mixins.json",
     "meadow.mixins.json"
   ],
   "depends": {

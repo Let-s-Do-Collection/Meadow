@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "meadow:cheese_tart"
+    }
+  ],
+  "result": {
+    "id": "meadow:cheese_tart_slice",
+    "count": 4
+  }
+}

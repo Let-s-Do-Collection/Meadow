@@ -1,9 +1,6 @@
 package net.satisfy.meadow.core.block.entity;
 
-import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
-import net.minecraft.core.NonNullList;
-import net.minecraft.core.RegistryAccess;
+import net.minecraft.core.*;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.ContainerHelper;
@@ -14,6 +11,9 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.RecipeHolder;
+import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
@@ -28,6 +28,9 @@ import net.satisfy.meadow.core.registry.TagRegistry;
 import net.satisfy.meadow.core.world.ImplementedInventory;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.List;
+import java.util.Optional;
 
 public class CheeseFormBlockEntity extends BlockEntity implements BlockEntityTicker<CheeseFormBlockEntity>, MenuProvider, ImplementedInventory {
 
@@ -85,45 +88,71 @@ public class CheeseFormBlockEntity extends BlockEntity implements BlockEntityTic
     }
 
     @Override
-    public void load(CompoundTag nbt) {
-        super.load(nbt);
+    protected void loadAdditional(CompoundTag compoundTag, HolderLookup.Provider provider) {
+        super.loadAdditional(compoundTag, provider);
         this.inventory = NonNullList.withSize(this.getContainerSize(), ItemStack.EMPTY);
-        ContainerHelper.loadAllItems(nbt, this.inventory);
-        this.fermentationTime = nbt.getShort("fermentationTime");
-        this.experience = nbt.getFloat("experience");
+        ContainerHelper.loadAllItems(compoundTag, this.inventory, provider);
+        this.fermentationTime = compoundTag.getShort("fermentationTime");
+        this.experience = compoundTag.getFloat("experience");
     }
 
     @Override
-    protected void saveAdditional(CompoundTag nbt) {
-        super.saveAdditional(nbt);
-        ContainerHelper.saveAllItems(nbt, this.inventory);
-        nbt.putFloat("experience", this.experience);
-        nbt.putShort("fermentationTime", (short) this.fermentationTime);
+    protected void saveAdditional(CompoundTag compoundTag, HolderLookup.Provider provider) {
+        super.saveAdditional(compoundTag, provider);
+        ContainerHelper.saveAllItems(compoundTag, this.inventory, provider);
+        compoundTag.putShort("fermentationTime", (short) this.fermentationTime);
+        compoundTag.putFloat("experience", this.experience);
     }
 
     @Override
     public void tick(Level world, BlockPos pos, BlockState state, CheeseFormBlockEntity blockEntity) {
         if (world.isClientSide) return;
-        RegistryAccess manager = world.registryAccess();
-        final var recipeType = world.getRecipeManager()
-                .getRecipeFor(RecipeRegistry.CHEESE.get(), blockEntity, world)
-                .orElse(null);
-        boolean working = canCraft(recipeType, manager);
-        if (working) {
-            this.fermentationTime++;
 
-            if (this.fermentationTime >= COOKING_TIME_IN_TICKS) {
+        RecipeManager recipeManager = world.getRecipeManager();
+        List<RecipeHolder<CheeseFormRecipe>> recipes = recipeManager.getAllRecipesFor(RecipeRegistry.CHEESE.get());
+        Optional<CheeseFormRecipe> recipe = Optional.ofNullable(getRecipe(recipes, inventory));
+
+        if (recipe.isPresent()) {
+            RegistryAccess access = world.registryAccess();
+            boolean working = canCraft(recipe.get(), access);
+            if (working) {
+                this.fermentationTime++;
+
+                if (this.fermentationTime >= COOKING_TIME_IN_TICKS) {
+                    this.fermentationTime = 0;
+                    craft(recipe.get(), access);
+                    setChanged();
+                }
+            } else {
                 this.fermentationTime = 0;
-                craft(recipeType, manager);
-                setChanged();
             }
-        } else {
-            this.fermentationTime = 0;
+            boolean done = !inventory.getFirst().isEmpty();
+            if (state.getValue(CheeseFormBlock.WORKING) != working || state.getValue(CheeseFormBlock.DONE) != done) {
+                world.setBlockAndUpdate(pos, state.setValue(CheeseFormBlock.WORKING, working).setValue(CheeseFormBlock.DONE, done));
+            }
         }
-        boolean done = !inventory.get(OUTPUT_SLOT).isEmpty();
-        if (state.getValue(CheeseFormBlock.WORKING) != working || state.getValue(CheeseFormBlock.DONE) != done) {
-            world.setBlockAndUpdate(pos, state.setValue(CheeseFormBlock.WORKING, working).setValue(CheeseFormBlock.DONE, done));
+    }
+
+    private CheeseFormRecipe getRecipe(List<RecipeHolder<CheeseFormRecipe>> recipes, NonNullList<ItemStack> inventory) {
+        recipeLoop:
+        for (RecipeHolder<CheeseFormRecipe> recipeHolder : recipes) {
+            CheeseFormRecipe recipe = recipeHolder.value();
+            for (Ingredient ingredient : recipe.getIngredients()) {
+                boolean ingredientFound = false;
+                for (int slotIndex = 1; slotIndex < inventory.size(); slotIndex++) {
+                    ItemStack slotItem = inventory.get(slotIndex);
+                    if (ingredient.test(slotItem)) {
+                        ingredientFound = true;
+                        break;
+                    }
+                }
+                if (!ingredientFound) {
+                    continue recipeLoop;
+                }
+            }
+            return recipe;
         }
+        return null;
     }
 
     private boolean canCraft(CheeseFormRecipe recipe, RegistryAccess manager) {

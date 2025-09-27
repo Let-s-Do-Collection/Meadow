@@ -1,15 +1,19 @@
 package net.satisfy.meadow.core.entity;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.DifficultyInstance;
@@ -29,15 +33,18 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
+import net.minecraft.world.level.storage.loot.LootTable;
+import net.satisfy.meadow.Meadow;
 import net.satisfy.meadow.core.registry.EntityTypeRegistry;
 import net.satisfy.meadow.core.registry.ObjectRegistry;
-import net.satisfy.meadow.Meadow;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class WoolyCowEntity extends Animal implements Shearable, VariantHolder<WoolyCowVar> {
+public class WoolyCowEntity extends Animal implements Shearable, VariantHolder<WoolyCowVariant> {
     private static final EntityDataAccessor<Boolean> IS_SHEARED = SynchedEntityData.defineId(WoolyCowEntity.class, EntityDataSerializers.BOOLEAN);
     private static final EntityDataAccessor<Integer> DATA_ID_TYPE_VARIANT = SynchedEntityData.defineId(WoolyCowEntity.class, EntityDataSerializers.INT);
+
+    private static final ResourceLocation COW_LOOT_TABLE = ResourceLocation.withDefaultNamespace("entities/cow");
 
     private int eatGrassTimer;
     private EatBlockGoal eatGrassGoal;
@@ -47,8 +54,15 @@ public class WoolyCowEntity extends Animal implements Shearable, VariantHolder<W
     }
 
     @Override
-    protected @NotNull ResourceLocation getDefaultLootTable() {
-        return Meadow.identifier("entities/wooly_cow");
+    protected @NotNull ResourceKey<LootTable> getDefaultLootTable() {
+        ResourceLocation location = COW_LOOT_TABLE;
+        if (!isSheared()) {
+            location = BuiltInRegistries.ITEM.getKey(getVariant().getWool());
+            String s = location.getPath().replace("_wool", "");
+
+            location = Meadow.identifier("entities/wooly_cow/" + s);
+        }
+        return ResourceKey.create(Registries.LOOT_TABLE, location);
     }
 
     @Override
@@ -58,7 +72,7 @@ public class WoolyCowEntity extends Animal implements Shearable, VariantHolder<W
             if (!this.level().isClientSide && this.readyForShearing()) {
                 this.shear(SoundSource.PLAYERS);
                 this.gameEvent(GameEvent.SHEAR, player);
-                itemStack.hurtAndBreak(1, player, player2 -> player2.broadcastBreakEvent(hand));
+                itemStack.hurtAndBreak(1, player, hand == InteractionHand.MAIN_HAND ? EquipmentSlot.MAINHAND : EquipmentSlot.OFFHAND);
                 return InteractionResult.SUCCESS;
             }
             return InteractionResult.CONSUME;
@@ -98,6 +112,11 @@ public class WoolyCowEntity extends Animal implements Shearable, VariantHolder<W
     }
 
     @Override
+    public boolean isFood(ItemStack itemStack) {
+        return itemStack.is(ItemTags.COW_FOOD);
+    }
+
+    @Override
     public void ate() {
         super.ate();
         this.setSheared(false);
@@ -125,10 +144,10 @@ public class WoolyCowEntity extends Animal implements Shearable, VariantHolder<W
     }
 
     @Override
-    protected void defineSynchedData() {
-        super.defineSynchedData();
-        entityData.define(IS_SHEARED, false);
-        entityData.define(DATA_ID_TYPE_VARIANT, 0);
+    protected void defineSynchedData(SynchedEntityData.Builder builder) {
+        super.defineSynchedData(builder);
+        builder.define(IS_SHEARED, false);
+        builder.define(DATA_ID_TYPE_VARIANT, 0);
     }
 
     public boolean isSheared() {
@@ -180,7 +199,7 @@ public class WoolyCowEntity extends Animal implements Shearable, VariantHolder<W
         if (cow == null) return null;
 
         RandomSource random = serverLevel.getRandom();
-        WoolyCowVar var = this.getVariant();
+        WoolyCowVariant var = this.getVariant();
         if (random.nextBoolean() && ageableMob instanceof WoolyCowEntity varCow) {
             var = varCow.getVariant();
         }
@@ -188,28 +207,27 @@ public class WoolyCowEntity extends Animal implements Shearable, VariantHolder<W
         return cow;
     }
 
-    @Nullable
-    public SpawnGroupData finalizeSpawn(@NotNull ServerLevelAccessor serverLevelAccessor, @NotNull DifficultyInstance difficultyInstance, @NotNull MobSpawnType mobSpawnType, @Nullable SpawnGroupData spawnGroupData, @Nullable CompoundTag compoundTag) {
-
-        WoolyCowVar variant;
+    @Override
+    public SpawnGroupData finalizeSpawn(ServerLevelAccessor serverLevelAccessor, DifficultyInstance difficultyInstance, MobSpawnType mobSpawnType, @Nullable SpawnGroupData spawnGroupData) {
+        WoolyCowVariant variant;
         if (spawnGroupData instanceof ShearableVarCowGroupData data) {
             variant = data.variant;
         } else {
-            variant = WoolyCowVar.getRandomVariant(serverLevelAccessor, blockPosition(), mobSpawnType.equals(MobSpawnType.SPAWN_EGG));
+            variant = WoolyCowVariant.getRandomVariant(serverLevelAccessor, blockPosition(), mobSpawnType.equals(MobSpawnType.SPAWN_EGG));
             spawnGroupData = new ShearableVarCowGroupData(variant);
         }
 
         setVariant(variant);
-        return super.finalizeSpawn(serverLevelAccessor, difficultyInstance, mobSpawnType, spawnGroupData, compoundTag);
+        return super.finalizeSpawn(serverLevelAccessor, difficultyInstance, mobSpawnType, spawnGroupData);
     }
 
-    public void setVariant(WoolyCowVar variant) {
+    public void setVariant(WoolyCowVariant variant) {
         setTypeVariant(variant.getId() & 255 | this.getTypeVariant() & -256);
     }
 
     @Override
-    public @NotNull WoolyCowVar getVariant() {
-        return WoolyCowVar.byId(getTypeVariant() & 255);
+    public @NotNull WoolyCowVariant getVariant() {
+        return WoolyCowVariant.byId(getTypeVariant() & 255);
     }
 
     private void setTypeVariant(int i) {
@@ -221,9 +239,9 @@ public class WoolyCowEntity extends Animal implements Shearable, VariantHolder<W
     }
 
     public static class ShearableVarCowGroupData extends AgeableMob.AgeableMobGroupData {
-        public final WoolyCowVar variant;
+        public final WoolyCowVariant variant;
 
-        public ShearableVarCowGroupData(WoolyCowVar variant) {
+        public ShearableVarCowGroupData(WoolyCowVariant variant) {
             super(true);
             this.variant = variant;
         }
@@ -264,22 +282,12 @@ public class WoolyCowEntity extends Animal implements Shearable, VariantHolder<W
     }
 
     @Override
-    protected boolean shouldDropLoot() {
-        return true;
-    }
-
-    @Override
-    protected void dropCustomDeathLoot(@NotNull DamageSource source, int lootingMultiplier, boolean recentlyHit) {
-        this.dropFromLootTable(source, recentlyHit);
-    }
-
-    @Override
     protected float getSoundVolume() {
         return 0.4F;
     }
 
     @Override
-    protected float getStandingEyeHeight(@NotNull Pose pose, @NotNull EntityDimensions entityDimensions) {
-        return this.isBaby() ? entityDimensions.height * 0.95F : 1.3F;
+    public double getEyeY() {
+        return super.getEyeY();
     }
 }
