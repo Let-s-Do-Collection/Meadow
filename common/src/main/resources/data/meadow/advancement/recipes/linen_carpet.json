@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "meadow:linen_carpet"
+    ]
+  },
+  "criteria": {
+    "has_linen_wool": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "meadow:linen_wool"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "meadow:linen_carpet"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_linen_wool",
+      "has_the_recipe"
+    ]
+  ]
+}

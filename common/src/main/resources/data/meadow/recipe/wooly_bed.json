@@ -3,7 +3,7 @@
   "group": "bed",
   "key": {
     "#": {
-      "item": "meadow:rocky_wool"
+      "item": "meadow:plaid_wool"
     },
     "X": {
       "tag": "minecraft:planks"
@@ -14,7 +14,7 @@
     "XXX"
   ],
   "result": {
-    "id": "meadow:rocky_bed",
+    "id": "meadow:plaid_bed",
     "count": 1
   }
 }

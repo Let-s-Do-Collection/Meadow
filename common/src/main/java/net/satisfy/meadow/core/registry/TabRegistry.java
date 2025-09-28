@@ -61,6 +61,8 @@ public class TabRegistry {
                 out.accept(new ItemStack(ObjectRegistry.PINE_FENCE_GATE.get()));
                 out.accept(new ItemStack(ObjectRegistry.PINE_DOOR.get()));
                 out.accept(new ItemStack(ObjectRegistry.PINE_TRAPDOOR.get()));
+                out.accept(new ItemStack(ObjectRegistry.PINE_BARN_DOOR.get()));
+                out.accept(new ItemStack(ObjectRegistry.PINE_BARN_TRAPDOOR.get()));
                 out.accept(new ItemStack(ObjectRegistry.PINE_PRESSURE_PLATE.get()));
                 out.accept(new ItemStack(ObjectRegistry.PINE_BUTTON.get()));
                 out.accept(new ItemStack(ObjectRegistry.PINE_SIGN.get()));
@@ -118,24 +120,24 @@ public class TabRegistry {
                 out.accept(new ItemStack(ObjectRegistry.ERIOPHORUM_TALL.get()));
                 out.accept(new ItemStack(ObjectRegistry.SMALL_FIR.get()));
 
-                out.accept(new ItemStack(ObjectRegistry.FLECKED_WOOL.get()));
-                out.accept(new ItemStack(ObjectRegistry.FLECKED_CARPET.get()));
-                out.accept(new ItemStack(ObjectRegistry.FLECKED_BED.get()));
-                out.accept(new ItemStack(ObjectRegistry.HIGHLAND_WOOL.get()));
-                out.accept(new ItemStack(ObjectRegistry.HIGHLAND_CARPET.get()));
-                out.accept(new ItemStack(ObjectRegistry.HIGHLAND_BED.get()));
-                out.accept(new ItemStack(ObjectRegistry.PATCHED_WOOL.get()));
-                out.accept(new ItemStack(ObjectRegistry.PATCHED_CARPET.get()));
-                out.accept(new ItemStack(ObjectRegistry.PATCHED_BED.get()));
-                out.accept(new ItemStack(ObjectRegistry.ROCKY_WOOL.get()));
-                out.accept(new ItemStack(ObjectRegistry.ROCKY_CARPET.get()));
-                out.accept(new ItemStack(ObjectRegistry.ROCKY_BED.get()));
-                out.accept(new ItemStack(ObjectRegistry.UMBRA_WOOL.get()));
-                out.accept(new ItemStack(ObjectRegistry.UMBRA_CARPET.get()));
-                out.accept(new ItemStack(ObjectRegistry.UMBRA_BED.get()));
-                out.accept(new ItemStack(ObjectRegistry.INKY_WOOL.get()));
-                out.accept(new ItemStack(ObjectRegistry.INKY_CARPET.get()));
-                out.accept(new ItemStack(ObjectRegistry.INKY_BED.get()));
+                out.accept(new ItemStack(ObjectRegistry.RUSTIC_WOOL.get()));
+                out.accept(new ItemStack(ObjectRegistry.RUSTIC_CARPET.get()));
+                out.accept(new ItemStack(ObjectRegistry.RUSTIC_BED.get()));
+                out.accept(new ItemStack(ObjectRegistry.LINEN_WOOL.get()));
+                out.accept(new ItemStack(ObjectRegistry.LINEN_CARPET.get()));
+                out.accept(new ItemStack(ObjectRegistry.LINEN_BED.get()));
+                out.accept(new ItemStack(ObjectRegistry.JACQUARD_WOOL.get()));
+                out.accept(new ItemStack(ObjectRegistry.JACQUARD_CARPET.get()));
+                out.accept(new ItemStack(ObjectRegistry.JACQUARD_BED.get()));
+                out.accept(new ItemStack(ObjectRegistry.PLAID_WOOL.get()));
+                out.accept(new ItemStack(ObjectRegistry.PLAID_CARPET.get()));
+                out.accept(new ItemStack(ObjectRegistry.PLAID_BED.get()));
+                out.accept(new ItemStack(ObjectRegistry.CHAMBRAY_WOOL.get()));
+                out.accept(new ItemStack(ObjectRegistry.CHAMBRAY_CARPET.get()));
+                out.accept(new ItemStack(ObjectRegistry.CHAMBRAY_BED.get()));
+                out.accept(new ItemStack(ObjectRegistry.TWEED_WOOL.get()));
+                out.accept(new ItemStack(ObjectRegistry.TWEED_CARPET.get()));
+                out.accept(new ItemStack(ObjectRegistry.TWEED_BED.get()));
                 out.accept(new ItemStack(ObjectRegistry.WARPED_WOOL.get()));
                 out.accept(new ItemStack(ObjectRegistry.WARPED_CARPET.get()));
                 out.accept(new ItemStack(ObjectRegistry.WARPED_BED.get()));
@@ -186,7 +188,9 @@ public class TabRegistry {
                 out.accept(new ItemStack(ObjectRegistry.WOODEN_AMETHYST_MILK_BUCKET.get()));
 
                 out.accept(new ItemStack(ObjectRegistry.WATER_BUFFALO_SPAWN_EGG_ITEM.get()));
-                out.accept(new ItemStack(ObjectRegistry.WOOLY_COW_SPAWN_EGG_ITEM.get()));
+                out.accept(new ItemStack(ObjectRegistry.HIGHLAND_WOOLY_COW_SPAWN_EGG.get()));
+                out.accept(new ItemStack(ObjectRegistry.UMBRA_WOOLY_COW_SPAWN_EGG.get()));
+                out.accept(new ItemStack(ObjectRegistry.WARPED_WOOLY_COW_SPAWN_EGG.get()));
             })
             .build());
 

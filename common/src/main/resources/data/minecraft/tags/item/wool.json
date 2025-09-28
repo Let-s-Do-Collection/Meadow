@@ -1,10 +1,10 @@
 {
   "values": [
-    "meadow:flecked_wool",
-    "meadow:highland_wool",
-    "meadow:patched_wool",
-    "meadow:rocky_wool",
-    "meadow:inky_wool",
-    "meadow:umbra_wool"
+    "meadow:rustic_wool",
+    "meadow:linen_wool",
+    "meadow:jacquard_wool",
+    "meadow:plaid_wool",
+    "meadow:tweed_wool",
+    "meadow:chambray_wool"
   ]
 }

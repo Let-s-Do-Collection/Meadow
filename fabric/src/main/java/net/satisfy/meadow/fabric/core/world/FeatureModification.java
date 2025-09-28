@@ -23,7 +23,7 @@ public class FeatureModification {
 
         Predicate<BiomeSelectionContext> meadowVarCows = (ctx -> {
             if(BiomeSelectors.spawnsOneOf(EntityType.COW).test(ctx)) return false;
-            return ctx.hasTag(TagRegistry.IS_MEADOW) || ctx.hasTag(TagRegistry.SPAWNS_UMBRA_COW);
+            return ctx.hasTag(TagRegistry.IS_MEADOW) || ctx.hasTag(TagRegistry.SPAWNS_HIGHLAND_COW);
         });
         BiomeModifications.addSpawn(meadowVarCows, MobCategory.CREATURE, EntityType.COW,
                 CommonSpawnUtil.cowSpawnWeight, CommonSpawnUtil.cowPackSizeMin, CommonSpawnUtil.cowPackSizeMax);

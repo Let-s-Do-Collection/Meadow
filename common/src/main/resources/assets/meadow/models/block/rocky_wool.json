@@ -1,6 +1,0 @@
-{
-  "parent": "block/cube_all",
-  "textures": {
-    "all": "meadow:block/rocky_sheep_wool"
-  }
-}

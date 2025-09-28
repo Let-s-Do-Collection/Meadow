@@ -1,6 +1,5 @@
 {
-  "type": "meadow:conditional
-",
+  "type": "meadow:conditional",
   "conditions": [
     {
       "type": "neoforge:mod_loaded",

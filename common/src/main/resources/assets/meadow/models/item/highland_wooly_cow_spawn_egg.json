@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "meadow:item/highland_wooly_cow_spawn_egg"
+  }
+}

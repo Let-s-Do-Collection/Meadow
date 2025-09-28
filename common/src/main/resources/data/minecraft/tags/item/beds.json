@@ -1,11 +1,11 @@
 {
   "values": [
-    "meadow:flecked_bed",
-    "meadow:highland_bed",
-    "meadow:patched_bed",
-    "meadow:rocky_bed",
-    "meadow:umbra_bed",
-    "meadow:inky_bed",
+    "meadow:rustic_bed",
+    "meadow:linen_bed",
+    "meadow:jacquard_bed",
+    "meadow:plaid_bed",
+    "meadow:chambray_bed",
+    "meadow:tweed_bed",
     "meadow:warped_bed"
   ]
 }

@@ -1,0 +1,78 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "meadow:block/plaid_wool"
+      },
+      {
+        "model": "meadow:block/plaid_wool",
+        "x": 90
+      },
+      {
+        "model": "meadow:block/plaid_wool",
+        "x": 180
+      },
+      {
+        "model": "meadow:block/plaid_wool",
+        "x": 270
+      },
+      {
+        "model": "meadow:block/plaid_wool",
+        "y": 90
+      },
+      {
+        "model": "meadow:block/plaid_wool",
+        "x": 90,
+        "y": 90
+      },
+      {
+        "model": "meadow:block/plaid_wool",
+        "x": 180,
+        "y": 90
+      },
+      {
+        "model": "meadow:block/plaid_wool",
+        "x": 270,
+        "y": 90
+      },
+      {
+        "model": "meadow:block/plaid_wool",
+        "y": 180
+      },
+      {
+        "model": "meadow:block/plaid_wool",
+        "x": 90,
+        "y": 180
+      },
+      {
+        "model": "meadow:block/plaid_wool",
+        "x": 180,
+        "y": 180
+      },
+      {
+        "model": "meadow:block/plaid_wool",
+        "x": 270,
+        "y": 180
+      },
+      {
+        "model": "meadow:block/plaid_wool",
+        "y": 270
+      },
+      {
+        "model": "meadow:block/plaid_wool",
+        "x": 90,
+        "y": 270
+      },
+      {
+        "model": "meadow:block/plaid_wool",
+        "x": 180,
+        "y": 270
+      },
+      {
+        "model": "meadow:block/plaid_wool",
+        "x": 270,
+        "y": 270
+      }
+    ]
+  }
+}

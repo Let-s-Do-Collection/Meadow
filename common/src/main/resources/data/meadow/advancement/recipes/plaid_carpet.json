@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "meadow:plaid_carpet"
+    ]
+  },
+  "criteria": {
+    "has_plaid_wool": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "meadow:plaid_wool"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "meadow:plaid_carpet"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_plaid_wool",
+      "has_the_recipe"
+    ]
+  ]
+}

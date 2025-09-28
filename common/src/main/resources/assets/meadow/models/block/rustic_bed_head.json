@@ -1,0 +1,6 @@
+{
+  "parent": "meadow:block/template_bed_head",
+  "textures": {
+    "bed": "meadow:entity/bed/rustic"
+  }
+}

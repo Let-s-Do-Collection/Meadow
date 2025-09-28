@@ -44,7 +44,7 @@ public class WoolyCowEntity extends Animal implements Shearable, VariantHolder<W
     private static final EntityDataAccessor<Boolean> IS_SHEARED = SynchedEntityData.defineId(WoolyCowEntity.class, EntityDataSerializers.BOOLEAN);
     private static final EntityDataAccessor<Integer> DATA_ID_TYPE_VARIANT = SynchedEntityData.defineId(WoolyCowEntity.class, EntityDataSerializers.INT);
 
-    private static final ResourceLocation COW_LOOT_TABLE = ResourceLocation.withDefaultNamespace("entities/cow");
+    private static final ResourceLocation COW_LOOT_TABLE = ResourceLocation.withDefaultNamespace("entities");
 
     private int eatGrassTimer;
     private EatBlockGoal eatGrassGoal;
@@ -55,15 +55,14 @@ public class WoolyCowEntity extends Animal implements Shearable, VariantHolder<W
 
     @Override
     protected @NotNull ResourceKey<LootTable> getDefaultLootTable() {
-        ResourceLocation location = COW_LOOT_TABLE;
+        ResourceLocation location = ResourceLocation.withDefaultNamespace("entities/cow");
         if (!isSheared()) {
-            location = BuiltInRegistries.ITEM.getKey(getVariant().getWool());
-            String s = location.getPath().replace("_wool", "");
-
-            location = Meadow.identifier("entities/wooly_cow/" + s);
+            String s = getVariant().getSerializedName();
+            location = Meadow.identifier("entities/" + s);
         }
         return ResourceKey.create(Registries.LOOT_TABLE, location);
     }
+
 
     @Override
     public @NotNull InteractionResult mobInteract(Player player, @NotNull InteractionHand hand) {
@@ -208,18 +207,24 @@ public class WoolyCowEntity extends Animal implements Shearable, VariantHolder<W
     }
 
     @Override
-    public SpawnGroupData finalizeSpawn(ServerLevelAccessor serverLevelAccessor, DifficultyInstance difficultyInstance, MobSpawnType mobSpawnType, @Nullable SpawnGroupData spawnGroupData) {
-        WoolyCowVariant variant;
-        if (spawnGroupData instanceof ShearableVarCowGroupData data) {
-            variant = data.variant;
-        } else {
-            variant = WoolyCowVariant.getRandomVariant(serverLevelAccessor, blockPosition(), mobSpawnType.equals(MobSpawnType.SPAWN_EGG));
-            spawnGroupData = new ShearableVarCowGroupData(variant);
+    public SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance diff, MobSpawnType reason, @Nullable SpawnGroupData data) {
+        if (reason == MobSpawnType.SPAWN_EGG) {
+            int v = getTypeVariant() & 255;
+            setVariant(WoolyCowVariant.byId(v));
+            return super.finalizeSpawn(level, diff, reason, data);
         }
 
+        WoolyCowVariant variant;
+        if (data instanceof ShearableVarCowGroupData d) {
+            variant = d.variant;
+        } else {
+            variant = WoolyCowVariant.getRandomVariant(level, blockPosition(), false);
+            data = new ShearableVarCowGroupData(variant);
+        }
         setVariant(variant);
-        return super.finalizeSpawn(serverLevelAccessor, difficultyInstance, mobSpawnType, spawnGroupData);
+        return super.finalizeSpawn(level, diff, reason, data);
     }
+
 
     public void setVariant(WoolyCowVariant variant) {
         setTypeVariant(variant.getId() & 255 | this.getTypeVariant() & -256);

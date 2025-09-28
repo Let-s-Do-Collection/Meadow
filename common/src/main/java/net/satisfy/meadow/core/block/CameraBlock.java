@@ -21,7 +21,6 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.satisfy.meadow.client.util.ClientPhoto;
 import net.satisfy.meadow.core.registry.SoundEventRegistry;
 import net.satisfy.meadow.core.util.GeneralUtil;
 import org.jetbrains.annotations.NotNull;
@@ -73,7 +72,6 @@ public class CameraBlock extends Block {
                 world.addParticle(ParticleTypes.FIREWORK, x, yBase, z, 0.0D, 0.0D, 0.0D);
                 world.addParticle(ParticleTypes.CRIT, x + 5.0D / 16.0D * direction.getStepX(), yBase, z, 0.0D, 0.0D, 0.0D);
             }
-            ClientPhoto.capture(pos, state.getValue(FACING));
         }
         return InteractionResult.SUCCESS;
     }

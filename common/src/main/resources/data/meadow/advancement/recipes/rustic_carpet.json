@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "meadow:rustic_carpet"
+    ]
+  },
+  "criteria": {
+    "has_rustic_wool": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "meadow:rustic_wool"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "meadow:rustic_carpet"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_rustic_wool",
+      "has_the_recipe"
+    ]
+  ]
+}

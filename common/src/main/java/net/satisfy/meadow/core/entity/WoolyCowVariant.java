@@ -22,8 +22,8 @@ import java.util.function.IntFunction;
 import java.util.stream.Collectors;
 
 public enum WoolyCowVariant implements StringRepresentable {
-    HIGHLAND(0, "highland_cattle", ObjectRegistry.HIGHLAND_WOOL.get().asItem(), ObjectRegistry.WOODEN_MILK_BUCKET.get()),
-    UMBRA(1, "umbra_cow", ObjectRegistry.UMBRA_WOOL.get().asItem(), ObjectRegistry.WOODEN_MILK_BUCKET.get()),
+    HIGHLAND(0, "highland_cattle", ObjectRegistry.LINEN_WOOL.get().asItem(), ObjectRegistry.WOODEN_MILK_BUCKET.get()),
+    UMBRA(1, "umbra_cow", ObjectRegistry.CHAMBRAY_WOOL.get().asItem(), ObjectRegistry.WOODEN_MILK_BUCKET.get()),
     WARPED(2, "warped_cow", ObjectRegistry.WARPED_WOOL.get().asItem(), ObjectRegistry.WOODEN_WARPED_MILK_BUCKET.get());
     private static final IntFunction<WoolyCowVariant> BY_ID = ByIdMap.continuous(WoolyCowVariant::getId, values(), ByIdMap.OutOfBoundsStrategy.WRAP);
     private final int id;

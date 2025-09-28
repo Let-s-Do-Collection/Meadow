@@ -3,7 +3,7 @@
   "display": {
     "icon": {
       "count": 1,
-      "id": "meadow:flecked_wool"
+      "id": "meadow:rustic_wool"
     },
     "title": {
       "translate": "advancement.meadow.wool_collector"
@@ -20,73 +20,73 @@
     "experience": 250
   },
   "criteria": {
-    "meadow:flecked_wool": {
+    "meadow:rustic_wool": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
             "items": [
-              "meadow:flecked_wool"
+              "meadow:rustic_wool"
             ]
           }
         ]
       }
     },
-    "meadow:highland_wool": {
+    "meadow:linen_wool": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
             "items": [
-              "meadow:highland_wool"
+              "meadow:linen_wool"
             ]
           }
         ]
       }
     },
-    "meadow:patched_wool": {
+    "meadow:jacquard_wool": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
             "items": [
-              "meadow:patched_wool"
+              "meadow:jacquard_wool"
             ]
           }
         ]
       }
     },
-    "meadow:rocky_wool": {
+    "meadow:plaid_wool": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
             "items": [
-              "meadow:rocky_wool"
+              "meadow:plaid_wool"
             ]
           }
         ]
       }
     },
-    "meadow:umbra_wool": {
+    "meadow:chambray_wool": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
             "items": [
-              "meadow:umbra_wool"
+              "meadow:chambray_wool"
             ]
           }
         ]
       }
     },
-    "meadow:inky_wool": {
+    "meadow:tweed_wool": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
             "items": [
-              "meadow:inky_wool"
+              "meadow:tweed_wool"
             ]
           }
         ]
@@ -107,22 +107,22 @@
   },
   "requirements": [
     [
-      "meadow:flecked_wool"
+      "meadow:rustic_wool"
     ],
     [
-      "meadow:highland_wool"
+      "meadow:linen_wool"
     ],
     [
-      "meadow:patched_wool"
+      "meadow:jacquard_wool"
     ],
     [
-      "meadow:rocky_wool"
+      "meadow:plaid_wool"
     ],
     [
-      "meadow:umbra_wool"
+      "meadow:chambray_wool"
     ],
     [
-      "meadow:inky_wool"
+      "meadow:tweed_wool"
     ],
     [
       "meadow:warped_wool"

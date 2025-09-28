@@ -9,8 +9,8 @@ import net.satisfy.meadow.Meadow;
 
 public class TagRegistry {
     public static final TagKey<Biome> IS_MEADOW = TagKey.create(Registries.BIOME, Meadow.identifier("is_meadow"));
-    public static final TagKey<Biome> SPAWNS_UMBRA_COW = TagKey.create(Registries.BIOME, Meadow.identifier("spawns_umbra_cows"));
-    public static final TagKey<Biome> SPAWNS_ROCKY_SHEEP = TagKey.create(Registries.BIOME, Meadow.identifier("spawns_rocky_sheep"));
+    public static final TagKey<Biome> SPAWNS_HIGHLAND_COW = TagKey.create(Registries.BIOME, Meadow.identifier("spawns_highland_cow"));
+    public static final TagKey<Biome> SPAWNS_UMBRA_COW = TagKey.create(Registries.BIOME, Meadow.identifier("spawns_umbra_cow"));
     public static final TagKey<Biome> SPAWNS_WARPED_COW = TagKey.create(Registries.BIOME, Meadow.identifier("spawns_warped_cow"));
     public static final TagKey<Item> MILK = TagKey.create(Registries.ITEM, Meadow.identifier("milk"));
     public static final TagKey<Item> CHEESE_BLOCKS = TagKey.create(Registries.ITEM, Meadow.identifier("cheese_blocks"));

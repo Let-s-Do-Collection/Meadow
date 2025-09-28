@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "meadow:jacquard_carpet"
+    ]
+  },
+  "criteria": {
+    "has_jacquard_wool": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "meadow:jacquard_wool"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "meadow:jacquard_carpet"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_jacquard_wool",
+      "has_the_recipe"
+    ]
+  ]
+}
