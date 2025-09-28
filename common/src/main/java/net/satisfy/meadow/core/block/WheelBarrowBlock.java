@@ -4,13 +4,9 @@ import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.sounds.SoundEvent;
-import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.ItemTags;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.shapes.BooleanOp;
 import net.minecraft.world.phys.shapes.CollisionContext;
@@ -81,15 +77,5 @@ public class WheelBarrowBlock extends StorageBlock {
     @Override
     public int getSection(Float aFloat, Float aFloat1) {
         return 0;
-    }
-
-    @Override
-    public SoundEvent getAddSound(Level level, BlockPos blockPos, Player player, int i) {
-        return SoundEvents.GRASS_PLACE;
-    }
-
-    @Override
-    public SoundEvent getRemoveSound(Level level, BlockPos blockPos, Player player, int i) {
-        return SoundEvents.GRASS_BREAK;
     }
 }

@@ -29,7 +29,7 @@ public class FlammableBlockRegistry {
 
         addFlammable(30, 60,
                 ObjectRegistry.PINE_LEAVES.get(),
-                ObjectRegistry.PINE_LEAVES_2.get(),
+                ObjectRegistry.YELLOW_PINE_LEAVES.get(),
                 ObjectRegistry.SHUTTER_BLOCK.get(),
                 ObjectRegistry.SHUTTER_BLOCK_BERRY.get(),
                 ObjectRegistry.SHUTTER_BLOCK_FIR.get(),

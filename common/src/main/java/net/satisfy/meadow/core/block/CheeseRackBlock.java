@@ -4,11 +4,9 @@ import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.sounds.SoundEvent;
-import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.Tuple;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
+import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -37,33 +35,34 @@ public class CheeseRackBlock extends StorageBlock {
     }
 
     @Override
-    public @NotNull InteractionResult use(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
+    protected @NotNull ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
         BlockEntity blockEntity = world.getBlockEntity(pos);
         if (!(blockEntity instanceof StorageBlockEntity shelfBlockEntity)) {
-            return InteractionResult.PASS;
+            return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
         }
 
         Optional<Tuple<Float, Float>> optional = GeneralUtil.getRelativeHitCoordinatesForBlockFace(hit, state.getValue(FACING), unAllowedDirections());
         if (optional.isEmpty()) {
-            return InteractionResult.PASS;
+            return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
         }
+
         Tuple<Float, Float> ff = optional.get();
         int i = getSection(ff.getA(), ff.getB());
         if (i == Integer.MIN_VALUE || i >= shelfBlockEntity.getInventory().size()) {
-            return InteractionResult.PASS;
+            return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
         }
+
         if (!shelfBlockEntity.getInventory().get(i).isEmpty()) {
             remove(world, pos, player, shelfBlockEntity, i);
-            return InteractionResult.sidedSuccess(world.isClientSide);
-        } else {
-            ItemStack stack = player.getItemInHand(hand);
-            if (!stack.isEmpty() && canInsertStack(stack)) {
-                add(world, pos, player, shelfBlockEntity, stack, i);
-                return InteractionResult.sidedSuccess(world.isClientSide);
-            } else {
-                return InteractionResult.CONSUME;
-            }
+            return ItemInteractionResult.sidedSuccess(world.isClientSide);
         }
+
+        if (!stack.isEmpty() && canInsertStack(stack)) {
+            add(world, pos, player, shelfBlockEntity, stack, i);
+            return ItemInteractionResult.sidedSuccess(world.isClientSide);
+        }
+
+        return ItemInteractionResult.CONSUME;
     }
 
     @Override
@@ -93,15 +92,5 @@ public class CheeseRackBlock extends StorageBlock {
             return Integer.MIN_VALUE;
         }
         return index;
-    }
-
-    @Override
-    public SoundEvent getRemoveSound(Level level, BlockPos blockPos, Player player, int i) {
-        return SoundEvents.WOOL_BREAK;
-    }
-
-    @Override
-    public SoundEvent getAddSound(Level level, BlockPos blockPos, Player player, int i) {
-        return SoundEvents.WOOL_PLACE;
     }
 }

@@ -18,7 +18,10 @@ import net.satisfy.meadow.client.renderer.block.CompletionistBannerRenderer;
 import net.satisfy.meadow.client.renderer.block.PineHangingSignRenderer;
 import net.satisfy.meadow.client.renderer.block.PineSignRenderer;
 import net.satisfy.meadow.client.renderer.block.storage.*;
-import net.satisfy.meadow.client.renderer.entity.*;
+import net.satisfy.meadow.client.renderer.entity.ChairRenderer;
+import net.satisfy.meadow.client.renderer.entity.PineBoatRenderer;
+import net.satisfy.meadow.client.renderer.entity.WaterBuffaloRenderer;
+import net.satisfy.meadow.client.renderer.entity.WoolyCowRenderer;
 import net.satisfy.meadow.core.registry.EntityTypeRegistry;
 import net.satisfy.meadow.core.registry.ScreenHandlerRegistry;
 import net.satisfy.meadow.core.registry.StorageTypeRegistry;
@@ -30,7 +33,7 @@ public class MeadowClient {
     public static final ModelLayerLocation WATER_BUFFALO_MODEL_LAYER = new ModelLayerLocation(Meadow.identifier("water_buffalo"), "head");
 
     public static void initClient() {
-        RenderTypeRegistry.register(RenderType.cutout(), PINE_DOOR.get(), PINE_TRAPDOOR.get(), DELPHINIUM.get(), ALPINE_POPPY.get(), SAXIFRAGE.get(), ENZIAN.get(), COOKING_CAULDRON.get(), FRAME.get(), TABLE.get(), FIRE_LOG.get(), ERIOPHORUM.get(), ERIOPHORUM_TALL.get(), SMALL_FIR.get(), PINE_SAPLING.get(), CHAIR.get(), POTTED_DELPHINIUM.get(), POTTED_ALPINE_POPPY.get(), POTTED_SAXIFRAGE.get(), POTTED_ENZIAN.get(), POTTED_ERIOPHORUM.get(), ERIOPHORUM_TALL.get(), PINE_SAPLING.get(), POTTED_PINE_SAPLING.get(), FIRE_LILY.get(), POTTED_FIRE_LILY.get(), WOODEN_FLOWER_POT_SMALL.get(), FONDUE.get(), OIL_LANTERN.get(), WHEELBARROW.get(), PINE_LEAVES_2.get(), WOODEN_FLOWER_POT_BIG.get(), WOODCUTTER.get());
+        RenderTypeRegistry.register(RenderType.cutout(), PINE_DOOR.get(), PINE_TRAPDOOR.get(), DELPHINIUM.get(), ALPINE_POPPY.get(), SAXIFRAGE.get(), ENZIAN.get(), COOKING_CAULDRON.get(), FRAME.get(), TABLE.get(), FIRE_LOG.get(), ERIOPHORUM.get(), ERIOPHORUM_TALL.get(), SMALL_FIR.get(), PINE_SAPLING.get(), CHAIR.get(), POTTED_DELPHINIUM.get(), POTTED_ALPINE_POPPY.get(), POTTED_SAXIFRAGE.get(), POTTED_ENZIAN.get(), POTTED_ERIOPHORUM.get(), ERIOPHORUM_TALL.get(), PINE_SAPLING.get(), POTTED_PINE_SAPLING.get(), FIRE_LILY.get(), POTTED_FIRE_LILY.get(), WOODEN_FLOWER_POT_SMALL.get(), FONDUE.get(), OIL_LANTERN.get(), WHEELBARROW.get(), YELLOW_PINE_LEAVES.get(), WOODEN_FLOWER_POT_BIG.get(), WOODCUTTER.get());
         RenderTypeRegistry.register(RenderType.translucent(), HEART_PATTERNED_WINDOW.get(), SUN_PATTERNED_WINDOW.get(), PINE_WINDOW.get());
 
         registerStorageTypeRenderers();

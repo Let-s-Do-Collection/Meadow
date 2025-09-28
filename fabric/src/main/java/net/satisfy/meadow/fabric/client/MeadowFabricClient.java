@@ -9,11 +9,11 @@ import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.satisfy.meadow.Meadow;
 import net.satisfy.meadow.client.MeadowClient;
 import net.satisfy.meadow.core.entity.PineBoatEntity;
+import net.satisfy.meadow.core.registry.ObjectRegistry;
 import net.satisfy.meadow.fabric.client.renderer.FurBootsRenderer;
 import net.satisfy.meadow.fabric.client.renderer.FurChestplateRenderer;
 import net.satisfy.meadow.fabric.client.renderer.FurHelmetRenderer;
 import net.satisfy.meadow.fabric.client.renderer.FurLeggingsRenderer;
-import net.satisfy.meadow.core.registry.ObjectRegistry;
 
 public class MeadowFabricClient implements ClientModInitializer {
     @Override

@@ -14,8 +14,8 @@
 **Fixed**
 * Cooking Pot recipes now work correctly when the result item is already present in the output slot. 
 * Removed the unnecessary subclass of `ResourceLocation`, which caused compatibility issues with some mods (e.g., Xaero's Minimap not displaying sheep faces). 
-* `pine_leaves_2` now correctly belongs to the `#minecraft:leaves` tag
-* Removed unintended `"shade": false` properties from `pine_leaves_1.json` and `pine_leaves_2.json`
+* `yellow_pine_leaves` now correctly belongs to the `#minecraft:leaves` tag
+* Removed unintended `"shade": false` properties from `pine_leaves_1.json` and `yellow_pine_leaves.json`
 * Pine leaves and hanging birch leaves are now correctly broken by pistons instead of being pushed
 * Wooly Cows & Sheep now correctly dropping meat
 

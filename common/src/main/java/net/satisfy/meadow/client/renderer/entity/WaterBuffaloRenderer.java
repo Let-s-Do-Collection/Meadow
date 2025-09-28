@@ -11,8 +11,6 @@ import net.satisfy.meadow.client.model.WaterBuffaloModel;
 import net.satisfy.meadow.core.entity.WaterBuffaloEntity;
 import org.jetbrains.annotations.NotNull;
 
-import static net.satisfy.meadow.Meadow.MOD_ID;
-
 public class WaterBuffaloRenderer extends MobRenderer<WaterBuffaloEntity, WaterBuffaloModel> {
 
     private static final ResourceLocation TEXTURE = Meadow.identifier("textures/entity/buffalo/water_buffalo.png");

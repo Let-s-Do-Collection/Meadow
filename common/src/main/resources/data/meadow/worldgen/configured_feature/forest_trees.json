@@ -12,7 +12,7 @@
       },
       {
         "chance": 0.2,
-        "feature": "meadow:forest_orange_spruce_pine_checked"
+        "feature": "meadow:forest_yellow_spruce_pine_checked"
       }
     ],
     "default": "meadow:forest_spruce_pine_checked"

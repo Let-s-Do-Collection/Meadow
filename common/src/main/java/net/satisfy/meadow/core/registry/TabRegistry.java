@@ -71,7 +71,7 @@ public class TabRegistry {
                 out.accept(new ItemStack(ObjectRegistry.PINE_RAILING.get()));
                 out.accept(new ItemStack(ObjectRegistry.PINE_WINDOW.get()));
                 out.accept(new ItemStack(ObjectRegistry.PINE_LEAVES.get()));
-                out.accept(new ItemStack(ObjectRegistry.PINE_LEAVES_2.get()));
+                out.accept(new ItemStack(ObjectRegistry.YELLOW_PINE_LEAVES.get()));
                 out.accept(new ItemStack(ObjectRegistry.PINE_SAPLING.get()));
                 out.accept(new ItemStack(ObjectRegistry.ALPINE_BIRCH_LOG.get()));
                 out.accept(new ItemStack(ObjectRegistry.ALPINE_BIRCH_LEAVES_HANGING.get()));

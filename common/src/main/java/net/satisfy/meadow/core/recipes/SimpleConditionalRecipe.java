@@ -2,8 +2,6 @@ package net.satisfy.meadow.core.recipes;
 
 import com.google.gson.JsonObject;
 import com.mojang.serialization.MapCodec;
-
-import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.util.GsonHelper;
