@@ -105,6 +105,7 @@ public class TabRegistry {
                 out.accept(new ItemStack(ObjectRegistry.CLIMBING_ROPE_TOPMOUNT.get()));
                 out.accept(new ItemStack(ObjectRegistry.FIRE_LOG.get()));
                 out.accept(new ItemStack(ObjectRegistry.CAN.get()));
+                out.accept(new ItemStack(ObjectRegistry.FELTING_NEEDLE.get()));
                 out.accept(new ItemStack(ObjectRegistry.WATERING_CAN.get()));
                 out.accept(new ItemStack(ObjectRegistry.CHEESE_FORM.get()));
 

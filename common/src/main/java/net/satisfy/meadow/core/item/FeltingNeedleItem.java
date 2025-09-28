@@ -73,9 +73,10 @@ public class FeltingNeedleItem extends Item {
             if (inputOpt.isPresent()) {
                 ItemStack input = inputOpt.get();
                 Optional<ItemStack> result = getFeltingResult(level, input);
-                if (result.isPresent()) {
-                    player.getInventory().placeItemBackInInventory(result.get());
-                    spawnParticles(user.position(), result.get(), level);
+                if (result.isPresent() && !result.get().isEmpty()) {
+                    ItemStack out = result.get();
+                    player.getInventory().placeItemBackInInventory(out);
+                    spawnParticles(user.position(), out, level);
                     stack.hurtAndBreak(1, player, EquipmentSlot.MAINHAND);
                 } else {
                     player.getInventory().placeItemBackInInventory(input);
@@ -103,7 +104,8 @@ public class FeltingNeedleItem extends Item {
     private Optional<ItemStack> getFeltingResult(Level level, ItemStack input) {
         SingleRecipeInput in = new SingleRecipeInput(input);
         return level.getRecipeManager().getRecipeFor(RecipeRegistry.FELTING.get(), in, level)
-                .map(h -> h.value().assemble(in, level.registryAccess()));
+                .map(h -> h.value().assemble(in, level.registryAccess()))
+                .filter(s -> !s.isEmpty());
     }
 
     private boolean canFelt(Level level, ItemStack input) {
@@ -111,6 +113,7 @@ public class FeltingNeedleItem extends Item {
     }
 
     private void spawnParticles(Vec3 pos, ItemStack stack, Level level) {
+        if (stack.isEmpty()) return;
         for (int i = 0; i < 15; i++) {
             Vec3 m = new Vec3((level.random.nextDouble() - 0.5) * 0.2, (level.random.nextDouble() - 0.5) * 0.2, (level.random.nextDouble() - 0.5) * 0.2);
             level.addParticle(new ItemParticleOption(ParticleTypes.ITEM, stack), pos.x, pos.y + 1.0, pos.z, m.x, m.y, m.z);

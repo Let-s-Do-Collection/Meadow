@@ -5,12 +5,14 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
+import net.minecraft.util.Tuple;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
@@ -18,12 +20,14 @@ import net.minecraft.world.phys.shapes.BooleanOp;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import net.satisfy.meadow.core.block.entity.StorageBlockEntity;
 import net.satisfy.meadow.core.registry.StorageTypeRegistry;
 import net.satisfy.meadow.core.util.GeneralUtil;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 import java.util.function.Supplier;
 
 public class FlowerBoxBlock extends StorageBlock {
@@ -52,7 +56,27 @@ public class FlowerBoxBlock extends StorageBlock {
     }
 
     public @NotNull InteractionResult use(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
-        return player.isShiftKeyDown() ? InteractionResult.PASS : super.use(state, world, pos, player, hand, hit);
+        BlockEntity be = world.getBlockEntity(pos);
+        if (be instanceof StorageBlockEntity shelf) {
+            Optional<Tuple<Float, Float>> opt = GeneralUtil.getRelativeHitCoordinatesForBlockFace(hit, Direction.UP, this.unAllowedDirections());
+            if (opt.isEmpty()) return InteractionResult.PASS;
+            Tuple<Float, Float> ff = opt.get();
+            int i = this.getSection(ff.getA(), ff.getB());
+            if (i == Integer.MIN_VALUE) return InteractionResult.PASS;
+            if (!shelf.getInventory().get(i).isEmpty()) {
+                this.remove(world, pos, player, shelf, i);
+                return InteractionResult.sidedSuccess(world.isClientSide);
+            } else {
+                ItemStack stack = player.getItemInHand(hand);
+                if (!stack.isEmpty() && this.canInsertStack(stack)) {
+                    this.add(world, pos, player, shelf, stack, i);
+                    return InteractionResult.sidedSuccess(world.isClientSide);
+                } else {
+                    return InteractionResult.CONSUME;
+                }
+            }
+        }
+        return InteractionResult.PASS;
     }
 
     public int size() {

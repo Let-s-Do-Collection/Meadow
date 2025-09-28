@@ -3,9 +3,11 @@ package net.satisfy.meadow.core.block;
 import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -37,26 +39,13 @@ import java.util.Map;
 import java.util.function.Supplier;
 
 public class CanBlock extends Block {
-
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
 
     private static final Supplier<VoxelShape> voxelShapeSupplier = () -> {
         VoxelShape shape = Shapes.empty();
-        shape = Shapes.joinUnoptimized(shape, Shapes.box(0.25, 0, 0.25, 0.75, 0.625, 0.75), BooleanOp.OR);
-        shape = Shapes.joinUnoptimized(shape, Shapes.box(0.921875, 0.28125, 0.375, 0.984375, 0.28125, 0.4375), BooleanOp.OR);
-        shape = Shapes.joinUnoptimized(shape, Shapes.box(0.984375, 0.28125, 0.375, 1.046875, 0.28125, 0.625), BooleanOp.OR);
-        shape = Shapes.joinUnoptimized(shape, Shapes.box(0.921875, 0.28125, 0.5625, 0.984375, 0.28125, 0.625), BooleanOp.OR);
-        shape = Shapes.joinUnoptimized(shape, Shapes.box(-0.0625, 0.65625, 0.375, 0, 0.65625, 0.4375), BooleanOp.OR);
-        shape = Shapes.joinUnoptimized(shape, Shapes.box(-0.125, 0.65625, 0.375, -0.0625, 0.65625, 0.625), BooleanOp.OR);
-        shape = Shapes.joinUnoptimized(shape, Shapes.box(-0.0625, 0.65625, 0.5625, 0, 0.65625, 0.625), BooleanOp.OR);
-        shape = Shapes.joinUnoptimized(shape, Shapes.box(0.25, 0.875, 0.625, 0.75, 0.9375, 0.75), BooleanOp.OR);
-        shape = Shapes.joinUnoptimized(shape, Shapes.box(0.25, 0.875, 0.25, 0.75, 0.9375, 0.375), BooleanOp.OR);
-        shape = Shapes.joinUnoptimized(shape, Shapes.box(0.3125, 0.625, 0.3125, 0.375, 0.875, 0.6875), BooleanOp.OR);
-        shape = Shapes.joinUnoptimized(shape, Shapes.box(0.625, 0.625, 0.3125, 0.6875, 0.875, 0.6875), BooleanOp.OR);
-        shape = Shapes.joinUnoptimized(shape, Shapes.box(0.375, 0.625, 0.3125, 0.625, 0.875, 0.375), BooleanOp.OR);
-        shape = Shapes.joinUnoptimized(shape, Shapes.box(0.375, 0.625, 0.625, 0.625, 0.875, 0.6875), BooleanOp.OR);
-        shape = Shapes.joinUnoptimized(shape, Shapes.box(0.25, 0.875, 0.375, 0.375, 0.9375, 0.625), BooleanOp.OR);
-        shape = Shapes.joinUnoptimized(shape, Shapes.box(0.625, 0.875, 0.375, 0.75, 0.9375, 0.625), BooleanOp.OR);
+        shape = Shapes.joinUnoptimized(shape, Shapes.box(0.25, 0.0, 0.25, 0.75, 0.625, 0.75), BooleanOp.OR);
+        shape = Shapes.joinUnoptimized(shape, Shapes.box(0.3125, 0.625, 0.3125, 0.6875, 0.875, 0.6875), BooleanOp.OR);
+        shape = Shapes.joinUnoptimized(shape, Shapes.box(0.25, 0.875, 0.25, 0.75, 0.9375, 0.75), BooleanOp.OR);
         return shape;
     };
 
@@ -131,12 +120,20 @@ public class CanBlock extends Block {
         builder.add(FLUID, FACING);
     }
 
-
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext ctx) {
         return this.defaultBlockState().setValue(FACING, ctx.getHorizontalDirection().getOpposite());
     }
 
+    @Override
+    public void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
+        if (level.isRainingAt(pos.above()) && state.getValue(FLUID) == 0) {
+            if (random.nextFloat() < 0.02f) {
+                level.setBlockAndUpdate(pos, state.setValue(FLUID, 2));
+                level.gameEvent(null, GameEvent.FLUID_PLACE, pos);
+            }
+        }
+    }
 
     @Override
     public @NotNull BlockState rotate(BlockState state, Rotation rotation) {
