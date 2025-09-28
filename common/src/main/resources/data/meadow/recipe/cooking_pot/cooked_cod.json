@@ -5,11 +5,13 @@
       "item": "minecraft:cod"
     },
     {
-      "item": "meadow:alpine_salt"
+      "tag": "meadow:salt"
     }
   ],
+  "fluid_amount": 12,
+  "crafting_duration": 20,
   "result": {
     "id": "minecraft:cooked_cod",
-    "count": 4
+    "count": 2
   }
 }

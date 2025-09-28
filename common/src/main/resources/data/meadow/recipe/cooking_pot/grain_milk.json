@@ -14,8 +14,12 @@
       "item": "meadow:wooden_bucket"
     }
   ],
+  "fluid_amount": 20,
+  "crafting_duration": 100,
   "result": {
     "id": "meadow:wooden_grain_milk_bucket",
     "count": 1
   }
 }
+
+

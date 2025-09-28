@@ -1,7 +1,6 @@
 {
   "replace": false,
   "values": [
-    "#neoforge:water_bottles",
     "#c:water_bottles"
   ]
 }

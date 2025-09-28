@@ -5,11 +5,15 @@
       "item": "minecraft:chicken"
     },
     {
-      "item": "meadow:alpine_salt"
+      "tag": "meadow:salt"
     }
   ],
+  "fluid_amount": 5,
+  "crafting_duration": 40,
   "result": {
     "id": "minecraft:cooked_chicken",
     "count": 4
   }
 }
+
+

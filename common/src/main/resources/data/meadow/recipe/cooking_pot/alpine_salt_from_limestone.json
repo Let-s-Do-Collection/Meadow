@@ -2,12 +2,11 @@
   "type": "meadow:cooking",
   "ingredients": [
     {
-      "tag": "meadow:water_bottles"
-    },
-    {
       "item": "meadow:limestone"
     }
   ],
+  "fluid_amount": 50,
+  "crafting_duration": 150,
   "result": {
     "id": "meadow:alpine_salt",
     "count": 4

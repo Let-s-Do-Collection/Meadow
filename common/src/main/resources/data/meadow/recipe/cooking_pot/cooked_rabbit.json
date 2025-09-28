@@ -5,11 +5,15 @@
       "item": "minecraft:rabbit"
     },
     {
-      "item": "meadow:alpine_salt"
+      "tag": "meadow:salt"
     }
   ],
+  "fluid_amount": 10,
+  "crafting_duration": 40,
   "result": {
     "id": "minecraft:cooked_rabbit",
-    "count": 4
+    "count": 2
   }
 }
+
+

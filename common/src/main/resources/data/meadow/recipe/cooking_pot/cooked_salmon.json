@@ -5,11 +5,15 @@
       "item": "minecraft:salmon"
     },
     {
-      "item": "meadow:alpine_salt"
+      "tag": "meadow:salt"
     }
   ],
+  "fluid_amount": 12,
+  "crafting_duration": 20,
   "result": {
     "id": "minecraft:cooked_salmon",
-    "count": 4
+    "count": 2
   }
 }
+
+

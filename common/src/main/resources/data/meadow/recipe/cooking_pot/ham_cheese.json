@@ -5,15 +5,18 @@
       "item": "meadow:raw_buffalo_meat"
     },
     {
-      "item": "meadow:alpine_salt"
+      "tag": "meadow:salt"
     },
     {
       "tag": "meadow:cheese"
     }
   ],
+  "fluid_amount": 2,
+  "crafting_duration": 120,
   "result": {
-    "id":  "meadow:sausage_with_cheese",
+    "id": "meadow:sausage_with_cheese",
     "count": 2
   }
 }
+
 

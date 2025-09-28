@@ -1,8 +1,8 @@
 {
-	"type": "doapi:conditional",
+	"type": "meadow:conditional",
 	"conditions": [
 		{
-			"type": "forge:mod_loaded",
+			"type": "neoforge:mod_loaded",
 			"modid": "beachparty"
 		}
 	],

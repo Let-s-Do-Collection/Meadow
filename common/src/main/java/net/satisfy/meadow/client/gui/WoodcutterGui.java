@@ -43,11 +43,8 @@ public class WoodcutterGui extends AbstractContainerScreen<WoodcutterGuiHandler>
         this.renderTooltip(context, mouseX, mouseY);
     }
 
-
-
     @Override
     protected void renderBg(GuiGraphics context, float delta, int mouseX, int mouseY) {
-        this.renderBackground(context, mouseX, mouseY, delta);
         RenderSystem.setShader(GameRenderer::getPositionTexShader);
         RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f);
         RenderSystem.setShaderTexture(0, TEXTURE);
@@ -56,7 +53,7 @@ public class WoodcutterGui extends AbstractContainerScreen<WoodcutterGuiHandler>
         context.blit(TEXTURE, posX, posY, 0, 0, this.imageWidth, this.imageHeight);
 
         int k = (int)(41.0f * this.scrollAmount);
-        if(this.shouldScroll()) context.blit(TEXTURE, posX + 124, posY + 14 + k, 176, 0, 11, 15);
+        if (this.shouldScroll()) context.blit(TEXTURE, posX + 124, posY + 14 + k, 176, 0, 11, 15);
         int recipeX = posX + recipeIconPosX;
         int recipeY = posY + recipeIconPosY;
 

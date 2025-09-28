@@ -5,11 +5,15 @@
       "item": "minecraft:mutton"
     },
     {
-      "item": "meadow:alpine_salt"
+      "tag": "meadow:salt"
     }
   ],
+  "fluid_amount": 5,
+  "crafting_duration": 20,
   "result": {
     "id": "minecraft:cooked_mutton",
-    "count": 4
+    "count": 2
   }
 }
+
+

@@ -1,13 +1,13 @@
 {
   "type": "minecraft:ore",
   "config": {
-    "size": 64,
-    "discard_chance_on_air_exposure": 0,
+    "size": 21,
+    "discard_chance_on_air_exposure": 0.0,
     "targets": [
       {
         "target": {
-          "predicate_type": "minecraft:tag_match",
-          "tag": "minecraft:stone_ore_replaceables"
+          "predicate_type": "minecraft:block_match",
+          "block": "minecraft:stone"
         },
         "state": {
           "Name": "meadow:limestone"

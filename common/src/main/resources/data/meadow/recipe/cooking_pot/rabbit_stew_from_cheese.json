@@ -17,8 +17,12 @@
       "tag": "meadow:cheese"
     }
   ],
+  "fluid_amount": 20,
+  "crafting_duration": 80,
   "result": {
     "id": "minecraft:rabbit_stew",
     "count": 6
   }
 }
+
+

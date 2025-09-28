@@ -2,7 +2,6 @@
   "replace": false,
   "values": [
     "meadow:stove_tiles_wood",
-    "#c:allows_cooking",
-    "#neoforge:allows_cooking"
+    "#c:allows_cooking"
   ]
 }

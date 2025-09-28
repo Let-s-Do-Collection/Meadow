@@ -2,17 +2,21 @@
   "type": "meadow:cooking",
   "ingredients": [
     {
-      "item": "minecraft:egg"
+      "tag": "meadow:egg"
     },
     {
-      "item": "meadow:alpine_salt"
+      "tag": "meadow:salt"
     },
     {
       "item": "minecraft:glass_bottle"
     }
   ],
+  "fluid_amount": 25,
+  "crafting_duration": 60,
   "result": {
-    "id":  "meadow:rennet",
+    "id": "meadow:rennet",
     "count": 2
   }
 }
+
+

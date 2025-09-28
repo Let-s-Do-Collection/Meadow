@@ -71,8 +71,9 @@ public class TabRegistry {
                 out.accept(new ItemStack(ObjectRegistry.PINE_RAILING.get()));
                 out.accept(new ItemStack(ObjectRegistry.PINE_WINDOW.get()));
                 out.accept(new ItemStack(ObjectRegistry.PINE_LEAVES.get()));
+                out.accept(new ItemStack(ObjectRegistry.PINE_LEAVES_2.get()));
                 out.accept(new ItemStack(ObjectRegistry.PINE_SAPLING.get()));
-                out.accept(new ItemStack(ObjectRegistry.SMALL_FIR.get()));
+                out.accept(new ItemStack(ObjectRegistry.ALPINE_BIRCH_LOG.get()));
                 out.accept(new ItemStack(ObjectRegistry.ALPINE_BIRCH_LEAVES_HANGING.get()));
 
                 out.accept(new ItemStack(ObjectRegistry.STOVE.get()));
@@ -99,11 +100,13 @@ public class TabRegistry {
                 out.accept(new ItemStack(ObjectRegistry.WOODEN_FLOWER_POT_SMALL.get()));
                 out.accept(new ItemStack(ObjectRegistry.WOODEN_FLOWER_BOX.get()));
                 out.accept(new ItemStack(ObjectRegistry.OIL_LANTERN.get()));
+                out.accept(new ItemStack(ObjectRegistry.FONDUE.get()));
                 out.accept(new ItemStack(ObjectRegistry.CAMERA.get()));
                 out.accept(new ItemStack(ObjectRegistry.CLIMBING_ROPE_TOPMOUNT.get()));
                 out.accept(new ItemStack(ObjectRegistry.FIRE_LOG.get()));
                 out.accept(new ItemStack(ObjectRegistry.CAN.get()));
                 out.accept(new ItemStack(ObjectRegistry.WATERING_CAN.get()));
+                out.accept(new ItemStack(ObjectRegistry.CHEESE_FORM.get()));
 
                 out.accept(new ItemStack(ObjectRegistry.ALPINE_POPPY.get()));
                 out.accept(new ItemStack(ObjectRegistry.DELPHINIUM.get()));
@@ -112,6 +115,7 @@ public class TabRegistry {
                 out.accept(new ItemStack(ObjectRegistry.FIRE_LILY.get()));
                 out.accept(new ItemStack(ObjectRegistry.ERIOPHORUM.get()));
                 out.accept(new ItemStack(ObjectRegistry.ERIOPHORUM_TALL.get()));
+                out.accept(new ItemStack(ObjectRegistry.SMALL_FIR.get()));
 
                 out.accept(new ItemStack(ObjectRegistry.FLECKED_WOOL.get()));
                 out.accept(new ItemStack(ObjectRegistry.FLECKED_CARPET.get()));

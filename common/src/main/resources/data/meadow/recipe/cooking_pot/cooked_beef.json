@@ -5,11 +5,15 @@
       "item": "minecraft:beef"
     },
     {
-      "item": "meadow:alpine_salt"
+      "tag": "meadow:salt"
     }
   ],
+  "fluid_amount": 2,
+  "crafting_duration": 30,
   "result": {
     "id": "minecraft:cooked_beef",
     "count": 4
   }
 }
+
+

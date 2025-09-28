@@ -37,12 +37,16 @@ public class CookingCauldronRecipe implements Recipe<RecipeInput> {
     @Override
     public boolean matches(RecipeInput inventory, Level level) {
         List<ItemStack> items = new ArrayList<>();
-        int max = Math.min(inventory.size() - 1, 7);
-        for (int i = 1; i <= max; i++) items.add(inventory.getItem(i));
+        for (int i = 0; i < inventory.size(); i++) {
+            ItemStack s = inventory.getItem(i);
+            if (!s.isEmpty()) items.add(s);
+        }
+        boolean[] used = new boolean[items.size()];
         for (Ingredient ing : inputs) {
             boolean ok = false;
-            for (ItemStack s : items) {
-                if (ing.test(s)) {
+            for (int i = 0; i < items.size(); i++) {
+                if (!used[i] && ing.test(items.get(i))) {
+                    used[i] = true;
                     ok = true;
                     break;
                 }
@@ -124,7 +128,7 @@ public class CookingCauldronRecipe implements Recipe<RecipeInput> {
         );
 
         @Override
-        public MapCodec<CookingCauldronRecipe> codec() {
+        public @NotNull MapCodec<CookingCauldronRecipe> codec() {
             return CODEC;
         }
 

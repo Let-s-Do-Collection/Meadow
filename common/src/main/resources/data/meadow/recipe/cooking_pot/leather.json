@@ -20,8 +20,12 @@
       "item": "minecraft:rotten_flesh"
     }
   ],
+  "fluid_amount": 30,
+  "crafting_duration": 60,
   "result": {
     "id": "minecraft:leather",
-    "count": 1
+    "count": 2
   }
 }
+
+
