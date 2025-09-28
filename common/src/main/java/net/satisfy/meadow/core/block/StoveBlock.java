@@ -19,7 +19,6 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 
 public class StoveBlock extends FacingBlock {
-
     public static final BooleanProperty CONNECTED = BooleanProperty.create("connected");
 
     public static final VoxelShape SHAPE_BIG = Shapes.or(StoveBlockBench.SHAPE, Block.box(0, 2, 0, 16, 16, 16));

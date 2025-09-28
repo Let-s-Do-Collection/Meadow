@@ -1,9 +1,0 @@
-{
-  "values": [
-    "minecraft:meadow",
-    "#minecraft:is_mountain",
-    "#minecraft:is_forest",
-    "#meadow:spawns_sunset_cow",
-    "#meadow:spawns_plaid"
-  ]
-}

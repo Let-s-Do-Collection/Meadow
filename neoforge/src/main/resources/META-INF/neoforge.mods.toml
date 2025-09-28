@@ -1,0 +1,40 @@
+modLoader = "javafml"
+loaderVersion="[4,)"
+source = "https://github.com/satisfyu/Meadow"
+issueTrackerURL = "https://github.com/satisfyu/Let-s-Do-Hub"
+license = "Custom"
+
+[[mixins]]
+config = "meadow.mixins.json"
+
+[[mods]]
+modId = "meadow"
+version = "${version}"
+displayName = "[Let's Do] Meadow"
+authors = "satisfy"
+credits = "MissLilitu"
+description = '''
+Hey Wanderer! Sit down, enjoy a piece of cheese, and take a look at the new mountain pasture - cliffs, beautiful forests, clearings, and lots of colorful flowers.
+'''
+logoFile = "pack.png"
+
+[[dependencies.meadow]]
+modId = "neoforge"
+mandatory = true
+versionRange = "[21.1.0,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.meadow]]
+modId = "minecraft"
+mandatory = true
+versionRange = "[1.21.1,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.meadow]]
+modId = "architectury"
+mandatory = true
+versionRange = "[13.0.0,)"
+ordering = "AFTER"
+side = "BOTH"

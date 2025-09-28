@@ -33,7 +33,7 @@ public class StoveBlockBench extends Block {
 
     @Override
     public @NotNull ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
-        InteractionResult result = GeneralUtil.onUse(level, player, hand, hit, -0.1);
+        InteractionResult result = GeneralUtil.onUse(level, player, hand, hit, 0.1);
         if (result.consumesAction()) {
             return ItemInteractionResult.sidedSuccess(level.isClientSide);
         }
@@ -42,7 +42,7 @@ public class StoveBlockBench extends Block {
 
     @Override
     public @NotNull InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hit) {
-        return GeneralUtil.onUse(level, player, InteractionHand.MAIN_HAND, hit, -0.1);
+        return GeneralUtil.onUse(level, player, InteractionHand.MAIN_HAND, hit, 0.1);
     }
 
     @Override

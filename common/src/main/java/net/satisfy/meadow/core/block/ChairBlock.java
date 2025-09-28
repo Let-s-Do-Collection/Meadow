@@ -110,7 +110,7 @@ public class ChairBlock extends Block {
             return InteractionResult.PASS;
         }
         if (state.getValue(HALF) == DoubleBlockHalf.LOWER) {
-            return GeneralUtil.onUse(world, player, hand, hit, 0);
+            return GeneralUtil.onUse(world, player, hand, hit, 0.3);
         }
         return InteractionResult.PASS;
     }

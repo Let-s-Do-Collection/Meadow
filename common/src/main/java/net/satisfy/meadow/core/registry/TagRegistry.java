@@ -12,6 +12,7 @@ public class TagRegistry {
     public static final TagKey<Biome> SPAWNS_HIGHLAND_COW = TagKey.create(Registries.BIOME, Meadow.identifier("spawns_highland_cow"));
     public static final TagKey<Biome> SPAWNS_UMBRA_COW = TagKey.create(Registries.BIOME, Meadow.identifier("spawns_umbra_cow"));
     public static final TagKey<Biome> SPAWNS_WARPED_COW = TagKey.create(Registries.BIOME, Meadow.identifier("spawns_warped_cow"));
+    public static final TagKey<Biome> SPAWNS_WATER_BUFFALO = TagKey.create(Registries.BIOME, Meadow.identifier("spawns_buffalo"));
     public static final TagKey<Item> MILK = TagKey.create(Registries.ITEM, Meadow.identifier("milk"));
     public static final TagKey<Item> CHEESE_BLOCKS = TagKey.create(Registries.ITEM, Meadow.identifier("cheese_blocks"));
     public static final TagKey<Item> CHEESE = TagKey.create(Registries.ITEM, Meadow.identifier("cheese"));

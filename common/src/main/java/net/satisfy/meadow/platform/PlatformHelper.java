@@ -17,11 +17,6 @@ public class PlatformHelper {
     }
 
     @ExpectPlatform
-    public static <T extends Recipe<?>> T fromJson(ResourceLocation recipeId, JsonObject json) {
-        throw new AssertionError();
-    }
-
-    @ExpectPlatform
     public static boolean isModLoaded(String modid){
         throw new AssertionError();
     }

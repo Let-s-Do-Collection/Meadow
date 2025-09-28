@@ -1,9 +1,0 @@
-{
-  "type": "forge:remove_features",
-  "biomes": "minecraft:meadow",
-  "features": [
-    "minecraft:flower_meadow",
-    "minecraft:trees_meadow"
-  ],
-  "step": "vegetal_decoration"
-}

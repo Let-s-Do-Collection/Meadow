@@ -186,6 +186,7 @@ public class TabRegistry {
                 out.accept(new ItemStack(ObjectRegistry.WOODEN_WARPED_MILK_BUCKET.get()));
                 out.accept(new ItemStack(ObjectRegistry.WOODEN_GRAIN_MILK_BUCKET.get()));
                 out.accept(new ItemStack(ObjectRegistry.WOODEN_AMETHYST_MILK_BUCKET.get()));
+                out.accept(new ItemStack(ObjectRegistry.MEADOW_BANNER.get()));
 
                 out.accept(new ItemStack(ObjectRegistry.WATER_BUFFALO_SPAWN_EGG_ITEM.get()));
                 out.accept(new ItemStack(ObjectRegistry.HIGHLAND_WOOLY_COW_SPAWN_EGG.get()));

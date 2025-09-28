@@ -1,29 +1,22 @@
 package net.satisfy.meadow.core.util;
 
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
 import com.mojang.datafixers.util.Pair;
-import com.mojang.serialization.JsonOps;
 import dev.architectury.platform.Platform;
 import dev.architectury.registry.registries.DeferredRegister;
 import dev.architectury.registry.registries.Registrar;
 import dev.architectury.registry.registries.RegistrySupplier;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.core.NonNullList;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.StringRepresentable;
 import net.minecraft.util.Tuple;
-import net.minecraft.world.Container;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -57,32 +50,6 @@ public class GeneralUtil {
 
     public static <T extends Item> RegistrySupplier<T> registerItem(DeferredRegister<Item> register, Registrar<Item> registrar, ResourceLocation path, Supplier<T> itemSupplier) {
         return Platform.isNeoForge() ? register.register(path.getPath(), itemSupplier) : registrar.register(path, itemSupplier);
-    }
-
-    public static boolean matchesRecipe(Container inventory, NonNullList<Ingredient> recipe, int startIndex, int endIndex) {
-        List<ItemStack> inputStacks = new ArrayList<>();
-        for (int i = startIndex; i < endIndex; i++) {
-            ItemStack stack = inventory.getItem(i);
-            if (!stack.isEmpty()) inputStacks.add(stack.copy());
-        }
-
-        if (inputStacks.size() != recipe.size()) return false;
-
-        List<Ingredient> unmatched = new ArrayList<>(recipe);
-        for (ItemStack input : inputStacks) {
-            boolean matched = false;
-            Iterator<Ingredient> iter = unmatched.iterator();
-            while (iter.hasNext()) {
-                if (iter.next().test(input)) {
-                    iter.remove();
-                    matched = true;
-                    break;
-                }
-            }
-            if (!matched) return false;
-        }
-
-        return unmatched.isEmpty();
     }
 
     public static Collection<ServerPlayer> tracking(ServerLevel world, ChunkPos pos) {
@@ -148,21 +115,6 @@ public class GeneralUtil {
             case EAST -> Optional.of(new Tuple<>(1.0f - z, y));
             default -> Optional.empty();
         };
-    }
-
-    public static NonNullList<Ingredient> deserializeIngredients(JsonArray json) {
-        NonNullList<Ingredient> ingredients = NonNullList.create();
-
-        for (JsonElement element : json) {
-            Ingredient ingredient = Ingredient.CODEC.parse(JsonOps.INSTANCE, element)
-                    .result()
-                    .orElse(Ingredient.EMPTY);
-            if (!ingredient.isEmpty()) {
-                ingredients.add(ingredient);
-            }
-        }
-
-        return ingredients;
     }
 
     public enum LineConnectingType implements StringRepresentable {

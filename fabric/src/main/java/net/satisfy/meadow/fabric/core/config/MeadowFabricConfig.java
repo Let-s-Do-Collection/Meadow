@@ -14,8 +14,6 @@ public class MeadowFabricConfig implements ConfigData {
     @ConfigEntry.Gui.CollapsibleObject
     public ItemsSettings items = new ItemsSettings();
 
-
-
     public static class BlocksSettings {
     }
 
