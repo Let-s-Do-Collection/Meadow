@@ -8,12 +8,17 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
+import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
 import net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsEvent;
 import net.neoforged.neoforge.registries.RegisterEvent;
 import net.satisfy.meadow.Meadow;
 import net.satisfy.meadow.client.MeadowClient;
+import net.satisfy.meadow.client.gui.CheeseFormGui;
+import net.satisfy.meadow.client.gui.CookingCauldronGui;
+import net.satisfy.meadow.client.gui.WoodcutterGui;
 import net.satisfy.meadow.core.entity.PineBoatEntity;
 import net.satisfy.meadow.core.registry.ObjectRegistry;
+import net.satisfy.meadow.core.registry.ScreenHandlerRegistry;
 import net.satisfy.meadow.neoforge.client.extensions.FurArmorBootsExtensions;
 import net.satisfy.meadow.neoforge.client.extensions.FurArmorChestplateExtensions;
 import net.satisfy.meadow.neoforge.client.extensions.FurArmorHatExtensions;
@@ -29,8 +34,14 @@ public class MeadowClientNeoForge {
 
     @SubscribeEvent
     public static void onClientSetup(FMLClientSetupEvent event) {
-        MeadowClient.preInitClient();
         MeadowClient.initClient();
+    }
+
+    @SubscribeEvent
+    public static void onClientSetup(RegisterMenuScreensEvent event) {
+        event.register(ScreenHandlerRegistry.CHEESE_FORM_SCREEN_HANDLER.get(), CheeseFormGui::new);
+        event.register(ScreenHandlerRegistry.WOODCUTTER_SCREEN_HANDLER.get(), WoodcutterGui::new);
+        event.register(ScreenHandlerRegistry.COOKING_CAULDRON_SCREEN_HANDLER.get(), CookingCauldronGui::new);
     }
 
     @SubscribeEvent

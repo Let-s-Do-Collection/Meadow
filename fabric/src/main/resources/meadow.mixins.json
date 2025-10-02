@@ -11,7 +11,6 @@
     "FluidDecrementMixin",
     "GoatMixin",
     "NetherPortalBlockMixin",
-    "RecipeManagerMixin",
     "SheepMixin"
   ],
   "injectors": {

@@ -52,7 +52,6 @@ public class CheesePressCategory implements IRecipeCategory<CheeseFormRecipe> {
         MeadowJEIPlugin.addSlot(builder, 33 - WIDTH_OF, 33 - HEIGHT_OF, ingredients.get(0));
         MeadowJEIPlugin.addSlot(builder, 51 - WIDTH_OF, 33 - HEIGHT_OF, ingredients.get(1));
 
-        // Output
         builder.addSlot(RecipeIngredientRole.OUTPUT, 123 - WIDTH_OF, 34 - HEIGHT_OF).addItemStack(recipe.getResultItem());
     }
 
@@ -73,6 +72,7 @@ public class CheesePressCategory implements IRecipeCategory<CheeseFormRecipe> {
     }
 
     @Override
+    @SuppressWarnings("removal")
     public @NotNull IDrawable getBackground() {
         return this.background;
     }

@@ -55,7 +55,7 @@ public class MeadowBiomeModification {
     }
 
     private static Predicate<BiomeSelectionContext> getMeadowSelector() {
-        return BiomeSelectors.tag(TagKey.create(Registries.BIOME, Meadow.identifier("meadow_biomes")));
+        return BiomeSelectors.tag(TagKey.create(Registries.BIOME, Meadow.identifier("is_meadow")));
     }
 
     public static class FabricEntitySpawn {

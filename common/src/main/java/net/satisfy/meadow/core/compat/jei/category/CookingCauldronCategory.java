@@ -95,6 +95,7 @@ public class CookingCauldronCategory implements IRecipeCategory<CookingCauldronR
     }
 
     @Override
+    @SuppressWarnings("removal")
     public @NotNull IDrawable getBackground() {
         return this.background;
     }

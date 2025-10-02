@@ -5,7 +5,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.AbstractCauldronBlock;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.LevelEvent;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
@@ -51,7 +50,7 @@ public class WoodenCauldronBlock extends AbstractCauldronBlock {
             world.setBlockAndUpdate(pos, ObjectRegistry.WOODEN_WATER_CAULDRON.get().defaultBlockState());
             world.gameEvent(null, GameEvent.BLOCK_CHANGE, pos);
         } else if (precipitation == Biome.Precipitation.SNOW) {
-            world.setBlockAndUpdate(pos, Blocks.POWDER_SNOW_CAULDRON.defaultBlockState());
+            world.setBlockAndUpdate(pos, ObjectRegistry.WOODEN_POWDER_SNOW_CAULDRON.get().defaultBlockState());
             world.gameEvent(null, GameEvent.BLOCK_CHANGE, pos);
         }
     }

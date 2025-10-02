@@ -51,6 +51,7 @@ public class WoodCutterCategory implements IRecipeCategory<WoodcuttingRecipe> {
     }
 
     @Override
+    @SuppressWarnings("removal")
     public @NotNull IDrawable getBackground() {
         return this.background;
     }

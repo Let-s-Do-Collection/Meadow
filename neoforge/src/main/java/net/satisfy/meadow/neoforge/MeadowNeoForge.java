@@ -10,6 +10,7 @@ import net.satisfy.meadow.core.registry.CompostableRegistry;
 import net.satisfy.meadow.neoforge.core.config.MeadowNeoForgeConfig;
 import net.satisfy.meadow.neoforge.core.registry.MeadowBiomeModifiers;
 import net.satisfy.meadow.neoforge.core.registry.MeadowForgeVillagers;
+import net.satisfy.meadow.neoforge.core.registry.MeadowSpawns;
 import net.satisfy.meadow.platform.neoforge.PlatformHelperImpl;
 
 @Mod(Meadow.MOD_ID)
@@ -24,12 +25,11 @@ public class MeadowNeoForge {
         bus.addListener(MeadowNeoForgeConfig::onLoad);
         bus.addListener(MeadowNeoForgeConfig::onReload);
         Meadow.init();
+        MeadowSpawns.init();
         MeadowBiomeModifiers.BIOME_MODIFIER_SERIALIZERS.register(modEventBus);
-
     }
 
     private void commonSetup(FMLCommonSetupEvent event) {
         event.enqueueWork(CompostableRegistry::registerCompostable);
-        Meadow.commonSetup();
     }
 }

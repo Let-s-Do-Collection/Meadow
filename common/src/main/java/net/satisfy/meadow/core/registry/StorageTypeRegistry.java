@@ -19,6 +19,7 @@ public class StorageTypeRegistry {
         blocks.add(ObjectRegistry.WOODEN_FLOWER_POT_BIG.get());
         blocks.add(ObjectRegistry.WOODEN_FLOWER_BOX.get());
         blocks.add(ObjectRegistry.CHEESE_RACK.get());
+        blocks.add(ObjectRegistry.SHELF.get());
         return blocks;
     }
 }

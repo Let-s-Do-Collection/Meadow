@@ -1,12 +1,9 @@
 package net.satisfy.meadow.platform;
 
-import com.google.gson.JsonObject;
 import dev.architectury.injectables.annotations.ExpectPlatform;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
-import net.minecraft.world.item.crafting.Recipe;
 
 import java.util.function.Supplier;
 

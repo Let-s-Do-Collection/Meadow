@@ -1,7 +1,5 @@
 accessWidener   v2  named
 accessible method net/minecraft/world/level/Level getEntities ()Lnet/minecraft/world/level/entity/LevelEntityGetter;
-accessible	class	net/minecraft/world/food/FoodProperties
-accessible	method	net/minecraft/world/food/FoodProperties	<init>	(IFZZZLjava/util/List;)V
 accessible method net/minecraft/world/level/block/AbstractCauldronBlock isEntityInsideContent (Lnet/minecraft/world/level/block/state/BlockState;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/entity/Entity;)Z
 accessible field net/minecraft/client/renderer/entity/layers/SheepFurLayer SHEEP_FUR_LOCATION Lnet/minecraft/resources/ResourceLocation;
 mutable field net/minecraft/client/renderer/entity/layers/SheepFurLayer SHEEP_FUR_LOCATION Lnet/minecraft/resources/ResourceLocation;
@@ -9,4 +7,3 @@ accessible method net/minecraft/world/level/block/state/properties/WoodType regi
 accessible method net/minecraft/world/level/block/FireBlock setFlammable (Lnet/minecraft/world/level/block/Block;II)V
 accessible field net/minecraft/util/GsonHelper GSON Lcom/google/gson/Gson;
 accessible method net/minecraft/world/item/crafting/RecipeManager fromJson (Lnet/minecraft/resources/ResourceLocation;Lcom/google/gson/JsonObject;Lnet/minecraft/core/HolderLookup$Provider;)Lnet/minecraft/world/item/crafting/RecipeHolder;
-accessible method net/minecraft/world/entity/SpawnPlacements register (Lnet/minecraft/world/entity/EntityType;Lnet/minecraft/world/entity/SpawnPlacementType;Lnet/minecraft/world/level/levelgen/Heightmap$Types;Lnet/minecraft/world/entity/SpawnPlacements$SpawnPredicate;)V

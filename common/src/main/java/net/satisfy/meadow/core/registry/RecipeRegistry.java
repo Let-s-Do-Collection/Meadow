@@ -20,7 +20,6 @@ public class RecipeRegistry {
 
     public static final RegistrySupplier<RecipeType<CheeseFormRecipe>> CHEESE = create("cheese");
     public static final RegistrySupplier<RecipeSerializer<CheeseFormRecipe>> CHEESE_SERIALIZER = create("cheese", CheeseFormRecipe.Serializer::new);
-    public static final RegistrySupplier<RecipeSerializer<Recipe<?>>> CONDITIONAL_RECIPE_SERIALIZER = create("conditional", SimpleConditionalRecipe.Serializer::new);
     public static final RegistrySupplier<RecipeType<WoodcuttingRecipe>> WOODCUTTING = create("woodcutting");
     public static final RegistrySupplier<RecipeSerializer<WoodcuttingRecipe>> WOODCUTTING_SERIALIZER = create("woodcutting", WoodcuttingRecipe.Serializer::new);
     public static final RegistrySupplier<RecipeType<FeltingRecipe>> FELTING = create("felting");

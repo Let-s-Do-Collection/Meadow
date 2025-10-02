@@ -1,3 +1,13 @@
+[1.4.1]
+
+**Fixed**
+* Crash up during initialization
+* Crash during initialization when Meadow and Candlelight were loaded together (flammability registration is now thread-safe)
+* Worldgen features not generating correctly on Fabric
+* Wooden Cauldron now properly transforms back when removing Water or Powder Snow
+
+***
+
 [1.4.0]
 
 **Ported to 1.21.1**

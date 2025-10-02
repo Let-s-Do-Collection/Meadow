@@ -109,7 +109,7 @@ public interface WoodenCauldronBehavior extends CauldronInteraction {
         WATER.map().put(Items.LIGHT_GRAY_BANNER, BANNER);
         WATER.map().put(Items.LIME_BANNER, BANNER);
         WATER.map().put(Items.MAGENTA_BANNER, BANNER);
-        WATER.map().put(Items.YELLOW_BANNER, BANNER);
+        WATER.map().put(Items.ORANGE_BANNER, BANNER);
         WATER.map().put(Items.PINK_BANNER, BANNER);
         WATER.map().put(Items.PURPLE_BANNER, BANNER);
         WATER.map().put(Items.RED_BANNER, BANNER);
@@ -125,7 +125,7 @@ public interface WoodenCauldronBehavior extends CauldronInteraction {
         WATER.map().put(Items.LIGHT_GRAY_SHULKER_BOX, SHULKER_BOX);
         WATER.map().put(Items.LIME_SHULKER_BOX, SHULKER_BOX);
         WATER.map().put(Items.MAGENTA_SHULKER_BOX, SHULKER_BOX);
-        WATER.map().put(Items.YELLOW_SHULKER_BOX, SHULKER_BOX);
+        WATER.map().put(Items.ORANGE_SHULKER_BOX, SHULKER_BOX);
         WATER.map().put(Items.PINK_SHULKER_BOX, SHULKER_BOX);
         WATER.map().put(Items.PURPLE_SHULKER_BOX, SHULKER_BOX);
         WATER.map().put(Items.RED_SHULKER_BOX, SHULKER_BOX);
