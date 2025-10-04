@@ -15,18 +15,16 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class StoveBlockMain extends FacingBlock {
-
+public class TiledStoveBlock extends FacingBlock {
     public static final BooleanProperty CONNECTED_UP = BooleanProperty.create("connected_up");
-
     public static final BooleanProperty CONNECTED_DOWN = BooleanProperty.create("connected_down");
+    public static final BooleanProperty LIT = BooleanProperty.create("lit");
+    public static final VoxelShape SHAPE_BIG = Shapes.or(TiledStoveBlockBench.SHAPE, Block.box(0, 2, 0, 16, 16, 16));
 
-    public static final VoxelShape SHAPE_BIG = Shapes.or(StoveBlockBench.SHAPE, Block.box(0, 2, 0, 16, 16, 16));
 
-
-    public StoveBlockMain(Properties settings) {
+    public TiledStoveBlock(Properties settings) {
         super(settings);
-        this.registerDefaultState(this.defaultBlockState().setValue(CONNECTED_DOWN, false).setValue(CONNECTED_UP, false));
+        this.registerDefaultState(this.defaultBlockState().setValue(CONNECTED_DOWN, false).setValue(CONNECTED_UP, false).setValue(LIT, false));
     }
 
     @Override
@@ -73,8 +71,8 @@ public class StoveBlockMain extends FacingBlock {
         super.createBlockStateDefinition(builder);
         builder.add(CONNECTED_DOWN);
         builder.add(CONNECTED_UP);
+        builder.add(LIT);
     }
-
 
     public boolean isBlockStove(BlockPlaceContext ctx, Direction direction) {
         return isBlockStove(ctx.getLevel().getBlockState(ctx.getClickedPos().relative(direction)));
@@ -85,6 +83,6 @@ public class StoveBlockMain extends FacingBlock {
     }
 
     public boolean isBlockStove(Block block) {
-        return block instanceof StoveBlockSmoker || block instanceof StoveBlockMain;
+        return block instanceof TiledStoveBlockSmoker || block instanceof TiledStoveBlock || block instanceof TiledStoveBlockFireplace;
     }
 }

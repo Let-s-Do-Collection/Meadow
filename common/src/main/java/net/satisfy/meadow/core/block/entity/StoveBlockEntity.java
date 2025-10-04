@@ -8,6 +8,7 @@ import net.satisfy.meadow.core.registry.EntityTypeRegistry;
 import org.jetbrains.annotations.NotNull;
 
 public class StoveBlockEntity extends SmokerBlockEntity {
+    
     public StoveBlockEntity(BlockPos blockPos, BlockState blockState) {
         super(blockPos, blockState);
     }

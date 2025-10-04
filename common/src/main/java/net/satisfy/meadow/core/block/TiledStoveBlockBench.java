@@ -17,12 +17,12 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import net.satisfy.meadow.core.util.GeneralUtil;
 import org.jetbrains.annotations.NotNull;
 
-public class StoveBlockBench extends Block {
+public class TiledStoveBlockBench extends Block {
     public static final VoxelShape SHAPE = Shapes.or(Block.box(0, 0, 0, 4, 2, 4), Block.box(12, 0, 0, 16, 2, 4), Block.box(0, 0, 12, 4, 2, 16), Block.box(12, 0, 12, 16, 2, 16));
     public static final VoxelShape SHAPE_SMALL = Shapes.or(SHAPE, Block.box(0, 2, 0, 16, 6, 16));
 
 
-    public StoveBlockBench(Properties settings) {
+    public TiledStoveBlockBench(Properties settings) {
         super(settings);
     }
 

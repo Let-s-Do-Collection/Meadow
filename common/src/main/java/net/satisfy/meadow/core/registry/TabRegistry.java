@@ -77,11 +77,10 @@ public class TabRegistry {
                 out.accept(new ItemStack(ObjectRegistry.PINE_SAPLING.get()));
                 out.accept(new ItemStack(ObjectRegistry.ALPINE_BIRCH_LOG.get()));
                 out.accept(new ItemStack(ObjectRegistry.ALPINE_BIRCH_LEAVES_HANGING.get()));
-
-                out.accept(new ItemStack(ObjectRegistry.STOVE.get()));
-                out.accept(new ItemStack(ObjectRegistry.STOVE_WOOD.get()));
-                out.accept(new ItemStack(ObjectRegistry.STOVE_LID.get()));
-                out.accept(new ItemStack(ObjectRegistry.STOVE_BENCH.get()));
+                out.accept(new ItemStack(ObjectRegistry.TILED_STOVE.get()));
+                out.accept(new ItemStack(ObjectRegistry.TILED_STOVE_FIREPLACE.get()));
+                out.accept(new ItemStack(ObjectRegistry.TILED_STOVE_SMOKER.get()));
+                out.accept(new ItemStack(ObjectRegistry.TILED_STOVE_BENCH.get()));
                 out.accept(new ItemStack(ObjectRegistry.WOODCUTTER.get()));
                 out.accept(new ItemStack(ObjectRegistry.WOODEN_CAULDRON.get()));
                 out.accept(new ItemStack(ObjectRegistry.COOKING_CAULDRON.get()));

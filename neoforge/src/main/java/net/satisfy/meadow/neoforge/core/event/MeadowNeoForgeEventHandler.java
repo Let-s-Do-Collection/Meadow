@@ -24,7 +24,7 @@ public class MeadowNeoForgeEventHandler {
             Map<Integer, List<VillagerTrades.ItemListing>> trades = new HashMap<>(event.getTrades());
             trades.computeIfAbsent(1, k -> new ArrayList<>()).add(new VillagerUtil.SellItemFactory(ObjectRegistry.RENNET.get(), 1, 2, 7));
             trades.computeIfAbsent(2, k -> new ArrayList<>()).add(new VillagerUtil.SellItemFactory(ObjectRegistry.COOKING_CAULDRON.get(), 7, 1, 10));
-            trades.computeIfAbsent(3, k -> new ArrayList<>()).add(new VillagerUtil.SellItemFactory(ObjectRegistry.STOVE.get(), 6, 1, 10));
+            trades.computeIfAbsent(3, k -> new ArrayList<>()).add(new VillagerUtil.SellItemFactory(ObjectRegistry.TILED_STOVE.get(), 6, 1, 10));
             trades.computeIfAbsent(4, k -> new ArrayList<>()).add(new VillagerUtil.SellItemFactory(ObjectRegistry.WOODEN_BUCKET.get(), 5, 1, 10));
             trades.get(4).add(new VillagerUtil.SellItemFactory(ObjectRegistry.WOODEN_MILK_BUCKET.get(), 12, 1, 10));
             trades.computeIfAbsent(5, k -> new ArrayList<>()).add(new VillagerUtil.SellItemFactory(ObjectRegistry.CHEESE_BLOCK.get(), 10, 1, 10));

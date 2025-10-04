@@ -1,3 +1,16 @@
+[1.4.2]
+
+**Fixed**
+* Windows now render and connect correctly
+* Structures no longer spawn without windows or with outdated block properties
+
+**Changed**
+* Slightly adjusted the Meadow Completionist Banner Texture for the Block & Item
+* Reshaded Warped Cheese Block & Warped Cheese Item
+* Reworked Tiled Stove blocks with new connection, lit-state, and top-design properties
+
+***
+
 [1.4.1]
 
 **Fixed**

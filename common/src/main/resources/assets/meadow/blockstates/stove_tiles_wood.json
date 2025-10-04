@@ -1,66 +1,242 @@
 {
   "variants": {
-    "facing=east,connected=false,lit=false": {
-      "model": "meadow:block/stove_tiles_wood",
-      "y": 90
-    },
-    "facing=north,connected=false,lit=false": {
+    "facing=north,connected_down=false,connected_up=false,lit=false,top=false": {
       "model": "meadow:block/stove_tiles_wood"
     },
-    "facing=south,connected=false,lit=false": {
-      "model": "meadow:block/stove_tiles_wood",
-      "y": 180
-    },
-    "facing=west,connected=false,lit=false": {
-      "model": "meadow:block/stove_tiles_wood",
-      "y": 270
-    },
-
-    "facing=east,connected=true,lit=false": {
-      "model": "meadow:block/stove_tiles_wood_connected",
-      "y": 90
-    },
-    "facing=north,connected=true,lit=false": {
+    "facing=north,connected_down=false,connected_up=true,lit=false,top=false": {
       "model": "meadow:block/stove_tiles_wood_connected"
     },
-    "facing=south,connected=true,lit=false": {
+    "facing=east,connected_down=false,connected_up=false,lit=false,top=false": {
+      "model": "meadow:block/stove_tiles_wood",
+      "y": 90
+    },
+    "facing=east,connected_down=false,connected_up=true,lit=false,top=false": {
+      "model": "meadow:block/stove_tiles_wood_connected",
+      "y": 90
+    },
+    "facing=south,connected_down=false,connected_up=false,lit=false,top=false": {
+      "model": "meadow:block/stove_tiles_wood",
+      "y": 180
+    },
+    "facing=south,connected_down=false,connected_up=true,lit=false,top=false": {
       "model": "meadow:block/stove_tiles_wood_connected",
       "y": 180
     },
-    "facing=west,connected=true,lit=false": {
+    "facing=west,connected_down=false,connected_up=false,lit=false,top=false": {
+      "model": "meadow:block/stove_tiles_wood",
+      "y": 270
+    },
+    "facing=west,connected_down=false,connected_up=true,lit=false,top=false": {
       "model": "meadow:block/stove_tiles_wood_connected",
       "y": 270
     },
-
-
-    "facing=east,connected=false,lit=true": {
-      "model": "meadow:block/stove_tiles_wood_on",
+    "facing=north,connected_down=false,connected_up=false,lit=false,top=true": {
+      "model": "meadow:block/stove_tiles_wood_top"
+    },
+    "facing=north,connected_down=false,connected_up=true,lit=false,top=true": {
+      "model": "meadow:block/stove_tiles_wood_connected"
+    },
+    "facing=east,connected_down=false,connected_up=false,lit=false,top=true": {
+      "model": "meadow:block/stove_tiles_wood_top",
       "y": 90
     },
-    "facing=north,connected=false,lit=true": {
+    "facing=east,connected_down=false,connected_up=true,lit=false,top=true": {
+      "model": "meadow:block/stove_tiles_wood_connected",
+      "y": 90
+    },
+    "facing=south,connected_down=false,connected_up=false,lit=false,top=true": {
+      "model": "meadow:block/stove_tiles_wood_top",
+      "y": 180
+    },
+    "facing=south,connected_down=false,connected_up=true,lit=false,top=true": {
+      "model": "meadow:block/stove_tiles_wood_connected",
+      "y": 180
+    },
+    "facing=west,connected_down=false,connected_up=false,lit=false,top=true": {
+      "model": "meadow:block/stove_tiles_wood_top",
+      "y": 270
+    },
+    "facing=west,connected_down=false,connected_up=true,lit=false,top=true": {
+      "model": "meadow:block/stove_tiles_wood_connected",
+      "y": 270
+    },
+    "facing=north,connected_down=false,connected_up=false,lit=true,top=false": {
       "model": "meadow:block/stove_tiles_wood_on"
     },
-    "facing=south,connected=false,lit=true": {
-      "model": "meadow:block/stove_tiles_wood_on",
-      "y": 180
+    "facing=north,connected_down=false,connected_up=true,lit=true,top=false": {
+      "model": "meadow:block/stove_tiles_wood_on_connected"
     },
-    "facing=west,connected=false,lit=true": {
+    "facing=east,connected_down=false,connected_up=false,lit=true,top=false": {
       "model": "meadow:block/stove_tiles_wood_on",
-      "y": 270
+      "y": 90
     },
-
-    "facing=east,connected=true,lit=true": {
+    "facing=east,connected_down=false,connected_up=true,lit=true,top=false": {
       "model": "meadow:block/stove_tiles_wood_on_connected",
       "y": 90
     },
-    "facing=north,connected=true,lit=true": {
-      "model": "meadow:block/stove_tiles_wood_on_connected"
+    "facing=south,connected_down=false,connected_up=false,lit=true,top=false": {
+      "model": "meadow:block/stove_tiles_wood_on",
+      "y": 180
     },
-    "facing=south,connected=true,lit=true": {
+    "facing=south,connected_down=false,connected_up=true,lit=true,top=false": {
       "model": "meadow:block/stove_tiles_wood_on_connected",
       "y": 180
     },
-    "facing=west,connected=true,lit=true": {
+    "facing=west,connected_down=false,connected_up=false,lit=true,top=false": {
+      "model": "meadow:block/stove_tiles_wood_on",
+      "y": 270
+    },
+    "facing=west,connected_down=false,connected_up=true,lit=true,top=false": {
+      "model": "meadow:block/stove_tiles_wood_on_connected",
+      "y": 270
+    },
+    "facing=north,connected_down=false,connected_up=false,lit=true,top=true": {
+      "model": "meadow:block/stove_tiles_wood_top_on"
+    },
+    "facing=north,connected_down=false,connected_up=true,lit=true,top=true": {
+      "model": "meadow:block/stove_tiles_wood_on_connected"
+    },
+    "facing=east,connected_down=false,connected_up=false,lit=true,top=true": {
+      "model": "meadow:block/stove_tiles_wood_top_on",
+      "y": 90
+    },
+    "facing=east,connected_down=false,connected_up=true,lit=true,top=true": {
+      "model": "meadow:block/stove_tiles_wood_on_connected",
+      "y": 90
+    },
+    "facing=south,connected_down=false,connected_up=false,lit=true,top=true": {
+      "model": "meadow:block/stove_tiles_wood_top_on",
+      "y": 180
+    },
+    "facing=south,connected_down=false,connected_up=true,lit=true,top=true": {
+      "model": "meadow:block/stove_tiles_wood_on_connected",
+      "y": 180
+    },
+    "facing=west,connected_down=false,connected_up=false,lit=true,top=true": {
+      "model": "meadow:block/stove_tiles_wood_top_on",
+      "y": 270
+    },
+    "facing=west,connected_down=false,connected_up=true,lit=true,top=true": {
+      "model": "meadow:block/stove_tiles_wood_on_connected",
+      "y": 270
+    },
+    "facing=north,connected_down=true,connected_up=false,lit=false,top=false": {
+      "model": "meadow:block/stove_tiles_wood_connected"
+    },
+    "facing=north,connected_down=true,connected_up=true,lit=false,top=false": {
+      "model": "meadow:block/stove_tiles_wood_connected"
+    },
+    "facing=east,connected_down=true,connected_up=false,lit=false,top=false": {
+      "model": "meadow:block/stove_tiles_wood_connected",
+      "y": 90
+    },
+    "facing=east,connected_down=true,connected_up=true,lit=false,top=false": {
+      "model": "meadow:block/stove_tiles_wood_connected",
+      "y": 90
+    },
+    "facing=south,connected_down=true,connected_up=false,lit=false,top=false": {
+      "model": "meadow:block/stove_tiles_wood_connected",
+      "y": 180
+    },
+    "facing=south,connected_down=true,connected_up=true,lit=false,top=false": {
+      "model": "meadow:block/stove_tiles_wood_connected",
+      "y": 180
+    },
+    "facing=west,connected_down=true,connected_up=false,lit=false,top=false": {
+      "model": "meadow:block/stove_tiles_wood_connected",
+      "y": 270
+    },
+    "facing=west,connected_down=true,connected_up=true,lit=false,top=false": {
+      "model": "meadow:block/stove_tiles_wood_connected",
+      "y": 270
+    },
+    "facing=north,connected_down=true,connected_up=false,lit=false,top=true": {
+      "model": "meadow:block/stove_tiles_wood_connected"
+    },
+    "facing=north,connected_down=true,connected_up=true,lit=false,top=true": {
+      "model": "meadow:block/stove_tiles_wood_connected"
+    },
+    "facing=east,connected_down=true,connected_up=false,lit=false,top=true": {
+      "model": "meadow:block/stove_tiles_wood_connected",
+      "y": 90
+    },
+    "facing=east,connected_down=true,connected_up=true,lit=false,top=true": {
+      "model": "meadow:block/stove_tiles_wood_connected",
+      "y": 90
+    },
+    "facing=south,connected_down=true,connected_up=false,lit=false,top=true": {
+      "model": "meadow:block/stove_tiles_wood_connected",
+      "y": 180
+    },
+    "facing=south,connected_down=true,connected_up=true,lit=false,top=true": {
+      "model": "meadow:block/stove_tiles_wood_connected",
+      "y": 180
+    },
+    "facing=west,connected_down=true,connected_up=false,lit=false,top=true": {
+      "model": "meadow:block/stove_tiles_wood_connected",
+      "y": 270
+    },
+    "facing=west,connected_down=true,connected_up=true,lit=false,top=true": {
+      "model": "meadow:block/stove_tiles_wood_connected",
+      "y": 270
+    },
+    "facing=north,connected_down=true,connected_up=false,lit=true,top=false": {
+      "model": "meadow:block/stove_tiles_wood_on_connected"
+    },
+    "facing=north,connected_down=true,connected_up=true,lit=true,top=false": {
+      "model": "meadow:block/stove_tiles_wood_on_connected"
+    },
+    "facing=east,connected_down=true,connected_up=false,lit=true,top=false": {
+      "model": "meadow:block/stove_tiles_wood_on_connected",
+      "y": 90
+    },
+    "facing=east,connected_down=true,connected_up=true,lit=true,top=false": {
+      "model": "meadow:block/stove_tiles_wood_on_connected",
+      "y": 90
+    },
+    "facing=south,connected_down=true,connected_up=false,lit=true,top=false": {
+      "model": "meadow:block/stove_tiles_wood_on_connected",
+      "y": 180
+    },
+    "facing=south,connected_down=true,connected_up=true,lit=true,top=false": {
+      "model": "meadow:block/stove_tiles_wood_on_connected",
+      "y": 180
+    },
+    "facing=west,connected_down=true,connected_up=false,lit=true,top=false": {
+      "model": "meadow:block/stove_tiles_wood_on_connected",
+      "y": 270
+    },
+    "facing=west,connected_down=true,connected_up=true,lit=true,top=false": {
+      "model": "meadow:block/stove_tiles_wood_on_connected",
+      "y": 270
+    },
+    "facing=north,connected_down=true,connected_up=false,lit=true,top=true": {
+      "model": "meadow:block/stove_tiles_wood_on_connected"
+    },
+    "facing=north,connected_down=true,connected_up=true,lit=true,top=true": {
+      "model": "meadow:block/stove_tiles_wood_on_connected"
+    },
+    "facing=east,connected_down=true,connected_up=false,lit=true,top=true": {
+      "model": "meadow:block/stove_tiles_wood_on_connected",
+      "y": 90
+    },
+    "facing=east,connected_down=true,connected_up=true,lit=true,top=true": {
+      "model": "meadow:block/stove_tiles_wood_on_connected",
+      "y": 90
+    },
+    "facing=south,connected_down=true,connected_up=false,lit=true,top=true": {
+      "model": "meadow:block/stove_tiles_wood_on_connected",
+      "y": 180
+    },
+    "facing=south,connected_down=true,connected_up=true,lit=true,top=true": {
+      "model": "meadow:block/stove_tiles_wood_on_connected",
+      "y": 180
+    },
+    "facing=west,connected_down=true,connected_up=false,lit=true,top=true": {
+      "model": "meadow:block/stove_tiles_wood_on_connected",
+      "y": 270
+    },
+    "facing=west,connected_down=true,connected_up=true,lit=true,top=true": {
       "model": "meadow:block/stove_tiles_wood_on_connected",
       "y": 270
     }

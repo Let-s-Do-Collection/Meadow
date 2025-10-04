@@ -25,12 +25,12 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class StoveBlockSmoker extends SmokerBlock {
+public class TiledStoveBlockSmoker extends SmokerBlock {
     public static final BooleanProperty CONNECTED = BooleanProperty.create("connected");
-    public static final VoxelShape SHAPE_BIG = Shapes.or(StoveBlockBench.SHAPE, Block.box(0, 2, 0, 16, 16, 16));
+    public static final VoxelShape SHAPE_BIG = Shapes.or(TiledStoveBlockBench.SHAPE, Block.box(0, 2, 0, 16, 16, 16));
     private final Direction directionToCheck;
 
-    public StoveBlockSmoker(Properties properties, Direction directionToCheck) {
+    public TiledStoveBlockSmoker(Properties properties, Direction directionToCheck) {
         super(properties);
         this.registerDefaultState(this.defaultBlockState().setValue(CONNECTED, false));
         this.directionToCheck = directionToCheck;
@@ -78,20 +78,25 @@ public class StoveBlockSmoker extends SmokerBlock {
 
     private List<Block> getBlocksToCheck() {
         if (directionToCheck == Direction.UP) {
-            return List.of(ObjectRegistry.STOVE.get());
+            return List.of(ObjectRegistry.TILED_STOVE.get());
         } else if (directionToCheck == Direction.DOWN) {
-            return List.of(ObjectRegistry.STOVE_WOOD.get(), ObjectRegistry.STOVE_LID.get());
+            return List.of(ObjectRegistry.TILED_STOVE_FIREPLACE.get(), ObjectRegistry.TILED_STOVE_SMOKER.get());
         } else return List.of();
     }
 
     @Override
     public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+        if (this == ObjectRegistry.TILED_STOVE_SMOKER.get()) return null;
         return new StoveBlockEntity(pos, state);
     }
 
+    @Override
     @Nullable
-    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> blockEntityType) {
-        return createFurnaceTicker(level, blockEntityType, EntityTypeRegistry.STOVE_BLOCK_ENTITY.get());
+    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
+
+        if (this == ObjectRegistry.TILED_STOVE_SMOKER.get()) return null;
+        return createFurnaceTicker(level, type, EntityTypeRegistry.STOVE_BLOCK_ENTITY.get());
     }
+
 }
 
