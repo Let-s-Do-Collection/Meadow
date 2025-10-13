@@ -1,3 +1,14 @@
+[1.4.3]
+
+**Fixed**
+* Several loot table predicates fixed
+* "Find Meadow" advancement no longer triggers immediately after entering a new world
+
+**Changed**
+* Decreased "Find Meadow" advancement experience reward from `50` to `10`
+
+***
+
 [1.4.2]
 
 **Fixed**

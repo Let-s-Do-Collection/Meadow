@@ -132,7 +132,7 @@ curseforge {
         addGameVersion rootProject.minecraft_version
         addGameVersion "Fabric"
         mainArtifact(remapJar) {
-            displayName = "meadow - ${rootProject.mod_version} - FABRIC - ${rootProject.minecraft_version}"
+            displayName = "Meadow - ${rootProject.mod_version} - FABRIC - ${rootProject.minecraft_version}"
             changelog = changelogText
             changelogType = "markdown"
         }

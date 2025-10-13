@@ -1,17 +1,28 @@
 {
   "parent": "meadow:main/root",
   "criteria": {
-    "meadow": {
+    "minecraft:meadow": {
       "trigger": "minecraft:location",
       "conditions": {
-        "player": {
-          "location": {
-            "biome": "minecraft:meadow"
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "location": {
+                "biomes": "minecraft:meadow"
+              }
+            }
           }
-        }
+        ]
       }
     }
   },
+  "requirements": [
+    [
+      "minecraft:meadow"
+    ]
+  ],
   "display": {
     "announce_to_chat": true,
     "description": {
@@ -20,21 +31,16 @@
     "frame": "task",
     "hidden": false,
     "icon": {
-      "count": 1,
-      "id": "meadow:camera"
+      "id": "meadow:camera",
+      "count": 1
     },
     "show_toast": true,
     "title": {
       "translate": "advancement.meadow.find_meadow"
     }
   },
-  "requirements": [
-    [
-      "meadow"
-    ]
-  ],
   "rewards": {
-    "experience": 50
+    "experience": 10
   },
   "sends_telemetry_event": true
 }
