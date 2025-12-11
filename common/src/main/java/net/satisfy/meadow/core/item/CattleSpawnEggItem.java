@@ -34,8 +34,14 @@ public class CattleSpawnEggItem extends ArchitecturySpawnEggItem {
     @Override
     public @NotNull ItemStack getDefaultInstance() {
         ItemStack stack = super.getDefaultInstance();
+        EntityType<?> entityType = getType(stack);
+
         CompoundTag entityTag = new CompoundTag();
+        if (entityType != null) {
+            entityTag.putString("id", EntityType.getKey(entityType).toString());
+        }
         entityTag.putInt("Variant", variantId);
+
         CompoundTag root = new CompoundTag();
         root.put("EntityTag", entityTag);
         stack.set(DataComponents.ENTITY_DATA, CustomData.of(root));

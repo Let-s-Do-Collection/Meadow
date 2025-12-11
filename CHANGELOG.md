@@ -1,3 +1,16 @@
+[1.4.4]
+
+**Fixed**
+* Alpine Salt loottable
+* Hanging Leaves not rendering properly when used with FastLeaves
+* Variant ID not being applied correctly on Cattle Spawn Egg
+
+**Changed**
+* Biome Grass and Foliage Modifier on NeoForge
+* FlowerPatch distribution
+
+***
+
 [1.4.3]
 
 **Fixed**

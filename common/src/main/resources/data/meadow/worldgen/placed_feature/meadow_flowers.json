@@ -2,12 +2,10 @@
   "feature": "meadow:meadow_flowers",
   "placement": [
     {
-      "type": "minecraft:count",
-      "count": 6
-    },
-    {
-      "type": "minecraft:rarity_filter",
-      "chance": 2
+      "type": "minecraft:noise_threshold_count",
+      "noise_level": -0.15,
+      "below_noise": 1,
+      "above_noise": 4
     },
     {
       "type": "minecraft:in_square"
