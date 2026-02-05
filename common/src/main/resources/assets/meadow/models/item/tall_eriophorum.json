@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "meadow:block/tall_eriophorum_top"
+  }
+}

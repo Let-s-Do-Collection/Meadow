@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/template_glass_pane_side",
+
+  "textures": {
+    "pane": "meadow:block/pine_window_pane_middle",
+    "edge": "meadow:block/pine_window_pane_side"
+  }
+}

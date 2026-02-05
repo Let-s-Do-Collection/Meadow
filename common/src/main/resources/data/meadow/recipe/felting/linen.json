@@ -1,0 +1,10 @@
+{
+  "type": "meadow:felting",
+  "ingredient": {
+    "item": "minecraft:light_gray_wool"
+  },
+  "result": {
+    "id": "meadow:linen",
+    "count": 1
+  }
+}

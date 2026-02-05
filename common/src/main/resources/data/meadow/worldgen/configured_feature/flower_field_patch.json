@@ -1,0 +1,33 @@
+{
+  "type": "minecraft:simple_block",
+  "config": {
+    "to_place": {
+      "type": "minecraft:noise_provider",
+      "noise": {
+        "amplitudes": [
+          1.0
+        ],
+        "firstOctave": 0
+      },
+      "scale": 0.030833334,
+      "seed": 4885,
+      "states": [
+        {
+          "Name": "meadow:saxifrage"
+        },
+        {
+          "Name": "meadow:alpine_poppy"
+        },
+        {
+          "Name": "meadow:enzian"
+        },
+        {
+          "Name": "meadow:delphinium"
+        },
+        {
+          "Name": "meadow:fire_lily"
+        }
+      ]
+    }
+  }
+}

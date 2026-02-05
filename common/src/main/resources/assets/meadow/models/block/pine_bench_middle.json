@@ -1,0 +1,22 @@
+{
+	"format_version": "1.21.11",
+	"credit": "Made by Satisfy",
+	"textures": {
+		"3": "meadow:block/stripped_pine_log_side",
+		"particle": "meadow:block/pine_log_side"
+	},
+	"elements": [
+		{
+			"from": [0, 4, 2],
+			"to": [16, 8, 14],
+			"faces": {
+				"north": {"uv": [0, 0, 4, 16], "rotation": 90, "texture": "#3"},
+				"east": {"uv": [3, 4, 7, 16], "rotation": 90, "texture": "#3"},
+				"south": {"uv": [12, 0, 16, 16], "rotation": 90, "texture": "#3"},
+				"west": {"uv": [3, 4, 7, 16], "rotation": 90, "texture": "#3"},
+				"up": {"uv": [14, 16, 2, 0], "rotation": 90, "texture": "#3"},
+				"down": {"uv": [14, 16, 2, 0], "rotation": 90, "texture": "#3"}
+			}
+		}
+	]
+}

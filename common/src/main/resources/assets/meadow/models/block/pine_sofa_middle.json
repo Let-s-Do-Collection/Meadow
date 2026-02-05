@@ -1,0 +1,43 @@
+{
+	"format_version": "1.21.6",
+	"credit": "Made by satisfy",
+	"textures": {
+		"6": "meadow:block/pine_sofa_top",
+		"8": "meadow:block/pine_sofa_back",
+		"9": "meadow:block/pine_table_middle",
+		"10": "meadow:block/pine_sofa_front",
+		"12": "meadow:block/pine_sofa_side",
+		"particle": "meadow:block/pine_sofa_front"
+	},
+	"elements": [
+		{
+			"from": [0, 7, 12],
+			"to": [16, 16, 16],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 11.5, 14]},
+			"faces": {
+				"north": {"uv": [0, 4, 16, 13], "texture": "#8"},
+				"south": {"uv": [0, 4, 16, 13], "texture": "#8"},
+				"up": {"uv": [0, 0, 16, 4], "texture": "#8"}
+			}
+		},
+		{
+			"from": [0, 2, 0],
+			"to": [16, 7, 16],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 5.5, 8]},
+			"faces": {
+				"north": {"uv": [0, 6, 16, 11], "texture": "#10", "tintindex": 1},
+				"south": {"uv": [0, 11, 16, 16], "texture": "#12"},
+				"up": {"uv": [16, 16, 0, 0], "texture": "#6", "tintindex": 1},
+				"down": {"uv": [16, 0, 0, 16], "texture": "#9", "tintindex": 1}
+			}
+		}
+	],
+	"groups": [
+		{
+			"name": "single",
+			"origin": [14, 1, -2],
+			"color": 0,
+			"children": [0, 1]
+		}
+	]
+}

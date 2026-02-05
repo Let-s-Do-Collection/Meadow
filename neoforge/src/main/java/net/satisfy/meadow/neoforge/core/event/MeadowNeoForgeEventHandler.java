@@ -37,11 +37,11 @@ public class MeadowNeoForgeEventHandler {
 
         } else if (event.getType().equals(MeadowForgeVillagers.HERMIT.get())) {
             Map<Integer, List<VillagerTrades.ItemListing>> trades = new HashMap<>(event.getTrades());
-            trades.computeIfAbsent(1, k -> new ArrayList<>()).add(new VillagerUtil.BuyForOneEmeraldFactory(ObjectRegistry.BENCH.get(), 15, 4, 5));
+            trades.computeIfAbsent(1, k -> new ArrayList<>()).add(new VillagerUtil.BuyForOneEmeraldFactory(ObjectRegistry.PINE_BENCH.get(), 15, 4, 5));
             trades.get(1).add(new VillagerUtil.BuyForOneEmeraldFactory(ObjectRegistry.PINE_LOG.get(), 10, 4, 5));
             trades.get(1).add(new VillagerUtil.SellItemFactory(ObjectRegistry.PINE_SAPLING.get(), 10, 6, 5));
             trades.get(1).add(new VillagerUtil.SellItemFactory(ObjectRegistry.PINE_SLAB.get(), 7, 4, 5));
-            trades.computeIfAbsent(2, k -> new ArrayList<>()).add(new VillagerUtil.BuyForOneEmeraldFactory(ObjectRegistry.SHELF.get(), 15, 4, 5));
+            trades.computeIfAbsent(2, k -> new ArrayList<>()).add(new VillagerUtil.BuyForOneEmeraldFactory(ObjectRegistry.PINE_CABINET.get(), 15, 4, 5));
             trades.get(2).add(new VillagerUtil.BuyForOneEmeraldFactory(ObjectRegistry.WOODEN_SHEEP_MILK_BUCKET.get(), 10, 2, 5));
             trades.get(2).add(new VillagerUtil.SellItemFactory(ObjectRegistry.WATERING_CAN_ITEM.get(), 25, 4, 5));
             trades.get(2).add(new VillagerUtil.SellItemFactory(ObjectRegistry.CHEESE_SANDWICH.get(), 4, 4, 5));

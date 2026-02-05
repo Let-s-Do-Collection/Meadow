@@ -58,8 +58,8 @@ public class BenchBlock extends LineConnectingBlock {
 
     @Override
     public @NotNull ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
-        InteractionResult result = GeneralUtil.onUse(level, player, hand, hit, 0.2);
-        if (result.consumesAction()) {
+        ItemInteractionResult result = GeneralUtil.onUse(level, player, hand, hit, 0.2);
+        if (result == ItemInteractionResult.SUCCESS) {
             return ItemInteractionResult.sidedSuccess(level.isClientSide);
         }
         return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
@@ -67,7 +67,11 @@ public class BenchBlock extends LineConnectingBlock {
 
     @Override
     public @NotNull InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hit) {
-        return GeneralUtil.onUse(level, player, InteractionHand.MAIN_HAND, hit, 0.2);
+        ItemInteractionResult result = GeneralUtil.onUse(level, player, InteractionHand.MAIN_HAND, hit, 0.2);
+        if (result == ItemInteractionResult.SUCCESS) {
+            return InteractionResult.sidedSuccess(level.isClientSide);
+        }
+        return InteractionResult.PASS;
     }
 
     @Override

@@ -1,0 +1,30 @@
+{
+	"format_version": "1.21.6",
+	"credit": "Made by Satisfy",
+	"textures": {
+		"0": "meadow:block/pine_table",
+		"1": "meadow:block/pine_table_middle",
+		"particle": "meadow:block/pine_table"
+	},
+	"elements": [
+		{
+			"from": [0, 13, 0],
+			"to": [16, 16, 16],
+			"rotation": {"angle": 0, "axis": "y", "origin": [16, 13, 0]},
+			"faces": {
+				"north": {"uv": [16, 0, 0, 3], "texture": "#0"},
+				"south": {"uv": [16, 0, 0, 3], "texture": "#0"},
+				"up": {"uv": [16, 0, 0, 16], "texture": "#1"},
+				"down": {"uv": [16, 0, 0, 16], "texture": "#1"}
+			}
+		}
+	],
+	"groups": [
+		{
+			"name": "table_single",
+			"origin": [-16, 13, 6],
+			"color": 0,
+			"children": [0]
+		}
+	]
+}

@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "meadow:block/pine_cheese_rack",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "meadow:block/pine_cheese_rack"
+    },
+    "facing=south": {
+      "model": "meadow:block/pine_cheese_rack",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "meadow:block/pine_cheese_rack",
+      "y": 270
+    }
+  }
+}

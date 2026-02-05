@@ -2,7 +2,7 @@
 	"format_version": "1.21.6",
 	"credit": "Made by Satisfy",
 	"textures": {
-		"1": "meadow:block/chain",
+		"1": "minecraft:block/chain",
 		"4": "meadow:block/frame_logs",
 		"6": "meadow:block/pine_planks",
 		"7": "meadow:block/frame_fire",

@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "meadow:block/pine_window_top",
+    "side": "meadow:block/pine_window_pane"
+  }
+}

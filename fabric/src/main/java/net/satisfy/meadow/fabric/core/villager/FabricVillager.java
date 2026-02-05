@@ -70,7 +70,7 @@ public class FabricVillager {
             factories.add(new SellItemFactory(ObjectRegistry.PINE_SLAB.get(), 7, 4, 5));
         });
         TradeOfferHelper.registerVillagerOffers(HERMIT, 2, factories -> {
-            factories.add(new BuyForOneEmeraldFactory(ObjectRegistry.SHELF.get(), 15, 4, 5));
+            factories.add(new BuyForOneEmeraldFactory(ObjectRegistry.PINE_CABINET.get(), 15, 4, 5));
             factories.add(new BuyForOneEmeraldFactory(ObjectRegistry.WOODEN_SHEEP_MILK_BUCKET.get(), 10, 2, 5));
             factories.add(new SellItemFactory(ObjectRegistry.WATERING_CAN_ITEM.get(), 25, 4, 5));
             factories.add(new SellItemFactory(ObjectRegistry.CHEESE_SANDWICH.get(), 4, 4, 5));

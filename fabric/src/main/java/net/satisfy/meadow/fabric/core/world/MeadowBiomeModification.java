@@ -29,9 +29,9 @@ public class MeadowBiomeModification {
                     gen.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, MeadowPlacedFeature.MEADOW_ORE_SALT_UPPER_KEY);
                     gen.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, MeadowPlacedFeature.MEADOW_ORE_SALT_BURIED_KEY);
                     gen.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, MeadowPlacedFeature.MEADOW_TREES_KEY);
-                    //gen.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, MeadowPlacedFeature.MEADOW_GRASS_PATCH_KEY);
                     gen.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, MeadowPlacedFeature.MEADOW_PINE_FALLEN_KEY);
-                    gen.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, MeadowPlacedFeature.MEADOW_FLOWERS_PATCH_KEY);
+                    gen.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, MeadowPlacedFeature.MEADOW_ERIOPHORUM_FIELD_KEY);
+                    gen.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, MeadowPlacedFeature.MEADOW_FLOWER_FIELD_PATCH_KEY);
                     gen.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, MeadowPlacedFeature.MEADOW_BOULDERS_KEY);
                     gen.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, MeadowPlacedFeature.MEADOW_LIMESTONE_SLAB_KEY);
                     gen.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, MeadowPlacedFeature.MEADOW_MOSSY_LIMESTONE_KEY);

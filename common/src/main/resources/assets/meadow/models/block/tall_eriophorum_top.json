@@ -1,5 +1,6 @@
 {
-  "parent": "minecraft:block/cross",
+  "ambientocclusion": false,
+  "parent": "minecraft:block/tinted_cross",
   "textures": {
     "cross": "meadow:block/tall_eriophorum_top"
   }

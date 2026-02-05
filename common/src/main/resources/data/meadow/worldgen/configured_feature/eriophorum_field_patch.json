@@ -1,0 +1,36 @@
+{
+  "type": "minecraft:random_patch",
+  "config": {
+    "tries": 22,
+    "xz_spread": 7,
+    "y_spread": 3,
+    "feature": {
+      "feature": {
+        "type": "minecraft:simple_block",
+        "config": {
+          "to_place": {
+            "type": "minecraft:weighted_state_provider",
+            "entries": [
+              {
+                "weight": 85,
+                "data": {
+                  "Name": "meadow:eriophorum"
+                }
+              },
+              {
+                "weight": 15,
+                "data": {
+                  "Name": "meadow:tall_eriophorum",
+                  "Properties": {
+                    "half": "lower"
+                  }
+                }
+              }
+            ]
+          }
+        }
+      },
+      "placement": []
+    }
+  }
+}

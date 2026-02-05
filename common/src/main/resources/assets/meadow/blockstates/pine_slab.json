@@ -4,7 +4,7 @@
       "model": "meadow:block/pine_slab"
     },
     "type=double": {
-      "model": "meadow:block/pine_slab_double"
+      "model": "meadow:block/pine_planks"
     },
     "type=top": {
       "model": "meadow:block/pine_slab_top"

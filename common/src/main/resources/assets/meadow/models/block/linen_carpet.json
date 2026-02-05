@@ -2,8 +2,8 @@
   "credit": "Made by Satisfy",
   "parent": "block/thin_block",
   "textures": {
-    "0": "meadow:block/linen_wool",
-    "particle": "meadow:block/linen_wool"
+    "0": "meadow:block/linen",
+    "particle": "meadow:block/linen"
   },
   "elements": [
     {

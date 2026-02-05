@@ -1,9 +1,0 @@
-{
-  "variants": {
-    "half=lower": [ { "model": "meadow:block/eriophorum_tall_bottom_1", "weight":1 },
-      { "model": "meadow:block/eriophorum_tall_bottom_2", "weight":1 }],
-    "half=upper": [ { "model": "meadow:block/eriophorum_tall_top_1", "weight":1 },
-      { "model": "meadow:block/eriophorum_tall_top_2", "weight":1 },
-      { "model": "meadow:block/eriophorum_tall_top_3", "weight":1 }]
-  }
-}

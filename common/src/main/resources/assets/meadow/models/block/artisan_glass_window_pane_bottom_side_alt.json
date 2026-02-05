@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/template_glass_pane_side_alt",
+  "textures": {
+    "pane": "meadow:block/artisan_glass_window_pane_bottom",
+    "edge": "meadow:block/artisan_glass_window_pane_side"
+  }
+}

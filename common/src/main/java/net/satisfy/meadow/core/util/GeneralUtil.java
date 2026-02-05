@@ -14,12 +14,15 @@ import net.minecraft.util.StringRepresentable;
 import net.minecraft.util.Tuple;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
@@ -134,23 +137,47 @@ public class GeneralUtil {
         }
     }
 
-    public static InteractionResult onUse(Level world, Player player, InteractionHand hand, BlockHitResult hit, double extraHeight) {
-        if (world.isClientSide) return InteractionResult.PASS;
-        if (player.isShiftKeyDown()) return InteractionResult.PASS;
-        if (GeneralUtil.isPlayerSitting(player)) return InteractionResult.PASS;
-        if (hit.getDirection() == Direction.DOWN) return InteractionResult.PASS;
+    public static ItemInteractionResult onUse(Level world, Player player, InteractionHand hand, BlockHitResult hit, double extraHeight) {
+        if (world.isClientSide) return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+        if (player.isShiftKeyDown()) return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+        if (GeneralUtil.isPlayerSitting(player)) return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+        if (hit.getDirection() == Direction.DOWN) return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+
         BlockPos hitPos = hit.getBlockPos();
         if (!GeneralUtil.isOccupied(world, hitPos) && player.getItemInHand(hand).isEmpty()) {
             ChairEntity chair = EntityTypeRegistry.CHAIR.get().create(world);
-            assert chair != null;
+            if (chair == null) return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+
+            BlockState s = world.getBlockState(hitPos);
+            float yaw = 0.0F;
+            for (var p : s.getProperties()) {
+                if (p.getName().equals("facing") && p instanceof DirectionProperty dp) {
+                    yaw = s.getValue(dp).toYRot();
+                    break;
+                }
+            }
+            for (var p : s.getProperties()) {
+                if (p.getName().equals("part")) {
+                    Object v = s.getValue(p);
+                    if (v.toString().equals("head")) {
+                        yaw += 180.0F;
+                    }
+                    break;
+                }
+            }
+
+            chair.setSeatPos(hitPos);
             chair.moveTo(hitPos.getX() + 0.5D, hitPos.getY() + 0.25D + extraHeight, hitPos.getZ() + 0.5D, 0, 0);
+            chair.setYRot(yaw);
+            chair.yRotO = yaw;
+
             if (GeneralUtil.addChairEntity(world, hitPos, chair, player.blockPosition())) {
                 world.addFreshEntity(chair);
                 player.startRiding(chair);
-                return InteractionResult.SUCCESS;
+                return ItemInteractionResult.SUCCESS;
             }
         }
-        return InteractionResult.PASS;
+        return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
     }
 
     public static void onStateReplaced(Level world, BlockPos pos) {

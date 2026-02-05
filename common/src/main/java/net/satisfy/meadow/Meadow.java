@@ -4,23 +4,21 @@ import dev.architectury.event.events.common.LifecycleEvent;
 import dev.architectury.hooks.item.tool.AxeItemHooks;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Blocks;
-import net.satisfy.meadow.core.registry.EntityTypeRegistry;
-import net.satisfy.meadow.core.registry.FlammableBlockRegistry;
-import net.satisfy.meadow.core.registry.ObjectRegistry;
-import net.satisfy.meadow.core.registry.RecipeRegistry;
-import net.satisfy.meadow.core.registry.ScreenHandlerRegistry;
-import net.satisfy.meadow.core.registry.SoundEventRegistry;
-import net.satisfy.meadow.core.registry.TabRegistry;
+import net.satisfy.meadow.core.registry.*;
 import net.satisfy.meadow.core.util.WoodenCauldronBehavior;
+import net.satisfy.meadow.core.util.datafixer.DataFixerEntries;
+import net.satisfy.meadow.core.world.feature.configured.tree.foliage.PineFoliagePlacer;
 
 public class Meadow {
     public static final String MOD_ID = "meadow";
 
     public static void init() {
+        DataFixerEntries.init();
         EntityTypeRegistry.init();
         ObjectRegistry.init();
         TabRegistry.init();
         RecipeRegistry.init();
+        PlacerTypeRegistry.init();
         SoundEventRegistry.init();
         ScreenHandlerRegistry.init();
         LifecycleEvent.SETUP.register(Meadow::setupSerial);

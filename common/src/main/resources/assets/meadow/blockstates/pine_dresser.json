@@ -1,0 +1,64 @@
+{
+  "variants": {
+    "facing=north,type=none": {
+      "model": "meadow:block/pine_dresser_single"
+    },
+    "facing=east,type=none": {
+      "model": "meadow:block/pine_dresser_single",
+      "y": 90
+    },
+    "facing=south,type=none": {
+      "model": "meadow:block/pine_dresser_single",
+      "y": 180
+    },
+    "facing=west,type=none": {
+      "model": "meadow:block/pine_dresser_single",
+      "y": 270
+    },
+    "facing=north,type=middle": {
+      "model": "meadow:block/pine_dresser_connected_middle"
+    },
+    "facing=east,type=middle": {
+      "model": "meadow:block/pine_dresser_connected_middle",
+      "y": 90
+    },
+    "facing=south,type=middle": {
+      "model": "meadow:block/pine_dresser_connected_middle",
+      "y": 180
+    },
+    "facing=west,type=middle": {
+      "model": "meadow:block/pine_dresser_connected_middle",
+      "y": 270
+    },
+    "facing=north,type=left": {
+      "model": "meadow:block/pine_dresser_connected_left"
+    },
+    "facing=east,type=left": {
+      "model": "meadow:block/pine_dresser_connected_left",
+      "y": 90
+    },
+    "facing=south,type=left": {
+      "model": "meadow:block/pine_dresser_connected_left",
+      "y": 180
+    },
+    "facing=west,type=left": {
+      "model": "meadow:block/pine_dresser_connected_left",
+      "y": 270
+    },
+    "facing=north,type=right": {
+      "model": "meadow:block/pine_dresser_connected_right",
+      "y": 180
+    },
+    "facing=east,type=right": {
+      "model": "meadow:block/pine_dresser_connected_right",
+      "y": 270
+    },
+    "facing=south,type=right": {
+      "model": "meadow:block/pine_dresser_connected_right"
+    },
+    "facing=west,type=right": {
+      "model": "meadow:block/pine_dresser_connected_right",
+      "y": 90
+    }
+  }
+}

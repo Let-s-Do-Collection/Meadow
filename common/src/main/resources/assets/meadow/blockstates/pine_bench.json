@@ -1,0 +1,64 @@
+{
+  "variants": {
+    "facing=north,type=none": {
+      "model": "meadow:block/pine_bench"
+    },
+    "facing=east,type=none": {
+      "model": "meadow:block/pine_bench",
+      "y": 90
+    },
+    "facing=south,type=none": {
+      "model": "meadow:block/pine_bench",
+      "y": 180
+    },
+    "facing=west,type=none": {
+      "model": "meadow:block/pine_bench",
+      "y": 270
+    },
+    "facing=north,type=middle": {
+      "model": "meadow:block/pine_bench_middle"
+    },
+    "facing=east,type=middle": {
+      "model": "meadow:block/pine_bench_middle",
+      "y": 90
+    },
+    "facing=south,type=middle": {
+      "model": "meadow:block/pine_bench_middle",
+      "y": 180
+    },
+    "facing=west,type=middle": {
+      "model": "meadow:block/pine_bench_middle",
+      "y": 270
+    },
+    "facing=north,type=left": {
+      "model": "meadow:block/pine_bench_side"
+    },
+    "facing=east,type=left": {
+      "model": "meadow:block/pine_bench_side",
+      "y": 90
+    },
+    "facing=south,type=left": {
+      "model": "meadow:block/pine_bench_side",
+      "y": 180
+    },
+    "facing=west,type=left": {
+      "model": "meadow:block/pine_bench_side",
+      "y": 270
+    },
+    "facing=north,type=right": {
+      "model": "meadow:block/pine_bench_side",
+      "y": 180
+    },
+    "facing=east,type=right": {
+      "model": "meadow:block/pine_bench_side",
+      "y": 270
+    },
+    "facing=south,type=right": {
+      "model": "meadow:block/pine_bench_side"
+    },
+    "facing=west,type=right": {
+      "model": "meadow:block/pine_bench_side",
+      "y": 90
+    }
+  }
+}

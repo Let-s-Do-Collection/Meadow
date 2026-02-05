@@ -29,7 +29,7 @@ public class CompostableRegistry {
         ComposterBlock.COMPOSTABLES.put(ObjectRegistry.ERIOPHORUM.get().asItem(), 0.3f);
         ComposterBlock.COMPOSTABLES.put(ObjectRegistry.SMALL_FIR.get().asItem(), 0.3f);
         ComposterBlock.COMPOSTABLES.put(ObjectRegistry.PINE_SAPLING.get().asItem(), 0.3f);
-        ComposterBlock.COMPOSTABLES.put(ObjectRegistry.ERIOPHORUM_TALL.get().asItem(), 0.3f);
+        ComposterBlock.COMPOSTABLES.put(ObjectRegistry.TALL_ERIOPHORUM.get().asItem(), 0.3f);
         ComposterBlock.COMPOSTABLES.put(ObjectRegistry.FIRE_LILY.get().asItem(), 0.3f);
     }
 }

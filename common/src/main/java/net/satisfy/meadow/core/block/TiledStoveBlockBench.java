@@ -33,8 +33,8 @@ public class TiledStoveBlockBench extends Block {
 
     @Override
     public @NotNull ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
-        InteractionResult result = GeneralUtil.onUse(level, player, hand, hit, 0.1);
-        if (result.consumesAction()) {
+        ItemInteractionResult result = GeneralUtil.onUse(level, player, hand, hit, 0.1);
+        if (result == ItemInteractionResult.SUCCESS) {
             return ItemInteractionResult.sidedSuccess(level.isClientSide);
         }
         return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
@@ -42,7 +42,11 @@ public class TiledStoveBlockBench extends Block {
 
     @Override
     public @NotNull InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hit) {
-        return GeneralUtil.onUse(level, player, InteractionHand.MAIN_HAND, hit, 0.1);
+        ItemInteractionResult result = GeneralUtil.onUse(level, player, InteractionHand.MAIN_HAND, hit, 0.1);
+        if (result == ItemInteractionResult.SUCCESS) {
+            return InteractionResult.sidedSuccess(level.isClientSide);
+        }
+        return InteractionResult.PASS;
     }
 
     @Override

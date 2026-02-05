@@ -10,7 +10,8 @@
     "meadow:terrain/meadow_mossy_limestone",
     "meadow:terrain/meadow_replace_stone_with_limestone",
     "meadow:meadow_pine_fallen",
-    "meadow:meadow_flowers",
+    "meadow:eriophorum_field_patch_placed",
+    "meadow:flower_field_patch_placed",
     "meadow:meadow_trees",
     "meadow:forest_trees",
     "meadow:forest_small_fir"

@@ -33,8 +33,8 @@ public class MeadowClient {
     public static final ModelLayerLocation WATER_BUFFALO_MODEL_LAYER = new ModelLayerLocation(Meadow.identifier("water_buffalo"), "head");
 
     public static void initClient() {
-        RenderTypeRegistry.register(RenderType.cutout(), PINE_DOOR.get(), PINE_TRAPDOOR.get(), DELPHINIUM.get(), ALPINE_POPPY.get(), SAXIFRAGE.get(), ENZIAN.get(), COOKING_CAULDRON.get(), FRAME.get(), TABLE.get(), FIRE_LOG.get(), ERIOPHORUM.get(), ERIOPHORUM_TALL.get(), SMALL_FIR.get(), PINE_SAPLING.get(), CHAIR.get(), POTTED_DELPHINIUM.get(), POTTED_ALPINE_POPPY.get(), POTTED_SAXIFRAGE.get(), POTTED_ENZIAN.get(), POTTED_ERIOPHORUM.get(), ERIOPHORUM_TALL.get(), PINE_SAPLING.get(), POTTED_PINE_SAPLING.get(), FIRE_LILY.get(), POTTED_FIRE_LILY.get(), WOODEN_FLOWER_POT_SMALL.get(), FONDUE.get(), OIL_LANTERN.get(), WHEELBARROW.get(), YELLOW_PINE_LEAVES.get(), WOODEN_FLOWER_POT_BIG.get(), WOODCUTTER.get());
-        RenderTypeRegistry.register(RenderType.translucent(), HEART_PATTERNED_WINDOW.get(), SUN_PATTERNED_WINDOW.get(), PINE_WINDOW.get());
+        RenderTypeRegistry.register(RenderType.cutout(), PINE_DOOR.get(), PINE_TRAPDOOR.get(), DELPHINIUM.get(), ALPINE_POPPY.get(), SAXIFRAGE.get(), ENZIAN.get(), COOKING_CAULDRON.get(), FRAME.get(), PINE_TABLE.get(), FIRE_LOG.get(), ERIOPHORUM.get(), TALL_ERIOPHORUM.get(), SMALL_FIR.get(), PINE_SAPLING.get(), PINE_CHAIR.get(), POTTED_DELPHINIUM.get(), POTTED_ALPINE_POPPY.get(), POTTED_SAXIFRAGE.get(), POTTED_ENZIAN.get(), POTTED_ERIOPHORUM.get(), PINE_SAPLING.get(), POTTED_PINE_SAPLING.get(), FIRE_LILY.get(), POTTED_FIRE_LILY.get(), WOODEN_FLOWER_POT_SMALL.get(), FONDUE.get(), OIL_LANTERN.get(), WHEELBARROW.get(), YELLOW_PINE_LEAVES.get(), WOODEN_FLOWER_POT_BIG.get(), WOODCUTTER.get());
+        RenderTypeRegistry.register(RenderType.translucent(), ARTISAN_GLASS_WINDOW_PANE.get(), ORNATE_GLASS_WINDOW_PANE.get(), PINE_WINDOW_PANE.get());
 
         registerStorageTypeRenderers();
         registerClientScreens();

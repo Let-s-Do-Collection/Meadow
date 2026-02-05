@@ -1,0 +1,22 @@
+{
+	"format_version": "1.21.11",
+	"credit": "Made by Satisfy",
+	"textures": {
+		"3": "meadow:block/pine_table_top"
+	},
+	"elements": [
+		{
+			"name": "Center post",
+			"from": [6, 0, 6],
+			"to": [10, 16, 10],
+			"faces": {
+				"north": {"uv": [2, 0, 6, 16], "texture": "#3"},
+				"east": {"uv": [6, 0, 10, 16], "texture": "#3"},
+				"south": {"uv": [10, 0, 14, 16], "texture": "#3"},
+				"west": {"uv": [6, 0, 10, 16], "texture": "#3"},
+				"up": {"uv": [14, 14, 10, 10], "texture": "#3", "cullface": "up"},
+				"down": {"uv": [14, 14, 10, 10], "texture": "#3", "cullface": "up"}
+			}
+		}
+	]
+}

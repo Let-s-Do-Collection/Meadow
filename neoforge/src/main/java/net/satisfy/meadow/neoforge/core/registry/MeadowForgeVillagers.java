@@ -22,7 +22,7 @@ public class MeadowForgeVillagers {
             new VillagerProfession("hermit", x -> x.value() == HERMIT_POI.get(), x -> x.value() == HERMIT_POI.get(), ImmutableSet.of(), ImmutableSet.of(), SoundEvents.VILLAGER_WORK_SHEPHERD));
 
     public static final DeferredHolder<PoiType, PoiType> CHEESEMAKER_POI = POI_TYPES.register("cheesemaker_poi", () ->
-            new PoiType(ImmutableSet.copyOf(ObjectRegistry.CHEESE_RACK.get().getStateDefinition().getPossibleStates()), 1, 1));
+            new PoiType(ImmutableSet.copyOf(ObjectRegistry.PINE_CHEESE_RACK.get().getStateDefinition().getPossibleStates()), 1, 1));
 
     public static final DeferredHolder<VillagerProfession, VillagerProfession> CHEESEMAKER = VILLAGER_PROFESSIONS.register("cheesemaker", () ->
             new VillagerProfession("cheesemaker", x -> x.value() == CHEESEMAKER_POI.get(), x -> x.value() == CHEESEMAKER_POI.get(), ImmutableSet.of(), ImmutableSet.of(), SoundEvents.VILLAGER_WORK_BUTCHER));

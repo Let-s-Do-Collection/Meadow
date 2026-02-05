@@ -25,7 +25,8 @@ public class MeadowPlacedFeature {
 
     public static final ResourceKey<PlacedFeature> MEADOW_GRASS_PATCH_KEY = registerKey("meadow_grass_patch");
     public static final ResourceKey<PlacedFeature> MEADOW_PINE_FALLEN_KEY = registerKey("meadow_pine_fallen");
-    public static final ResourceKey<PlacedFeature> MEADOW_FLOWERS_PATCH_KEY = registerKey("meadow_flowers");
+    public static final ResourceKey<PlacedFeature> MEADOW_ERIOPHORUM_FIELD_KEY = registerKey("meadow_eriophorum_field");
+    public static final ResourceKey<PlacedFeature> MEADOW_FLOWER_FIELD_PATCH_KEY = registerKey("meadow_flower_field");
     public static final ResourceKey<PlacedFeature> MEADOW_TREES_KEY = registerKey("meadow_trees");
     public static final ResourceKey<PlacedFeature> MEADOW_MC_FLOWERS = registerMCKey("flower_meadow");
     public static final ResourceKey<PlacedFeature> MEADOW_MC_TREES = registerMCKey("trees_meadow");
