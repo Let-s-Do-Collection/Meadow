@@ -4,9 +4,17 @@
     "features": [
       {
         "chance": 0.4,
-        "feature": "meadow:meadow_pine_hanging_checked"
+        "feature": "meadow:alpine_birch_tree_checked"
+      },
+      {
+        "chance": 0.05,
+        "feature": "meadow:oak_bush_checked"
+      },
+      {
+        "chance": 0.1,
+        "feature": "meadow:pine_tree_checked"
       }
     ],
-    "default": "meadow:meadow_oak_pine_checked"
+    "default": "meadow:pine_tree_small_checked"
   }
 }

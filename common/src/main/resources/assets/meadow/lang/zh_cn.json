@@ -1,7 +1,7 @@
 {
   "biome.meadow.meadow_clearing": "草甸旷野",
   "biome.meadow.meadow_forest": "草甸森林",
-  "block.meadow.alpine_birch_leaves_hanging": "悬垂白桦树叶",
+  "block.meadow.alpine_birch_leaves": "悬垂白桦树叶",
   "block.meadow.alpine_birch_log": "山地白桦原木",
   "block.meadow.alpine_coal_ore": "山地煤矿石",
   "block.meadow.alpine_copper_ore": "山地铜矿石",
@@ -49,7 +49,7 @@
   "block.meadow.doormat.tooltip": "可放置",
   "block.meadow.enzian": "龙胆花",
   "block.meadow.eriophorum": "羊胡子草",
-  "block.meadow.eriophorum_tall": "高羊胡子草",
+  "block.meadow.tall_eriophorum": "高羊胡子草",
   "block.meadow.fire_lily": "珠芽百合",
   "block.meadow.fire_log": "柴火",
   "block.meadow.rustic_bed": "棕色花纹床",

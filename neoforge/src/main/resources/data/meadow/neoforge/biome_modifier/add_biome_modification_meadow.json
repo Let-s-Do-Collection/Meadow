@@ -2,20 +2,22 @@
   "type": "neoforge:add_features",
   "biomes": "minecraft:meadow",
   "features": [
-    "meadow:ores/ore_limestone",
-    "meadow:ores/ore_salt_upper",
-    "meadow:ores/ore_salt_buried",
-    "meadow:terrain/meadow_boulders",
-    "meadow:terrain/meadow_limestone_slab",
-    "meadow:terrain/meadow_mossy_limestone",
-    "meadow:terrain/meadow_replace_stone_with_limestone",
-    "meadow:meadow_pine_fallen",
     "meadow:eriophorum_field_patch_placed",
+    "meadow:fallen_pine_tree_checked",
     "meadow:flower_field_patch_placed",
-    "meadow:meadow_trees",
     "meadow:forest_trees",
-    "meadow:forest_small_fir"
+    "meadow:meadow_trees",
+    "meadow:ores/ore_limestone",
+    "meadow:ores/ore_salt_buried",
+    "meadow:ores/ore_salt_upper",
+    "meadow:small_fir_patch_placed",
+    "meadow:terrain/limestone_boulder_placed",
+    "meadow:terrain/limestone_slab_placed",
+    "meadow:terrain/replace_stone_with_limestone",
+    "meadow:terrain/replace_grass_with_mossy_cobbled_limestone",
+    "meadow:terrain/replace_grass_with_cobbled_limestone",
+    "meadow:terrain/replace_grass_with_coarse_dirt"
+
   ],
   "step": "vegetal_decoration"
 }
-

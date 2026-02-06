@@ -1,7 +1,7 @@
 {
   "biome.meadow.meadow_clearing": "Claro de pradera",
   "biome.meadow.meadow_forest": "Bosque de pradera",
-  "block.meadow.alpine_birch_leaves_hanging": "Hojas de abedul colgantes",
+  "block.meadow.alpine_birch_leaves": "Hojas de abedul colgantes",
   "block.meadow.alpine_birch_log": "Tronco de abedul alpino",
   "block.meadow.alpine_coal_ore": "Mineral de carbón alpino",
   "block.meadow.alpine_copper_ore": "Mineral de cobre alpino",
@@ -46,7 +46,7 @@
   "block.meadow.doormat.tooltip": "Se puede colocar",
   "block.meadow.enzian": "Gentiana",
   "block.meadow.eriophorum": "Hierba algodonera",
-  "block.meadow.eriophorum_tall": "Hierba algodonera alta",
+  "block.meadow.tall_eriophorum": "Hierba algodonera alta",
   "block.meadow.fire_lily": "Lirio de fuego",
   "block.meadow.fire_log": "Leña",
   "block.meadow.rustic_bed": "Cama estampada marrón",

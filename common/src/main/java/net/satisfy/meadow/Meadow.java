@@ -7,7 +7,6 @@ import net.minecraft.world.level.block.Blocks;
 import net.satisfy.meadow.core.registry.*;
 import net.satisfy.meadow.core.util.WoodenCauldronBehavior;
 import net.satisfy.meadow.core.util.datafixer.DataFixerEntries;
-import net.satisfy.meadow.core.world.feature.configured.tree.foliage.PineFoliagePlacer;
 
 public class Meadow {
     public static final String MOD_ID = "meadow";
@@ -33,7 +32,6 @@ public class Meadow {
         AxeItemHooks.addStrippable(ObjectRegistry.PINE_LOG.get(), ObjectRegistry.STRIPPED_PINE_LOG.get());
         AxeItemHooks.addStrippable(ObjectRegistry.PINE_WOOD.get(), ObjectRegistry.STRIPPED_PINE_WOOD.get());
         AxeItemHooks.addStrippable(ObjectRegistry.ALPINE_BIRCH_LOG.get(), Blocks.STRIPPED_BIRCH_LOG);
-        AxeItemHooks.addStrippable(ObjectRegistry.ALPINE_OAK_LOG.get(), Blocks.STRIPPED_OAK_LOG);
     }
 
     public static ResourceLocation identifier(String path) {

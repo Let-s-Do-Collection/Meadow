@@ -1,5 +1,5 @@
 {
-  "block.meadow.alpine_birch_leaves_hanging": "Висяче березове листя",
+  "block.meadow.alpine_birch_leaves": "Висяче березове листя",
   "block.meadow.alpine_birch_log": "Колода альпійської берези",
   "block.meadow.alpine_coal_ore": "Альпійська вугільна руда",
   "block.meadow.alpine_copper_ore": "Альпійська мідна руда",
@@ -36,7 +36,7 @@
   "block.meadow.doormat": "Килимок",
   "block.meadow.enzian": "Ензіан",
   "block.meadow.eriophorum": "Пухівка",
-  "block.meadow.eriophorum_tall": "Висока пухівка",
+  "block.meadow.tall_eriophorum": "Висока пухівка",
   "block.meadow.fire_lily": "Вогняна лілія",
   "block.meadow.fire_log": "Вогняна колода",
   "block.meadow.rustic_bed": "Плямисте вовняне ліжко",

@@ -37,7 +37,7 @@
                   ]
                 }
               ],
-              "name": "meadow:alpine_birch_leaves_hanging"
+              "name": "meadow:alpine_birch_leaves"
             },
             {
               "type": "minecraft:item",
@@ -56,7 +56,7 @@
                   "enchantment": "minecraft:fortune"
                 }
               ],
-              "name": "minecraft:birch_sapling"
+              "name": "meadow:alpine_birch_sapling"
             }
           ]
         }

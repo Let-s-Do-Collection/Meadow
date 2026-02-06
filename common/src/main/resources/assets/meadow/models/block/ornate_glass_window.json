@@ -1,0 +1,10 @@
+{
+	"format_version": "1.21.11",
+	"credit": "Made by Satisfy",
+	"parent": "minecraft:block/cube_column",
+	"textures": {
+		"particle": "meadow:block/ornate_glass_window_pane",
+		"side": "meadow:block/ornate_glass_window_pane",
+		"end": "meadow:block/ornate_glass_window_top"
+	}
+}

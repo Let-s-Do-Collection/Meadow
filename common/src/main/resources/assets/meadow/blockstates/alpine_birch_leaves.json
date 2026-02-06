@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "hanging=false": {
+      "model": "meadow:block/alpine_birch_leaves"
+    },
+    "hanging=true": {
+      "model": "meadow:block/alpine_birch_leaves_hanging"
+    }
+  }
+}

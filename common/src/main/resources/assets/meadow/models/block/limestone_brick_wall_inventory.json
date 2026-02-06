@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/wall_inventory",
   "textures": {
-    "wall": "meadow:block/limestone_bricks_1"
+    "wall": "meadow:block/limestone_bricks"
   }
 }

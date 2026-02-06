@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cross",
+  "textures": {
+    "cross": "meadow:block/alpine_birch_sapling"
+  }
+}

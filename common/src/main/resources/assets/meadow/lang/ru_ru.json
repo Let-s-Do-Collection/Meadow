@@ -28,7 +28,7 @@
   "advancement.meadow.wool_collector": "Мягкий коллекционер",
   "advancement.meadow.wool_collector.desc": "Соберите все 7 видов шерсти, представленных в Meadow",
 
-  "block.meadow.alpine_birch_leaves_hanging": "Свисающие берёзовые листья",
+  "block.meadow.alpine_birch_leaves": "Свисающие берёзовые листья",
   "block.meadow.alpine_birch_log": "Бревно горной берёзы",
   "block.meadow.alpine_coal_ore": "Горная угольная руда",
   "block.meadow.alpine_copper_ore": "Горная медная руда",
@@ -64,7 +64,7 @@
   "block.meadow.doormat": "Половик",
   "block.meadow.enzian": "Горечавка",
   "block.meadow.eriophorum": "Пушица",
-  "block.meadow.eriophorum_tall": "Высокая пушица",
+  "block.meadow.tall_eriophorum": "Высокая пушица",
   "block.meadow.fire_lily": "Огненная лилия",
   "block.meadow.fire_log": "Поленья",
   "block.meadow.rustic_bed": "Кровать из грубой шерсти",

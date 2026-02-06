@@ -1,15 +1,5 @@
 {
   "variants": {
-    "": [
-            {
-                    "model": "meadow:block/limestone",
-                    "weight": 1
-            },
-            {
-                    "model": "meadow:block/limestone",
-                    "y": 180,
-                    "weight": 1
-            }
-        ]
+    "": { "model": "meadow:block/limestone" }
   }
 }

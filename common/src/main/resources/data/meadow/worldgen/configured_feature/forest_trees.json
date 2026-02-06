@@ -3,18 +3,18 @@
   "config": {
     "features": [
       {
-        "chance": 0.1,
-        "feature": "meadow:forest_birch_pine_checked"
+        "chance": 0.15,
+        "feature": "meadow:oak_bush_checked"
       },
       {
-        "chance": 0.6,
-        "feature": "meadow:forest_pine_checked"
+        "chance": 0.5,
+        "feature": "meadow:pine_tree_checked"
       },
       {
-        "chance": 0.2,
-        "feature": "meadow:forest_yellow_spruce_pine_checked"
+        "chance": 0.35,
+        "feature": "meadow:yellow_pine_tree_checked"
       }
     ],
-    "default": "meadow:forest_spruce_pine_checked"
+    "default": "meadow:pine_tree_small_checked"
   }
 }

@@ -19,20 +19,14 @@ public class PineFoliagePlacer extends FoliagePlacer {
                     IntProvider.codec(0, 24)
                             .fieldOf("trunk_height")
                             .forGetter(placer -> placer.trunkHeight)
-            ).and(
-                    IntProvider.codec(0, 24)
-                            .fieldOf("height")
-                            .forGetter(placer -> placer.height)
             ).apply(instance, PineFoliagePlacer::new)
     );
 
     private final IntProvider trunkHeight;
-    private final IntProvider height;
 
-    public PineFoliagePlacer(IntProvider radius, IntProvider offset, IntProvider trunkHeight, IntProvider height) {
+    public PineFoliagePlacer(IntProvider radius, IntProvider offset, IntProvider trunkHeight) {
         super(radius, offset);
         this.trunkHeight = trunkHeight;
-        this.height = height;
     }
 
     @Override
@@ -58,39 +52,11 @@ public class PineFoliagePlacer extends FoliagePlacer {
             if (ringRadius == 0) {
                 mutablePos.setWithOffset(anchor, 0, y, 0);
                 tryPlaceLeaf(level, setter, random, config, mutablePos);
-
-                if (layerIndex == 1) {
-                    if (random.nextInt(3) != 0) {
-                        mutablePos.setWithOffset(anchor, 1, y, 0);
-                        tryPlaceLeaf(level, setter, random, config, mutablePos);
-                    }
-                    if (random.nextInt(3) != 0) {
-                        mutablePos.setWithOffset(anchor, -1, y, 0);
-                        tryPlaceLeaf(level, setter, random, config, mutablePos);
-                    }
-                    if (random.nextInt(3) != 0) {
-                        mutablePos.setWithOffset(anchor, 0, y, 1);
-                        tryPlaceLeaf(level, setter, random, config, mutablePos);
-                    }
-                    if (random.nextInt(3) != 0) {
-                        mutablePos.setWithOffset(anchor, 0, y, -1);
-                        tryPlaceLeaf(level, setter, random, config, mutablePos);
-                    }
-                }
-
-                if (layerIndex == 2 && random.nextInt(4) == 0) {
-                    Direction direction = Direction.Plane.HORIZONTAL.getRandomDirection(random);
-                    Direction secondDirection = random.nextBoolean() ? direction.getClockWise() : direction.getCounterClockWise();
-                    mutablePos.setWithOffset(anchor, direction.getStepX() + secondDirection.getStepX(), y, direction.getStepZ() + secondDirection.getStepZ());
-                    tryPlaceLeaf(level, setter, random, config, mutablePos);
-                }
-
                 if (layerIndex <= 2 && random.nextInt(4) == 0) {
                     Direction direction = Direction.Plane.HORIZONTAL.getRandomDirection(random);
                     Direction secondDirection = random.nextBoolean() ? direction.getClockWise() : direction.getCounterClockWise();
                     tryPlaceLeaf(level, setter, random, config, mutablePos.relative(direction, 1).relative(secondDirection, 1));
                 }
-
                 continue;
             }
 

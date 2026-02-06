@@ -1,6 +1,0 @@
-{
-  "parent": "minecraft:block/cube_all",
-  "textures": {
-    "all": "meadow:block/yellow_pine_leaves"
-  }
-}

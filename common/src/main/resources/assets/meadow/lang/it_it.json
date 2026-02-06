@@ -1,7 +1,7 @@
 {
   "biome.meadow.meadow_clearing": "Radura del prato",
   "biome.meadow.meadow_forest": "Foresta del prato",
-  "block.meadow.alpine_birch_leaves_hanging": "Foglie di betulla pendenti",
+  "block.meadow.alpine_birch_leaves": "Foglie di betulla pendenti",
   "block.meadow.alpine_birch_log": "Tronco di betulla alpino",
   "block.meadow.alpine_coal_ore": "Minerale di carbone alpino",
   "block.meadow.alpine_copper_ore": "Minerale di rame alpino",
@@ -49,7 +49,7 @@
   "block.meadow.doormat.tooltip": "Può essere posizionato",
   "block.meadow.enzian": "Enzian",
   "block.meadow.eriophorum": "Eriophorum",
-  "block.meadow.eriophorum_tall": "Eriophorum Alto",
+  "block.meadow.tall_eriophorum": "Eriophorum Alto",
   "block.meadow.fire_lily": "Giglio di fuoco",
   "block.meadow.fire_log": "Tronco di fuoco",
   "block.meadow.rustic_bed": "Letto fantasia marrone",

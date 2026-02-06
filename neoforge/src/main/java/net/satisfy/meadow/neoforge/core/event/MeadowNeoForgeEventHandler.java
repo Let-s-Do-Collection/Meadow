@@ -49,7 +49,7 @@ public class MeadowNeoForgeEventHandler {
             trades.get(3).add(new VillagerUtil.SellItemFactory(ObjectRegistry.FRAME.get(), 25, 1, 10));
             trades.computeIfAbsent(4, k -> new ArrayList<>()).add(new VillagerUtil.SellItemFactory(ObjectRegistry.WOODEN_BUCKET.get(), 5, 1, 10));
             trades.get(4).add(new VillagerUtil.SellItemFactory(Items.RABBIT_HIDE, 8, 2, 10));
-            trades.get(4).add(new VillagerUtil.SellItemFactory(ObjectRegistry.FIRE_LOG.get(), 6, 2, 10));
+            trades.get(4).add(new VillagerUtil.SellItemFactory(ObjectRegistry.FIREWOOD.get(), 6, 2, 10));
             trades.computeIfAbsent(5, k -> new ArrayList<>()).add(new VillagerUtil.SellItemFactory(Items.IRON_AXE, 10, 1, 10));
             trades.get(5).add(new VillagerUtil.SellItemFactory(ObjectRegistry.WOODEN_CAULDRON.get(), 5, 1, 10));
             trades.get(5).add(new VillagerUtil.SellItemFactory(ObjectRegistry.ALPINE_SALT.get(), 3, 1, 5));

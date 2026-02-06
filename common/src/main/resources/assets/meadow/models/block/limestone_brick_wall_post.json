@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/template_wall_post",
   "textures": {
-    "wall": "meadow:block/limestone_bricks_1"
+    "wall": "meadow:block/limestone_bricks"
   }
 }

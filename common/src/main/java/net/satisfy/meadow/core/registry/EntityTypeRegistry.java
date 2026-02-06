@@ -11,15 +11,7 @@ import net.minecraft.world.entity.animal.Cow;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.satisfy.meadow.Meadow;
-import net.satisfy.meadow.core.block.entity.CabinetBlockEntity;
-import net.satisfy.meadow.core.block.entity.CheeseFormBlockEntity;
-import net.satisfy.meadow.core.block.entity.CheeseRackBlockEntity;
-import net.satisfy.meadow.core.block.entity.CompletionistBannerEntity;
-import net.satisfy.meadow.core.block.entity.CookingCauldronBlockEntity;
-import net.satisfy.meadow.core.block.entity.PineHangingSignBlockEntity;
-import net.satisfy.meadow.core.block.entity.PineSignBlockEntity;
-import net.satisfy.meadow.core.block.entity.StorageBlockEntity;
-import net.satisfy.meadow.core.block.entity.StoveBlockEntity;
+import net.satisfy.meadow.core.block.entity.*;
 import net.satisfy.meadow.core.entity.ChairEntity;
 import net.satisfy.meadow.core.entity.PineBoatEntity;
 import net.satisfy.meadow.core.entity.PineChestBoatEntity;
@@ -43,6 +35,7 @@ public class EntityTypeRegistry {
     public static final RegistrySupplier<BlockEntityType<CompletionistBannerEntity>> MEADOW_BANNER = registerBlockEntity("meadow_banner", () -> BlockEntityType.Builder.of(CompletionistBannerEntity::new, ObjectRegistry.MEADOW_BANNER.get(), ObjectRegistry.MEADOW_WALL_BANNER.get()).build(null));
     public static final RegistrySupplier<BlockEntityType<PineSignBlockEntity>> MOD_SIGN = BLOCK_ENTITY_TYPES.register("mod_sign", () -> BlockEntityType.Builder.of(PineSignBlockEntity::new, ObjectRegistry.PINE_SIGN.get(), ObjectRegistry.PINE_WALL_SIGN.get()).build(null));
     public static final RegistrySupplier<BlockEntityType<PineHangingSignBlockEntity>> MOD_HANGING_SIGN = BLOCK_ENTITY_TYPES.register("mod_hanging_sign", () -> BlockEntityType.Builder.of(PineHangingSignBlockEntity::new, ObjectRegistry.PINE_HANGING_SIGN.get(), ObjectRegistry.PINE_WALL_HANGING_SIGN.get()).build(null));
+    public static final RegistrySupplier<BlockEntityType<WardrobeBlockEntity>> WARDROBE_BLOCK_ENTITY = registerBlockEntity("wardrobe", () -> BlockEntityType.Builder.of(WardrobeBlockEntity::new, ObjectRegistry.PINE_WARDROBE.get()).build(null));
 
     public static final RegistrySupplier<EntityType<WaterBuffaloEntity>> WATER_BUFFALO = registerEntity("water_buffalo", () -> EntityType.Builder.of(WaterBuffaloEntity::new, MobCategory.CREATURE).sized(0.9f, 1.4f).build(Meadow.identifier("water_buffalo").toString()));
     public static final RegistrySupplier<EntityType<WoolyCowEntity>> WOOLY_COW = registerEntity("wooly_cow", () -> EntityType.Builder.of(WoolyCowEntity::new, MobCategory.CREATURE).sized(0.9f, 1.4f).build(Meadow.identifier("wooly_cow").toString()));

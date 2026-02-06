@@ -1,7 +1,10 @@
 {
-  "parent": "minecraft:block/cube_column",
-  "textures": {
-    "end": "meadow:block/pine_window_top",
-    "side": "meadow:block/pine_window_pane"
-  }
+	"format_version": "1.21.11",
+	"credit": "Made by Satisfy",
+	"parent": "minecraft:block/cube_column",
+	"textures": {
+		"particle": "meadow:block/pine_window_pane",
+		"side": "meadow:block/pine_window_pane",
+		"end": "meadow:block/pine_table_top"
+	}
 }

@@ -2,14 +2,10 @@
   "feature": "meadow:flower_field_patch",
   "placement": [
     {
-      "type": "minecraft:rarity_filter",
-      "chance": 12
-    },
-    {
-      "type": "minecraft:noise_threshold_count",
-      "noise_level": -0.2,
-      "below_noise": 1,
-      "above_noise": 4
+      "type": "minecraft:noise_based_count",
+      "noise_to_count_ratio": 22,
+      "noise_factor": 1.0,
+      "noise_offset": 0.1
     },
     {
       "type": "minecraft:in_square"
@@ -17,6 +13,22 @@
     {
       "type": "minecraft:heightmap",
       "heightmap": "MOTION_BLOCKING"
+    },
+    {
+      "type": "minecraft:block_predicate_filter",
+      "predicate": {
+        "type": "minecraft:matching_blocks",
+        "offset": [
+          0,
+          -1,
+          0
+        ],
+        "blocks": [
+          "minecraft:grass_block",
+          "minecraft:dirt",
+          "minecraft:coarse_dirt"
+        ]
+      }
     },
     {
       "type": "minecraft:biome"

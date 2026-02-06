@@ -1,49 +1,16 @@
 {
   "variants": {
-    "facing=east,fluid=0": {
-      "model": "meadow:block/can",
-      "y": 90
+    "fill_level=0": {
+      "model": "meadow:block/milk_can_0"
     },
-    "facing=north,fluid=0": {
-      "model": "meadow:block/can"
+    "fill_level=1": {
+      "model": "meadow:block/milk_can_1"
     },
-    "facing=south,fluid=0": {
-      "model": "meadow:block/can",
-      "y": 180
+    "fill_level=2": {
+      "model": "meadow:block/milk_can_2"
     },
-    "facing=west,fluid=0": {
-      "model": "meadow:block/can",
-      "y": 270
-    },
-    "facing=east,fluid=1": {
-      "model": "meadow:block/can_milk",
-      "y": 90
-    },
-    "facing=north,fluid=1": {
-      "model": "meadow:block/can_milk"
-    },
-    "facing=south,fluid=1": {
-      "model": "meadow:block/can_milk",
-      "y": 180
-    },
-    "facing=west,fluid=1": {
-      "model": "meadow:block/can_milk",
-      "y": 270
-    },
-    "facing=east,fluid=2": {
-      "model": "meadow:block/can_water",
-      "y": 90
-    },
-    "facing=north,fluid=2": {
-      "model": "meadow:block/can_water"
-    },
-    "facing=south,fluid=2": {
-      "model": "meadow:block/can_water",
-      "y": 180
-    },
-    "facing=west,fluid=2": {
-      "model": "meadow:block/can_water",
-      "y": 270
+    "fill_level=3": {
+      "model": "meadow:block/milk_can_3"
     }
   }
 }

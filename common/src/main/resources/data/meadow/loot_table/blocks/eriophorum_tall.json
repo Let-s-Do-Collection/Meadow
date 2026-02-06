@@ -13,14 +13,14 @@
           "type": "minecraft:item",
           "conditions": [
             {
-              "block": "meadow:eriophorum_tall",
+              "block": "meadow:tall_eriophorum",
               "condition": "minecraft:block_state_property",
               "properties": {
                 "half": "lower"
               }
             }
           ],
-          "name": "meadow:eriophorum_tall"
+          "name": "meadow:tall_eriophorum"
         }
       ],
       "rolls": 1

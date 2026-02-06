@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "meadow:block/alpine_birch_leaves_hanging"
+      "model": "meadow:block/alpine_birch_leaves"
     }
   }
 }

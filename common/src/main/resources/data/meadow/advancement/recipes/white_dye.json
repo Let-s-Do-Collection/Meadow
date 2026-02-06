@@ -6,13 +6,13 @@
     ]
   },
   "criteria": {
-    "has_eriophorum_tall": {
+    "has_tall_eriophorum": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
             "items": [
-              "meadow:eriophorum_tall"
+              "meadow:tall_eriophorum"
             ]
           }
         ]
@@ -27,7 +27,7 @@
   },
   "requirements": [
     [
-      "has_eriophorum_tall",
+      "has_tall_eriophorum",
       "has_the_recipe"
     ]
   ]
