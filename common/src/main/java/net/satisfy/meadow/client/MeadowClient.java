@@ -2,6 +2,7 @@ package net.satisfy.meadow.client;
 
 import dev.architectury.registry.client.level.entity.EntityModelLayerRegistry;
 import dev.architectury.registry.client.level.entity.EntityRendererRegistry;
+import dev.architectury.registry.client.particle.ParticleProviderRegistry;
 import dev.architectury.registry.client.rendering.BlockEntityRendererRegistry;
 import dev.architectury.registry.client.rendering.ColorHandlerRegistry;
 import dev.architectury.registry.client.rendering.RenderTypeRegistry;
@@ -13,17 +14,30 @@ import net.satisfy.meadow.Meadow;
 import net.satisfy.meadow.client.gui.CheeseFormGui;
 import net.satisfy.meadow.client.gui.CookingCauldronGui;
 import net.satisfy.meadow.client.gui.WoodcutterGui;
-import net.satisfy.meadow.client.model.*;
+import net.satisfy.meadow.client.model.FurBootsModel;
+import net.satisfy.meadow.client.model.FurChestplateModel;
+import net.satisfy.meadow.client.model.FurHelmetModel;
+import net.satisfy.meadow.client.model.FurLeggingsModel;
+import net.satisfy.meadow.client.model.WaterBuffaloModel;
+import net.satisfy.meadow.client.model.WoolyCowModel;
+import net.satisfy.meadow.client.particle.FondueBubbleParticle;
+import net.satisfy.meadow.client.particle.SoupSteamParticle;
 import net.satisfy.meadow.client.renderer.block.CompletionistBannerRenderer;
 import net.satisfy.meadow.client.renderer.block.PineHangingSignRenderer;
 import net.satisfy.meadow.client.renderer.block.PineSignRenderer;
 import net.satisfy.meadow.client.renderer.block.WardrobeRenderer;
-import net.satisfy.meadow.client.renderer.block.storage.*;
+import net.satisfy.meadow.client.renderer.block.storage.CheeseRackRenderer;
+import net.satisfy.meadow.client.renderer.block.storage.FlowerBoxRenderer;
+import net.satisfy.meadow.client.renderer.block.storage.FlowerPotBigRenderer;
+import net.satisfy.meadow.client.renderer.block.storage.FlowerPotSmallRenderer;
+import net.satisfy.meadow.client.renderer.block.storage.StorageBlockEntityRenderer;
+import net.satisfy.meadow.client.renderer.block.storage.WheelBarrowRenderer;
 import net.satisfy.meadow.client.renderer.entity.ChairRenderer;
 import net.satisfy.meadow.client.renderer.entity.PineBoatRenderer;
 import net.satisfy.meadow.client.renderer.entity.WaterBuffaloRenderer;
 import net.satisfy.meadow.client.renderer.entity.WoolyCowRenderer;
 import net.satisfy.meadow.core.registry.EntityTypeRegistry;
+import net.satisfy.meadow.core.registry.ParticleTypeRegistry;
 import net.satisfy.meadow.core.registry.ScreenHandlerRegistry;
 import net.satisfy.meadow.core.registry.StorageTypeRegistry;
 
@@ -34,8 +48,12 @@ public class MeadowClient {
     public static final ModelLayerLocation WATER_BUFFALO_MODEL_LAYER = new ModelLayerLocation(Meadow.identifier("water_buffalo"), "head");
 
     public static void initClient() {
-        RenderTypeRegistry.register(RenderType.cutout(), PINE_DOOR.get(), PINE_TRAPDOOR.get(), DELPHINIUM.get(), ALPINE_POPPY.get(), SAXIFRAGE.get(), ENZIAN.get(), COOKING_CAULDRON.get(), FRAME.get(), PINE_TABLE.get(), FIREWOOD.get(), ERIOPHORUM.get(), TALL_ERIOPHORUM.get(), SMALL_FIR.get(), PINE_SAPLING.get(), PINE_CHAIR.get(), POTTED_DELPHINIUM.get(), POTTED_ALPINE_POPPY.get(), POTTED_SAXIFRAGE.get(), POTTED_ENZIAN.get(), POTTED_ERIOPHORUM.get(), PINE_SAPLING.get(), POTTED_PINE_SAPLING.get(), FIRE_LILY.get(), POTTED_FIRE_LILY.get(), WOODEN_FLOWER_POT_SMALL.get(), FONDUE.get(), OIL_LANTERN.get(), WHEELBARROW.get(), WOODEN_FLOWER_POT_BIG.get(), WOODCUTTER.get(), ALPINE_BIRCH_SAPLING.get(), YELLOW_PINE_SAPLING.get(), POTTED_ALPINE_BIRCH_SAPLING.get(), POTTED_YELLOW_PINE_SAPLING.get(), PINE_WARDROBE.get(), MILK_CAN.get());
+        RenderTypeRegistry.register(RenderType.cutout(), PINE_DOOR.get(), PINE_TRAPDOOR.get(), DELPHINIUM.get(), ALPINE_POPPY.get(), SAXIFRAGE.get(), ENZIAN.get(), COOKING_CAULDRON.get(), FRAME.get(), PINE_TABLE.get(), FIREWOOD.get(), ERIOPHORUM.get(), TALL_ERIOPHORUM.get(), SMALL_FIR.get(), PINE_SAPLING.get(), PINE_CHAIR.get(), POTTED_DELPHINIUM.get(), POTTED_ALPINE_POPPY.get(), POTTED_SAXIFRAGE.get(), POTTED_ENZIAN.get(), POTTED_ERIOPHORUM.get(), PINE_SAPLING.get(), POTTED_PINE_SAPLING.get(), FIRE_LILY.get(), POTTED_FIRE_LILY.get(), WOODEN_FLOWER_POT_SMALL.get(), WHEELBARROW.get(), WOODEN_FLOWER_POT_BIG.get(), WOODCUTTER.get(), ALPINE_BIRCH_SAPLING.get(), YELLOW_PINE_SAPLING.get(), POTTED_ALPINE_BIRCH_SAPLING.get(), POTTED_YELLOW_PINE_SAPLING.get(), PINE_WARDROBE.get(), MILK_CAN.get());
         RenderTypeRegistry.register(RenderType.translucent(), ARTISAN_GLASS_WINDOW_PANE.get(), ORNATE_GLASS_WINDOW_PANE.get(), PINE_WINDOW_PANE.get(), ARTISAN_GLASS_WINDOW.get(), ORNATE_GLASS_WINDOW.get(), PINE_WINDOW.get());
+
+        ParticleProviderRegistry.register(ParticleTypeRegistry.FONDUE_BUBBLE.get(), FondueBubbleParticle.Provider::new);
+        ParticleProviderRegistry.register(ParticleTypeRegistry.SOUP_BUBBLE.get(), FondueBubbleParticle.Provider::new);
+        ParticleProviderRegistry.register(ParticleTypeRegistry.SOUP_STEAM.get(), SoupSteamParticle.Provider::new);
 
         registerStorageTypeRenderers();
         registerClientScreens();
@@ -94,5 +112,5 @@ public class MeadowClient {
         EntityModelLayerRegistry.register(CompletionistBannerRenderer.LAYER_LOCATION, CompletionistBannerRenderer::createBodyLayer);
         EntityModelLayerRegistry.register(SHEARABLE_MEADOW_COW_MODEL_LAYER, WoolyCowModel::createBodyLayer);
         EntityModelLayerRegistry.register(WATER_BUFFALO_MODEL_LAYER, WaterBuffaloModel::getTexturedModelData);
-     }
+    }
 }

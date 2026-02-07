@@ -1,5 +1,4 @@
 {
-	"format_version": "1.21.6",
 	"credit": "Made by Satisfy",
 	"textures": {
 		"0": "meadow:block/wooden_cauldron_side",
@@ -69,6 +68,5 @@
 				"down": {"uv": [12, 3, 13, 11], "rotation": 90, "texture": "#3"}
 			}
 		}
-	],
-	"display": {}
+	]
 }

@@ -1,13 +1,12 @@
 {
-	"format_version": "1.21.6",
 	"credit": "Made by Satisfy",
 	"textures": {
 		"1": "meadow:block/brick_oven_top",
 		"3": "meadow:block/brick_stove_side",
 		"4": "meadow:block/brick_stove_bottom",
-		"5": "meadow:block/brick_stove_bottom_2",
+		"5": "meadow:block/brick_stove_feets_bottom",
 		"7": "meadow:block/brick_stove_front",
-		"particle": "meadow:block/brick_stove_bottom_2"
+		"particle": "meadow:block/brick_stove_feets_bottom"
 	},
 	"elements": [
 		{
@@ -118,36 +117,5 @@
 				"down": {"uv": [14, 2, 16, 4], "texture": "#5", "cullface": "down"}
 			}
 		}
-	],
-	"display": {
-		"thirdperson_righthand": {
-			"rotation": [75, 45, 0],
-			"translation": [0, 2.5, 0],
-			"scale": [0.375, 0.375, 0.375]
-		},
-		"thirdperson_lefthand": {
-			"rotation": [75, 45, 0],
-			"translation": [0, 2.5, 0],
-			"scale": [0.375, 0.375, 0.375]
-		},
-		"firstperson_righthand": {
-			"rotation": [0, 45, 0],
-			"scale": [0.4, 0.4, 0.4]
-		},
-		"firstperson_lefthand": {
-			"rotation": [0, -135, 0],
-			"scale": [0.4, 0.4, 0.4]
-		},
-		"ground": {
-			"translation": [0, 3, 0],
-			"scale": [0.25, 0.25, 0.25]
-		},
-		"gui": {
-			"rotation": [30, -135, 0],
-			"scale": [0.625, 0.625, 0.625]
-		},
-		"fixed": {
-			"scale": [0.5, 0.5, 0.5]
-		}
-	}
+	]
 }

@@ -1,3 +1,24 @@
+[1.4.5]
+
+This update brings a wide range of community wishes and improvements, directly implementing your feedback. Gaps have been closed, features have been made more accessible and refined, and familiar content has been carefully revisited and improved.
+
+**Fixed**
+* Alpine Salt loot table
+* Hanging Leaves not rendering properly when used with FastLeaves
+
+**Changed**
+* Many textures have been completely reworked. Some were oversaturated, simple vanilla recolors, or not clearly identifiable in game. The goal was to stay as close as possible to the original feel while improving clarity and consistency.
+* The same applies to a few blocks such as the Fondue, Pine Chair, Pine Table and Milk Can models.
+* Hanging Birch Leaves now generate hanging leaves as originally intended when they were first introduced three years ago.
+
+**Added**
+* A whole variety of Furniture: Pine Sofa, Pine Wardrobe, Pine Dresser, Pine Wall Cabinet
+* Window Blocks for Pine Window Panes, Artisan Window Panes, Ornate Window Panes
+* Saplings for Yellow Pines and Alpine Birch Trees
+* Particles for Cooking Pot & Fondue that show while you're cooking
+
+***
+
 [1.4.4]
 
 **Fixed**

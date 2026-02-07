@@ -15,6 +15,7 @@ public class Meadow {
         DataFixerEntries.init();
         EntityTypeRegistry.init();
         ObjectRegistry.init();
+        ParticleTypeRegistry.init();
         TabRegistry.init();
         RecipeRegistry.init();
         PlacerTypeRegistry.init();

@@ -1,5 +1,4 @@
 {
-	"format_version": "1.21.11",
 	"credit": "Made by Satisfy",
 	"textures": {
 		"0": "meadow:block/pine_barn_trapdoor",
@@ -180,32 +179,6 @@
 				"up": {"uv": [12, 4, 14, 12], "texture": "#3"},
 				"down": {"uv": [2, 5, 4, 12], "texture": "#5"}
 			}
-		}
-	],
-	"groups": [
-		{
-			"name": "front",
-			"origin": [8, 8, 8],
-			"color": 0,
-			"children": [0, 1, 2]
-		},
-		{
-			"name": "handle",
-			"origin": [8, 8, 8],
-			"color": 0,
-			"children": [3, 4]
-		},
-		{
-			"name": "support",
-			"origin": [8, 8, 8],
-			"color": 0,
-			"children": [5, 6, 7, 8]
-		},
-		{
-			"name": "main",
-			"origin": [8, 8, 8],
-			"color": 0,
-			"children": [9, 10, 11, 12, 13]
 		}
 	]
 }

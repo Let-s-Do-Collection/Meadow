@@ -1,0 +1,64 @@
+{
+  "variants": {
+    "facing=east,fill_amount=0": {
+      "model": "meadow:block/fondue_pot_0",
+      "y": 90
+    },
+    "facing=east,fill_amount=1": {
+      "model": "meadow:block/fondue_pot_1",
+      "y": 90
+    },
+    "facing=east,fill_amount=2": {
+      "model": "meadow:block/fondue_pot_2",
+      "y": 90
+    },
+    "facing=east,fill_amount=3": {
+      "model": "meadow:block/fondue_pot_3",
+      "y": 90
+    },
+    "facing=north,fill_amount=0": {
+      "model": "meadow:block/fondue_pot_0"
+    },
+    "facing=north,fill_amount=1": {
+      "model": "meadow:block/fondue_pot_1"
+    },
+    "facing=north,fill_amount=2": {
+      "model": "meadow:block/fondue_pot_2"
+    },
+    "facing=north,fill_amount=3": {
+      "model": "meadow:block/fondue_pot_3"
+    },
+    "facing=south,fill_amount=0": {
+      "model": "meadow:block/fondue_pot_0",
+      "y": 180
+    },
+    "facing=south,fill_amount=1": {
+      "model": "meadow:block/fondue_pot_1",
+      "y": 180
+    },
+    "facing=south,fill_amount=2": {
+      "model": "meadow:block/fondue_pot_2",
+      "y": 180
+    },
+    "facing=south,fill_amount=3": {
+      "model": "meadow:block/fondue_pot_3",
+      "y": 180
+    },
+    "facing=west,fill_amount=0": {
+      "model": "meadow:block/fondue_pot_0",
+      "y": 270
+    },
+    "facing=west,fill_amount=1": {
+      "model": "meadow:block/fondue_pot_1",
+      "y": 270
+    },
+    "facing=west,fill_amount=2": {
+      "model": "meadow:block/fondue_pot_2",
+      "y": 270
+    },
+    "facing=west,fill_amount=3": {
+      "model": "meadow:block/fondue_pot_3",
+      "y": 270
+    }
+  }
+}

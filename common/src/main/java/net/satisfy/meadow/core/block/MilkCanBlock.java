@@ -1,15 +1,18 @@
 package net.satisfy.meadow.core.block;
 
+import java.util.EnumMap;
+import java.util.Map;
 import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
@@ -30,27 +33,40 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.satisfy.meadow.core.registry.ObjectRegistry;
+import net.satisfy.meadow.core.util.GeneralUtil;
 import org.jetbrains.annotations.NotNull;
 
-public class MilkCanBlock extends Block {
+public class MilkCanBlock extends FacingBlock {
     public static final IntegerProperty FILL_LEVEL = IntegerProperty.create("fill_level", 0, 3);
 
-    private static final VoxelShape SHAPE = Util.make(() -> {
-        VoxelShape voxelShape = Shapes.empty();
-        voxelShape = Shapes.joinUnoptimized(voxelShape, Shapes.box(0.25, 0.0, 0.25, 0.75, 0.625, 0.75), BooleanOp.OR);
-        voxelShape = Shapes.joinUnoptimized(voxelShape, Shapes.box(0.3125, 0.625, 0.3125, 0.6875, 0.875, 0.6875), BooleanOp.OR);
-        voxelShape = Shapes.joinUnoptimized(voxelShape, Shapes.box(0.25, 0.875, 0.25, 0.75, 1.0, 0.75), BooleanOp.OR);
-        return voxelShape;
+    private static final VoxelShape BASE_SHAPE = Util.make(() -> {
+        VoxelShape combinedShape = Shapes.empty();
+        combinedShape = Shapes.joinUnoptimized(combinedShape, Shapes.box(0.25, 0.0, 0.25, 0.75, 0.625, 0.75), BooleanOp.OR);
+        combinedShape = Shapes.joinUnoptimized(combinedShape, Shapes.box(0.3125, 0.625, 0.3125, 0.6875, 0.875, 0.6875), BooleanOp.OR);
+        combinedShape = Shapes.joinUnoptimized(combinedShape, Shapes.box(0.25, 0.875, 0.25, 0.75, 1.0, 0.75), BooleanOp.OR);
+        combinedShape = Shapes.joinUnoptimized(combinedShape, Shapes.box(0.1875, 0.5, 0.3125, 0.25, 0.625, 0.6875), BooleanOp.OR);
+        combinedShape = Shapes.joinUnoptimized(combinedShape, Shapes.box(0.75, 0.5, 0.3125, 0.8125, 0.625, 0.6875), BooleanOp.OR);
+        return combinedShape;
+    });
+
+    private static final Map<Direction, VoxelShape> SHAPES = Util.make(() -> {
+        Map<Direction, VoxelShape> shapes = new EnumMap<>(Direction.class);
+        shapes.put(Direction.NORTH, BASE_SHAPE);
+        shapes.put(Direction.EAST, GeneralUtil.rotateShape(Direction.NORTH, Direction.EAST, BASE_SHAPE));
+        shapes.put(Direction.SOUTH, GeneralUtil.rotateShape(Direction.NORTH, Direction.SOUTH, BASE_SHAPE));
+        shapes.put(Direction.WEST, GeneralUtil.rotateShape(Direction.NORTH, Direction.WEST, BASE_SHAPE));
+        return shapes;
     });
 
     public MilkCanBlock(Properties properties) {
         super(properties);
-        registerDefaultState(defaultBlockState().setValue(FILL_LEVEL, 0));
+        registerDefaultState(defaultBlockState().setValue(FACING, Direction.NORTH).setValue(FILL_LEVEL, 0));
     }
 
     @Override
     public @NotNull VoxelShape getShape(BlockState state, BlockGetter level, BlockPos blockPos, CollisionContext context) {
-        return SHAPE;
+        VoxelShape shape = SHAPES.get(state.getValue(FACING));
+        return shape == null ? BASE_SHAPE : shape;
     }
 
     @Override
@@ -97,6 +113,7 @@ public class MilkCanBlock extends Block {
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
+        super.createBlockStateDefinition(builder);
         builder.add(FILL_LEVEL);
     }
 

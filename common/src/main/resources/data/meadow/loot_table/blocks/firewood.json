@@ -1,0 +1,72 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "bonus_rolls": 0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "add": false,
+              "conditions": [
+                {
+                  "block": "meadow:firewood",
+                  "condition": "minecraft:block_state_property",
+                  "properties": {
+                    "stage": "1"
+                  }
+                }
+              ],
+              "count": 1,
+              "function": "minecraft:set_count"
+            },
+            {
+              "add": false,
+              "conditions": [
+                {
+                  "block": "meadow:firewood",
+                  "condition": "minecraft:block_state_property",
+                  "properties": {
+                    "stage": "2"
+                  }
+                }
+              ],
+              "count": 2,
+              "function": "minecraft:set_count"
+            },
+            {
+              "add": false,
+              "conditions": [
+                {
+                  "block": "meadow:firewood",
+                  "condition": "minecraft:block_state_property",
+                  "properties": {
+                    "stage": "3"
+                  }
+                }
+              ],
+              "count": 3,
+              "function": "minecraft:set_count"
+            },
+            {
+              "add": false,
+              "conditions": [
+                {
+                  "block": "meadow:firewood",
+                  "condition": "minecraft:block_state_property",
+                  "properties": {
+                    "stage": "0"
+                  }
+                }
+              ],
+              "function": "minecraft:explosion_decay"
+            }
+          ],
+          "name": "meadow:firewood"
+        }
+      ],
+      "rolls": 1
+    }
+  ]
+}

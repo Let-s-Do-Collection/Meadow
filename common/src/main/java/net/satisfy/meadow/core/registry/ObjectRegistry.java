@@ -77,8 +77,8 @@ public class ObjectRegistry {
     public static final RegistrySupplier<Block> MOSSY_LIMESTONE_BRICK_STAIRS = registerWithItem("mossy_limestone_brick_stairs", () -> new StairBlock(LIMESTONE_BRICKS.get().defaultBlockState(), BlockBehaviour.Properties.ofFullCopy(LIMESTONE_BRICKS.get())));
     public static final RegistrySupplier<Block> MOSSY_LIMESTONE_BRICK_SLAB = registerWithItem("mossy_limestone_brick_slab", () -> new SlabBlock(BlockBehaviour.Properties.ofFullCopy(MOSSY_LIMESTONE_BRICKS.get())));
     public static final RegistrySupplier<Block> CRACKED_LIMESTONE_BRICKS = registerWithItem("cracked_limestone_bricks", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.CRACKED_STONE_BRICKS)));
-    public static final RegistrySupplier<Block> CHISELED_LIMESTONE_BRICKS = registerWithItem("chiseled_limestone_bricks", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.CHISELED_STONE_BRICKS)));
-    public static final RegistrySupplier<Block> POLISHED_LIMESTONE_BRICKS = registerWithItem("polished_limestone_bricks", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.POLISHED_ANDESITE)));
+    public static final RegistrySupplier<Block> CHISELED_LIMESTONE = registerWithItem("chiseled_limestone", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.CHISELED_STONE_BRICKS)));
+    public static final RegistrySupplier<Block> POLISHED_LIMESTONE = registerWithItem("polished_limestone", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.POLISHED_ANDESITE)));
     public static final RegistrySupplier<Block> LIMESTONE_WALL = registerWithItem("limestone_wall", () -> new WallBlock(BlockBehaviour.Properties.ofFullCopy(LIMESTONE.get())));
     public static final RegistrySupplier<Block> COBBLED_LIMESTONE_WALL = registerWithItem("cobbled_limestone_wall", () -> new WallBlock(BlockBehaviour.Properties.ofFullCopy(COBBLED_LIMESTONE.get())));
     public static final RegistrySupplier<Block> LIMESTONE_BRICK_WALL = registerWithItem("limestone_brick_wall", () -> new WallBlock(BlockBehaviour.Properties.ofFullCopy(LIMESTONE_BRICKS.get())));
@@ -134,6 +134,7 @@ public class ObjectRegistry {
 
     public static final RegistrySupplier<Block> STONE_TABLE = registerWithItem("stone_table", () -> new TableBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.STONE).strength(4f, 0.0f).sound(SoundType.STONE).noOcclusion()));
     public static final RegistrySupplier<Block> STONE_BENCH = registerWithItem("stone_bench", () -> new BenchBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.STONE).strength(4f, 0.0f).sound(SoundType.STONE)));
+
     public static final RegistrySupplier<Block> TILED_STOVE = registerWithItem("stove_tiles", () -> new TiledStoveBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.BRICKS)));
     public static final RegistrySupplier<Block> TILED_STOVE_FIREPLACE = registerWithItem("stove_tiles_wood", () -> new TiledStoveBlockFireplace(BlockBehaviour.Properties.ofFullCopy(Blocks.BRICKS).lightLevel(s -> s.getValue(TiledStoveBlock.LIT) ? 13 : 0).randomTicks()));
     public static final RegistrySupplier<Block> TILED_STOVE_SMOKER = registerWithItem("stove_tiles_lid", () -> new TiledStoveBlockSmoker(BlockBehaviour.Properties.ofFullCopy(Blocks.SMOKER), Direction.UP));
@@ -169,8 +170,8 @@ public class ObjectRegistry {
     public static final RegistrySupplier<Block> STRAW_BED = registerWithItem("straw_bed", () -> new MeadowBedBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.WHITE_WOOL).sound(SoundType.WOOD).strength(0.2F).noOcclusion()));
 
     public static final RegistrySupplier<Block> CHEESE_FORM = registerWithItem("cheese_form", () -> new CheeseFormBlock(BlockBehaviour.Properties.of().noOcclusion().strength(0.1f).sound(SoundType.WOOD)));
-    public static final RegistrySupplier<Block> FONDUE = registerWithItem("fondue", () -> new FondueBlock(BlockBehaviour.Properties.of().requiresCorrectToolForDrops().strength(3.5F).sound(SoundType.METAL).lightLevel((blockState) -> 13)));
-    public static final RegistrySupplier<Block> COOKING_CAULDRON = registerWithItem("cooking_cauldron", () -> new CookingCauldronBlock(BlockBehaviour.Properties.of().requiresCorrectToolForDrops().strength(3.5F).sound(SoundType.METAL).lightLevel(state -> state.getValue(CookingCauldronBlock.HANGING) ? 13 : 0)));
+    public static final RegistrySupplier<Block> FONDUE_POT = registerWithItem("fondue_pot", () -> new FonduePotBlock(BlockBehaviour.Properties.of().requiresCorrectToolForDrops().strength(3.5F).sound(SoundType.METAL)));
+    public static final RegistrySupplier<Block> COOKING_CAULDRON = registerWithItem("cookpot", () -> new CookingCauldronBlock(BlockBehaviour.Properties.of().requiresCorrectToolForDrops().strength(3.5F).sound(SoundType.METAL).lightLevel(state -> state.getValue(CookingCauldronBlock.HANGING) ? 13 : 0)));
     public static final RegistrySupplier<Block> FRAME = registerWithItem("frame", () -> new FrameBlock(BlockBehaviour.Properties.of().requiresCorrectToolForDrops().lightLevel((blockState) -> 13).strength(3.5F).sound(SoundType.WOOD).noOcclusion()));
     public static final RegistrySupplier<Block> WOODCUTTER = registerWithItem("woodcutter", () -> new WoodcutterBlock(BlockBehaviour.Properties.of().requiresCorrectToolForDrops().strength(3.5F).sound(SoundType.WOOD)));
     public static final RegistrySupplier<Block> WOODEN_CAULDRON = registerWithItem("wooden_cauldron", () -> new WoodenCauldronBlock(BlockBehaviour.Properties.of().requiresCorrectToolForDrops().strength(2.0f).noOcclusion().sound(SoundType.WOOD).mapColor(MapColor.PODZOL)));

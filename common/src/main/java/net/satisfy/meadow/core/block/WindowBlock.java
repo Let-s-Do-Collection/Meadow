@@ -33,6 +33,7 @@ public class WindowBlock extends IronBarsBlock {
     @Override
     public void setPlacedBy(Level world, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack itemStack) {
         if (!world.isClientSide()) {
+            
             this.updateWindows(world, pos);
         }
     }

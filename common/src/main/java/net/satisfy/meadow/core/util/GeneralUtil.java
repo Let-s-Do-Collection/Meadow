@@ -51,6 +51,7 @@ public class GeneralUtil {
         return Platform.isNeoForge() ? register.register(path.getPath(), block) : registrar.register(path, block);
     }
 
+
     public static <T extends Item> RegistrySupplier<T> registerItem(DeferredRegister<Item> register, Registrar<Item> registrar, ResourceLocation path, Supplier<T> itemSupplier) {
         return Platform.isNeoForge() ? register.register(path.getPath(), itemSupplier) : registrar.register(path, itemSupplier);
     }

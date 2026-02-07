@@ -1,6 +1,5 @@
 {
-  "ambientocclusion": false,
-  "parent": "minecraft:block/tinted_cross",
+  "parent": "minecraft:block/cross",
   "textures": {
     "cross": "meadow:block/saxifrage_2"
   }

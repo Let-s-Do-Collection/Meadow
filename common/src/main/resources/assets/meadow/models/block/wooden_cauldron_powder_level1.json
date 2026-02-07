@@ -5,7 +5,7 @@
     "5": "meadow:block/wooden_cauldron_inner_side",
     "6": "meadow:block/oven_top",
     "top": "meadow:block/wooden_cauldron_top",
-    "bottom": "meadow:block/cauldron_bottom",
+    "bottom": "meadow:block/wooden_cauldron_bottom",
     "particle": "meadow:block/wooden_cauldron_side",
     "side": "meadow:block/wooden_cauldron_side",
     "content": "block/powder_snow"

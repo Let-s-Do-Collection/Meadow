@@ -1,16 +1,64 @@
 {
   "variants": {
-    "fill_level=0": {
+    "facing=north,fill_level=0": {
       "model": "meadow:block/milk_can_0"
     },
-    "fill_level=1": {
+    "facing=east,fill_level=0": {
+      "model": "meadow:block/milk_can_0",
+      "y": 90
+    },
+    "facing=south,fill_level=0": {
+      "model": "meadow:block/milk_can_0",
+      "y": 180
+    },
+    "facing=west,fill_level=0": {
+      "model": "meadow:block/milk_can_0",
+      "y": 270
+    },
+    "facing=north,fill_level=1": {
       "model": "meadow:block/milk_can_1"
     },
-    "fill_level=2": {
+    "facing=east,fill_level=1": {
+      "model": "meadow:block/milk_can_1",
+      "y": 90
+    },
+    "facing=south,fill_level=1": {
+      "model": "meadow:block/milk_can_1",
+      "y": 180
+    },
+    "facing=west,fill_level=1": {
+      "model": "meadow:block/milk_can_1",
+      "y": 270
+    },
+    "facing=north,fill_level=2": {
       "model": "meadow:block/milk_can_2"
     },
-    "fill_level=3": {
+    "facing=east,fill_level=2": {
+      "model": "meadow:block/milk_can_2",
+      "y": 90
+    },
+    "facing=south,fill_level=2": {
+      "model": "meadow:block/milk_can_2",
+      "y": 180
+    },
+    "facing=west,fill_level=2": {
+      "model": "meadow:block/milk_can_2",
+      "y": 270
+    },
+    "facing=north,fill_level=3": {
       "model": "meadow:block/milk_can_3"
+    },
+    "facing=east,fill_level=3": {
+      "model": "meadow:block/milk_can_3",
+      "y": 90
+    },
+    "facing=south,fill_level=3": {
+      "model": "meadow:block/milk_can_3",
+      "y": 180
+    },
+    "facing=west,fill_level=3": {
+      "model": "meadow:block/milk_can_3",
+      "y": 270
     }
   }
 }

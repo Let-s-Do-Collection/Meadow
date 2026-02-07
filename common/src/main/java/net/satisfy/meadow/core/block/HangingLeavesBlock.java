@@ -24,14 +24,14 @@ public class HangingLeavesBlock extends LeavesBlock {
     public static final MapCodec<HangingLeavesBlock> CODEC = simpleCodec(HangingLeavesBlock::new);
     public static final BooleanProperty HANGING = BooleanProperty.create("hanging");
 
-    @Override
-    public @NotNull MapCodec<? extends HangingLeavesBlock> codec() {
-        return CODEC;
-    }
-
     public HangingLeavesBlock(Properties properties) {
         super(properties);
         this.registerDefaultState(this.defaultBlockState().setValue(HANGING, false));
+    }
+
+    @Override
+    public @NotNull MapCodec<? extends HangingLeavesBlock> codec() {
+        return CODEC;
     }
 
     @Override
@@ -43,16 +43,18 @@ public class HangingLeavesBlock extends LeavesBlock {
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext context) {
         BlockState placedState = super.getStateForPlacement(context);
-        boolean aboveSame = isSameHangingLeaves(context.getLevel().getBlockState(context.getClickedPos().above()));
-        assert placedState != null;
-        return placedState.setValue(HANGING, aboveSame);
+        if (placedState == null) {
+            return null;
+        }
+        boolean shouldHang = isSameHangingLeaves(context.getLevel().getBlockState(context.getClickedPos().above()));
+        return placedState.setValue(HANGING, shouldHang);
     }
 
     @Override
     protected @NotNull BlockState updateShape(BlockState state, Direction direction, BlockState neighborState, LevelAccessor level, BlockPos pos, BlockPos neighborPos) {
         BlockState updatedState = super.updateShape(state, direction, neighborState, level, pos, neighborPos);
-        if (direction == Direction.UP && !isSameHangingLeaves(neighborState)) {
-            return updatedState.setValue(HANGING, false);
+        if (direction == Direction.UP) {
+            return updatedState.setValue(HANGING, isSameHangingLeaves(neighborState));
         }
         return updatedState;
     }

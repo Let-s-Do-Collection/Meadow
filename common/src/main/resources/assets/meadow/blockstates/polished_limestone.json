@@ -1,5 +1,7 @@
 {
   "variants": {
-    "": { "model": "meadow:block/polished_limestone" }
+    "": {
+      "model": "meadow:block/polished_limestone"
+    }
   }
 }

@@ -17,5 +17,9 @@ public final class DataFixerEntries {
         DataFixers.register("meadow:eriophorum_tall", "meadow:tall_eriophorum");
         DataFixers.register("meadow:alpine_birch_leaves", "meadow:alpine_birch_leaves");
         DataFixers.register("meadow:fire_log", "meadow:firewood");
+        DataFixers.register("meadow:fondue", "meadow:fondue_pot");
+        DataFixers.register("meadow:cooking_cauldron", "meadow:cookpot");
+        DataFixers.register("meadow:chiseled_limestone_bricks", "meadow:chiseled_limestone");
+        DataFixers.register("meadow:polished_limestone_bricks", "meadow:polished_limestone");
     }
 }
