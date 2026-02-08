@@ -1,5 +1,7 @@
 {
+  "replace": false,
   "values": [
-    "meadow:pine_planks"
+    "meadow:pine_planks",
+    "meadow:reclaimed_pine_planks"
   ]
 }

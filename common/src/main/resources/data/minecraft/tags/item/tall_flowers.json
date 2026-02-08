@@ -1,4 +1,5 @@
 {
+  "replace": false,
   "values": [
     "meadow:tall_eriophorum",
     "meadow:small_fir"

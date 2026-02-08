@@ -1,10 +1,12 @@
 {
+  "replace": false,
   "values": [
-    "meadow:rustic_wool",
+    "meadow:chambray_wool",
     "meadow:linen",
-    "meadow:jacquard_wool",
     "meadow:plaid_wool",
+    "meadow:jacquard_wool",
+    "meadow:rustic_wool",
     "meadow:tweed_wool",
-    "meadow:chambray_wool"
+    "meadow:warped_wool"
   ]
 }

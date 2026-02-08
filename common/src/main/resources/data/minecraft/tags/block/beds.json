@@ -1,4 +1,5 @@
 {
+  "replace": false,
   "values": [
     "meadow:rustic_bed",
     "meadow:linen_bed",
@@ -6,6 +7,7 @@
     "meadow:plaid_bed",
     "meadow:chambray_bed",
     "meadow:tweed_bed",
-    "meadow:warped_bed"
+    "meadow:warped_bed",
+    "meadow:straw_bed"
   ]
 }

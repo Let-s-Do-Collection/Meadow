@@ -1,5 +1,10 @@
 {
+  "replace": false,
   "values": [
-    "#meadow:logs"
+    "meadow:pine_log",
+    "meadow:pine_wood",
+    "meadow:stripped_pine_log",
+    "meadow:stripped_pine_wood",
+    "meadow:alpine_birch_log"
   ]
 }

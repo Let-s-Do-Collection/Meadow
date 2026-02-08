@@ -3,7 +3,7 @@
   "display": {
     "icon": {
       "count": 1,
-      "id": "meadow:cooking_cauldron"
+      "id": "meadow:cookpot"
     },
     "title": {
       "translate": "advancement.meadow.rennet"

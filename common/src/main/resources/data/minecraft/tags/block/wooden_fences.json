@@ -1,4 +1,5 @@
 {
+  "replace": false,
   "values": [
     "meadow:pine_fence",
     "meadow:pine_railing"

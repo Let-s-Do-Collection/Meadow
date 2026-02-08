@@ -1,8 +1,0 @@
-{
-  "replace": false,
-  "values": [
-    "#c:salt",
-    "#c:salts",
-    "meadow:alpine_salt"
-  ]
-}
