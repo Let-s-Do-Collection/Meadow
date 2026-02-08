@@ -7,12 +7,14 @@ This update implements a wide range of community feedback. Several long-standing
 * Pine Signs (Hanging, Wall, etc.) rendering twice
 * Items not being compostable on Neoforge
 * CheeseForm not changing states 
+* Rebuilt all Meadow Structures - this should finally resolve the "meadow:bench - unknown propert for..." error
 
 **Changed**
 * Many textures have been completely reworked. Some were oversaturated, simple vanilla recolors, or not clearly identifiable in-game. The goal was to stay as close as possible to the original feel while improving clarity and consistency.
 * Several models have been refined, including the Fondue, Pine Chair, Pine Table and Milk Can.
 * Hanging Birch Leaves now correctly generate hanging leaves as originally intended when first introduced.
 * The Cooking Frame is now a proper 2-block-tall block. It always includes a Cooking Pot and is immediately ready for use after placement. You might have to replace existing Frames!
+* Remade Pine & Alpine Birch tree shapes
 
 **Added**
 * New furniture pieces: Pine Sofa, Pine Wardrobe, Pine Dresser, Pine Wall Cabinet.
