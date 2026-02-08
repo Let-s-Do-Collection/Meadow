@@ -1,13 +1,14 @@
 {
-  "credit": "Made by Satisfy",
-  "parent": "minecraft:block/template_cauldron_full",
-  "textures": {
-    "5": "meadow:block/wooden_cauldron_inner_side",
-    "6": "meadow:block/oven_top",
-    "top": "meadow:block/wooden_cauldron_top",
-    "bottom": "meadow:block/wooden_cauldron_bottom",
-    "particle": "meadow:block/wooden_cauldron_side",
-    "side": "meadow:block/wooden_cauldron_side",
-    "content": "block/powder_snow"
-  }
+	"format_version": "1.21.11",
+	"credit": "Made by Satisfy",
+	"parent": "minecraft:block/template_cauldron_full",
+	"textures": {
+		"5": "meadow:block/wooden_cauldron_inner_side",
+		"6": "meadow:block/brick_stove_bottom",
+		"top": "meadow:block/wooden_cauldron_top",
+		"bottom": "meadow:block/wooden_cauldron_bottom",
+		"particle": "meadow:block/wooden_cauldron_side",
+		"side": "meadow:block/wooden_cauldron_side",
+		"content": "block/powder_snow"
+	}
 }

@@ -1,0 +1,104 @@
+{
+  "replace": false,
+  "values": {
+    "meadow:cheese_slice": {
+      "chance": 0.5
+    },
+    "meadow:goat_cheese_slice": {
+      "chance": 0.5
+    },
+    "meadow:grain_cheese_slice": {
+      "chance": 0.5
+    },
+    "meadow:amethyst_cheese_slice": {
+      "chance": 0.5
+    },
+    "meadow:sheep_cheese_slice": {
+      "chance": 0.5
+    },
+    "meadow:warped_cheese_slice": {
+      "chance": 0.5
+    },
+    "meadow:buffalo_cheese_slice": {
+      "chance": 0.5
+    },
+    "meadow:cheesecake_slice": {
+      "chance": 0.5
+    },
+    "meadow:cheese_tart_slice": {
+      "chance": 0.5
+    },
+    "meadow:cheese_sandwich": {
+      "chance": 0.5
+    },
+    "meadow:cheese_roll": {
+      "chance": 0.5
+    },
+    "meadow:cheese_stick": {
+      "chance": 0.5
+    },
+    "meadow:cheese_wheel": {
+      "chance": 1.0
+    },
+    "meadow:warped_cheese_wheel": {
+      "chance": 1.0
+    },
+    "meadow:amethyst_cheese_wheel": {
+      "chance": 1.0
+    },
+    "meadow:goat_cheese_wheel": {
+      "chance": 1.0
+    },
+    "meadow:sheep_cheese_wheel": {
+      "chance": 1.0
+    },
+    "meadow:grain_cheese_wheel": {
+      "chance": 1.0
+    },
+    "meadow:buffalo_cheese_wheel": {
+      "chance": 1.0
+    },
+    "meadow:enzian": {
+      "chance": 0.3
+    },
+    "meadow:delphinium": {
+      "chance": 0.3
+    },
+    "meadow:alpine_poppy": {
+      "chance": 0.3
+    },
+    "meadow:saxifrage": {
+      "chance": 0.3
+    },
+    "meadow:eriophorum": {
+      "chance": 0.3
+    },
+    "meadow:small_fir": {
+      "chance": 0.3
+    },
+    "meadow:pine_sapling": {
+      "chance": 0.3
+    },
+    "meadow:yellow_pine_sapling": {
+      "chance": 0.3
+    },
+    "meadow:alpine_birch_sapling": {
+      "chance": 0.3
+    },
+    "meadow:tall_eriophorum": {
+      "chance": 0.3
+    },
+    "meadow:fire_lily": {
+      "chance": 0.3
+    },
+    "meadow:pine_leaves": {
+      "chance": 0.3
+    },
+    "meadow:yellow_pine_leaves": {
+      "chance": 0.3
+    },
+    "meadow:alpine_birch_leaves": {
+      "chance": 0.3
+    }
+  }
+}

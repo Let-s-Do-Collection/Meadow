@@ -4,9 +4,9 @@
 		"1": "meadow:block/brick_oven_top",
 		"3": "meadow:block/brick_stove_side_connected_bottom",
 		"4": "meadow:block/brick_stove_bottom",
-		"5": "meadow:block/brick_stove_feets_bottom",
+		"5": "meadow:block/wooden_cauldron_bottom",
 		"7": "meadow:block/brick_stove_front_connected",
-		"particle": "meadow:block/brick_stove_feets_bottom"
+		"particle": "meadow:block/wooden_cauldron_bottom"
 	},
 	"elements": [
 		{

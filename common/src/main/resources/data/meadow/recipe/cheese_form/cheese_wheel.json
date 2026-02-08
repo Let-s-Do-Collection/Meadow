@@ -1,7 +1,7 @@
 {
   "type": "meadow:cheese",
   "bucket": {
-    "tag": "meadow:milk"
+    "tag": "c:milks"
   },
   "ingredient": {
     "item": "meadow:rennet"

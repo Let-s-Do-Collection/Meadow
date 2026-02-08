@@ -2,10 +2,10 @@
   "type": "meadow:cooking",
   "ingredients": [
     {
-      "tag": "meadow:egg"
+      "tag": "c:eggs"
     },
     {
-      "tag": "meadow:salt"
+      "tag": "c:salts"
     },
     {
       "item": "minecraft:glass_bottle"

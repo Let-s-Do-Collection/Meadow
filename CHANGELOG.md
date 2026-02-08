@@ -4,6 +4,9 @@ This update implements a wide range of community feedback. Several long-standing
 
 **Fixed**
 * Various minor issues and inconsistencies across blocks and models.
+* Pine Signs (Hanging, Wall, etc.) rendering twice
+* Items not being compostable on Neoforge
+* CheeseForm not changing states 
 
 **Changed**
 * Many textures have been completely reworked. Some were oversaturated, simple vanilla recolors, or not clearly identifiable in-game. The goal was to stay as close as possible to the original feel while improving clarity and consistency.
@@ -16,6 +19,7 @@ This update implements a wide range of community feedback. Several long-standing
 * Window Blocks for Pine Window Panes, Artisan Window Panes and Ornate Window Panes.
 * Saplings for Yellow Pines and Alpine Birch Trees.
 * Cooking particles for the Cooking Pot and Fondue while preparing food.
+* CTM and BetterLeaves Texture Packs are now built-in for Neoforge and Fabric.
 
 ***
 

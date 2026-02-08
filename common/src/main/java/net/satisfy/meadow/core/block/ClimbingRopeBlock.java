@@ -27,8 +27,10 @@ public class ClimbingRopeBlock extends Block {
     private static final int MAX_LENGTH = 12;
 
     private static final VoxelShape SEGMENT_SHAPE = Block.box(7, 0, 7, 9, 16, 9);
-    private static final VoxelShape TOP_SHAPE = Shapes.or(Block.box(7, 0, 7, 9, 16, 9), Block.box(6, 8, 6, 10, 12, 10));
-
+    private static final VoxelShape TOP_SHAPE = Shapes.or(
+            Block.box(7, 0, 7, 9, 16, 9),
+            Block.box(6, 8, 6, 10, 14, 10)
+    );
     public ClimbingRopeBlock(Properties properties) {
         super(properties);
         this.registerDefaultState(this.stateDefinition.any().setValue(PART, RopePart.TOP));

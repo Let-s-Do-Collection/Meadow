@@ -2,10 +2,10 @@
 	"credit": "Made by Satisfy",
 	"textures": {
 		"1": "meadow:block/brick_stove_bottom",
-		"5": "meadow:block/brick_stove_feets_bottom",
+		"5": "meadow:block/wooden_cauldron_bottom",
 		"8": "meadow:block/brick_stove_bench_top",
 		"9": "meadow:block/brick_stove_lid",
-		"particle": "meadow:block/brick_stove_feets_bottom"
+		"particle": "meadow:block/wooden_cauldron_bottom"
 	},
 	"elements": [
 		{

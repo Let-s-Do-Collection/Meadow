@@ -14,7 +14,7 @@
       "item": "minecraft:carrot"
     },
     {
-      "tag": "meadow:cheese"
+      "tag": "c:cheese"
     }
   ],
   "fluid_amount": 20,

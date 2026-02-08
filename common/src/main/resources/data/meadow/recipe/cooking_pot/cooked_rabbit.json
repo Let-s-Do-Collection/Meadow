@@ -5,7 +5,7 @@
       "item": "minecraft:rabbit"
     },
     {
-      "tag": "meadow:salt"
+      "tag": "c:salts"
     }
   ],
   "fluid_amount": 10,

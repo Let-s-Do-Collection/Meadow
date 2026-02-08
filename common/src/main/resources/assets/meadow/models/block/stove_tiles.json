@@ -4,8 +4,8 @@
 		"1": "meadow:block/brick_stove_bottom",
 		"3": "meadow:block/brick_stove_side",
 		"4": "meadow:block/brick_oven_top",
-		"5": "meadow:block/brick_stove_feets_bottom",
-		"particle": "meadow:block/brick_stove_feets_bottom"
+		"5": "meadow:block/wooden_cauldron_bottom",
+		"particle": "meadow:block/wooden_cauldron_bottom"
 	},
 	"elements": [
 		{

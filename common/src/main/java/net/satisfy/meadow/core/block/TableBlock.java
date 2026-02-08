@@ -20,8 +20,6 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import net.satisfy.meadow.core.util.GeneralUtil;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Objects;
-
 public class TableBlock extends LineConnectingBlock implements SimpleWaterloggedBlock {
     public static final BooleanProperty WATERLOGGED;
     public static final VoxelShape TOP_SHAPE;
@@ -32,6 +30,7 @@ public class TableBlock extends LineConnectingBlock implements SimpleWaterlogged
         this.registerDefaultState(this.stateDefinition.any().setValue(WATERLOGGED, false));
     }
 
+    @Override
     public @NotNull VoxelShape getShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
         Direction direction = state.getValue(FACING);
         GeneralUtil.LineConnectingType type = state.getValue(TYPE);
@@ -53,17 +52,84 @@ public class TableBlock extends LineConnectingBlock implements SimpleWaterlogged
         }
     }
 
+    @Override
     public BlockState getStateForPlacement(BlockPlaceContext context) {
         Level world = context.getLevel();
         BlockPos clickedPos = context.getClickedPos();
-        return Objects.requireNonNull(super.getStateForPlacement(context)).setValue(WATERLOGGED, world.getFluidState(clickedPos).getType() == Fluids.WATER);
+        Direction facing = context.getHorizontalDirection().getOpposite();
+
+        BlockState baseState = this.defaultBlockState()
+                .setValue(FACING, facing)
+                .setValue(WATERLOGGED, world.getFluidState(clickedPos).getType() == Fluids.WATER);
+
+        return switch (facing) {
+            case EAST -> baseState.setValue(TYPE, getType(baseState, world.getBlockState(clickedPos.south()), world.getBlockState(clickedPos.north())));
+            case SOUTH -> baseState.setValue(TYPE, getType(baseState, world.getBlockState(clickedPos.west()), world.getBlockState(clickedPos.east())));
+            case WEST -> baseState.setValue(TYPE, getType(baseState, world.getBlockState(clickedPos.north()), world.getBlockState(clickedPos.south())));
+            default -> baseState.setValue(TYPE, getType(baseState, world.getBlockState(clickedPos.east()), world.getBlockState(clickedPos.west())));
+        };
     }
 
+    @Override
+    public void neighborChanged(BlockState state, Level world, BlockPos pos, Block sourceBlock, BlockPos sourcePos, boolean notify) {
+        if (world.isClientSide) {
+            return;
+        }
+
+        Direction facing = state.getValue(FACING);
+        GeneralUtil.LineConnectingType type = switch (facing) {
+            case EAST -> getType(state, world.getBlockState(pos.south()), world.getBlockState(pos.north()));
+            case SOUTH -> getType(state, world.getBlockState(pos.west()), world.getBlockState(pos.east()));
+            case WEST -> getType(state, world.getBlockState(pos.north()), world.getBlockState(pos.south()));
+            default -> getType(state, world.getBlockState(pos.east()), world.getBlockState(pos.west()));
+        };
+
+        BlockState updatedState = state.getValue(TYPE) == type ? state : state.setValue(TYPE, type);
+        if (updatedState != state) {
+            world.setBlock(pos, updatedState, 3);
+        }
+    }
+
+    public GeneralUtil.LineConnectingType getType(BlockState selfState, BlockState leftState, BlockState rightState) {
+        boolean leftConnects = isConnectable(leftState, selfState);
+        boolean rightConnects = isConnectable(rightState, selfState);
+
+        if (leftConnects && rightConnects) {
+            return GeneralUtil.LineConnectingType.MIDDLE;
+        }
+        if (leftConnects) {
+            return GeneralUtil.LineConnectingType.LEFT;
+        }
+        if (rightConnects) {
+            return GeneralUtil.LineConnectingType.RIGHT;
+        }
+        return GeneralUtil.LineConnectingType.NONE;
+    }
+
+    private boolean isConnectable(BlockState neighborState, BlockState selfState) {
+        if (!neighborState.hasProperty(FACING) || !selfState.hasProperty(FACING)) {
+            return false;
+        }
+
+        if (neighborState.getValue(FACING) != selfState.getValue(FACING)) {
+            return false;
+        }
+
+        if (neighborState.getBlock() == selfState.getBlock()) {
+            return true;
+        }
+
+        return (neighborState.getBlock() instanceof DresserBlock && selfState.getBlock() instanceof TableBlock)
+                || (neighborState.getBlock() instanceof TableBlock && selfState.getBlock() instanceof DresserBlock);
+    }
+
+    @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         super.createBlockStateDefinition(builder);
         builder.add(WATERLOGGED);
     }
 
+    @Override
     public @NotNull FluidState getFluidState(BlockState state) {
         return state.getValue(WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(state);
     }

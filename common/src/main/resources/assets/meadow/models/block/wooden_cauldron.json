@@ -1,9 +1,10 @@
 {
+	"format_version": "1.21.11",
 	"credit": "Made by Satisfy",
 	"ambientocclusion": false,
 	"textures": {
 		"4": "meadow:block/wooden_cauldron_inner_side",
-		"5": "meadow:block/oven_top",
+		"5": "meadow:block/brick_stove_bottom",
 		"6": "meadow:block/pine_table_top",
 		"top": "meadow:block/wooden_cauldron_top",
 		"bottom": "meadow:block/wooden_cauldron_bottom",

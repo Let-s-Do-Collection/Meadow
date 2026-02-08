@@ -6,13 +6,13 @@
     ],
     "key": {
         "/": {
-            "tag": "meadow:cheese"
+            "tag": "c:cheese"
         },
         "E": {
-            "tag": "meadow:egg"
+            "tag": "c:egg"
         },
         "W": {
-            "tag": "meadow:wheat"
+            "tag": "c:wheat"
         }
     },
     "result": {

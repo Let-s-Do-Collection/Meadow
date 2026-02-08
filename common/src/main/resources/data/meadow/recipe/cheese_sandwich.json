@@ -7,10 +7,10 @@
   ],
   "key": {
     "#": {
-      "tag": "meadow:bread"
+      "tag": "c:bread"
     },
     "M": {
-      "tag": "meadow:cheese"
+      "tag": "c:cheese"
     }
   },
   "result":

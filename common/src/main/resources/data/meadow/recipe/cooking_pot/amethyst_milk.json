@@ -5,10 +5,10 @@
       "item": "minecraft:amethyst_cluster"
     },
     {
-      "tag": "meadow:salt"
+      "tag": "c:salts"
     },
     {
-      "tag": "meadow:milk"
+      "tag": "c:milks"
     }
   ],
   "fluid_amount": 2,

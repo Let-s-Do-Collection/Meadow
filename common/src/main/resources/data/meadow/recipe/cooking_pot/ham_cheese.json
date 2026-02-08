@@ -5,10 +5,10 @@
       "item": "meadow:raw_buffalo_meat"
     },
     {
-      "tag": "meadow:salt"
+      "tag": "c:salts"
     },
     {
-      "tag": "meadow:cheese"
+      "tag": "c:cheese"
     }
   ],
   "fluid_amount": 2,

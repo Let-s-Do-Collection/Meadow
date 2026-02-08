@@ -71,6 +71,7 @@ public class DresserBlock extends BaseEntityBlock implements SimpleWaterloggedBl
         BlockPos clickedPos = context.getClickedPos();
         Direction facing = context.getHorizontalDirection().getOpposite();
         BlockState blockState = this.defaultBlockState().setValue(FACING, facing).setValue(WATERLOGGED, world.getFluidState(clickedPos).getType() == Fluids.WATER);
+
         return switch (facing) {
             case EAST -> blockState.setValue(TYPE, getType(blockState, world.getBlockState(clickedPos.south()), world.getBlockState(clickedPos.north())));
             case SOUTH -> blockState.setValue(TYPE, getType(blockState, world.getBlockState(clickedPos.west()), world.getBlockState(clickedPos.east())));
@@ -100,13 +101,13 @@ public class DresserBlock extends BaseEntityBlock implements SimpleWaterloggedBl
     protected @NotNull InteractionResult useWithoutItem(BlockState blockState, Level world, BlockPos pos, Player player, BlockHitResult blockHitResult) {
         if (world.isClientSide) {
             return InteractionResult.SUCCESS;
-        } else {
-            BlockEntity blockEntity = world.getBlockEntity(pos);
-            if (blockEntity instanceof CabinetBlockEntity blockEntity1) {
-                player.openMenu(blockEntity1);
-            }
-            return InteractionResult.CONSUME;
         }
+
+        BlockEntity blockEntity = world.getBlockEntity(pos);
+        if (blockEntity instanceof CabinetBlockEntity cabinetBlockEntity) {
+            player.openMenu(cabinetBlockEntity);
+        }
+        return InteractionResult.CONSUME;
     }
 
     @SuppressWarnings("unused")
@@ -136,8 +137,8 @@ public class DresserBlock extends BaseEntityBlock implements SimpleWaterloggedBl
     public void setPlacedBy(Level world, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack itemStack) {
         if (itemStack.has(DataComponents.CUSTOM_NAME)) {
             BlockEntity blockEntity = world.getBlockEntity(pos);
-            if (blockEntity instanceof CabinetBlockEntity blockEntity1) {
-                blockEntity1.setComponents(DataComponentMap.builder().set(DataComponents.CUSTOM_NAME, itemStack.getHoverName()).build());
+            if (blockEntity instanceof CabinetBlockEntity cabinetBlockEntity) {
+                cabinetBlockEntity.setComponents(DataComponentMap.builder().set(DataComponents.CUSTOM_NAME, itemStack.getHoverName()).build());
             }
         }
     }
@@ -148,37 +149,56 @@ public class DresserBlock extends BaseEntityBlock implements SimpleWaterloggedBl
     }
 
     public GeneralUtil.LineConnectingType getType(BlockState state, BlockState left, BlockState right) {
-        boolean shape_left_same = isConnectable(left, state);
-        boolean shape_right_same = isConnectable(right, state);
-        if (shape_left_same && shape_right_same) {
+        boolean leftConnects = isConnectable(left, state);
+        boolean rightConnects = isConnectable(right, state);
+
+        if (leftConnects && rightConnects) {
             return GeneralUtil.LineConnectingType.MIDDLE;
-        } else if (shape_left_same) {
+        }
+        if (leftConnects) {
             return GeneralUtil.LineConnectingType.LEFT;
-        } else if (shape_right_same) {
+        }
+        if (rightConnects) {
             return GeneralUtil.LineConnectingType.RIGHT;
         }
         return GeneralUtil.LineConnectingType.NONE;
     }
 
-    protected boolean isConnectable(BlockState state1, BlockState state2) {
-        return state1.getBlock() == state2.getBlock() && state1.getValue(FACING) == state2.getValue(FACING);
+    protected boolean isConnectable(BlockState neighborState, BlockState selfState) {
+        if (!neighborState.hasProperty(FACING) || !selfState.hasProperty(FACING)) {
+            return false;
+        }
+
+        if (neighborState.getValue(FACING) != selfState.getValue(FACING)) {
+            return false;
+        }
+
+        if (neighborState.getBlock() == selfState.getBlock()) {
+            return true;
+        }
+
+        return (neighborState.getBlock() instanceof TableBlock && selfState.getBlock() instanceof DresserBlock)
+                || (neighborState.getBlock() instanceof DresserBlock && selfState.getBlock() instanceof TableBlock);
     }
 
     @Override
     public void neighborChanged(BlockState state, Level world, BlockPos pos, Block sourceBlock, BlockPos sourcePos, boolean notify) {
-        if (world.isClientSide) return;
+        if (world.isClientSide) {
+            return;
+        }
+
         Direction facing = state.getValue(FACING);
-        GeneralUtil.LineConnectingType type;
-        switch (facing) {
-            case EAST -> type = getType(state, world.getBlockState(pos.south()), world.getBlockState(pos.north()));
-            case SOUTH -> type = getType(state, world.getBlockState(pos.west()), world.getBlockState(pos.east()));
-            case WEST -> type = getType(state, world.getBlockState(pos.north()), world.getBlockState(pos.south()));
-            default -> type = getType(state, world.getBlockState(pos.east()), world.getBlockState(pos.west()));
+        GeneralUtil.LineConnectingType type = switch (facing) {
+            case EAST -> getType(state, world.getBlockState(pos.south()), world.getBlockState(pos.north()));
+            case SOUTH -> getType(state, world.getBlockState(pos.west()), world.getBlockState(pos.east()));
+            case WEST -> getType(state, world.getBlockState(pos.north()), world.getBlockState(pos.south()));
+            default -> getType(state, world.getBlockState(pos.east()), world.getBlockState(pos.west()));
+        };
+
+        BlockState updatedState = state.getValue(TYPE) == type ? state : state.setValue(TYPE, type);
+        if (updatedState != state) {
+            world.setBlock(pos, updatedState, 3);
         }
-        if (state.getValue(TYPE) != type) {
-            state = state.setValue(TYPE, type);
-        }
-        world.setBlock(pos, state, 3);
     }
 
     @Override
@@ -229,10 +249,12 @@ public class DresserBlock extends BaseEntityBlock implements SimpleWaterloggedBl
         FACING = BlockStateProperties.HORIZONTAL_FACING;
         TYPE = GeneralUtil.LINE_CONNECTING_TYPE;
         OPEN = BlockStateProperties.OPEN;
+
         SHAPES_SUPPLIERS.put(GeneralUtil.LineConnectingType.NONE, DresserBlock::makeSingleShape);
         SHAPES_SUPPLIERS.put(GeneralUtil.LineConnectingType.MIDDLE, DresserBlock::makeMiddleShape);
         SHAPES_SUPPLIERS.put(GeneralUtil.LineConnectingType.RIGHT, DresserBlock::makeRightShape);
         SHAPES_SUPPLIERS.put(GeneralUtil.LineConnectingType.LEFT, DresserBlock::makeLeftShape);
+
         for (Direction direction : Direction.Plane.HORIZONTAL) {
             SHAPES.put(direction, new HashMap<>());
             for (Map.Entry<GeneralUtil.LineConnectingType, Supplier<VoxelShape>> entry : SHAPES_SUPPLIERS.entrySet()) {

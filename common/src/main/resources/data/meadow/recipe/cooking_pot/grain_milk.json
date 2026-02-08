@@ -2,13 +2,13 @@
   "type": "meadow:cooking",
   "ingredients": [
     {
-      "tag": "meadow:wheat"
+      "tag": "c:wheat"
     },
     {
-      "tag": "meadow:wheat"
+      "tag": "c:wheat"
     },
     {
-      "tag": "meadow:wheat"
+      "tag": "c:wheat"
     },
     {
       "item": "meadow:wooden_bucket"

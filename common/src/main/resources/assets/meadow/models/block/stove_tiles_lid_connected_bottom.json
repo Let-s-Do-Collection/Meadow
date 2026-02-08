@@ -1,12 +1,13 @@
 {
+	"format_version": "1.21.11",
 	"credit": "Made by Satisfy",
 	"textures": {
 		"1": "meadow:block/brick_stove_bottom",
 		"3": "meadow:block/brick_stove_side_connected_bottom",
 		"4": "meadow:block/brick_stove_lid_connected_bottom",
-		"5": "meadow:block/brick_stove_feets_bottom",
+		"5": "meadow:block/wooden_cauldron_bottom",
 		"6": "meadow:block/brick_oven_top",
-		"particle": "meadow:block/brick_stove_feets_bottom"
+		"particle": "meadow:block/wooden_cauldron_bottom"
 	},
 	"elements": [
 		{
