@@ -19,3 +19,5 @@ classes/
 .settings
 *.launch.DS_Store
 .desc/
+.DS_Store
+**/.DS_Store
