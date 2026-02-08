@@ -13,6 +13,10 @@
       {
         "chance": 0.1,
         "feature": "meadow:pine_tree_checked"
+      },
+      {
+        "chance": 0.1,
+        "feature": "meadow:pine_tree_decorated_checked"
       }
     ],
     "default": "meadow:pine_tree_small_checked"

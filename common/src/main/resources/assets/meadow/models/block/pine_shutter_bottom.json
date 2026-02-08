@@ -1,0 +1,21 @@
+{
+	"format_version": "1.21.11",
+	"credit": "Made by Satisfy",
+	"textures": {
+		"particle": "meadow:block/pine_shutter_bottom",
+		"middle": "meadow:block/pine_shutter_bottom"
+	},
+	"elements": [
+		{
+			"from": [0, 0, 13],
+			"to": [16, 16, 16],
+			"faces": {
+				"north": {"uv": [0, 0, 16, 16], "texture": "#middle"},
+				"east": {"uv": [0, 0, 3, 16], "texture": "#middle", "cullface": "east"},
+				"south": {"uv": [0, 0, 16, 16], "texture": "#middle", "cullface": "south"},
+				"west": {"uv": [3, 0, 0, 16], "texture": "#middle", "cullface": "west"},
+				"down": {"uv": [3, 0, 0, 16], "rotation": 90, "texture": "#middle", "cullface": "down"}
+			}
+		}
+	]
+}

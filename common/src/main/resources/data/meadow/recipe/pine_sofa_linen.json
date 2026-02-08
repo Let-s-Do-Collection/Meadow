@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "# #",
+    "###",
+    "X X"
+  ],
+  "key": {
+    "X": {
+      "item": "meadow:pine_planks"
+    },
+    "#": {
+      "tag": "meadow:linen_wool"
+    }
+  },
+  "result": {
+    "id": "meadow:pine_sofa_linen",
+    "count": 1
+  }
+}

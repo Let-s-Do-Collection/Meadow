@@ -2,10 +2,10 @@
   "feature": "meadow:eriophorum_field_patch",
   "placement": [
     {
-      "type": "minecraft:noise_based_count",
-      "noise_to_count_ratio": 20,
-      "noise_factor": 1.0,
-      "noise_offset": 0.0
+      "type": "minecraft:noise_threshold_count",
+      "noise_level": 0.02,
+      "below_noise": 0,
+      "above_noise": 5
     },
     {
       "type": "minecraft:in_square"
@@ -13,6 +13,36 @@
     {
       "type": "minecraft:heightmap",
       "heightmap": "MOTION_BLOCKING_NO_LEAVES"
+    },
+    {
+      "type": "minecraft:block_predicate_filter",
+      "predicate": {
+        "type": "minecraft:all_of",
+        "predicates": [
+          {
+            "type": "minecraft:matching_blocks",
+            "offset": [
+              0,
+              0,
+              0
+            ],
+            "blocks": [
+              "minecraft:air"
+            ]
+          },
+          {
+            "type": "minecraft:matching_blocks",
+            "offset": [
+              0,
+              -1,
+              0
+            ],
+            "blocks": [
+              "minecraft:grass_block"
+            ]
+          }
+        ]
+      }
     },
     {
       "type": "minecraft:biome"

@@ -1,0 +1,10 @@
+{
+  "type": "meadow:woodcutting",
+  "inputItem": {
+    "item": "meadow:reclaimed_pine_planks"
+  },
+  "outputItem": {
+    "count": 3,
+    "id": "meadow:reclaimed_pine_door"
+  }
+}

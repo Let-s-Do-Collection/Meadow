@@ -1,0 +1,12 @@
+{
+  "parent": "meadow:block/template_sofa_right",
+  "textures": {
+    "1": "meadow:block/pine_sofa_warped_back",
+    "2": "meadow:block/pine_table_side",
+    "3": "meadow:block/pine_sofa_warped_front",
+    "4": "meadow:block/pine_sofa_warped_parts",
+    "5": "meadow:block/pine_sofa_side",
+    "6": "meadow:block/pine_sofa_warped_top",
+    "particle": "meadow:block/pine_sofa_warped_front"
+  }
+}

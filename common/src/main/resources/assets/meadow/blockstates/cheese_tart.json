@@ -1,37 +1,35 @@
 {
   "variants": {
     "facing=east,cuts=0": {
-      "model": "meadow:block/cheese_tart_4",
+      "model": "meadow:block/cheese_tart_0",
       "y": 90
     },
     "facing=north,cuts=0": {
-      "model": "meadow:block/cheese_tart_4"
+      "model": "meadow:block/cheese_tart_0"
     },
     "facing=south,cuts=0": {
-      "model": "meadow:block/cheese_tart_4",
+      "model": "meadow:block/cheese_tart_0",
       "y": 180
     },
     "facing=west,cuts=0": {
-      "model": "meadow:block/cheese_tart_4",
+      "model": "meadow:block/cheese_tart_0",
       "y": 270
     },
-
     "facing=east,cuts=1": {
-      "model": "meadow:block/cheese_tart_3",
+      "model": "meadow:block/cheese_tart_1",
       "y": 90
     },
     "facing=north,cuts=1": {
-      "model": "meadow:block/cheese_tart_3"
+      "model": "meadow:block/cheese_tart_1"
     },
     "facing=south,cuts=1": {
-      "model": "meadow:block/cheese_tart_3",
+      "model": "meadow:block/cheese_tart_1",
       "y": 180
     },
     "facing=west,cuts=1": {
-      "model": "meadow:block/cheese_tart_3",
+      "model": "meadow:block/cheese_tart_1",
       "y": 270
     },
-
     "facing=east,cuts=2": {
       "model": "meadow:block/cheese_tart_2",
       "y": 90
@@ -47,20 +45,19 @@
       "model": "meadow:block/cheese_tart_2",
       "y": 270
     },
-
     "facing=east,cuts=3": {
-      "model": "meadow:block/cheese_tart_1",
+      "model": "meadow:block/cheese_tart_3",
       "y": 90
     },
     "facing=north,cuts=3": {
-      "model": "meadow:block/cheese_tart_1"
+      "model": "meadow:block/cheese_tart_3"
     },
     "facing=south,cuts=3": {
-      "model": "meadow:block/cheese_tart_1",
+      "model": "meadow:block/cheese_tart_3",
       "y": 180
     },
     "facing=west,cuts=3": {
-      "model": "meadow:block/cheese_tart_1",
+      "model": "meadow:block/cheese_tart_3",
       "y": 270
     }
   }

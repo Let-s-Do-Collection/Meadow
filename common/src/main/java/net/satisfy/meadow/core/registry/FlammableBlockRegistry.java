@@ -8,9 +8,9 @@ import net.minecraft.world.level.block.FireBlock;
 public class FlammableBlockRegistry {
     public static void init() {
         addFlammable(5, 20,
-                ObjectRegistry.PINE_BARN_DOOR.get(),
+                ObjectRegistry.RECLAIMED_PINE_TRAPDOOR.get(),
                 ObjectRegistry.PINE_BEAM.get(),
-                ObjectRegistry.PINE_BARN_TRAPDOOR.get(),
+                ObjectRegistry.RECLAIMED_PINE_DOOR.get(),
                 ObjectRegistry.PINE_DOOR.get(),
                 ObjectRegistry.PINE_FENCE_GATE.get(),
                 ObjectRegistry.PINE_BUTTON.get(),
@@ -30,10 +30,7 @@ public class FlammableBlockRegistry {
         addFlammable(30, 60,
                 ObjectRegistry.PINE_LEAVES.get(),
                 ObjectRegistry.YELLOW_PINE_LEAVES.get(),
-                ObjectRegistry.SHUTTER_BLOCK.get(),
-                ObjectRegistry.SHUTTER_BLOCK_BERRY.get(),
-                ObjectRegistry.SHUTTER_BLOCK_FIR.get(),
-                ObjectRegistry.SHUTTER_BLOCK_POPPY.get()
+                ObjectRegistry.PINE_SHUTTER.get()
         );
 
         addFlammable(10, 40,

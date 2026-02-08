@@ -1,0 +1,12 @@
+{
+  "parent": "meadow:block/template_sofa_single",
+  "textures": {
+    "1": "meadow:block/pine_sofa_tweed_front",
+    "2": "meadow:block/pine_sofa_side",
+    "4": "meadow:block/pine_sofa_tweed_parts",
+    "5": "meadow:block/pine_table_top",
+    "6": "meadow:block/pine_sofa_tweed_back",
+    "7": "meadow:block/pine_sofa_tweed_top",
+    "particle": "meadow:block/pine_sofa_tweed_front"
+  }
+}

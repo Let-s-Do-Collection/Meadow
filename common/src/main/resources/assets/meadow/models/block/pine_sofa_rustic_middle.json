@@ -1,0 +1,10 @@
+{
+  "parent": "meadow:block/template_sofa_middle",
+  "textures": {
+    "6": "meadow:block/pine_sofa_rustic_top",
+    "8": "meadow:block/pine_sofa_rustic_back",
+    "9": "meadow:block/pine_table_middle",
+    "12": "meadow:block/pine_sofa_side",
+    "particle": "meadow:block/pine_sofa_rustic_front"
+  }
+}

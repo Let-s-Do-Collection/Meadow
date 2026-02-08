@@ -13,7 +13,7 @@ public class TabRegistry {
 
     @SuppressWarnings("unused")
     public static final RegistrySupplier<CreativeModeTab> MEADOW_TAB = CREATIVE_MODE_TABS.register("meadow", () -> CreativeModeTab.builder(CreativeModeTab.Row.TOP, 0)
-            .icon(() -> new ItemStack(ObjectRegistry.CHEESE_SLICE.get()))
+            .icon(() -> new ItemStack(ObjectRegistry.CHEESE_WHEEL.get()))
             .title(Component.translatable("creativetab.meadow.tab"))
             .displayItems((parameters, output) -> {
                 output.accept(ObjectRegistry.ALPINE_COAL_ORE.get());
@@ -37,9 +37,6 @@ public class TabRegistry {
                 output.accept(ObjectRegistry.LIMESTONE_STAIRS.get());
                 output.accept(ObjectRegistry.LIMESTONE_SLAB.get());
                 output.accept(ObjectRegistry.LIMESTONE_WALL.get());
-
-
-
                 output.accept(ObjectRegistry.LIMESTONE_BRICKS.get());
                 output.accept(ObjectRegistry.LIMESTONE_BRICK_STAIRS.get());
                 output.accept(ObjectRegistry.LIMESTONE_BRICK_SLAB.get());
@@ -62,12 +59,15 @@ public class TabRegistry {
                 output.accept(ObjectRegistry.PINE_PLANKS.get());
                 output.accept(ObjectRegistry.PINE_STAIRS.get());
                 output.accept(ObjectRegistry.PINE_SLAB.get());
+                output.accept(ObjectRegistry.RECLAIMED_PINE_PLANKS.get());
+                output.accept(ObjectRegistry.RECLAIMED_PINE_STAIRS.get());
+                output.accept(ObjectRegistry.RECLAIMED_PINE_SLAB.get());
                 output.accept(ObjectRegistry.PINE_FENCE.get());
                 output.accept(ObjectRegistry.PINE_FENCE_GATE.get());
                 output.accept(ObjectRegistry.PINE_DOOR.get());
                 output.accept(ObjectRegistry.PINE_TRAPDOOR.get());
-                output.accept(ObjectRegistry.PINE_BARN_DOOR.get());
-                output.accept(ObjectRegistry.PINE_BARN_TRAPDOOR.get());
+                output.accept(ObjectRegistry.RECLAIMED_PINE_DOOR.get());
+                output.accept(ObjectRegistry.RECLAIMED_PINE_TRAPDOOR.get());
                 output.accept(ObjectRegistry.PINE_PRESSURE_PLATE.get());
                 output.accept(ObjectRegistry.PINE_BUTTON.get());
                 output.accept(ObjectRegistry.PINE_SIGN_ITEM.get());
@@ -79,7 +79,6 @@ public class TabRegistry {
                 output.accept(ObjectRegistry.PINE_WINDOW.get());
                 output.accept(ObjectRegistry.PINE_WINDOW_PANE.get());
                 output.accept(ObjectRegistry.PINE_CHEESE_RACK.get());
-                output.accept(ObjectRegistry.PINE_SOFA.get());
                 output.accept(ObjectRegistry.PINE_DRESSER.get());
                 output.accept(ObjectRegistry.PINE_CABINET.get());
                 output.accept(ObjectRegistry.PINE_WALL_CABINET.get());
@@ -87,28 +86,35 @@ public class TabRegistry {
                 output.accept(ObjectRegistry.PINE_CHAIR.get());
                 output.accept(ObjectRegistry.PINE_TABLE.get());
                 output.accept(ObjectRegistry.PINE_BENCH.get());
-                output.accept(ObjectRegistry.SHUTTER_BLOCK.get());
+                output.accept(ObjectRegistry.PINE_SHUTTER.get());
                 output.accept(ObjectRegistry.RUSTIC_WOOL.get());
                 output.accept(ObjectRegistry.RUSTIC_CARPET.get());
                 output.accept(ObjectRegistry.RUSTIC_BED.get());
+                output.accept(ObjectRegistry.PINE_SOFA_RUSTIC.get());
                 output.accept(ObjectRegistry.LINEN.get());
                 output.accept(ObjectRegistry.LINEN_CARPET.get());
                 output.accept(ObjectRegistry.LINEN_BED.get());
+                output.accept(ObjectRegistry.PINE_SOFA_LINEN.get());
                 output.accept(ObjectRegistry.JACQUARD_WOOL.get());
                 output.accept(ObjectRegistry.JACQUARD_CARPET.get());
                 output.accept(ObjectRegistry.JACQUARD_BED.get());
+                output.accept(ObjectRegistry.PINE_SOFA_JACQUARD.get());
                 output.accept(ObjectRegistry.PLAID_WOOL.get());
                 output.accept(ObjectRegistry.PLAID_CARPET.get());
                 output.accept(ObjectRegistry.PLAID_BED.get());
+                output.accept(ObjectRegistry.PINE_SOFA_PLAID.get());
                 output.accept(ObjectRegistry.CHAMBRAY_WOOL.get());
                 output.accept(ObjectRegistry.CHAMBRAY_CARPET.get());
                 output.accept(ObjectRegistry.CHAMBRAY_BED.get());
+                output.accept(ObjectRegistry.PINE_SOFA_CHAMBRAY.get());
                 output.accept(ObjectRegistry.TWEED_WOOL.get());
                 output.accept(ObjectRegistry.TWEED_CARPET.get());
                 output.accept(ObjectRegistry.TWEED_BED.get());
+                output.accept(ObjectRegistry.PINE_SOFA_TWEED.get());
                 output.accept(ObjectRegistry.WARPED_WOOL.get());
                 output.accept(ObjectRegistry.WARPED_CARPET.get());
                 output.accept(ObjectRegistry.WARPED_BED.get());
+                output.accept(ObjectRegistry.PINE_SOFA_WARPED.get());
                 output.accept(ObjectRegistry.STRAW_BED.get());
                 output.accept(ObjectRegistry.STONE_TABLE.get());
                 output.accept(ObjectRegistry.STONE_BENCH.get());
@@ -153,6 +159,7 @@ public class TabRegistry {
                 output.accept(ObjectRegistry.FUR_CHESTPLATE.get());
                 output.accept(ObjectRegistry.FUR_LEGGINGS.get());
                 output.accept(ObjectRegistry.FUR_BOOTS.get());
+                output.accept(ObjectRegistry.MEADOW_BANNER.get());
                 output.accept(ObjectRegistry.CHEESE_WHEEL.get());
                 output.accept(ObjectRegistry.SHEEP_CHEESE_WHEEL.get());
                 output.accept(ObjectRegistry.GRAIN_CHEESE_WHEEL.get());
@@ -189,8 +196,6 @@ public class TabRegistry {
                 output.accept(ObjectRegistry.WOODEN_WARPED_MILK_BUCKET.get());
                 output.accept(ObjectRegistry.WOODEN_GRAIN_MILK_BUCKET.get());
                 output.accept(ObjectRegistry.WOODEN_AMETHYST_MILK_BUCKET.get());
-                output.accept(ObjectRegistry.MEADOW_BANNER.get());
-
                 output.accept(ObjectRegistry.WATER_BUFFALO_SPAWN_EGG_ITEM.get());
                 output.accept(ObjectRegistry.HIGHLAND_WOOLY_COW_SPAWN_EGG.get());
                 output.accept(ObjectRegistry.UMBRA_WOOLY_COW_SPAWN_EGG.get());

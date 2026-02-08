@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/door_top_right_open",
+  "textures": {
+    "top": "meadow:block/reclaimed_pine_door_top",
+    "bottom": "meadow:block/reclaimed_pine_door_bottom"
+  }
+}

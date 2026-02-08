@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "meadow:pine_barn_trapdoor"
+      "meadow:reclaimed_pine_trapdoor"
     ]
   },
   "criteria": {
@@ -21,7 +21,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "meadow:pine_barn_trapdoor"
+        "recipe": "meadow:reclaimed_pine_trapdoor"
       }
     }
   },

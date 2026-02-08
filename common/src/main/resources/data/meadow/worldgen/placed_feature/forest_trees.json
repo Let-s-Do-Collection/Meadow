@@ -1,11 +1,21 @@
 {
-  "feature": "meadow:forest_trees",
+  "feature": {
+    "type": "minecraft:simple_random_selector",
+    "config": {
+      "features": [
+        {
+          "feature": "meadow:forest_trees",
+          "placement": []
+        }
+      ]
+    }
+  },
   "placement": [
     {
       "type": "minecraft:noise_based_count",
-      "noise_to_count_ratio": 12,
-      "noise_factor": 1.0,
-      "noise_offset": 0.0
+      "noise_to_count_ratio": 16,
+      "noise_factor": 1.2,
+      "noise_offset": -0.3
     },
     {
       "type": "minecraft:in_square"
@@ -23,33 +33,11 @@
             "type": "minecraft:matching_blocks",
             "offset": [
               0,
-              -1,
+              0,
               0
             ],
             "blocks": [
-              "minecraft:grass_block"
-            ]
-          },
-          {
-            "type": "minecraft:matching_blocks",
-            "offset": [
-              1,
-              -1,
-              0
-            ],
-            "blocks": [
-              "minecraft:grass_block"
-            ]
-          },
-          {
-            "type": "minecraft:matching_blocks",
-            "offset": [
-              -1,
-              -1,
-              0
-            ],
-            "blocks": [
-              "minecraft:grass_block"
+              "minecraft:air"
             ]
           },
           {
@@ -57,21 +45,12 @@
             "offset": [
               0,
               -1,
-              1
+              0
             ],
             "blocks": [
-              "minecraft:grass_block"
-            ]
-          },
-          {
-            "type": "minecraft:matching_blocks",
-            "offset": [
-              0,
-              -1,
-              -1
-            ],
-            "blocks": [
-              "minecraft:grass_block"
+              "minecraft:grass_block",
+              "minecraft:dirt",
+              "minecraft:coarse_dirt"
             ]
           }
         ]

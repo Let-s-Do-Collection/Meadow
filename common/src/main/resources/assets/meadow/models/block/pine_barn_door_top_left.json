@@ -1,7 +1,0 @@
-{
-  "parent": "minecraft:block/door_top_left",
-  "textures": {
-    "top": "meadow:block/pine_barn_door_top",
-    "bottom": "meadow:block/pine_barn_door_bottom"
-  }
-}

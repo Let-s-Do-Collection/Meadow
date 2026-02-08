@@ -1,0 +1,64 @@
+{
+  "variants": {
+    "facing=north,type=left": {
+      "model": "meadow:block/pine_sofa_warped_left"
+    },
+    "facing=east,type=left": {
+      "y": 90,
+      "model": "meadow:block/pine_sofa_warped_left"
+    },
+    "facing=west,type=middle": {
+      "y": 270,
+      "model": "meadow:block/pine_sofa_warped_middle"
+    },
+    "facing=west,type=left": {
+      "y": 270,
+      "model": "meadow:block/pine_sofa_warped_left"
+    },
+    "facing=north,type=right": {
+      "model": "meadow:block/pine_sofa_warped_right"
+    },
+    "facing=east,type=middle": {
+      "y": 90,
+      "model": "meadow:block/pine_sofa_warped_middle"
+    },
+    "facing=east,type=right": {
+      "y": 90,
+      "model": "meadow:block/pine_sofa_warped_right"
+    },
+    "facing=south,type=none": {
+      "y": 180,
+      "model": "meadow:block/pine_sofa_warped_single"
+    },
+    "facing=north,type=middle": {
+      "model": "meadow:block/pine_sofa_warped_middle"
+    },
+    "facing=north,type=none": {
+      "model": "meadow:block/pine_sofa_warped_single"
+    },
+    "facing=east,type=none": {
+      "y": 90,
+      "model": "meadow:block/pine_sofa_warped_single"
+    },
+    "facing=south,type=middle": {
+      "y": 180,
+      "model": "meadow:block/pine_sofa_warped_middle"
+    },
+    "facing=south,type=right": {
+      "y": 180,
+      "model": "meadow:block/pine_sofa_warped_right"
+    },
+    "facing=south,type=left": {
+      "y": 180,
+      "model": "meadow:block/pine_sofa_warped_left"
+    },
+    "facing=west,type=right": {
+      "y": 270,
+      "model": "meadow:block/pine_sofa_warped_right"
+    },
+    "facing=west,type=none": {
+      "y": 270,
+      "model": "meadow:block/pine_sofa_warped_single"
+    }
+  }
+}

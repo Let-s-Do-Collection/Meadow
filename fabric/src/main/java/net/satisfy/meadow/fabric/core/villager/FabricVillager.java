@@ -24,7 +24,7 @@ import net.minecraft.world.level.block.Block;
 import net.satisfy.meadow.Meadow;
 import net.satisfy.meadow.core.registry.ObjectRegistry;
 
-@SuppressWarnings("deprecation")
+@SuppressWarnings("deprecation, unused")
 public class FabricVillager {
 
     private static final ResourceLocation CHEESEMAKER_POI_IDENTIFIER = Meadow.identifier("cheesemaker_poi");
@@ -40,15 +40,9 @@ public class FabricVillager {
 
     public static void init() {
 
-        TradeOfferHelper.registerVillagerOffers(CHEESEMAKER, 1, factories -> {
-            factories.add(new SellItemFactory(ObjectRegistry.RENNET.get(), 1, 2, 7));
-        });
-        TradeOfferHelper.registerVillagerOffers(CHEESEMAKER, 2, factories -> {
-            factories.add(new SellItemFactory(ObjectRegistry.COOKING_CAULDRON.get(), 7, 1, 10));
-        });
-        TradeOfferHelper.registerVillagerOffers(CHEESEMAKER, 3, factories -> {
-            factories.add(new SellItemFactory(ObjectRegistry.TILED_STOVE.get(), 6, 1, 10));
-        });
+        TradeOfferHelper.registerVillagerOffers(CHEESEMAKER, 1, factories -> factories.add(new SellItemFactory(ObjectRegistry.RENNET.get(), 1, 2, 7)));
+        TradeOfferHelper.registerVillagerOffers(CHEESEMAKER, 2, factories -> factories.add(new SellItemFactory(ObjectRegistry.COOKING_CAULDRON.get(), 7, 1, 10)));
+        TradeOfferHelper.registerVillagerOffers(CHEESEMAKER, 3, factories -> factories.add(new SellItemFactory(ObjectRegistry.TILED_STOVE.get(), 6, 1, 10)));
         TradeOfferHelper.registerVillagerOffers(CHEESEMAKER, 4, factories -> {
             factories.add(new SellItemFactory(ObjectRegistry.WOODEN_BUCKET.get(), 5, 1, 10));
             factories.add(new SellItemFactory(ObjectRegistry.WOODEN_MILK_BUCKET.get(), 12, 1, 10));
@@ -64,7 +58,7 @@ public class FabricVillager {
 
 
         TradeOfferHelper.registerVillagerOffers(HERMIT, 1, factories -> {
-            factories.add(new BuyForOneEmeraldFactory(ObjectRegistry.BENCH.get(), 15, 4, 5));
+            factories.add(new BuyForOneEmeraldFactory(ObjectRegistry.PINE_BENCH.get(), 15, 4, 5));
             factories.add(new BuyForOneEmeraldFactory(ObjectRegistry.PINE_LOG.get(), 10, 4, 5));
             factories.add(new SellItemFactory(ObjectRegistry.PINE_SAPLING.get(), 10, 6, 5));
             factories.add(new SellItemFactory(ObjectRegistry.PINE_SLAB.get(), 7, 4, 5));

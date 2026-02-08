@@ -141,10 +141,78 @@ public class CheeseWheelBlock extends FacingBlock {
             SHAPE_SHEEP_3
     };
 
+    private static final VoxelShape SHAPE_CHEESECAKE_0 = Shapes.or(
+            Block.box(3, 0, 8, 8, 4, 13),
+            Block.box(3, 0, 3, 8, 4, 8),
+            Block.box(2, 4, 2, 8, 6, 8),
+            Block.box(2, 4, 8, 8, 6, 14),
+            Block.box(8, 4, 8, 14, 6, 14),
+            Block.box(8, 4, 2, 14, 6, 8),
+            Block.box(8, 0, 8, 13, 4, 13),
+            Block.box(8, 0, 3, 13, 4, 8)
+    );
+
+    private static final VoxelShape SHAPE_CHEESECAKE_1 = Shapes.or(
+            Block.box(3, 0, 8, 8, 4, 13),
+            Block.box(8, 0, 3, 13, 4, 8),
+            Block.box(8, 0, 8, 13, 4, 13),
+            Block.box(8, 4, 2, 14, 6, 8),
+            Block.box(2, 4, 8, 8, 6, 14),
+            Block.box(8, 4, 8, 14, 6, 14)
+    );
+
+    private static final VoxelShape SHAPE_CHEESECAKE_2 = Shapes.or(
+            Block.box(3, 0, 8, 8, 4, 13),
+            Block.box(2, 4, 8, 8, 6, 14),
+            Block.box(8, 4, 8, 14, 6, 14),
+            Block.box(8, 0, 8, 13, 4, 13)
+    );
+
+    private static final VoxelShape SHAPE_CHEESECAKE_3 = Shapes.or(
+            Block.box(8, 4, 8, 14, 6, 14),
+            Block.box(8, 0, 8, 13, 4, 13)
+    );
+
+    private static final VoxelShape[] CHEESECAKE_SHAPES_BY_CUTS = new VoxelShape[]{
+            SHAPE_CHEESECAKE_0,
+            SHAPE_CHEESECAKE_1,
+            SHAPE_CHEESECAKE_2,
+            SHAPE_CHEESECAKE_3
+    };
+
+    private static final VoxelShape SHAPE_CHEESE_TART_0 = Shapes.or(
+            Block.box(2, 0, 2, 8, 4, 8),
+            Block.box(8, 0, 2, 14, 4, 8),
+            Block.box(2, 0, 8, 8, 4, 14),
+            Block.box(8, 0, 8, 14, 4, 14)
+    );
+
+    private static final VoxelShape SHAPE_CHEESE_TART_1 = Shapes.or(
+            Block.box(8, 0, 2, 14, 4, 8),
+            Block.box(2, 0, 8, 8, 4, 14),
+            Block.box(8, 0, 8, 14, 4, 14)
+    );
+
+    private static final VoxelShape SHAPE_CHEESE_TART_2 = Shapes.or(
+            Block.box(2, 0, 8, 8, 4, 14),
+            Block.box(8, 0, 8, 14, 4, 14)
+    );
+
+    private static final VoxelShape SHAPE_CHEESE_TART_3 = Block.box(8, 0, 8, 14, 4, 14);
+
+    private static final VoxelShape[] CHEESE_TART_SHAPES_BY_CUTS = new VoxelShape[]{
+            SHAPE_CHEESE_TART_0,
+            SHAPE_CHEESE_TART_1,
+            SHAPE_CHEESE_TART_2,
+            SHAPE_CHEESE_TART_3
+    };
+
     private static final VoxelShape[][] WARPED_SHAPES_BY_FACING_AND_CUTS = new VoxelShape[4][4];
     private static final VoxelShape[][] BUFFALO_GOAT_SHAPES_BY_FACING_AND_CUTS = new VoxelShape[4][4];
     private static final VoxelShape[][] CHEESE_AMETHYST_SHAPES_BY_FACING_AND_CUTS = new VoxelShape[4][4];
     private static final VoxelShape[][] SHEEP_SHAPES_BY_FACING_AND_CUTS = new VoxelShape[4][4];
+    private static final VoxelShape[][] CHEESECAKE_SHAPES_BY_FACING_AND_CUTS = new VoxelShape[4][4];
+    private static final VoxelShape[][] CHEESE_TART_SHAPES_BY_FACING_AND_CUTS = new VoxelShape[4][4];
 
     static {
         for (Direction facing : Direction.Plane.HORIZONTAL) {
@@ -154,6 +222,8 @@ public class CheeseWheelBlock extends FacingBlock {
                 BUFFALO_GOAT_SHAPES_BY_FACING_AND_CUTS[facingIndex][cuts] = GeneralUtil.rotateShape(Direction.NORTH, facing, BUFFALO_GOAT_SHAPES_BY_CUTS[cuts]);
                 CHEESE_AMETHYST_SHAPES_BY_FACING_AND_CUTS[facingIndex][cuts] = GeneralUtil.rotateShape(Direction.NORTH, facing, CHEESE_AMETHYST_SHAPES_BY_CUTS[cuts]);
                 SHEEP_SHAPES_BY_FACING_AND_CUTS[facingIndex][cuts] = GeneralUtil.rotateShape(Direction.NORTH, facing, SHEEP_SHAPES_BY_CUTS[cuts]);
+                CHEESECAKE_SHAPES_BY_FACING_AND_CUTS[facingIndex][cuts] = GeneralUtil.rotateShape(Direction.NORTH, facing, CHEESECAKE_SHAPES_BY_CUTS[cuts]);
+                CHEESE_TART_SHAPES_BY_FACING_AND_CUTS[facingIndex][cuts] = GeneralUtil.rotateShape(Direction.NORTH, facing, CHEESE_TART_SHAPES_BY_CUTS[cuts]);
             }
         }
     }
@@ -187,6 +257,8 @@ public class CheeseWheelBlock extends FacingBlock {
             case REGULAR, AMETHYST -> CHEESE_AMETHYST_SHAPES_BY_FACING_AND_CUTS[facingIndex][cuts];
             case GRAIN -> GeneralUtil.rotateShape(Direction.NORTH, facing, SHAPE_GRAIN);
             case CAKE -> GeneralUtil.rotateShape(Direction.NORTH, facing, Block.box(2, 0, 2, 14, 4, 14));
+            case CHEESECAKE -> CHEESECAKE_SHAPES_BY_FACING_AND_CUTS[facingIndex][cuts];
+            case CHEESE_TART -> CHEESE_TART_SHAPES_BY_FACING_AND_CUTS[facingIndex][cuts];
         };
     }
 
@@ -238,6 +310,6 @@ public class CheeseWheelBlock extends FacingBlock {
     }
 
     public enum CheeseType {
-        GRAIN, REGULAR, AMETHYST, WARPED, BUFFALO, GOAT, SHEEP, CAKE
+        GRAIN, REGULAR, AMETHYST, WARPED, BUFFALO, GOAT, SHEEP, CAKE, CHEESECAKE, CHEESE_TART
     }
 }

@@ -1,12 +1,12 @@
 {
 	"credit": "Made by Satisfy",
 	"textures": {
-		"0": "meadow:block/pine_barn_trapdoor",
+		"0": "meadow:block/reclaimed_pine_trapdoor",
 		"1": "meadow:block/chiseled_limestone",
 		"2": "meadow:block/wheelbarrow_side",
 		"3": "meadow:block/wheelbarrow_top",
 		"5": "meadow:block/oven_top",
-		"particle": "meadow:block/pine_barn_trapdoor"
+		"particle": "meadow:block/reclaimed_pine_trapdoor"
 	},
 	"elements": [
 		{

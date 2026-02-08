@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/pressure_plate_down",
   "textures": {
-    "texture": "meadow:block/pine_planks_alt"
+    "texture": "meadow:block/reclaimed_pine_planks"
   }
 }

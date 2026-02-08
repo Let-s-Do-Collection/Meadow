@@ -37,5 +37,12 @@ public final class DataFixerEntries {
         DataFixers.register("meadow:piece_of_goat_cheese", "meadow:goat_cheese_slice");
         DataFixers.register("meadow:piece_of_warped_cheese", "meadow:warped_cheese_slice");
         DataFixers.register("meadow:roasted_ham", "meadow:roasted_buffalo_ham");
+        DataFixers.register("meadow:shutter_block", "meadow:pine_shutter");
+        DataFixers.register("meadow:shutter_block_poppy", "meadow:pine_shutter");
+        DataFixers.register("meadow:shutter_block_fir", "meadow:pine_shutter");
+        DataFixers.register("meadow:shutter_block_berry", "meadow:pine_shutter");
+        DataFixers.register("meadow:reclaimed_pine_trapdoor", "meadow:reclaimed_pine_trapdoor");
+        DataFixers.register("meadow:reclaimed_pine_door", "meadow:reclaimed_pine_door");
+
     }
 }

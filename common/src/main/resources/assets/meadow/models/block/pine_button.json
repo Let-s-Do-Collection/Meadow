@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/button",
   "textures": {
-    "texture": "meadow:block/pine_planks_alt"
+    "texture": "meadow:block/reclaimed_pine_planks"
   }
 }

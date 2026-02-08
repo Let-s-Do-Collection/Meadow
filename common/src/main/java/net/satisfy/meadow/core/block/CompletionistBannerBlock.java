@@ -129,15 +129,14 @@ public class CompletionistBannerBlock extends BaseEntityBlock {
     @Override
     public void appendHoverText(ItemStack itemStack, Item.TooltipContext tooltipContext, List<Component> tooltip, TooltipFlag tooltipFlag) {
         if (PlatformHelper.shouldShowTooltip()) {
-            int primary = 0x3A6B35;
-            int accent = 0x7FB069;
-            int deep = 0x2E4F2E;
+            int primary = 0xEDE6D6;
+            int accent = 0xC8A873;
             tooltip.add(Component.translatable("tooltip.meadow.banner.thankyou_1").withStyle(style -> style.withColor(TextColor.fromRgb(primary))));
             tooltip.add(Component.empty());
             tooltip.add(Component.translatable("tooltip.meadow.banner.thankyou_2").withStyle(style -> style.withColor(TextColor.fromRgb(accent))));
             tooltip.add(Component.translatable("tooltip.meadow.banner.thankyou_4").withStyle(style -> style.withColor(TextColor.fromRgb(accent))));
             tooltip.add(Component.empty());
-            tooltip.add(Component.translatable("tooltip.meadow.banner.thankyou_3").withStyle(style -> style.withColor(TextColor.fromRgb(deep))));
+            tooltip.add(Component.translatable("tooltip.meadow.banner.thankyou_3").withStyle(style -> style.withColor(TextColor.fromRgb(primary))));
         }
     }
 }

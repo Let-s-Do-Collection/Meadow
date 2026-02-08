@@ -84,17 +84,12 @@ public class ObjectRegistry {
     public static final RegistrySupplier<Block> LIMESTONE_BRICK_WALL = registerWithItem("limestone_brick_wall", () -> new WallBlock(BlockBehaviour.Properties.ofFullCopy(LIMESTONE_BRICKS.get())));
     public static final RegistrySupplier<Block> MOSSY_COBBLED_LIMESTONE_WALL = registerWithItem("mossy_cobbled_limestone_wall", () -> new WallBlock(BlockBehaviour.Properties.ofFullCopy(MOSSY_COBBLED_LIMESTONE.get())));
     public static final RegistrySupplier<Block> MOSSY_LIMESTONE_BRICK_WALL = registerWithItem("mossy_limestone_brick_wall", () -> new WallBlock(BlockBehaviour.Properties.ofFullCopy(MOSSY_LIMESTONE_BRICKS.get())));
-
     public static final RegistrySupplier<Block> PINE_SAPLING = registerWithItem("pine_sapling", () -> new SaplingBlock(PINE, BlockBehaviour.Properties.ofFullCopy(Blocks.SPRUCE_SAPLING)));
     public static final RegistrySupplier<Block> PINE_LEAVES = registerWithItem("pine_leaves", () -> new LeavesBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.SPRUCE_LEAVES)));
-
     public static final RegistrySupplier<Block> YELLOW_PINE_SAPLING = registerWithItem("yellow_pine_sapling", () -> new SaplingBlock(YELLOW_PINE, BlockBehaviour.Properties.ofFullCopy(Blocks.SPRUCE_SAPLING)));
     public static final RegistrySupplier<Block> YELLOW_PINE_LEAVES = registerWithItem("yellow_pine_leaves", () -> new LeavesBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.SPRUCE_LEAVES)));
-
     public static final RegistrySupplier<Block> ALPINE_BIRCH_SAPLING = registerWithItem("alpine_birch_sapling", () -> new SaplingBlock(ALPINE_BIRCH, BlockBehaviour.Properties.ofFullCopy(Blocks.BIRCH_SAPLING)));
     public static final RegistrySupplier<Block> ALPINE_BIRCH_LEAVES = registerWithItem("alpine_birch_leaves", () -> new HangingLeavesBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.BIRCH_LEAVES)));
-
-
     public static final RegistrySupplier<Block> ALPINE_BIRCH_LOG = registerWithItem("alpine_birch_log", () -> new RotatedPillarBlock(BlockBehaviour.Properties.of().sound(SoundType.WOOD).strength(2.0f)));
     public static final RegistrySupplier<Block> PINE_LOG = registerLog("pine_log");
     public static final RegistrySupplier<Block> PINE_WOOD = registerLog("pine_wood");
@@ -104,12 +99,15 @@ public class ObjectRegistry {
     public static final RegistrySupplier<Block> PINE_PLANKS = registerWithItem("pine_planks", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2.0F, 3.0F).sound(SoundType.WOOD)));
     public static final RegistrySupplier<Block> PINE_STAIRS = registerWithItem("pine_stairs", () -> new StairBlock(PINE_PLANKS.get().defaultBlockState(), BlockBehaviour.Properties.ofFullCopy(PINE_PLANKS.get())));
     public static final RegistrySupplier<Block> PINE_SLAB = registerWithItem("pine_slab", () -> new SlabBlock(getSlabSettings()));
+    public static final RegistrySupplier<Block> RECLAIMED_PINE_PLANKS = registerWithItem("reclaimed_pine_planks", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2.0F, 3.0F).sound(SoundType.WOOD)));
+    public static final RegistrySupplier<Block> RECLAIMED_PINE_STAIRS = registerWithItem("reclaimed_pine_stairs", () -> new StairBlock(PINE_PLANKS.get().defaultBlockState(), BlockBehaviour.Properties.ofFullCopy(PINE_PLANKS.get())));
+    public static final RegistrySupplier<Block> RECLAIMED_PINE_SLAB = registerWithItem("reclaimed_pine_slab", () -> new SlabBlock(getSlabSettings()));
     public static final RegistrySupplier<Block> PINE_PRESSURE_PLATE = registerWithItem("pine_pressure_plate", () -> new PressurePlateBlock(BlockSetType.OAK, BlockBehaviour.Properties.of().noCollission().strength(0.5f).sound(SoundType.WOOD).mapColor(PINE_PLANKS.get().defaultMapColor())));
     public static final RegistrySupplier<Block> PINE_BUTTON = registerWithItem("pine_button", () -> woodenButton(FeatureFlags.VANILLA));
     public static final RegistrySupplier<Block> PINE_TRAPDOOR = registerWithItem("pine_trapdoor", () -> new TrapDoorBlock(BlockSetType.OAK, BlockBehaviour.Properties.ofFullCopy(Blocks.ACACIA_TRAPDOOR)));
     public static final RegistrySupplier<Block> PINE_DOOR = registerWithItem("pine_door", () -> new DoorBlock(BlockSetType.OAK, BlockBehaviour.Properties.of().strength(3.0f).sound(SoundType.WOOD).noOcclusion().mapColor(PINE_PLANKS.get().defaultMapColor())));
-    public static final RegistrySupplier<Block> PINE_BARN_TRAPDOOR = registerWithItem("pine_barn_trapdoor", () -> new TrapDoorBlock(BlockSetType.OAK, BlockBehaviour.Properties.ofFullCopy(Blocks.ACACIA_TRAPDOOR)));
-    public static final RegistrySupplier<Block> PINE_BARN_DOOR = registerWithItem("pine_barn_door", () -> new DoorBlock(BlockSetType.OAK, BlockBehaviour.Properties.of().strength(3.0f).sound(SoundType.WOOD).noOcclusion().mapColor(PINE_PLANKS.get().defaultMapColor())));
+    public static final RegistrySupplier<Block> RECLAIMED_PINE_TRAPDOOR = registerWithItem("reclaimed_pine_trapdoor", () -> new TrapDoorBlock(BlockSetType.OAK, BlockBehaviour.Properties.ofFullCopy(Blocks.ACACIA_TRAPDOOR)));
+    public static final RegistrySupplier<Block> RECLAIMED_PINE_DOOR = registerWithItem("reclaimed_pine_door", () -> new DoorBlock(BlockSetType.OAK, BlockBehaviour.Properties.of().strength(3.0f).sound(SoundType.WOOD).noOcclusion().mapColor(PINE_PLANKS.get().defaultMapColor())));
     public static final RegistrySupplier<Block> PINE_FENCE = registerWithItem("pine_fence", () -> new FenceBlock(BlockBehaviour.Properties.of().strength(2.0f, 3.0f).sound(SoundType.WOOD)));
     public static final RegistrySupplier<Block> PINE_FENCE_GATE = registerWithItem("pine_fence_gate", () -> new FenceGateBlock(WoodType.OAK, BlockBehaviour.Properties.of().strength(2.0f, 3.0f).sound(SoundType.WOOD).mapColor(PINE_PLANKS.get().defaultMapColor())));
     public static final RegistrySupplier<Block> PINE_RAILING = registerWithItem("pine_railing", () -> new FenceBlock(BlockBehaviour.Properties.of().strength(2.0f, 3.0f).sound(SoundType.WOOD)));
@@ -119,33 +117,28 @@ public class ObjectRegistry {
     public static final RegistrySupplier<Block> PINE_CHAIR = registerWithItem("pine_chair", () -> new ChairBlock(BlockBehaviour.Properties.of().strength(2.0f, 3.0f).sound(SoundType.WOOD)));
     public static final RegistrySupplier<Block> PINE_TABLE = registerWithItem("pine_table", () -> new TableBlock(BlockBehaviour.Properties.of().requiresCorrectToolForDrops().strength(3.5F).sound(SoundType.WOOD).noOcclusion()));
     public static final RegistrySupplier<Block> PINE_BENCH = registerWithItem("pine_bench", () -> new BenchBlock(BlockBehaviour.Properties.of().strength(2.0f, 3.0f).sound(SoundType.WOOD)));
-    public static final RegistrySupplier<Block> PINE_SOFA = registerWithItem("pine_sofa", () -> new SofaBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).sound(SoundType.WOOD).mapColor(MapColor.COLOR_LIGHT_GRAY)));
+    public static final RegistrySupplier<Block> PINE_SOFA_RUSTIC = registerWithItem("pine_sofa_rustic", () -> new SofaBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).sound(SoundType.WOOD).mapColor(MapColor.COLOR_BROWN)));
+    public static final RegistrySupplier<Block> PINE_SOFA_LINEN = registerWithItem("pine_sofa_linen", () -> new SofaBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).sound(SoundType.WOOD).mapColor(MapColor.COLOR_GRAY)));
+    public static final RegistrySupplier<Block> PINE_SOFA_JACQUARD = registerWithItem("pine_sofa_jacquard", () -> new SofaBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).sound(SoundType.WOOD).mapColor(MapColor.COLOR_BLUE)));
+    public static final RegistrySupplier<Block> PINE_SOFA_PLAID = registerWithItem("pine_sofa_plaid", () -> new SofaBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).sound(SoundType.WOOD).mapColor(MapColor.COLOR_GRAY)));
+    public static final RegistrySupplier<Block> PINE_SOFA_CHAMBRAY = registerWithItem("pine_sofa_chambray", () -> new SofaBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).sound(SoundType.WOOD).mapColor(MapColor.COLOR_BLUE)));
+    public static final RegistrySupplier<Block> PINE_SOFA_TWEED = registerWithItem("pine_sofa_tweed", () -> new SofaBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).sound(SoundType.WOOD).mapColor(MapColor.COLOR_BLACK)));
+    public static final RegistrySupplier<Block> PINE_SOFA_WARPED = registerWithItem("pine_sofa_warped", () -> new SofaBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).sound(SoundType.WOOD).mapColor(MapColor.COLOR_CYAN)));
     public static final RegistrySupplier<Block> PINE_DRESSER = registerWithItem("pine_dresser", () -> new DresserBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS), () -> SoundEvents.WOODEN_TRAPDOOR_OPEN, () -> SoundEvents.WOODEN_TRAPDOOR_CLOSE));
     public static final RegistrySupplier<Block> PINE_WARDROBE = registerWithItem("pine_wardrobe", () -> new WardrobeBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).sound(SoundType.WOOD).mapColor(MapColor.TERRACOTTA_WHITE)));
-
     public static final RegistrySupplier<Block> PINE_WINDOW = registerWithItem("pine_window", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.GLASS)));
     public static final RegistrySupplier<Block> PINE_WINDOW_PANE = registerWithItem("pine_window_pane", () -> new WindowBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.GLASS_PANE)));
-
-    public static final RegistrySupplier<Block> SHUTTER_BLOCK = registerWithItem("shutter_block", () -> new ShutterBlock(BlockBehaviour.Properties.of().strength(1.0F).sound(SoundType.WOOD)));
-    public static final RegistrySupplier<Block> SHUTTER_BLOCK_POPPY = registerWithItem("shutter_block_poppy", () -> new ShutterBlock(BlockBehaviour.Properties.of().strength(1.0F).sound(SoundType.WOOD)));
-    public static final RegistrySupplier<Block> SHUTTER_BLOCK_FIR = registerWithItem("shutter_block_fir", () -> new ShutterBlock(BlockBehaviour.Properties.of().strength(1.0F).sound(SoundType.WOOD)));
-    public static final RegistrySupplier<Block> SHUTTER_BLOCK_BERRY = registerWithItem("shutter_block_berry", () -> new ShutterBlock(BlockBehaviour.Properties.of().strength(1.0F).sound(SoundType.WOOD)));
-
-
+    public static final RegistrySupplier<Block> PINE_SHUTTER = registerWithItem("pine_shutter", () -> new ShutterBlock(BlockBehaviour.Properties.of().strength(1.0F).sound(SoundType.WOOD)));
     public static final RegistrySupplier<Block> STONE_TABLE = registerWithItem("stone_table", () -> new TableBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.STONE).strength(4f, 0.0f).sound(SoundType.STONE).noOcclusion()));
     public static final RegistrySupplier<Block> STONE_BENCH = registerWithItem("stone_bench", () -> new BenchBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.STONE).strength(4f, 0.0f).sound(SoundType.STONE)));
-
     public static final RegistrySupplier<Block> TILED_STOVE = registerWithItem("stove_tiles", () -> new TiledStoveBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.BRICKS)));
     public static final RegistrySupplier<Block> TILED_STOVE_FIREPLACE = registerWithItem("stove_tiles_wood", () -> new TiledStoveBlockFireplace(BlockBehaviour.Properties.ofFullCopy(Blocks.BRICKS).lightLevel(s -> s.getValue(TiledStoveBlock.LIT) ? 13 : 0).randomTicks()));
     public static final RegistrySupplier<Block> TILED_STOVE_SMOKER = registerWithItem("stove_tiles_lid", () -> new TiledStoveBlockSmoker(BlockBehaviour.Properties.ofFullCopy(Blocks.SMOKER), Direction.UP));
     public static final RegistrySupplier<Block> TILED_STOVE_BENCH = registerWithItem("stove_tiles_bench", () -> new TiledStoveBlockBench(BlockBehaviour.Properties.ofFullCopy(Blocks.BRICKS)));
-
     public static final RegistrySupplier<Block> ARTISAN_GLASS_WINDOW = registerWithItem("artisan_glass_window", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.GLASS)));
     public static final RegistrySupplier<Block> ARTISAN_GLASS_WINDOW_PANE = registerWithItem("artisan_glass_window_pane", () -> new WindowBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.GLASS_PANE)));
-
     public static final RegistrySupplier<Block> ORNATE_GLASS_WINDOW = registerWithItem("ornate_glass_window", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.GLASS)));
     public static final RegistrySupplier<Block> ORNATE_GLASS_WINDOW_PANE = registerWithItem("ornate_glass_window_pane", () -> new WindowBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.GLASS_PANE)));
-
     public static final RegistrySupplier<Block> RUSTIC_WOOL = registerWithItem("rustic_wool", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.BLACK_WOOL)));
     public static final RegistrySupplier<Block> RUSTIC_CARPET = registerWithItem("rustic_carpet", () -> new CarpetBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.BLACK_CARPET)));
     public static final RegistrySupplier<Block> RUSTIC_BED = registerWithItem("rustic_bed", () -> new MeadowBedBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.WHITE_WOOL).sound(SoundType.WOOD).strength(0.2F).noOcclusion()));
@@ -168,7 +161,6 @@ public class ObjectRegistry {
     public static final RegistrySupplier<Block> WARPED_CARPET = registerWithItem("warped_carpet", () -> new CarpetBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.BLACK_CARPET)));
     public static final RegistrySupplier<Block> WARPED_BED = registerWithItem("warped_bed", () -> new MeadowBedBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.WHITE_WOOL).sound(SoundType.WOOD).strength(0.2F).noOcclusion()));
     public static final RegistrySupplier<Block> STRAW_BED = registerWithItem("straw_bed", () -> new MeadowBedBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.WHITE_WOOL).sound(SoundType.WOOD).strength(0.2F).noOcclusion()));
-
     public static final RegistrySupplier<Block> CHEESE_FORM = registerWithItem("cheese_form", () -> new CheeseFormBlock(BlockBehaviour.Properties.of().noOcclusion().strength(0.1f).sound(SoundType.WOOD)));
     public static final RegistrySupplier<Block> FONDUE_POT = registerWithItem("fondue_pot", () -> new FonduePotBlock(BlockBehaviour.Properties.of().requiresCorrectToolForDrops().strength(3.5F).sound(SoundType.METAL)));
     public static final RegistrySupplier<Block> COOKING_CAULDRON = registerWithItem("cookpot", () -> new CookingCauldronBlock(BlockBehaviour.Properties.of().requiresCorrectToolForDrops().strength(3.5F).sound(SoundType.METAL)));
@@ -186,16 +178,13 @@ public class ObjectRegistry {
     public static final RegistrySupplier<Block> OIL_LANTERN = registerWithItem("oil_lantern", () -> new OilLantern(BlockBehaviour.Properties.of().requiresCorrectToolForDrops().strength(3.5f).sound(SoundType.LANTERN).lightLevel((blockState) -> 14).noOcclusion()));
     public static final RegistrySupplier<Block> CAMERA = registerWithItem("camera", () -> new CameraBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.BLACK_WOOL)));
     public static final RegistrySupplier<Block> DOORMAT = registerWithItem("doormat", () -> new DoormatBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.BLACK_CARPET)));
-
     public static final RegistrySupplier<Block> WOODEN_FLOWER_POT_BIG = registerWithItem("wooden_flower_pot_big", () -> new FlowerPotBigBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).instabreak()));
     public static final RegistrySupplier<Block> WOODEN_FLOWER_POT_SMALL = registerWithItem("wooden_flower_pot_small", () -> new FlowerPotSmallBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).instabreak()));
     public static final RegistrySupplier<Block> WOODEN_FLOWER_BOX = registerWithItem("wooden_flower_box", () -> new FlowerBoxBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).instabreak()));
-
     public static final RegistrySupplier<Item> FUR_HELMET = registerItem("fur_helmet", () -> new FurHelmetItem(BuiltInRegistries.ARMOR_MATERIAL.wrapAsHolder(ArmorMaterialRegistry.FUR_ARMOR), ArmorItem.Type.HELMET, getSettings().rarity(Rarity.EPIC), Meadow.identifier("textures/models/armor/fur.png")));
     public static final RegistrySupplier<Item> FUR_CHESTPLATE = registerItem("fur_chestplate", () -> new FurChestItem(BuiltInRegistries.ARMOR_MATERIAL.wrapAsHolder(ArmorMaterialRegistry.FUR_ARMOR), ArmorItem.Type.CHESTPLATE, getSettings().rarity(Rarity.RARE), Meadow.identifier("textures/models/armor/fur.png")));
     public static final RegistrySupplier<Item> FUR_LEGGINGS = registerItem("fur_leggings", () -> new FurLegsItem(BuiltInRegistries.ARMOR_MATERIAL.wrapAsHolder(ArmorMaterialRegistry.FUR_ARMOR), ArmorItem.Type.LEGGINGS, getSettings().rarity(Rarity.RARE), Meadow.identifier("textures/models/armor/fur.png")));
     public static final RegistrySupplier<Item> FUR_BOOTS = registerItem("fur_boots", () -> new FurBootsItem(BuiltInRegistries.ARMOR_MATERIAL.wrapAsHolder(ArmorMaterialRegistry.FUR_ARMOR), ArmorItem.Type.BOOTS, getSettings().rarity(Rarity.RARE), Meadow.identifier("textures/models/armor/fur.png")));
-
     public static final RegistrySupplier<Block> SMALL_FIR = registerWithItem("small_fir", () -> new DoublePlantBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.ROSE_BUSH)));
     public static final RegistrySupplier<Block> ALPINE_POPPY = registerWithItem("alpine_poppy", () -> new FlowerBlock(MobEffects.HEAL, 1, BlockBehaviour.Properties.ofFullCopy(Blocks.DANDELION)));
     public static final RegistrySupplier<Block> DELPHINIUM = registerWithItem("delphinium", () -> new FlowerBlock(MobEffects.HEAL, 1, BlockBehaviour.Properties.ofFullCopy(Blocks.DANDELION)));
@@ -213,8 +202,8 @@ public class ObjectRegistry {
     public static final RegistrySupplier<Item> BUFFALO_CHEESE_SLICE = registerItem("buffalo_cheese_slice", () -> new Item(getSettings().food(new FoodProperties.Builder().nutrition(6).saturationModifier(0.8f).build())));
     public static final RegistrySupplier<Item> GOAT_CHEESE_SLICE = registerItem("goat_cheese_slice", () -> new Item(getSettings().food(new FoodProperties.Builder().nutrition(6).saturationModifier(0.8f).build())));
     public static final RegistrySupplier<Item> WARPED_CHEESE_SLICE = registerItem("warped_cheese_slice", () -> new Item(getSettings().food(new FoodProperties.Builder().nutrition(6).saturationModifier(0.8f).effect(new MobEffectInstance(MobEffects.FIRE_RESISTANCE, 300, 1), 1.0F).build())));
-    public static final RegistrySupplier<Block> CHEESECAKE = registerWithItem("cheesecake", () -> new CheeseWheelBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.CAKE), ObjectRegistry.CHEESECAKE_SLICE, CheeseWheelBlock.CheeseType.CAKE));
-    public static final RegistrySupplier<Block> CHEESE_TART = registerWithItem("cheese_tart", () -> new CheeseWheelBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.CAKE), ObjectRegistry.CHEESE_TART_SLICE, CheeseWheelBlock.CheeseType.CAKE));
+    public static final RegistrySupplier<Block> CHEESECAKE = registerWithItem("cheesecake", () -> new CheeseWheelBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.CAKE), ObjectRegistry.CHEESECAKE_SLICE, CheeseWheelBlock.CheeseType.CHEESECAKE));
+    public static final RegistrySupplier<Block> CHEESE_TART = registerWithItem("cheese_tart", () -> new CheeseWheelBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.CAKE), ObjectRegistry.CHEESE_TART_SLICE, CheeseWheelBlock.CheeseType.CHEESE_TART));
     public static final RegistrySupplier<Block> CHEESE_WHEEL = registerWithItem("cheese_wheel", () -> new CheeseWheelBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.CAKE), ObjectRegistry.CHEESE_SLICE, CheeseWheelBlock.CheeseType.REGULAR));
     public static final RegistrySupplier<Block> AMETHYST_CHEESE_WHEEL = registerWithItem("amethyst_cheese_wheel", () -> new CheeseWheelBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.CAKE), ObjectRegistry.AMETHYST_CHEESE_SLICE, CheeseWheelBlock.CheeseType.REGULAR));
     public static final RegistrySupplier<Block> BUFFALO_CHEESE_WHEEL = registerWithItem("buffalo_cheese_wheel", () -> new CheeseWheelBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.CAKE), ObjectRegistry.BUFFALO_CHEESE_SLICE, CheeseWheelBlock.CheeseType.BUFFALO));
@@ -244,7 +233,6 @@ public class ObjectRegistry {
     public static final RegistrySupplier<Item> HIGHLAND_WOOLY_COW_SPAWN_EGG = ITEMS.register("highland_wooly_cow_spawn_egg", () -> new CattleSpawnEggItem(EntityTypeRegistry.WOOLY_COW, -1, -1, getSettings(), 0));
     public static final RegistrySupplier<Item> UMBRA_WOOLY_COW_SPAWN_EGG = ITEMS.register("umbra_wooly_cow_spawn_egg", () -> new CattleSpawnEggItem(EntityTypeRegistry.WOOLY_COW, -1, -1, getSettings(), 1));
     public static final RegistrySupplier<Item> WARPED_WOOLY_COW_SPAWN_EGG = ITEMS.register("warped_wooly_cow_spawn_egg", () -> new CattleSpawnEggItem(EntityTypeRegistry.WOOLY_COW, -1, -1, getSettings(), 2));
-
     public static final RegistrySupplier<Block> POTTED_ENZIAN = registerWithoutItem("potted_enzian", () -> new FlowerPotBlock(ObjectRegistry.ENZIAN.get(), BlockBehaviour.Properties.ofFullCopy(Blocks.POTTED_POPPY)));
     public static final RegistrySupplier<Block> POTTED_FIRE_LILY = registerWithoutItem("potted_fire_lily", () -> new FlowerPotBlock(ObjectRegistry.FIRE_LILY.get(), BlockBehaviour.Properties.ofFullCopy(Blocks.POTTED_POPPY)));
     public static final RegistrySupplier<Block> POTTED_ALPINE_POPPY = registerWithoutItem("potted_alpine_poppy", () -> new FlowerPotBlock(ObjectRegistry.ALPINE_POPPY.get(), BlockBehaviour.Properties.ofFullCopy(Blocks.POTTED_POPPY)));
@@ -254,10 +242,8 @@ public class ObjectRegistry {
     public static final RegistrySupplier<Block> POTTED_PINE_SAPLING = registerWithoutItem("potted_pine_sapling", () -> new FlowerPotBlock(ObjectRegistry.PINE_SAPLING.get(), BlockBehaviour.Properties.ofFullCopy(Blocks.POTTED_POPPY)));
     public static final RegistrySupplier<Block> POTTED_YELLOW_PINE_SAPLING = registerWithoutItem("potted_yellow_pine_sapling", () -> new FlowerPotBlock(ObjectRegistry.PINE_SAPLING.get(), BlockBehaviour.Properties.ofFullCopy(Blocks.POTTED_POPPY)));
     public static final RegistrySupplier<Block> POTTED_ALPINE_BIRCH_SAPLING = registerWithoutItem("potted_alpine_birch_sapling", () -> new FlowerPotBlock(ObjectRegistry.PINE_SAPLING.get(), BlockBehaviour.Properties.ofFullCopy(Blocks.POTTED_POPPY)));
-
     public static final RegistrySupplier<Item> PINE_BOAT = ITEMS.register("pine_boat", () -> new PineBoatItem(false, PineBoatEntity.Type.PINE, new Item.Properties()));
     public static final RegistrySupplier<Item> PINE_CHEST_BOAT = ITEMS.register("pine_chest_boat", () -> new PineBoatItem(true, PineBoatEntity.Type.PINE, new Item.Properties()));
-
     public static final RegistrySupplier<Block> MEADOW_BANNER = registerWithItem("meadow_banner", () -> new CompletionistBannerBlock(BlockBehaviour.Properties.of().strength(1F).instrument(NoteBlockInstrument.BASS).noCollission().sound(SoundType.WOOD)));
     public static final RegistrySupplier<Block> MEADOW_WALL_BANNER = registerWithoutItem("meadow_wall_banner", () -> new CompletionistWallBannerBlock(BlockBehaviour.Properties.of().strength(1F).instrument(NoteBlockInstrument.BASS).noCollission().sound(SoundType.WOOD)));
     public static final RegistrySupplier<Item> FELTING_NEEDLE = registerItem("felting_needle", () -> new FeltingNeedleItem(getSettings().durability(128)));

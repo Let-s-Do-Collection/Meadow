@@ -23,22 +23,21 @@ public class MeadowBiomeModification {
         BiomeModifications.create(Meadow.identifier("world_features"))
                 .add(ModificationPhase.ADDITIONS, getMeadowSelector(), ctx -> {
                     var gen = ctx.getGenerationSettings();
-                    gen.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, MeadowPlacedFeature.FOREST_TREES_KEY);
-                    gen.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, MeadowPlacedFeature.FOREST_SMALL_FIR_KEY);
-                    gen.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, MeadowPlacedFeature.MEADOW_ORE_LIMESTONE_KEY);
-                    gen.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, MeadowPlacedFeature.MEADOW_ORE_SALT_UPPER_KEY);
-                    gen.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, MeadowPlacedFeature.MEADOW_ORE_SALT_BURIED_KEY);
-                    gen.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, MeadowPlacedFeature.MEADOW_TREES_KEY);
-                    gen.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, MeadowPlacedFeature.MEADOW_PINE_FALLEN_KEY);
-                    gen.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, MeadowPlacedFeature.MEADOW_ERIOPHORUM_FIELD_KEY);
-                    gen.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, MeadowPlacedFeature.MEADOW_FLOWER_FIELD_PATCH_KEY);
-                    gen.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, MeadowPlacedFeature.MEADOW_BOULDERS_KEY);
-                    gen.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, MeadowPlacedFeature.MEADOW_LIMESTONE_SLAB_KEY);
-                    gen.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, MeadowPlacedFeature.MEADOW_MOSSY_LIMESTONE_KEY);
-                    gen.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, MeadowPlacedFeature.MEADOW_REPLACE_STONE_WITH_LIMESTONE_KEY);
-                    gen.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, MeadowPlacedFeature.MEADOW_REPLACE_GRASS_WITH_COBBLED_LIMESTONE_KEY);
-                    gen.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, MeadowPlacedFeature.MEADOW_REPLACE_GRASS_WITH_COARSE_DIRT_KEY);
-                    gen.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, MeadowPlacedFeature.MEADOW_REPLACE_GRASS_WITH_MOSSY_COBBLED_LIMESTONE_KEY);
+                    gen.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, MeadowPlacedFeature.ERIOPHORUM_FIELD_PATCH_PLACED);
+                    gen.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, MeadowPlacedFeature.FALLEN_PINE_TREE_CHECKED);
+                    gen.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, MeadowPlacedFeature.FLOWER_FIELD_PATCH_PLACED);
+                    gen.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, MeadowPlacedFeature.FOREST_TREES_PLACED);
+                    gen.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, MeadowPlacedFeature.MEADOW_TREES_PLACED);
+                    gen.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, MeadowPlacedFeature.SMALL_FIR_PATCH_PLACED);
+                    gen.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, MeadowPlacedFeature.ORE_LIMESTONE_KEY);
+                    gen.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, MeadowPlacedFeature.ORE_SALT_UPPER_KEY);
+                    gen.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, MeadowPlacedFeature.ORE_SALT_BURIED_KEY);
+                    gen.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, MeadowPlacedFeature.BOULDERS_KEY);
+                    gen.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, MeadowPlacedFeature.LIMESTONE_SLAB_KEY);
+                    gen.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, MeadowPlacedFeature.REPLACE_STONE_WITH_LIMESTONE_KEY);
+                    gen.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, MeadowPlacedFeature.REPLACE_GRASS_WITH_COBBLED_LIMESTONE_KEY);
+                    gen.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, MeadowPlacedFeature.REPLACE_GRASS_WITH_COARSE_DIRT_KEY);
+                    gen.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, MeadowPlacedFeature.REPLACE_GRASS_WITH_MOSSY_COBBLED_LIMESTONE_KEY);
                 })
                 .add(ModificationPhase.ADDITIONS, getMeadowSelector(), ctx -> {
                     var effects = ctx.getEffects();
@@ -47,8 +46,8 @@ public class MeadowBiomeModification {
                 })
                 .add(ModificationPhase.REMOVALS, getMeadowSelector(), ctx -> {
                     var gen = ctx.getGenerationSettings();
-                    gen.removeFeature(GenerationStep.Decoration.VEGETAL_DECORATION, MeadowPlacedFeature.MEADOW_MC_FLOWERS);
-                    gen.removeFeature(GenerationStep.Decoration.VEGETAL_DECORATION, MeadowPlacedFeature.MEADOW_MC_TREES);
+                    gen.removeFeature(GenerationStep.Decoration.VEGETAL_DECORATION, MeadowPlacedFeature.MC_FLOWERS);
+                    gen.removeFeature(GenerationStep.Decoration.VEGETAL_DECORATION, MeadowPlacedFeature.MC_TREES);
                 });
 
         FabricEntitySpawn.registerEntitySpawn();
