@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "meadow:climbing_rope_topmount"
+      "meadow:climbing_rope"
     ]
   },
   "criteria": {
@@ -21,7 +21,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "meadow:climbing_rope_topmount"
+        "recipe": "meadow:climbing_rope"
       }
     }
   },

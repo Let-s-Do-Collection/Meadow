@@ -1,5 +1,4 @@
 {
-	"format_version": "1.21.11",
 	"credit": "Made by Satisfy",
 	"parent": "minecraft:block/cube_column",
 	"textures": {

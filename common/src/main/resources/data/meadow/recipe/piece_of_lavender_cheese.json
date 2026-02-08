@@ -2,11 +2,11 @@
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
     {
-      "item": "meadow:amethyst_cheese_block"
+      "item": "meadow:amethyst_cheese_wheel"
     }
   ],
   "result": {
-    "id": "meadow:piece_of_amethyst_cheese",
+    "id": "meadow:amethyst_cheese_slice",
     "count": 4
   }
 }

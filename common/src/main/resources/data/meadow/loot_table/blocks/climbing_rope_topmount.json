@@ -11,7 +11,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "meadow:climbing_rope_topmount"
+          "name": "meadow:climbing_rope"
         }
       ],
       "rolls": 1

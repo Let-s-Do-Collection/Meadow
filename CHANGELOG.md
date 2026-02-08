@@ -1,21 +1,21 @@
 [1.4.5]
 
-This update brings a wide range of community wishes and improvements, directly implementing your feedback. Gaps have been closed, features have been made more accessible and refined, and familiar content has been carefully revisited and improved.
+This update implements a wide range of community feedback. Several long-standing gaps have been addressed, features refined, and older content revisited to improve clarity, consistency, and overall quality.
 
 **Fixed**
-* Alpine Salt loot table
-* Hanging Leaves not rendering properly when used with FastLeaves
+* Various minor issues and inconsistencies across blocks and models.
 
 **Changed**
-* Many textures have been completely reworked. Some were oversaturated, simple vanilla recolors, or not clearly identifiable in game. The goal was to stay as close as possible to the original feel while improving clarity and consistency.
-* The same applies to a few blocks such as the Fondue, Pine Chair, Pine Table and Milk Can models.
-* Hanging Birch Leaves now generate hanging leaves as originally intended when they were first introduced three years ago.
+* Many textures have been completely reworked. Some were oversaturated, simple vanilla recolors, or not clearly identifiable in-game. The goal was to stay as close as possible to the original feel while improving clarity and consistency.
+* Several models have been refined, including the Fondue, Pine Chair, Pine Table and Milk Can.
+* Hanging Birch Leaves now correctly generate hanging leaves as originally intended when first introduced.
+* The Cooking Frame is now a proper 2-block-tall block. It always includes a Cooking Pot and is immediately ready for use after placement. You might have to replace existing Frames!
 
 **Added**
-* A whole variety of Furniture: Pine Sofa, Pine Wardrobe, Pine Dresser, Pine Wall Cabinet
-* Window Blocks for Pine Window Panes, Artisan Window Panes, Ornate Window Panes
-* Saplings for Yellow Pines and Alpine Birch Trees
-* Particles for Cooking Pot & Fondue that show while you're cooking
+* New furniture pieces: Pine Sofa, Pine Wardrobe, Pine Dresser, Pine Wall Cabinet.
+* Window Blocks for Pine Window Panes, Artisan Window Panes and Ornate Window Panes.
+* Saplings for Yellow Pines and Alpine Birch Trees.
+* Cooking particles for the Cooking Pot and Fondue while preparing food.
 
 ***
 

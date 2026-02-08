@@ -1,0 +1,35 @@
+{
+	"format_version": "1.21.11",
+	"credit": "Made by Satisfy",
+	"textures": {
+		"1": "meadow:block/climbing_rope",
+		"particle": "meadow:block/climbing_rope"
+	},
+	"elements": [
+		{
+			"from": [6, 8, 6],
+			"to": [10, 14, 10],
+			"faces": {
+				"north": {"uv": [9, 10, 13, 15.968], "texture": "#1"},
+				"east": {"uv": [9.032, 10.032, 12.968, 15.968], "texture": "#1"},
+				"south": {"uv": [9.032, 10.032, 12.968, 15.968], "texture": "#1"},
+				"west": {"uv": [9.032, 10.032, 12.968, 15.968], "texture": "#1"},
+				"up": {"uv": [9.032, 6.032, 12.968, 9.968], "texture": "#1"},
+				"down": {"uv": [9.032, 6.032, 12.968, 9.968], "texture": "#1"}
+			}
+		},
+		{
+			"from": [7, 0, 7],
+			"to": [9, 16, 9],
+			"rotation": {"angle": 0, "axis": "y", "origin": [7, -13, 7]},
+			"faces": {
+				"north": {"uv": [7, 0, 9, 16], "texture": "#1"},
+				"east": {"uv": [7, 0, 9, 16], "texture": "#1"},
+				"south": {"uv": [7, 0, 9, 16], "texture": "#1"},
+				"west": {"uv": [7, 0, 9, 16], "texture": "#1"},
+				"up": {"uv": [10, 7, 12, 9], "texture": "#1"},
+				"down": {"uv": [10, 7, 12, 9], "texture": "#1"}
+			}
+		}
+	]
+}

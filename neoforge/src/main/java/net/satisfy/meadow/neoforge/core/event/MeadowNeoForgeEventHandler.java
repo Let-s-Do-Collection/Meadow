@@ -27,10 +27,10 @@ public class MeadowNeoForgeEventHandler {
             trades.computeIfAbsent(3, k -> new ArrayList<>()).add(new VillagerUtil.SellItemFactory(ObjectRegistry.TILED_STOVE.get(), 6, 1, 10));
             trades.computeIfAbsent(4, k -> new ArrayList<>()).add(new VillagerUtil.SellItemFactory(ObjectRegistry.WOODEN_BUCKET.get(), 5, 1, 10));
             trades.get(4).add(new VillagerUtil.SellItemFactory(ObjectRegistry.WOODEN_MILK_BUCKET.get(), 12, 1, 10));
-            trades.computeIfAbsent(5, k -> new ArrayList<>()).add(new VillagerUtil.SellItemFactory(ObjectRegistry.CHEESE_BLOCK.get(), 10, 1, 10));
+            trades.computeIfAbsent(5, k -> new ArrayList<>()).add(new VillagerUtil.SellItemFactory(ObjectRegistry.CHEESE_WHEEL.get(), 10, 1, 10));
             trades.get(5).add(new VillagerUtil.SellItemFactory(ObjectRegistry.CHEESE_FORM.get(), 4, 1, 10));
-            trades.get(5).add(new VillagerUtil.SellItemFactory(ObjectRegistry.AMETHYST_CHEESE_BLOCK.get(), 12, 1, 15));
-            trades.get(5).add(new VillagerUtil.SellItemFactory(ObjectRegistry.GRAIN_CHEESE_BLOCK.get(), 12, 1, 15));
+            trades.get(5).add(new VillagerUtil.SellItemFactory(ObjectRegistry.AMETHYST_CHEESE_WHEEL.get(), 12, 1, 15));
+            trades.get(5).add(new VillagerUtil.SellItemFactory(ObjectRegistry.GRAIN_CHEESE_WHEEL.get(), 12, 1, 15));
             trades.get(5).add(new VillagerUtil.SellItemFactory(ObjectRegistry.WOODEN_WARPED_MILK_BUCKET.get(), 18, 2, 15));
             event.getTrades().clear();
             event.getTrades().putAll(trades);
@@ -46,7 +46,7 @@ public class MeadowNeoForgeEventHandler {
             trades.get(2).add(new VillagerUtil.SellItemFactory(ObjectRegistry.WATERING_CAN_ITEM.get(), 25, 4, 5));
             trades.get(2).add(new VillagerUtil.SellItemFactory(ObjectRegistry.CHEESE_SANDWICH.get(), 4, 4, 5));
             trades.computeIfAbsent(3, k -> new ArrayList<>()).add(new VillagerUtil.SellItemFactory(ObjectRegistry.PINE_PLANKS.get(), 3, 2, 10));
-            trades.get(3).add(new VillagerUtil.SellItemFactory(ObjectRegistry.FRAME.get(), 25, 1, 10));
+            trades.get(3).add(new VillagerUtil.SellItemFactory(ObjectRegistry.COOKING_FRAME.get(), 25, 1, 10));
             trades.computeIfAbsent(4, k -> new ArrayList<>()).add(new VillagerUtil.SellItemFactory(ObjectRegistry.WOODEN_BUCKET.get(), 5, 1, 10));
             trades.get(4).add(new VillagerUtil.SellItemFactory(Items.RABBIT_HIDE, 8, 2, 10));
             trades.get(4).add(new VillagerUtil.SellItemFactory(ObjectRegistry.FIREWOOD.get(), 6, 2, 10));

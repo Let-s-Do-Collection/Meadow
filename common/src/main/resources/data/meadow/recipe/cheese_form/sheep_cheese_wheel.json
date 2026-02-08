@@ -1,0 +1,13 @@
+{
+  "type": "meadow:cheese",
+  "bucket": {
+    "item": "meadow:wooden_sheep_milk_bucket"
+  },
+  "ingredient": {
+    "item": "meadow:rennet"
+  },
+  "result": {
+    "id": "meadow:sheep_cheese_wheel",
+    "count": 1
+  }
+}

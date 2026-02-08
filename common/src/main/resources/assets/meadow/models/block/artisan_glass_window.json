@@ -1,4 +1,6 @@
 {
+  "credit": "Made by Satisfy",
+  "parent": "minecraft:block/cube_column",
   "textures": {
     "particle": "meadow:block/artisan_glass_window_pane",
     "side": "meadow:block/artisan_glass_window_pane",

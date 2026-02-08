@@ -1,7 +1,18 @@
 {
   "variants": {
-    "": [ { "model": "meadow:block/saxifrage_1", "weight":1 }
-    ,{ "model": "meadow:block/saxifrage_2", "weight":1 }
-    ,{ "model": "meadow:block/saxifrage_3", "weight":1 }
-    ]   }
+    "": [
+      {
+        "model": "meadow:block/saxifrage_0",
+        "weight": 1
+      },
+      {
+        "model": "meadow:block/saxifrage_1",
+        "weight": 1
+      },
+      {
+        "model": "meadow:block/saxifrage_2",
+        "weight": 1
+      }
+    ]
+  }
 }

@@ -1,9 +1,10 @@
 {
+	"format_version": "1.21.11",
 	"credit": "Made by Satisfy",
 	"textures": {
 		"0": "meadow:block/pine_log_side",
 		"1": "meadow:block/pine_log_top",
-		"2": "meadow:item/axe",
+		"2": "meadow:item/woodcutter_axe",
 		"particle": "meadow:block/pine_log_side"
 	},
 	"elements": [

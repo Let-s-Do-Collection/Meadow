@@ -33,7 +33,6 @@ import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.satisfy.meadow.core.block.entity.CookingCauldronBlockEntity;
 import net.satisfy.meadow.core.registry.EntityTypeRegistry;
-import net.satisfy.meadow.core.registry.ObjectRegistry;
 import net.satisfy.meadow.core.registry.ParticleTypeRegistry;
 import net.satisfy.meadow.core.registry.SoundEventRegistry;
 import net.satisfy.meadow.core.util.GeneralUtil;
@@ -66,12 +65,9 @@ public class CookingCauldronBlock extends BaseEntityBlock {
             NORMAL_KNOB
     );
 
-    private static final VoxelShape HANGING_SHAPE = Shapes.box(0.1875, 0, 0.1875, 0.8125, 1.25, 0.8125);
-
     public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
     public static final BooleanProperty LIT = BooleanProperty.create("lit");
     public static final BooleanProperty COOKING = BooleanProperty.create("cooking");
-    public static final BooleanProperty HANGING = BooleanProperty.create("hanging");
     public static final EnumProperty<CookpotStage> STAGE = EnumProperty.create("stage", CookpotStage.class);
 
     public static final MapCodec<CookingCauldronBlock> CODEC = simpleCodec(CookingCauldronBlock::new);
@@ -80,7 +76,6 @@ public class CookingCauldronBlock extends BaseEntityBlock {
         super(properties);
         registerDefaultState(stateDefinition.any()
                 .setValue(FACING, Direction.NORTH)
-                .setValue(HANGING, false)
                 .setValue(STAGE, CookpotStage.NORMAL)
                 .setValue(COOKING, false)
                 .setValue(LIT, false));
@@ -93,15 +88,11 @@ public class CookingCauldronBlock extends BaseEntityBlock {
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(FACING, HANGING, STAGE, COOKING, LIT);
+        builder.add(FACING, STAGE, COOKING, LIT);
     }
 
     @Override
     public @NotNull VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
-        if (state.getValue(HANGING)) {
-            return HANGING_SHAPE;
-        }
-
         VoxelShape baseShape = state.getValue(STAGE) == CookpotStage.NORMAL
                 ? NORMAL_POT_SHAPE
                 : BASE_POT_SHAPE;
@@ -111,9 +102,7 @@ public class CookingCauldronBlock extends BaseEntityBlock {
 
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext context) {
-        return defaultBlockState()
-                .setValue(FACING, context.getHorizontalDirection())
-                .setValue(HANGING, false);
+        return defaultBlockState().setValue(FACING, context.getHorizontalDirection());
     }
 
     @Override
@@ -171,7 +160,7 @@ public class CookingCauldronBlock extends BaseEntityBlock {
         if (stage == CookpotStage.NORMAL) return;
 
         double centerX = pos.getX() + 0.5;
-        double centerY = pos.getY() + (state.getValue(HANGING) ? 1.0 : 0.7);
+        double centerY = pos.getY() + 0.7;
         double centerZ = pos.getZ() + 0.5;
 
         if (stage == CookpotStage.WARM) {
@@ -246,7 +235,6 @@ public class CookingCauldronBlock extends BaseEntityBlock {
     public @NotNull List<ItemStack> getDrops(BlockState state, LootParams.Builder builder) {
         List<ItemStack> drops = new ArrayList<>();
         drops.add(new ItemStack(this));
-        if (state.getValue(HANGING)) drops.add(new ItemStack(ObjectRegistry.FRAME.get()));
         return drops;
     }
 

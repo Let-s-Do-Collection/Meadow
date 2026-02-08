@@ -13,7 +13,7 @@ public class TabRegistry {
 
     @SuppressWarnings("unused")
     public static final RegistrySupplier<CreativeModeTab> MEADOW_TAB = CREATIVE_MODE_TABS.register("meadow", () -> CreativeModeTab.builder(CreativeModeTab.Row.TOP, 0)
-            .icon(() -> new ItemStack(ObjectRegistry.PIECE_OF_CHEESE.get()))
+            .icon(() -> new ItemStack(ObjectRegistry.CHEESE_SLICE.get()))
             .title(Component.translatable("creativetab.meadow.tab"))
             .displayItems((parameters, output) -> {
                 output.accept(ObjectRegistry.ALPINE_COAL_ORE.get());
@@ -25,31 +25,36 @@ public class TabRegistry {
                 output.accept(ObjectRegistry.ALPINE_EMERALD_ORE.get());
                 output.accept(ObjectRegistry.ALPINE_DIAMOND_ORE.get());
                 output.accept(ObjectRegistry.ALPINE_SALT_ORE.get());
-
-                output.accept(ObjectRegistry.LIMESTONE.get());
                 output.accept(ObjectRegistry.COBBLED_LIMESTONE.get());
+                output.accept(ObjectRegistry.COBBLED_LIMESTONE_STAIRS.get());
+                output.accept(ObjectRegistry.COBBLED_LIMESTONE_SLAB.get());
+                output.accept(ObjectRegistry.COBBLED_LIMESTONE_WALL.get());
                 output.accept(ObjectRegistry.MOSSY_COBBLED_LIMESTONE.get());
+                output.accept(ObjectRegistry.MOSSY_COBBLED_LIMESTONE_STAIRS.get());
+                output.accept(ObjectRegistry.MOSSY_COBBLED_LIMESTONE_SLAB.get());
+                output.accept(ObjectRegistry.MOSSY_COBBLED_LIMESTONE_WALL.get());
+                output.accept(ObjectRegistry.LIMESTONE.get());
+                output.accept(ObjectRegistry.LIMESTONE_STAIRS.get());
+                output.accept(ObjectRegistry.LIMESTONE_SLAB.get());
+                output.accept(ObjectRegistry.LIMESTONE_WALL.get());
+
+
+
                 output.accept(ObjectRegistry.LIMESTONE_BRICKS.get());
+                output.accept(ObjectRegistry.LIMESTONE_BRICK_STAIRS.get());
+                output.accept(ObjectRegistry.LIMESTONE_BRICK_SLAB.get());
+                output.accept(ObjectRegistry.LIMESTONE_BRICK_WALL.get());
                 output.accept(ObjectRegistry.MOSSY_LIMESTONE_BRICKS.get());
+                output.accept(ObjectRegistry.MOSSY_LIMESTONE_BRICK_STAIRS.get());
+                output.accept(ObjectRegistry.MOSSY_LIMESTONE_BRICK_SLAB.get());
+                output.accept(ObjectRegistry.MOSSY_LIMESTONE_BRICK_WALL.get());
                 output.accept(ObjectRegistry.CRACKED_LIMESTONE_BRICKS.get());
                 output.accept(ObjectRegistry.CHISELED_LIMESTONE.get());
                 output.accept(ObjectRegistry.POLISHED_LIMESTONE.get());
-                output.accept(ObjectRegistry.LIMESTONE_STAIRS.get());
-                output.accept(ObjectRegistry.LIMESTONE_SLAB.get());
-                output.accept(ObjectRegistry.COBBLED_LIMESTONE_STAIRS.get());
-                output.accept(ObjectRegistry.COBBLED_LIMESTONE_SLAB.get());
-                output.accept(ObjectRegistry.LIMESTONE_BRICK_STAIRS.get());
-                output.accept(ObjectRegistry.LIMESTONE_BRICK_SLAB.get());
-                output.accept(ObjectRegistry.MOSSY_COBBLED_LIMESTONE_STAIRS.get());
-                output.accept(ObjectRegistry.MOSSY_COBBLED_LIMESTONE_SLAB.get());
-                output.accept(ObjectRegistry.MOSSY_LIMESTONE_BRICK_STAIRS.get());
-                output.accept(ObjectRegistry.MOSSY_LIMESTONE_BRICK_SLAB.get());
-                output.accept(ObjectRegistry.LIMESTONE_WALL.get());
-                output.accept(ObjectRegistry.COBBLED_LIMESTONE_WALL.get());
-                output.accept(ObjectRegistry.LIMESTONE_BRICK_WALL.get());
-                output.accept(ObjectRegistry.MOSSY_COBBLED_LIMESTONE_WALL.get());
-                output.accept(ObjectRegistry.MOSSY_LIMESTONE_BRICK_WALL.get());
-
+                output.accept(ObjectRegistry.ARTISAN_GLASS_WINDOW.get());
+                output.accept(ObjectRegistry.ARTISAN_GLASS_WINDOW_PANE.get());
+                output.accept(ObjectRegistry.ORNATE_GLASS_WINDOW.get());
+                output.accept(ObjectRegistry.ORNATE_GLASS_WINDOW_PANE.get());
                 output.accept(ObjectRegistry.PINE_LOG.get());
                 output.accept(ObjectRegistry.STRIPPED_PINE_LOG.get());
                 output.accept(ObjectRegistry.PINE_WOOD.get());
@@ -73,21 +78,6 @@ public class TabRegistry {
                 output.accept(ObjectRegistry.PINE_RAILING.get());
                 output.accept(ObjectRegistry.PINE_WINDOW.get());
                 output.accept(ObjectRegistry.PINE_WINDOW_PANE.get());
-                output.accept(ObjectRegistry.PINE_SAPLING.get());
-                output.accept(ObjectRegistry.PINE_LEAVES.get());
-                output.accept(ObjectRegistry.YELLOW_PINE_SAPLING.get());
-                output.accept(ObjectRegistry.YELLOW_PINE_LEAVES.get());
-                output.accept(ObjectRegistry.ALPINE_BIRCH_SAPLING.get());
-                output.accept(ObjectRegistry.ALPINE_BIRCH_LOG.get());
-                output.accept(ObjectRegistry.ALPINE_BIRCH_LEAVES.get());
-
-                output.accept(ObjectRegistry.TILED_STOVE.get());
-                output.accept(ObjectRegistry.TILED_STOVE_FIREPLACE.get());
-                output.accept(ObjectRegistry.TILED_STOVE_SMOKER.get());
-                output.accept(ObjectRegistry.TILED_STOVE_BENCH.get());
-                output.accept(ObjectRegistry.WOODCUTTER.get());
-                output.accept(ObjectRegistry.WOODEN_CAULDRON.get());
-                output.accept(ObjectRegistry.COOKING_CAULDRON.get());
                 output.accept(ObjectRegistry.PINE_CHEESE_RACK.get());
                 output.accept(ObjectRegistry.PINE_SOFA.get());
                 output.accept(ObjectRegistry.PINE_DRESSER.get());
@@ -97,38 +87,7 @@ public class TabRegistry {
                 output.accept(ObjectRegistry.PINE_CHAIR.get());
                 output.accept(ObjectRegistry.PINE_TABLE.get());
                 output.accept(ObjectRegistry.PINE_BENCH.get());
-                output.accept(ObjectRegistry.STONE_TABLE.get());
-                output.accept(ObjectRegistry.STONE_BENCH.get());
                 output.accept(ObjectRegistry.SHUTTER_BLOCK.get());
-                output.accept(ObjectRegistry.ARTISAN_GLASS_WINDOW.get());
-                output.accept(ObjectRegistry.ARTISAN_GLASS_WINDOW_PANE.get());
-                output.accept(ObjectRegistry.ORNATE_GLASS_WINDOW.get());
-                output.accept(ObjectRegistry.ORNATE_GLASS_WINDOW_PANE.get());
-                output.accept(ObjectRegistry.FRAME.get());
-                output.accept(ObjectRegistry.WHEELBARROW.get());
-                output.accept(ObjectRegistry.DOORMAT.get());
-                output.accept(ObjectRegistry.WOODEN_FLOWER_POT_BIG.get());
-                output.accept(ObjectRegistry.WOODEN_FLOWER_POT_SMALL.get());
-                output.accept(ObjectRegistry.WOODEN_FLOWER_BOX.get());
-                output.accept(ObjectRegistry.OIL_LANTERN.get());
-                output.accept(ObjectRegistry.FONDUE_POT.get());
-                output.accept(ObjectRegistry.CAMERA.get());
-                output.accept(ObjectRegistry.CLIMBING_ROPE_TOPMOUNT.get());
-                output.accept(ObjectRegistry.FIREWOOD.get());
-                output.accept(ObjectRegistry.MILK_CAN.get());
-                output.accept(ObjectRegistry.FELTING_NEEDLE.get());
-                output.accept(ObjectRegistry.WATERING_CAN_ITEM.get());
-                output.accept(ObjectRegistry.CHEESE_FORM.get());
-
-                output.accept(ObjectRegistry.ALPINE_POPPY.get());
-                output.accept(ObjectRegistry.DELPHINIUM.get());
-                output.accept(ObjectRegistry.SAXIFRAGE.get());
-                output.accept(ObjectRegistry.ENZIAN.get());
-                output.accept(ObjectRegistry.FIRE_LILY.get());
-                output.accept(ObjectRegistry.ERIOPHORUM.get());
-                output.accept(ObjectRegistry.TALL_ERIOPHORUM.get());
-                output.accept(ObjectRegistry.SMALL_FIR.get());
-
                 output.accept(ObjectRegistry.RUSTIC_WOOL.get());
                 output.accept(ObjectRegistry.RUSTIC_CARPET.get());
                 output.accept(ObjectRegistry.RUSTIC_BED.get());
@@ -151,31 +110,63 @@ public class TabRegistry {
                 output.accept(ObjectRegistry.WARPED_CARPET.get());
                 output.accept(ObjectRegistry.WARPED_BED.get());
                 output.accept(ObjectRegistry.STRAW_BED.get());
-
+                output.accept(ObjectRegistry.STONE_TABLE.get());
+                output.accept(ObjectRegistry.STONE_BENCH.get());
+                output.accept(ObjectRegistry.TILED_STOVE.get());
+                output.accept(ObjectRegistry.TILED_STOVE_FIREPLACE.get());
+                output.accept(ObjectRegistry.TILED_STOVE_SMOKER.get());
+                output.accept(ObjectRegistry.TILED_STOVE_BENCH.get());
+                output.accept(ObjectRegistry.PINE_SAPLING.get());
+                output.accept(ObjectRegistry.PINE_LEAVES.get());
+                output.accept(ObjectRegistry.YELLOW_PINE_SAPLING.get());
+                output.accept(ObjectRegistry.YELLOW_PINE_LEAVES.get());
+                output.accept(ObjectRegistry.ALPINE_BIRCH_SAPLING.get());
+                output.accept(ObjectRegistry.ALPINE_BIRCH_LOG.get());
+                output.accept(ObjectRegistry.ALPINE_BIRCH_LEAVES.get());
+                output.accept(ObjectRegistry.WOODCUTTER.get());
+                output.accept(ObjectRegistry.WOODEN_CAULDRON.get());
+                output.accept(ObjectRegistry.COOKING_FRAME.get());
+                output.accept(ObjectRegistry.COOKING_CAULDRON.get());
+                output.accept(ObjectRegistry.FONDUE_POT.get());
+                output.accept(ObjectRegistry.CHEESE_FORM.get());
+                output.accept(ObjectRegistry.WHEELBARROW.get());
+                output.accept(ObjectRegistry.DOORMAT.get());
+                output.accept(ObjectRegistry.WOODEN_FLOWER_POT_BIG.get());
+                output.accept(ObjectRegistry.WOODEN_FLOWER_POT_SMALL.get());
+                output.accept(ObjectRegistry.WOODEN_FLOWER_BOX.get());
+                output.accept(ObjectRegistry.WATERING_CAN_ITEM.get());
+                output.accept(ObjectRegistry.FIREWOOD.get());
+                output.accept(ObjectRegistry.MILK_CAN.get());
+                output.accept(ObjectRegistry.FELTING_NEEDLE.get());
+                output.accept(ObjectRegistry.OIL_LANTERN.get());
+                output.accept(ObjectRegistry.CAMERA.get());
+                output.accept(ObjectRegistry.CLIMBING_ROPE.get());
+                output.accept(ObjectRegistry.ALPINE_POPPY.get());
+                output.accept(ObjectRegistry.DELPHINIUM.get());
+                output.accept(ObjectRegistry.SAXIFRAGE.get());
+                output.accept(ObjectRegistry.ENZIAN.get());
+                output.accept(ObjectRegistry.FIRE_LILY.get());
+                output.accept(ObjectRegistry.ERIOPHORUM.get());
+                output.accept(ObjectRegistry.TALL_ERIOPHORUM.get());
+                output.accept(ObjectRegistry.SMALL_FIR.get());
                 output.accept(ObjectRegistry.FUR_HELMET.get());
                 output.accept(ObjectRegistry.FUR_CHESTPLATE.get());
                 output.accept(ObjectRegistry.FUR_LEGGINGS.get());
                 output.accept(ObjectRegistry.FUR_BOOTS.get());
-
-                output.accept(ObjectRegistry.ALPINE_SALT.get());
-                output.accept(ObjectRegistry.RENNET.get());
-
-                output.accept(ObjectRegistry.CHEESE_BLOCK.get());
-                output.accept(ObjectRegistry.SHEEP_CHEESE_BLOCK.get());
-                output.accept(ObjectRegistry.GRAIN_CHEESE_BLOCK.get());
-                output.accept(ObjectRegistry.AMETHYST_CHEESE_BLOCK.get());
-                output.accept(ObjectRegistry.BUFFALO_CHEESE_BLOCK.get());
-                output.accept(ObjectRegistry.GOAT_CHEESE_BLOCK.get());
-                output.accept(ObjectRegistry.WARPED_CHEESE_BLOCK.get());
-
-                output.accept(ObjectRegistry.PIECE_OF_CHEESE.get());
-                output.accept(ObjectRegistry.PIECE_OF_SHEEP_CHEESE.get());
-                output.accept(ObjectRegistry.PIECE_OF_GRAIN_CHEESE.get());
-                output.accept(ObjectRegistry.PIECE_OF_AMETHYST_CHEESE.get());
-                output.accept(ObjectRegistry.PIECE_OF_BUFFALO_CHEESE.get());
-                output.accept(ObjectRegistry.PIECE_OF_GOAT_CHEESE.get());
-                output.accept(ObjectRegistry.PIECE_OF_WARPED_CHEESE.get());
-
+                output.accept(ObjectRegistry.CHEESE_WHEEL.get());
+                output.accept(ObjectRegistry.SHEEP_CHEESE_WHEEL.get());
+                output.accept(ObjectRegistry.GRAIN_CHEESE_WHEEL.get());
+                output.accept(ObjectRegistry.AMETHYST_CHEESE_WHEEL.get());
+                output.accept(ObjectRegistry.BUFFALO_CHEESE_WHEEL.get());
+                output.accept(ObjectRegistry.GOAT_CHEESE_WHEEL.get());
+                output.accept(ObjectRegistry.WARPED_CHEESE_WHEEL.get());
+                output.accept(ObjectRegistry.CHEESE_SLICE.get());
+                output.accept(ObjectRegistry.SHEEP_CHEESE_SLICE.get());
+                output.accept(ObjectRegistry.GRAIN_CHEESE_SLICE.get());
+                output.accept(ObjectRegistry.AMETHYST_CHEESE_SLICE.get());
+                output.accept(ObjectRegistry.BUFFALO_CHEESE_SLICE.get());
+                output.accept(ObjectRegistry.GOAT_CHEESE_SLICE.get());
+                output.accept(ObjectRegistry.WARPED_CHEESE_SLICE.get());
                 output.accept(ObjectRegistry.CHEESECAKE.get());
                 output.accept(ObjectRegistry.CHEESE_TART.get());
                 output.accept(ObjectRegistry.CHEESECAKE_SLICE.get());
@@ -183,12 +174,12 @@ public class TabRegistry {
                 output.accept(ObjectRegistry.CHEESE_SANDWICH.get());
                 output.accept(ObjectRegistry.CHEESE_ROLL.get());
                 output.accept(ObjectRegistry.CHEESE_STICK.get());
-
                 output.accept(ObjectRegistry.RAW_BUFFALO_MEAT.get());
                 output.accept(ObjectRegistry.COOKED_BUFFALO_MEAT.get());
-                output.accept(ObjectRegistry.ROASTED_HAM.get());
+                output.accept(ObjectRegistry.ROASTED_BUFFALO_HAM.get());
                 output.accept(ObjectRegistry.SAUSAGE_WITH_CHEESE.get());
-
+                output.accept(ObjectRegistry.ALPINE_SALT.get());
+                output.accept(ObjectRegistry.RENNET.get());
                 output.accept(ObjectRegistry.WOODEN_BUCKET.get());
                 output.accept(ObjectRegistry.WOODEN_WATER_BUCKET.get());
                 output.accept(ObjectRegistry.WOODEN_MILK_BUCKET.get());

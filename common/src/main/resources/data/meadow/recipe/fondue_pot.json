@@ -1,16 +1,16 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    " B ",
-    "III",
-    "I I"
+    "  B",
+    "IBI",
+    "III"
   ],
   "key": {
     "I": {
       "item": "minecraft:iron_ingot"
     },
     "B": {
-      "item": "meadow:cooking_cauldron"
+      "item": "minecraft:stick"
     }
   },
   "result": {

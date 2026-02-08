@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/fence_side",
   "textures": {
-    "texture": "meadow:block/pine_planks"
+    "texture": "meadow:block/pine_planks_alt"
   }
 }

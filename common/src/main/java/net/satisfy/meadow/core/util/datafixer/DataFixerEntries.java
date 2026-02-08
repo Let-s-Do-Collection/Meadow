@@ -18,8 +18,24 @@ public final class DataFixerEntries {
         DataFixers.register("meadow:alpine_birch_leaves", "meadow:alpine_birch_leaves");
         DataFixers.register("meadow:fire_log", "meadow:firewood");
         DataFixers.register("meadow:fondue", "meadow:fondue_pot");
+        DataFixers.register("meadow:frame", "meadow:cooking_frame");
         DataFixers.register("meadow:cooking_cauldron", "meadow:cookpot");
         DataFixers.register("meadow:chiseled_limestone_bricks", "meadow:chiseled_limestone");
         DataFixers.register("meadow:polished_limestone_bricks", "meadow:polished_limestone");
+        DataFixers.register("meadow:warped_cheese_block", "meadow:warped_cheese_wheel");
+        DataFixers.register("meadow:buffalo_cheese_block", "meadow:buffalo_cheese_wheel");
+        DataFixers.register("meadow:goat_cheese_block", "meadow:goat_cheese_wheel");
+        DataFixers.register("meadow:sheep_cheese_block", "meadow:sheep_cheese_wheel");
+        DataFixers.register("meadow:grain_cheese_block", "meadow:grain_cheese_wheel");
+        DataFixers.register("meadow:amethyst_cheese_block", "meadow:amethyst_cheese_wheel");
+        DataFixers.register("meadow:cheese_block", "meadow:cheese_wheel");
+        DataFixers.register("meadow:piece_of_cheese", "meadow:cheese_slice");
+        DataFixers.register("meadow:piece_of_sheep_cheese", "meadow:sheep_cheese_slice");
+        DataFixers.register("meadow:piece_of_grain_cheese", "meadow:grain_cheese_slice");
+        DataFixers.register("meadow:piece_of_amethyst_cheese", "meadow:amethyst_cheese_slice");
+        DataFixers.register("meadow:piece_of_buffalo_cheese", "meadow:buffalo_cheese_slice");
+        DataFixers.register("meadow:piece_of_goat_cheese", "meadow:goat_cheese_slice");
+        DataFixers.register("meadow:piece_of_warped_cheese", "meadow:warped_cheese_slice");
+        DataFixers.register("meadow:roasted_ham", "meadow:roasted_buffalo_ham");
     }
 }

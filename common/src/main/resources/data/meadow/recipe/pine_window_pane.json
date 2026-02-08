@@ -1,16 +1,12 @@
 {
     "type": "minecraft:crafting_shaped",
     "pattern": [
-        "GGG",
-        "G#G",
-        "GGG"
+        "###",
+        "###"
     ],
     "key": {
         "#": {
-            "item": "minecraft:glass_pane"
-        },
-        "G": {
-            "item": "meadow:pine_planks"
+            "item": "meadow:pine_window"
         }
     },
     "result": {

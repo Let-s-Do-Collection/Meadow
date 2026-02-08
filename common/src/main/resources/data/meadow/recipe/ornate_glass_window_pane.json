@@ -1,19 +1,12 @@
 {
     "type": "minecraft:crafting_shaped",
     "pattern": [
-        "#BB",
-        "G#G",
-        "#BG"
+        "###",
+        "###"
     ],
     "key": {
         "#": {
-            "item": "minecraft:yellow_stained_glass_pane"
-        },
-        "B": {
-            "item": "minecraft:blue_stained_glass_pane"
-        },
-        "G": {
-            "item": "minecraft:black_stained_glass_pane"
+            "item": "meadow:ornate_glass_window"
         }
     },
     "result": {

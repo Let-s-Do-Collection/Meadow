@@ -2,11 +2,11 @@
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
     {
-      "item": "meadow:sheep_cheese_block"
+      "item": "meadow:sheep_cheese_wheel"
     }
   ],
   "result": {
-    "id": "meadow:piece_of_sheep_cheese",
+    "id": "meadow:sheep_cheese_slice",
     "count": 4
   }
 }

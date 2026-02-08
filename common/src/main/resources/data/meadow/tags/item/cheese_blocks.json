@@ -1,11 +1,11 @@
 {
   "values": [
-    "meadow:cheese_block",
-    "meadow:sheep_cheese_block",
-    "meadow:grain_cheese_block",
-    "meadow:amethyst_cheese_block",
-    "meadow:buffalo_cheese_block",
-    "meadow:goat_cheese_block",
-    "meadow:warped_cheese_block"
+    "meadow:cheese_wheel",
+    "meadow:sheep_cheese_wheel",
+    "meadow:grain_cheese_wheel",
+    "meadow:amethyst_cheese_wheel",
+    "meadow:buffalo_cheese_wheel",
+    "meadow:goat_cheese_wheel",
+    "meadow:warped_cheese_wheel"
   ]
 }

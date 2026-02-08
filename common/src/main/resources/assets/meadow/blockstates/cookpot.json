@@ -1,131 +1,67 @@
 {
   "variants": {
-    "facing=north,hanging=false,stage=normal": {
+    "facing=north,stage=normal": {
       "model": "meadow:block/cookpot",
       "y": 0
     },
-    "facing=east,hanging=false,stage=normal": {
+    "facing=east,stage=normal": {
       "model": "meadow:block/cookpot",
       "y": 90
     },
-    "facing=south,hanging=false,stage=normal": {
+    "facing=south,stage=normal": {
       "model": "meadow:block/cookpot",
       "y": 180
     },
-    "facing=west,hanging=false,stage=normal": {
+    "facing=west,stage=normal": {
       "model": "meadow:block/cookpot",
       "y": 270
     },
-    "facing=north,hanging=false,stage=warm": {
+    "facing=north,stage=warm": {
       "model": "meadow:block/cookpot_warm",
       "y": 0
     },
-    "facing=east,hanging=false,stage=warm": {
+    "facing=east,stage=warm": {
       "model": "meadow:block/cookpot_warm",
       "y": 90
     },
-    "facing=south,hanging=false,stage=warm": {
+    "facing=south,stage=warm": {
       "model": "meadow:block/cookpot_warm",
       "y": 180
     },
-    "facing=west,hanging=false,stage=warm": {
+    "facing=west,stage=warm": {
       "model": "meadow:block/cookpot_warm",
       "y": 270
     },
-    "facing=north,hanging=false,stage=cooking": {
+    "facing=north,stage=cooking": {
       "model": "meadow:block/cookpot_filled",
       "y": 0
     },
-    "facing=east,hanging=false,stage=cooking": {
+    "facing=east,stage=cooking": {
       "model": "meadow:block/cookpot_filled",
       "y": 90
     },
-    "facing=south,hanging=false,stage=cooking": {
+    "facing=south,stage=cooking": {
       "model": "meadow:block/cookpot_filled",
       "y": 180
     },
-    "facing=west,hanging=false,stage=cooking": {
+    "facing=west,stage=cooking": {
       "model": "meadow:block/cookpot_filled",
       "y": 270
     },
-    "facing=north,hanging=false,stage=filled": {
+    "facing=north,stage=filled": {
       "model": "meadow:block/cookpot_filled",
       "y": 0
     },
-    "facing=east,hanging=false,stage=filled": {
+    "facing=east,stage=filled": {
       "model": "meadow:block/cookpot_filled",
       "y": 90
     },
-    "facing=south,hanging=false,stage=filled": {
+    "facing=south,stage=filled": {
       "model": "meadow:block/cookpot_filled",
       "y": 180
     },
-    "facing=west,hanging=false,stage=filled": {
+    "facing=west,stage=filled": {
       "model": "meadow:block/cookpot_filled",
-      "y": 270
-    },
-    "facing=north,hanging=true,stage=normal": {
-      "model": "meadow:block/frame_cauldron",
-      "y": 0
-    },
-    "facing=east,hanging=true,stage=normal": {
-      "model": "meadow:block/frame_cauldron",
-      "y": 90
-    },
-    "facing=south,hanging=true,stage=normal": {
-      "model": "meadow:block/frame_cauldron",
-      "y": 180
-    },
-    "facing=west,hanging=true,stage=normal": {
-      "model": "meadow:block/frame_cauldron",
-      "y": 270
-    },
-    "facing=north,hanging=true,stage=warm": {
-      "model": "meadow:block/frame_cauldron",
-      "y": 0
-    },
-    "facing=east,hanging=true,stage=warm": {
-      "model": "meadow:block/frame_cauldron",
-      "y": 90
-    },
-    "facing=south,hanging=true,stage=warm": {
-      "model": "meadow:block/frame_cauldron",
-      "y": 180
-    },
-    "facing=west,hanging=true,stage=warm": {
-      "model": "meadow:block/frame_cauldron",
-      "y": 270
-    },
-    "facing=north,hanging=true,stage=cooking": {
-      "model": "meadow:block/frame_cauldron_cooking",
-      "y": 0
-    },
-    "facing=east,hanging=true,stage=cooking": {
-      "model": "meadow:block/frame_cauldron_cooking",
-      "y": 90
-    },
-    "facing=south,hanging=true,stage=cooking": {
-      "model": "meadow:block/frame_cauldron_cooking",
-      "y": 180
-    },
-    "facing=west,hanging=true,stage=cooking": {
-      "model": "meadow:block/frame_cauldron_cooking",
-      "y": 270
-    },
-    "facing=north,hanging=true,stage=filled": {
-      "model": "meadow:block/frame_cauldron",
-      "y": 0
-    },
-    "facing=east,hanging=true,stage=filled": {
-      "model": "meadow:block/frame_cauldron",
-      "y": 90
-    },
-    "facing=south,hanging=true,stage=filled": {
-      "model": "meadow:block/frame_cauldron",
-      "y": 180
-    },
-    "facing=west,hanging=true,stage=filled": {
-      "model": "meadow:block/frame_cauldron",
       "y": 270
     }
   }

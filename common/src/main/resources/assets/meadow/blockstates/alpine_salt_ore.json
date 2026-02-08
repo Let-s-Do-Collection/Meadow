@@ -2,11 +2,11 @@
   "variants": {
     "": [
       {
-        "model": "meadow:block/alpine_salt_ore_1",
+        "model": "meadow:block/alpine_salt_ore_0",
         "weight": 1
       },
       {
-        "model": "meadow:block/alpine_salt_ore_2",
+        "model": "meadow:block/alpine_salt_ore_1",
         "weight": 1
       }
     ]

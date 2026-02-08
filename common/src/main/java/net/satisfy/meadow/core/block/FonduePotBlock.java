@@ -92,7 +92,7 @@ public class FonduePotBlock extends FacingBlock {
             return ItemInteractionResult.sidedSuccess(level.isClientSide);
         }
 
-        if (fillAmount < 3 && stack.is(TagRegistry.CHEESE_BLOCKS)) {
+        if (fillAmount < 3 && stack.is(TagRegistry.CHEESE_WHEELS)) {
             if (!level.isClientSide) {
                 level.setBlock(pos, state.setValue(FILL_AMOUNT, 3), 11);
                 if (!player.getAbilities().instabuild) {

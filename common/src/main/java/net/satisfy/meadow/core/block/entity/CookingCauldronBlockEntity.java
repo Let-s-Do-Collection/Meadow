@@ -22,7 +22,6 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.satisfy.meadow.client.gui.handler.CookingCauldronGuiHandler;
-import net.satisfy.meadow.core.block.CookingCauldronBlock;
 import net.satisfy.meadow.core.recipes.CookingCauldronRecipe;
 import net.satisfy.meadow.core.registry.EntityTypeRegistry;
 import net.satisfy.meadow.core.registry.ObjectRegistry;
@@ -118,7 +117,7 @@ public class CookingCauldronBlockEntity extends BlockEntity implements Implement
     public boolean isBeingBurned() {
         Level currentLevel = getLevel();
         if (currentLevel == null) return false;
-        if (getBlockState().getValue(CookingCauldronBlock.HANGING)) return true;
+        if (getBlockState().is(ObjectRegistry.COOKING_FRAME.get())) return true;
         return currentLevel.getBlockState(getBlockPos().below()).is(TagRegistry.ALLOWS_COOKING);
     }
 

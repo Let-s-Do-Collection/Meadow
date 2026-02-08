@@ -1,12 +1,12 @@
 {
   "replace": false,
   "values": [
-    "meadow:piece_of_cheese",
-    "meadow:piece_of_sheep_cheese",
-    "meadow:piece_of_grain_cheese",
-    "meadow:piece_of_amethyst_cheese",
-    "meadow:piece_of_buffalo_cheese",
-    "meadow:piece_of_goat_cheese",
-    "meadow:piece_of_warped_cheese"
+    "meadow:cheese_slice",
+    "meadow:sheep_cheese_slice",
+    "meadow:grain_cheese_slice",
+    "meadow:amethyst_cheese_slice",
+    "meadow:buffalo_cheese_slice",
+    "meadow:goat_cheese_slice",
+    "meadow:warped_cheese_slice"
   ]
 }

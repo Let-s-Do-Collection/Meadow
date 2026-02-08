@@ -82,7 +82,7 @@ public class CheeseRackBlock extends StorageBlock {
 
     @Override
     public boolean canInsertStack(ItemStack itemStack) {
-        return itemStack.is(TagRegistry.CHEESE_BLOCKS);
+        return itemStack.is(TagRegistry.CHEESE_WHEELS);
     }
 
     @Override

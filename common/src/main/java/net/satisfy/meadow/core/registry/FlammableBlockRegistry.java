@@ -46,7 +46,7 @@ public class FlammableBlockRegistry {
                 ObjectRegistry.PINE_WARDROBE.get(),
                 ObjectRegistry.WOODEN_CAULDRON.get(),
                 ObjectRegistry.WATERING_CAN.get(),
-                ObjectRegistry.FRAME.get(),
+                ObjectRegistry.COOKING_FRAME.get(),
                 ObjectRegistry.FIREWOOD.get(),
                 ObjectRegistry.WOODEN_FLOWER_BOX.get(),
                 ObjectRegistry.WOODEN_FLOWER_POT_SMALL.get(),

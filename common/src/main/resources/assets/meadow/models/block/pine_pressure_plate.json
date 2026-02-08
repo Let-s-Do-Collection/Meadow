@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/pressure_plate_up",
   "textures": {
-    "texture": "meadow:block/pine_planks"
+    "texture": "meadow:block/pine_planks_alt"
   }
 }

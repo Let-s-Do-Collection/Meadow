@@ -1,7 +1,18 @@
 {
   "variants": {
-    "": [ { "model": "meadow:block/eriophorum_1", "weight":1 }
-    ,{ "model": "meadow:block/eriophorum_2", "weight":1 }
-    ,{ "model": "meadow:block/eriophorum_3", "weight":1 }
-    ]   }
+    "": [
+      {
+        "model": "meadow:block/eriophorum_0",
+        "weight": 1
+      },
+      {
+        "model": "meadow:block/eriophorum_1",
+        "weight": 1
+      },
+      {
+        "model": "meadow:block/eriophorum_2",
+        "weight": 1
+      }
+    ]
+  }
 }

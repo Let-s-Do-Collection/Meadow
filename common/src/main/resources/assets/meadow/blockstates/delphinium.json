@@ -1,8 +1,18 @@
 {
   "variants": {
-    "": [ { "model": "meadow:block/delphinium_1", "weight":1 }
-    ,{ "model": "meadow:block/delphinium_2", "weight":1 }
-    ,{ "model": "meadow:block/delphinium_3", "weight":1 }
-
-    ]   }
+    "": [
+      {
+        "model": "meadow:block/delphinium_0",
+        "weight": 1
+      },
+      {
+        "model": "meadow:block/delphinium_1",
+        "weight": 1
+      },
+      {
+        "model": "meadow:block/delphinium_2",
+        "weight": 1
+      }
+    ]
+  }
 }

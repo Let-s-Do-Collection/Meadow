@@ -198,18 +198,4 @@ public class WardrobeBlock extends HorizontalDirectionalBlock implements EntityB
     public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
         return new WardrobeBlockEntity(pos, state);
     }
-
-    @Override
-    public void appendHoverText(ItemStack itemStack, Item.TooltipContext tooltipContext, List<Component> list, TooltipFlag tooltipFlag) {
-        int beige = 0xF5DEB3;
-        int gold = 0xFFD700;
-        if (!Screen.hasShiftDown()) {
-            Component key = Component.literal("[SHIFT]").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(gold)));
-            list.add(Component.translatable("tooltip.meadow.tooltip_information.hold", key).withStyle(Style.EMPTY.withColor(TextColor.fromRgb(beige))));
-            return;
-        }
-        list.add(Component.translatable("tooltip.meadow.wardrobe.info_0").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(beige))));
-        list.add(Component.empty());
-        list.add(Component.translatable("tooltip.meadow.wardrobe.info_1").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(beige))));
-    }
 }

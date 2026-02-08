@@ -1,0 +1,6 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "meadow:item/grain_cheese_wheel"
+  }
+}

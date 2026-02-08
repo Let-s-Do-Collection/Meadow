@@ -1,7 +1,18 @@
 {
   "variants": {
-    "": [ { "model": "meadow:block/alpine_poppy_1", "weight":1 }
-    ,{ "model": "meadow:block/alpine_poppy_2", "weight":1 }
-    ,{ "model": "meadow:block/alpine_poppy_3", "weight":1 }
-    ]   }
+    "": [
+      {
+        "model": "meadow:block/alpine_poppy_0",
+        "weight": 1
+      },
+      {
+        "model": "meadow:block/alpine_poppy_1",
+        "weight": 1
+      },
+      {
+        "model": "meadow:block/alpine_poppy_2",
+        "weight": 1
+      }
+    ]
+  }
 }
