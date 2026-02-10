@@ -47,5 +47,6 @@
       ],
       "rolls": 1.0
     }
-  ]
+  ],
+  "random_sequence": "meadow:blocks/alpine_salt_ore"
 }

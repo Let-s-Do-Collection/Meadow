@@ -14,16 +14,20 @@ import net.satisfy.meadow.core.item.FurLegsItem;
 import net.satisfy.meadow.core.registry.ArmorRegistry;
 
 public class FurLeggingsRenderer implements ArmorRenderer {
+
     @Override
     public void render(PoseStack matrices, MultiBufferSource vertexConsumers, ItemStack stack, LivingEntity entity, EquipmentSlot slot, int light, HumanoidModel<LivingEntity> contextModel) {
         if (slot != EquipmentSlot.LEGS) return;
         if (!(stack.getItem() instanceof FurLegsItem furLegsItem)) return;
-        Model model = ArmorRegistry.getLeggingsModel(furLegsItem, contextModel.leftLeg, contextModel.rightLeg);
-        ResourceLocation base = furLegsItem.getLeggingsTexture();
-        String path = base.getPath();
-        if (!path.startsWith("textures/")) path = "textures/" + path;
-        if (!path.endsWith(".png")) path = path + ".png";
-        ResourceLocation texture = ResourceLocation.fromNamespaceAndPath(base.getNamespace(), path);
-        model.renderToBuffer(matrices, vertexConsumers.getBuffer(model.renderType(texture)), light, OverlayTexture.NO_OVERLAY);
+
+        Model model = ArmorRegistry.getLeggingsModel(furLegsItem, contextModel.rightLeg, contextModel.leftLeg, contextModel);
+
+        ResourceLocation baseTexture = furLegsItem.getLeggingsTexture();
+        String texturePath = baseTexture.getPath();
+        if (!texturePath.startsWith("textures/")) texturePath = "textures/" + texturePath;
+        if (!texturePath.endsWith(".png")) texturePath = texturePath + ".png";
+        ResourceLocation texture = ResourceLocation.fromNamespaceAndPath(baseTexture.getNamespace(), texturePath);
+
+        model.renderToBuffer(matrices, vertexConsumers.getBuffer(model.renderType(texture)), light, OverlayTexture.NO_OVERLAY, -1);
     }
 }

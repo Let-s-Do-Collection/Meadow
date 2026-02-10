@@ -11,11 +11,11 @@ import net.satisfy.meadow.core.registry.ArmorRegistry;
 import org.jetbrains.annotations.NotNull;
 
 public class FurArmorBootsExtensions implements IClientItemExtensions {
+
     @Override
     public @NotNull Model getGenericArmorModel(@NotNull LivingEntity entity, @NotNull ItemStack stack, @NotNull EquipmentSlot slot, @NotNull HumanoidModel<?> original) {
-        if (slot == EquipmentSlot.FEET && stack.getItem() instanceof FurBootsItem boots) {
-            return ArmorRegistry.getBootsModel(boots, original.rightLeg, original.leftLeg);
-        }
-        return original;
+        if (slot != EquipmentSlot.FEET || !(stack.getItem() instanceof FurBootsItem furBootsItem)) return original;
+
+        return ArmorRegistry.getBootsModel(furBootsItem, original.rightLeg, original.leftLeg, original);
     }
 }

@@ -1,7 +1,7 @@
 {
   "values": [
-    "#minecraft:is_forest",
-    "#minecraft:has_structure/woodland_mansion",
-    "#minecraft:is_taiga"
+    "#minecraft:is_savanna",
+    "#minecraft:is_river",
+    "#minecraft:is_swamp"
   ]
 }
