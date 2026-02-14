@@ -212,7 +212,7 @@ public class ObjectRegistry {
     public static final RegistrySupplier<Block> SHEEP_CHEESE_WHEEL = registerWithItem("sheep_cheese_wheel", () -> new CheeseWheelBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.CAKE), ObjectRegistry.SHEEP_CHEESE_SLICE, CheeseWheelBlock.CheeseType.SHEEP));
     public static final RegistrySupplier<Block> GOAT_CHEESE_WHEEL = registerWithItem("goat_cheese_wheel", () -> new CheeseWheelBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.CAKE), ObjectRegistry.GOAT_CHEESE_SLICE, CheeseWheelBlock.CheeseType.GOAT));
     public static final RegistrySupplier<Item> ALPINE_SALT = registerItem("alpine_salt", () -> new Item(getSettings()));
-    public static final RegistrySupplier<Item> RENNET = registerItem("rennet", () -> new Item(getSettings()));
+    public static final RegistrySupplier<Item> RENNET = registerItem("rennet", () -> new Item(getSettings().craftRemainder(Items.GLASS_BOTTLE)));
     public static final RegistrySupplier<Item> CHEESE_SANDWICH = registerItem("cheese_sandwich", () -> new Item(getSettings().food(new FoodProperties.Builder().nutrition(7).saturationModifier(0.7f).build())));
     public static final RegistrySupplier<Item> CHEESE_ROLL = registerItem("cheese_roll", () -> new Item(getSettings().food(new FoodProperties.Builder().nutrition(7).saturationModifier(0.8f).build())));
     public static final RegistrySupplier<Item> CHEESE_STICK = registerItem("cheese_stick", () -> new Item(getSettings().food(new FoodProperties.Builder().nutrition(6).saturationModifier(0.6f).build())));

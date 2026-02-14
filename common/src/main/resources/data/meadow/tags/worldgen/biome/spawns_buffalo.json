@@ -2,6 +2,6 @@
   "values": [
     "#minecraft:is_savanna",
     "#minecraft:is_river",
-    "#minecraft:is_swamp"
+    "minecraft:swamp"
   ]
 }

@@ -161,12 +161,11 @@ public class CookingCauldronBlockEntity extends BlockEntity implements Implement
                     stackInSlot.shrink(1);
 
                     if (!remainderStack.isEmpty()) {
-                        if (stackInSlot.isEmpty()) {
-                            setItem(slotIndex, remainderStack);
-                        } else {
-                            handleRemainder(remainderStack, slotIndex);
-                        }
+                        handleRemainder(remainderStack, slotIndex);
+                    } else if (stackInSlot.isEmpty()) {
+                        setItem(slotIndex, ItemStack.EMPTY);
                     }
+
                     break;
                 }
             }
@@ -177,29 +176,52 @@ public class CookingCauldronBlockEntity extends BlockEntity implements Implement
     }
 
     private void handleRemainder(ItemStack remainderStack, int originalSlot) {
-        if (originalSlot == FLUID_INPUT_SLOT) {
-            ItemStack currentFluidSlot = getItem(FLUID_INPUT_SLOT);
-            if (currentFluidSlot.isEmpty()) {
-                setItem(FLUID_INPUT_SLOT, remainderStack.copy());
-            } else {
-                dropItemIntoWorld(remainderStack, worldPosition);
-            }
+        if (remainderStack.isEmpty()) {
+            return;
+        }
+
+        if (tryPlaceRemainderIntoSlot(remainderStack, originalSlot)) {
             return;
         }
 
         for (int slotIndex = INGREDIENTS_START; slotIndex <= INGREDIENTS_END; slotIndex++) {
-            ItemStack stackInSlot = getItem(slotIndex);
-            if (stackInSlot.isEmpty()) {
-                setItem(slotIndex, remainderStack.copy());
-                return;
+            if (slotIndex == originalSlot) {
+                continue;
             }
-            if (ItemStack.isSameItem(stackInSlot, remainderStack) && stackInSlot.getCount() + remainderStack.getCount() <= stackInSlot.getMaxStackSize()) {
-                stackInSlot.grow(remainderStack.getCount());
+            if (getItem(slotIndex).isEmpty()) {
+                setItem(slotIndex, remainderStack.copy());
                 return;
             }
         }
 
+        if (originalSlot != FLUID_INPUT_SLOT && getItem(FLUID_INPUT_SLOT).isEmpty()) {
+            setItem(FLUID_INPUT_SLOT, remainderStack.copy());
+            return;
+        }
+
         dropItemIntoWorld(remainderStack, worldPosition);
+    }
+
+    private boolean tryPlaceRemainderIntoSlot(ItemStack remainderStack, int targetSlot) {
+        if (targetSlot == OUTPUT_SLOT) {
+            return false;
+        }
+
+        ItemStack targetStack = getItem(targetSlot);
+
+        if (targetStack.isEmpty()) {
+            setItem(targetSlot, remainderStack.copy());
+            return true;
+        }
+
+        if (ItemStack.isSameItem(targetStack, remainderStack) && targetStack.getCount() < targetStack.getMaxStackSize()) {
+            int space = targetStack.getMaxStackSize() - targetStack.getCount();
+            int toMove = Math.min(space, remainderStack.getCount());
+            targetStack.grow(toMove);
+            return toMove == remainderStack.getCount();
+        }
+
+        return false;
     }
 
     private ItemStack getRemainderItem(ItemStack stack) {

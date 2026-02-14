@@ -1,3 +1,15 @@
+[1.4.6]
+
+**Fixed**
+* Containers such as bottles, bowls and buckets not being returned after cooking
+*`spawns_buffalo` tag referencing an invalid entry preventing buffalos from spawning
+
+**Changed**
+* Added crafting remainder to Rennet
+* Updated pack.png
+
+***
+
 [1.4.5]
 
 This update implements a wide range of community feedback. Several long-standing gaps have been addressed, features refined, and older content revisited to improve clarity, consistency, and overall quality.

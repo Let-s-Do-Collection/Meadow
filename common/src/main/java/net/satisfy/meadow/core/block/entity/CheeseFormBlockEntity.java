@@ -9,12 +9,12 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.ContainerHelper;
 import net.minecraft.world.MenuProvider;
+import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeManager;
@@ -27,12 +27,12 @@ import net.satisfy.meadow.core.recipes.CheeseFormRecipe;
 import net.satisfy.meadow.core.registry.EntityTypeRegistry;
 import net.satisfy.meadow.core.registry.ObjectRegistry;
 import net.satisfy.meadow.core.registry.RecipeRegistry;
-import net.satisfy.meadow.core.registry.TagRegistry;
 import net.satisfy.meadow.core.world.ImplementedInventory;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
+import java.util.Objects;
 
 public class CheeseFormBlockEntity extends BlockEntity implements MenuProvider, ImplementedInventory {
 
@@ -40,12 +40,14 @@ public class CheeseFormBlockEntity extends BlockEntity implements MenuProvider, 
     public static final int CAPACITY = 3;
     public static final int COOKING_TIME_IN_TICKS = 1800;
     private static final int OUTPUT_SLOT = 0;
+    private static final int FIRST_INPUT_SLOT = 1;
+    private static final int SECOND_INPUT_SLOT = 2;
     private int fermentationTime = 0;
     protected float experience;
 
-    private static final int[] SLOTS_FOR_SIDE = new int[]{2};
-    private static final int[] SLOTS_FOR_UP = new int[]{1};
-    private static final int[] SLOTS_FOR_DOWN = new int[]{0};
+    private static final int[] SLOTS_FOR_SIDE = new int[]{SECOND_INPUT_SLOT};
+    private static final int[] SLOTS_FOR_UP = new int[]{FIRST_INPUT_SLOT};
+    private static final int[] SLOTS_FOR_DOWN = new int[]{OUTPUT_SLOT};
 
     private final ContainerData propertyDelegate = new ContainerData() {
 
@@ -79,7 +81,7 @@ public class CheeseFormBlockEntity extends BlockEntity implements MenuProvider, 
     }
 
     public void tick(Level world, BlockPos pos, BlockState state) {
-        if (world.isClientSide) {
+        if (world.isClientSide()) {
             return;
         }
 
@@ -146,7 +148,7 @@ public class CheeseFormBlockEntity extends BlockEntity implements MenuProvider, 
             CheeseFormRecipe recipe = recipeHolder.value();
             for (Ingredient ingredient : recipe.getIngredients()) {
                 boolean ingredientFound = false;
-                for (int slotIndex = 1; slotIndex < inventory.size(); slotIndex++) {
+                for (int slotIndex = FIRST_INPUT_SLOT; slotIndex < inventory.size(); slotIndex++) {
                     ItemStack slotItem = inventory.get(slotIndex);
                     if (ingredient.test(slotItem)) {
                         ingredientFound = true;
@@ -174,13 +176,7 @@ public class CheeseFormBlockEntity extends BlockEntity implements MenuProvider, 
     }
 
     private boolean areInputsEmpty() {
-        int emptyStacks = 0;
-        for (int slotIndex = 1; slotIndex <= 2; slotIndex++) {
-            if (this.getItem(slotIndex).isEmpty()) {
-                emptyStacks++;
-            }
-        }
-        return emptyStacks == 2;
+        return this.getItem(FIRST_INPUT_SLOT).isEmpty() && this.getItem(SECOND_INPUT_SLOT).isEmpty();
     }
 
     private void craft(CheeseFormRecipe recipe, RegistryAccess access) {
@@ -197,32 +193,63 @@ public class CheeseFormBlockEntity extends BlockEntity implements MenuProvider, 
             outputSlotStack.grow(recipeOutput.getCount());
         }
 
-        ItemStack slot1Stack = this.getItem(1);
-        if (recipe.getIngredients().stream().anyMatch(ingredient -> ingredient.test(slot1Stack))) {
-            if (slot1Stack.is(Items.MILK_BUCKET)) {
-                this.setItem(1, Items.BUCKET.getDefaultInstance());
-            } else if (slot1Stack.is(TagRegistry.WOODEN_MILK_BUCKET)) {
-                this.setItem(1, ObjectRegistry.WOODEN_BUCKET.get().getDefaultInstance());
-            } else {
-                removeItem(1, 1);
-            }
+        consumeOneAndReturnRemainderIfAny(recipe, FIRST_INPUT_SLOT);
+        consumeOneAndReturnRemainderIfAny(recipe, SECOND_INPUT_SLOT);
+    }
+
+    private void consumeOneAndReturnRemainderIfAny(CheeseFormRecipe recipe, int slotIndex) {
+        ItemStack slotStack = this.getItem(slotIndex);
+        if (slotStack.isEmpty()) {
+            return;
         }
 
-        ItemStack slot2Stack = this.getItem(2);
-        if (recipe.getIngredients().stream().anyMatch(ingredient -> ingredient.test(slot2Stack))) {
-            if (slot2Stack.is(Items.MILK_BUCKET)) {
-                this.setItem(2, Items.BUCKET.getDefaultInstance());
-            } else if (slot2Stack.is(TagRegistry.WOODEN_MILK_BUCKET)) {
-                this.setItem(2, ObjectRegistry.WOODEN_BUCKET.get().getDefaultInstance());
+        boolean matches = recipe.getIngredients().stream().anyMatch(ingredient -> ingredient.test(slotStack));
+        if (!matches) {
+            return;
+        }
+
+        ItemStack remainderStack = ItemStack.EMPTY;
+        if (slotStack.getItem().hasCraftingRemainingItem()) {
+            remainderStack = new ItemStack(Objects.requireNonNull(slotStack.getItem().getCraftingRemainingItem()));
+        }
+
+        slotStack.shrink(1);
+
+        if (!remainderStack.isEmpty()) {
+            if (slotStack.isEmpty()) {
+                this.setItem(slotIndex, remainderStack);
             } else {
-                if (slot2Stack.is(TagRegistry.MILK)) {
-                    ItemStack bucket = slot2Stack.getItem() == ObjectRegistry.WOODEN_MILK_BUCKET.get() ? ObjectRegistry.WOODEN_BUCKET.get().getDefaultInstance() : Items.BUCKET.getDefaultInstance();
-                    this.setItem(2, bucket);
-                } else {
-                    removeItem(2, 1);
-                }
+                tryInsertRemainder(remainderStack);
+            }
+        } else {
+            if (slotStack.isEmpty()) {
+                this.setItem(slotIndex, ItemStack.EMPTY);
             }
         }
+    }
+
+    private void tryInsertRemainder(ItemStack remainderStack) {
+        if (remainderStack.isEmpty()) {
+            return;
+        }
+
+        if (this.getItem(FIRST_INPUT_SLOT).isEmpty()) {
+            this.setItem(FIRST_INPUT_SLOT, remainderStack);
+            return;
+        }
+
+        if (this.getItem(SECOND_INPUT_SLOT).isEmpty()) {
+            this.setItem(SECOND_INPUT_SLOT, remainderStack);
+            return;
+        }
+
+        if (this.level == null) {
+            return;
+        }
+
+        ItemEntity itemEntity = new ItemEntity(this.level, this.worldPosition.getX() + 0.5, this.worldPosition.getY() + 0.5, this.worldPosition.getZ() + 0.5, remainderStack);
+        itemEntity.setDefaultPickUpDelay();
+        this.level.addFreshEntity(itemEntity);
     }
 
     @Override
@@ -241,7 +268,7 @@ public class CheeseFormBlockEntity extends BlockEntity implements MenuProvider, 
             stack.setCount(this.getMaxStackSize());
         }
 
-        if (slot == 1 || slot == 2) {
+        if (slot == FIRST_INPUT_SLOT || slot == SECOND_INPUT_SLOT) {
             if (!dirty) {
                 this.fermentationTime = 0;
                 setChanged();
