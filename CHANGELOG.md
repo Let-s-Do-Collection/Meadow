@@ -2,7 +2,7 @@
 
 **Fixed**
 * Containers such as bottles, bowls and buckets not being returned after cooking
-*`spawns_buffalo` tag referencing an invalid entry preventing buffalos from spawning
+* `spawns_buffalo` tag referencing an invalid entry preventing buffalos from spawning
 
 **Changed**
 * Added crafting remainder to Rennet
