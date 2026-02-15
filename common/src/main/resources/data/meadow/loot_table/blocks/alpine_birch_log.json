@@ -11,7 +11,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "minecraft:birch_log"
+          "name": "meadow:alpine_birch_log"
         }
       ],
       "rolls": 1
