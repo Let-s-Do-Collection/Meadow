@@ -1,4 +1,4 @@
-![Meadow](https://lets-do.ch/assets/mod-logos/meadow.png)
+![Meadow](https://lets-do.ch/assets/mod-logos/meadow.webp)
 
 <br>
 
