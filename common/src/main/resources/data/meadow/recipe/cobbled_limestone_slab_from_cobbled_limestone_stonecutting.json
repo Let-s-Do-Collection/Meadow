@@ -1,11 +1,10 @@
 {
   "type": "minecraft:stonecutting",
-  "count": 2,
   "ingredient": {
-      "item": "meadow:cobbled_limestone"
+    "item": "meadow:cobbled_limestone"
   },
   "result": {
-    "count": 1,
-    "id": "meadow:cobbled_limestone_slab"
+    "id": "meadow:cobbled_limestone_slab",
+    "count": 2
   }
 }

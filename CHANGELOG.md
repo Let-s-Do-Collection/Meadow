@@ -1,3 +1,10 @@
+[1.4.7]
+
+**Fixed**
+* Corrected stonecutting recipes where the count value was defined at the top level instead of inside the result object
+
+***
+
 [1.4.6]
 
 **Fixed**
