@@ -2,6 +2,11 @@
 
 **Fixed**
 * Corrected stonecutting recipes where the count value was defined at the top level instead of inside the result object
+* Fixed Alpine Birch dropping Birch Logs instead of Alpine Birch Logs
+* Fixed tag typo: `c:egg` instead of `c:eggs` (thanks to awoolanche)
+
+**Added** 
+* zh_tw translation (thanks to cherrypuff)
 
 ***
 
