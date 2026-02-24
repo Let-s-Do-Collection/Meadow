@@ -17,12 +17,7 @@ import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
-import net.minecraft.world.level.block.BaseEntityBlock;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.HorizontalDirectionalBlock;
-import net.minecraft.world.level.block.Mirror;
-import net.minecraft.world.level.block.RenderShape;
-import net.minecraft.world.level.block.Rotation;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -162,9 +157,19 @@ public class CookingFrameBlock extends BaseEntityBlock {
 
     @Override
     public @NotNull BlockState playerWillDestroy(Level level, BlockPos pos, BlockState state, Player player) {
-        BlockPos otherPos = state.getValue(HALF) == DoubleBlockHalf.LOWER ? pos.above() : pos.below();
-        BlockState otherState = level.getBlockState(otherPos);
-        if (otherState.is(this)) level.destroyBlock(otherPos, false);
+        if (!level.isClientSide) {
+            DoubleBlockHalf half = state.getValue(HALF);
+            BlockPos basePos = half == DoubleBlockHalf.LOWER ? pos : pos.below();
+            BlockEntity blockEntity = level.getBlockEntity(basePos);
+            if (blockEntity instanceof CookingCauldronBlockEntity cookingCauldronBlockEntity) {
+                cookingCauldronBlockEntity.dropContents();
+            }
+            BlockPos otherPos = half == DoubleBlockHalf.LOWER ? pos.above() : pos.below();
+            BlockState otherState = level.getBlockState(otherPos);
+            if (otherState.is(this)) {
+                level.setBlock(otherPos, Blocks.AIR.defaultBlockState(), 35);
+            }
+        }
         return super.playerWillDestroy(level, pos, state, player);
     }
 

@@ -7,6 +7,7 @@
 * Ensure wardrobe drops correctly when upper half is broken.
 * Fix stored armor not dropping when top block is destroyed.
 * Remove half=lower loot condition and handle drops in block logic.
+* Ensure Cooking Frame drops its inventory when broken
 
 **Changed**
 * Updated ru_ru translation (tefnya)
