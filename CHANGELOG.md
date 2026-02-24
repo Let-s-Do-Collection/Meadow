@@ -1,17 +1,17 @@
 [1.4.8]
 
 **Fixed**
-* Set durability multiplier to 13 and enforce stack size of 1 for all fur armor pieces.
-* Wrong Translation  for Reclaimed Pine Trapdoor
-* Include pine_dresser and all pine_sofa_* variants.
-* Ensure wardrobe drops correctly when upper half is broken.
-* Fix stored armor not dropping when top block is destroyed.
-* Remove half=lower loot condition and handle drops in block logic.
-* Ensure Cooking Frame drops its inventory when broken
+* Fur Armor now has proper durability scaling and can no longer be stacked.
+* Fixed incorrect translation for Reclaimed Pine Trapdoor.
+* Added missing Pine Dresser and all Pine Sofa variants to the correct wooden block tags.
+* Wardrobe now correctly drops when the upper half is broken.
+* Stored armor inside Wardrobes no longer disappears when the top part is destroyed.
+* Cooking Frame now properly drops all stored items when broken.
+* Fixed model and rendering alignment issues affecting Sofa variants and the Pine Cabinet.
 
 **Changed**
-* Updated ru_ru translation (tefnya)
-* Remove duplicate wooden_cauldron entry.
+* Updated ru_ru translation (thanks to tefnya).
+* Removed duplicate wooden_cauldron entry from block tags.
 
 ***
 
