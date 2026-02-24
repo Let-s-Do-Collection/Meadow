@@ -1,3 +1,14 @@
+[1.4.8]
+
+**Fixed**
+* Set durability multiplier to 13 and enforce stack size of 1 for all fur armor pieces.
+* Wrong Translation  for Reclaimed Pine Trapdoor
+
+**Changed**
+* Updated ru_ru translation (tefnya)
+
+***
+
 [1.4.7]
 
 **Fixed**
