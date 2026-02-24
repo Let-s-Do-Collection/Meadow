@@ -3,10 +3,11 @@
 **Fixed**
 * Set durability multiplier to 13 and enforce stack size of 1 for all fur armor pieces.
 * Wrong Translation  for Reclaimed Pine Trapdoor
+* Include pine_dresser and all pine_sofa_* variants.
 
 **Changed**
 * Updated ru_ru translation (tefnya)
-
+* Remove duplicate wooden_cauldron entry.
 ***
 
 [1.4.7]
