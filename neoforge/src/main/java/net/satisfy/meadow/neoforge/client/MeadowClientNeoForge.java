@@ -29,6 +29,8 @@ import net.satisfy.meadow.neoforge.client.extensions.FurArmorHatExtensions;
 import net.satisfy.meadow.neoforge.client.extensions.FurArmorLeggingsExtensions;
 
 @EventBusSubscriber(modid = Meadow.MOD_ID, value = Dist.CLIENT, bus = EventBusSubscriber.Bus.MOD)
+
+
 public class MeadowClientNeoForge {
 
     @SubscribeEvent
