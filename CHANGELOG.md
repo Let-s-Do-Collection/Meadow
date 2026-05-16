@@ -1,3 +1,10 @@
+[1.4.9]
+
+**Fixed**
+* Alpine Birch Sapling not being pottable
+
+***
+
 [1.4.8]
 
 **Fixed**
