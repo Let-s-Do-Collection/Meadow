@@ -1,0 +1,7 @@
+{
+  "parent": "foundation:block/template_table_connected_support",
+  "textures": {
+    "top": "meadow:block/stone_table_top",
+    "side": "meadow:block/polished_limestone"
+  }
+}

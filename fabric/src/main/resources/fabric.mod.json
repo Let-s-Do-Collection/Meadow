@@ -3,16 +3,22 @@
   "id": "meadow",
   "version": "${version}",
   "name": "[Let's Do] Meadow",
-"description": "Hey Wanderer! Sit down, enjoy a piece of cheese, and take a look at the new mountain pasture - cliffs, beautiful forests, clearings, and lots of colorful flowers!",
+  "description": "Hey Wanderer! Sit down, enjoy a piece of cheese, and take a look at the new mountain pasture - cliffs, beautiful forests, clearings, and lots of colorful flowers!",
   "authors": [
-    "satisfy, Jason13"
+    "satisfy",
+    "Jason13Official"
+  ],
+  "contributors": [
+    "MissLilitu"
   ],
   "contact": {
-    "homepage": "https://legacy.curseforge.com/minecraft/mc-mods/lets-do-meadow",
-    "sources": "https://github.com/satisfyu/Meadow/"
+    "homepage": "https://www.lets-do.ch",
+    "wiki": "https://lets-do.ch/wiki/meadow/",
+    "sources": "https://github.com/Let-s-Do-Collection/Meadow",
+    "issues": "https://github.com/satisfyu/Let-s-Do-Hub"
   },
-  "icon": "pack.png",
   "license": "Custom",
+  "icon": "pack.png",
   "environment": "*",
   "entrypoints": {
     "main": [
@@ -35,8 +41,11 @@
     "meadow.mixins.json"
   ],
   "depends": {
-    "fabric": "*",
-    "minecraft": ">=1.20",
-    "architectury": ">=9.1.10"
+    "fabricloader": ">=0.16.14",
+    "fabric-api": "*",
+    "minecraft": "~1.21.1",
+    "architectury": ">=13.0.8",
+    "foundation": ">=1.0.7",
+    "cloth-config": "*"
   }
 }

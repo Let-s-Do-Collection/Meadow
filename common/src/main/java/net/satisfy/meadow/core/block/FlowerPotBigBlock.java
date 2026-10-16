@@ -20,7 +20,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.function.Supplier;
 
-public class FlowerPotBigBlock extends StorageBlock {
+public class FlowerPotBigBlock extends MeadowStorageBlock {
     private static final Supplier<VoxelShape> voxelShapeSupplier = () -> Shapes.box(0.25, 0.0, 0.25, 0.75, 0.5625, 0.75);
     private static final VoxelShape SHAPE;
 

@@ -1,8 +1,7 @@
 modLoader = "javafml"
-loaderVersion="[4,)"
-source = "https://github.com/satisfyu/Meadow"
-issueTrackerURL = "https://github.com/satisfyu/Let-s-Do-Hub"
+loaderVersion = "[4,)"
 license = "Custom"
+issueTrackerURL = "https://github.com/satisfyu/Let-s-Do-Hub"
 
 [[mixins]]
 config = "meadow.mixins.json"
@@ -11,30 +10,43 @@ config = "meadow.mixins.json"
 modId = "meadow"
 version = "${version}"
 displayName = "[Let's Do] Meadow"
-authors = "satisfy"
+authors = "satisfy, Jason13Official"
 credits = "MissLilitu"
-description = '''
-Hey Wanderer! Sit down, enjoy a piece of cheese, and take a look at the new mountain pasture - cliffs, beautiful forests, clearings, and lots of colorful flowers.
-'''
 logoFile = "pack.png"
+displayURL = "https://www.lets-do.ch"
+description = '''
+Hey Wanderer! Sit down, enjoy a piece of cheese, and take a look at the new mountain pasture - cliffs, beautiful forests, clearings, and lots of colorful flowers!
+
+Website: https://www.lets-do.ch
+Wiki: https://lets-do.ch/wiki/meadow/
+Source: https://github.com/Let-s-Do-Collection/Meadow
+Issues: https://github.com/satisfyu/Let-s-Do-Hub
+'''
 
 [[dependencies.meadow]]
 modId = "neoforge"
-mandatory = true
-versionRange = "[21.1.0,)"
+type = "required"
+versionRange = "[21.1,)"
 ordering = "NONE"
 side = "BOTH"
 
 [[dependencies.meadow]]
 modId = "minecraft"
-mandatory = true
-versionRange = "[1.21.1,)"
+type = "required"
+versionRange = "[1.21.1]"
 ordering = "NONE"
 side = "BOTH"
 
 [[dependencies.meadow]]
 modId = "architectury"
-mandatory = true
-versionRange = "[13.0.0,)"
+type = "required"
+versionRange = "[13.0.8,)"
+ordering = "AFTER"
+side = "BOTH"
+
+[[dependencies.meadow]]
+modId = "foundation"
+type = "required"
+versionRange = "[1.0.7,)"
 ordering = "AFTER"
 side = "BOTH"

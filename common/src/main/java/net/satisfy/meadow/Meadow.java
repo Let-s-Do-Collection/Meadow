@@ -12,6 +12,7 @@ public class Meadow {
     public static final String MOD_ID = "meadow";
 
     public static void init() {
+        CompostableRegistry.registerCompostable();
         DataFixerEntries.init();
         ObjectRegistry.init();
         EntityTypeRegistry.init();
@@ -21,6 +22,8 @@ public class Meadow {
         PlacerTypeRegistry.init();
         SoundEventRegistry.init();
         ScreenHandlerRegistry.init();
+        FlammableBlockRegistry.init();
+        ArmorSetRegistry.init();
         LifecycleEvent.SETUP.register(Meadow::setupSerial);
     }
 
@@ -28,7 +31,6 @@ public class Meadow {
     }
 
     private static void setupSerial() {
-        FlammableBlockRegistry.init();
         WoodenCauldronBehavior.bootStrap();
         AxeItemHooks.addStrippable(ObjectRegistry.PINE_LOG.get(), ObjectRegistry.STRIPPED_PINE_LOG.get());
         AxeItemHooks.addStrippable(ObjectRegistry.PINE_WOOD.get(), ObjectRegistry.STRIPPED_PINE_WOOD.get());

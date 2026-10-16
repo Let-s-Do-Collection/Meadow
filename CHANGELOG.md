@@ -1,3 +1,17 @@
+[1.4.10]
+
+**Changed**
+* Meadow now requires Foundation 1.0.7 and uses its shared blocks, signs, boats, seats, storage, banner and armor rendering.
+* Pine and Stone Tables now accept a carpet as tablecloth and use the shared Let's Do table models.
+* Pine Cabinet now uses the shared Let's Do cabinet model.
+* Soup bubbles and steam now use the shared Foundation particles.
+* Fur Armor set tooltip now uses the shared armor set display.
+
+**Fixed**
+* Fur Armor full set bonus now actually grants Knockback Resistance +2.
+
+***
+
 [1.4.9]
 
 **Fixed**

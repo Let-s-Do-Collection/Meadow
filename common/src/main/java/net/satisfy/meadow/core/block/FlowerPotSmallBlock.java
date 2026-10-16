@@ -13,7 +13,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import net.satisfy.meadow.core.registry.StorageTypeRegistry;
 import org.jetbrains.annotations.NotNull;
 
-public class FlowerPotSmallBlock extends StorageBlock {
+public class FlowerPotSmallBlock extends MeadowStorageBlock {
     protected static final VoxelShape SHAPE = Block.box(5.0, 0.0, 5.0, 11.0, 6.0, 11.0);
 
     public FlowerPotSmallBlock(Properties settings) {

@@ -15,7 +15,6 @@
       "model": "meadow:block/roasted_buffalo_ham_3",
       "y": 270
     },
-
     "facing=east,bites=1": {
       "model": "meadow:block/roasted_buffalo_ham_2",
       "y": 90
@@ -31,7 +30,6 @@
       "model": "meadow:block/roasted_buffalo_ham_2",
       "y": 270
     },
-
     "facing=east,bites=2": {
       "model": "meadow:block/roasted_buffalo_ham_1",
       "y": 90
@@ -47,7 +45,6 @@
       "model": "meadow:block/roasted_buffalo_ham_1",
       "y": 270
     },
-
     "facing=east,bites=3": {
       "model": "meadow:block/roasted_buffalo_ham_0",
       "y": 90
@@ -60,6 +57,96 @@
       "y": 180
     },
     "facing=west,bites=3": {
+      "model": "meadow:block/roasted_buffalo_ham_0",
+      "y": 270
+    },
+    "facing=north,bites=4": {
+      "model": "meadow:block/roasted_buffalo_ham_0"
+    },
+    "facing=north,bites=5": {
+      "model": "meadow:block/roasted_buffalo_ham_0"
+    },
+    "facing=north,bites=6": {
+      "model": "meadow:block/roasted_buffalo_ham_0"
+    },
+    "facing=north,bites=7": {
+      "model": "meadow:block/roasted_buffalo_ham_0"
+    },
+    "facing=north,bites=8": {
+      "model": "meadow:block/roasted_buffalo_ham_0"
+    },
+    "facing=north,bites=9": {
+      "model": "meadow:block/roasted_buffalo_ham_0"
+    },
+    "facing=east,bites=4": {
+      "model": "meadow:block/roasted_buffalo_ham_0",
+      "y": 90
+    },
+    "facing=east,bites=5": {
+      "model": "meadow:block/roasted_buffalo_ham_0",
+      "y": 90
+    },
+    "facing=east,bites=6": {
+      "model": "meadow:block/roasted_buffalo_ham_0",
+      "y": 90
+    },
+    "facing=east,bites=7": {
+      "model": "meadow:block/roasted_buffalo_ham_0",
+      "y": 90
+    },
+    "facing=east,bites=8": {
+      "model": "meadow:block/roasted_buffalo_ham_0",
+      "y": 90
+    },
+    "facing=east,bites=9": {
+      "model": "meadow:block/roasted_buffalo_ham_0",
+      "y": 90
+    },
+    "facing=south,bites=4": {
+      "model": "meadow:block/roasted_buffalo_ham_0",
+      "y": 180
+    },
+    "facing=south,bites=5": {
+      "model": "meadow:block/roasted_buffalo_ham_0",
+      "y": 180
+    },
+    "facing=south,bites=6": {
+      "model": "meadow:block/roasted_buffalo_ham_0",
+      "y": 180
+    },
+    "facing=south,bites=7": {
+      "model": "meadow:block/roasted_buffalo_ham_0",
+      "y": 180
+    },
+    "facing=south,bites=8": {
+      "model": "meadow:block/roasted_buffalo_ham_0",
+      "y": 180
+    },
+    "facing=south,bites=9": {
+      "model": "meadow:block/roasted_buffalo_ham_0",
+      "y": 180
+    },
+    "facing=west,bites=4": {
+      "model": "meadow:block/roasted_buffalo_ham_0",
+      "y": 270
+    },
+    "facing=west,bites=5": {
+      "model": "meadow:block/roasted_buffalo_ham_0",
+      "y": 270
+    },
+    "facing=west,bites=6": {
+      "model": "meadow:block/roasted_buffalo_ham_0",
+      "y": 270
+    },
+    "facing=west,bites=7": {
+      "model": "meadow:block/roasted_buffalo_ham_0",
+      "y": 270
+    },
+    "facing=west,bites=8": {
+      "model": "meadow:block/roasted_buffalo_ham_0",
+      "y": 270
+    },
+    "facing=west,bites=9": {
       "model": "meadow:block/roasted_buffalo_ham_0",
       "y": 270
     }

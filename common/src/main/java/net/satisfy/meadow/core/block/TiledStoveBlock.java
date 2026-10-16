@@ -1,5 +1,6 @@
 package net.satisfy.meadow.core.block;
 
+import net.satisfy.foundation.block.FacingBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.context.BlockPlaceContext;

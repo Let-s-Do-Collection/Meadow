@@ -1,5 +1,7 @@
 package net.satisfy.meadow.core.block;
 
+import net.satisfy.foundation.registry.FoundationParticles;
+import net.satisfy.foundation.util.ShapeUtil;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
@@ -33,9 +35,7 @@ import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.satisfy.meadow.core.block.entity.CookingCauldronBlockEntity;
 import net.satisfy.meadow.core.registry.EntityTypeRegistry;
-import net.satisfy.meadow.core.registry.ParticleTypeRegistry;
 import net.satisfy.meadow.core.registry.SoundEventRegistry;
-import net.satisfy.meadow.core.util.GeneralUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -52,13 +52,13 @@ public class CookingFrameBlock extends BaseEntityBlock {
 
     private static final Map<Direction, VoxelShape> ROTATED_TOP = Util.make(new HashMap<>(), map -> {
         for (Direction direction : Direction.Plane.HORIZONTAL.stream().toList()) {
-            map.put(direction, GeneralUtil.rotateShape(Direction.NORTH, direction, TOP_SHAPE));
+            map.put(direction, ShapeUtil.rotateShape(Direction.NORTH, direction, TOP_SHAPE));
         }
     });
 
     private static final Map<Direction, VoxelShape> ROTATED_BOTTOM = Util.make(new HashMap<>(), map -> {
         for (Direction direction : Direction.Plane.HORIZONTAL.stream().toList()) {
-            map.put(direction, GeneralUtil.rotateShape(Direction.NORTH, direction, BOTTOM_SHAPE));
+            map.put(direction, ShapeUtil.rotateShape(Direction.NORTH, direction, BOTTOM_SHAPE));
         }
     });
 
@@ -108,14 +108,14 @@ public class CookingFrameBlock extends BaseEntityBlock {
             for (int i = 0; i < 3; i++) {
                 double offsetX = (random.nextDouble() - 0.5) * 0.4;
                 double offsetZ = (random.nextDouble() - 0.5) * 0.4;
-                level.addParticle(ParticleTypeRegistry.SOUP_BUBBLE.get(), centerX + offsetX, centerY, centerZ + offsetZ, 0.0, 0.03, 0.0);
+                level.addParticle(FoundationParticles.SOUP_BUBBLE.get(), centerX + offsetX, centerY, centerZ + offsetZ, 0.0, 0.03, 0.0);
             }
         }
 
         if (random.nextInt(100) < 60) {
             double offsetX = (random.nextDouble() - 0.5) * 0.3;
             double offsetZ = (random.nextDouble() - 0.5) * 0.3;
-            level.addParticle(ParticleTypeRegistry.SOUP_STEAM.get(), centerX + offsetX, centerY + 0.3, centerZ + offsetZ, 0.0, 0.07, 0.0);
+            level.addParticle(FoundationParticles.SOUP_STEAM.get(), centerX + offsetX, centerY + 0.3, centerZ + offsetZ, 0.0, 0.07, 0.0);
         }
 
         if (random.nextInt(100) < 6) {

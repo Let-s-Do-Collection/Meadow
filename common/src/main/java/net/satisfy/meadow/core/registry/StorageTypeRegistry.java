@@ -19,9 +19,10 @@ public class StorageTypeRegistry {
         blocks.add(ObjectRegistry.WOODEN_FLOWER_POT_BIG.get());
         blocks.add(ObjectRegistry.WOODEN_FLOWER_BOX.get());
         blocks.add(ObjectRegistry.PINE_CHEESE_RACK.get());
-        blocks.add(ObjectRegistry.PINE_CABINET.get());
-        blocks.add(ObjectRegistry.PINE_WALL_CABINET.get());
-        blocks.add(ObjectRegistry.PINE_DRESSER.get());
         return blocks;
+    }
+
+    public static Block[] getCabinetBlocks() {
+        return new Block[]{ObjectRegistry.PINE_CABINET.get(), ObjectRegistry.PINE_WALL_CABINET.get(), ObjectRegistry.PINE_DRESSER.get()};
     }
 }

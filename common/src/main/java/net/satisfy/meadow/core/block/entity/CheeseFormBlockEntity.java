@@ -1,5 +1,6 @@
 package net.satisfy.meadow.core.block.entity;
 
+import net.satisfy.foundation.util.ImplementedInventory;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
@@ -27,7 +28,6 @@ import net.satisfy.meadow.core.recipes.CheeseFormRecipe;
 import net.satisfy.meadow.core.registry.EntityTypeRegistry;
 import net.satisfy.meadow.core.registry.ObjectRegistry;
 import net.satisfy.meadow.core.registry.RecipeRegistry;
-import net.satisfy.meadow.core.world.ImplementedInventory;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 

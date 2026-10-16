@@ -1,14 +1,15 @@
 package net.satisfy.meadow.client.renderer.block.storage;
 
+import net.satisfy.foundation.storage.StorageTypeRenderer;
+import net.satisfy.foundation.storage.StorageBlockEntity;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.core.NonNullList;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.state.BlockState;
-import net.satisfy.meadow.core.block.entity.StorageBlockEntity;
 
-import static net.satisfy.meadow.client.util.ClientUtil.renderBlock;
+import static net.satisfy.foundation.render.ClientUtil.renderBlock;
 
 public class FlowerPotSmallRenderer implements StorageTypeRenderer {
 

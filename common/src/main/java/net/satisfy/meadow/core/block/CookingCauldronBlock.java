@@ -1,5 +1,7 @@
 package net.satisfy.meadow.core.block;
 
+import net.satisfy.foundation.registry.FoundationParticles;
+import net.satisfy.foundation.util.ShapeUtil;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -33,9 +35,7 @@ import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.satisfy.meadow.core.block.entity.CookingCauldronBlockEntity;
 import net.satisfy.meadow.core.registry.EntityTypeRegistry;
-import net.satisfy.meadow.core.registry.ParticleTypeRegistry;
 import net.satisfy.meadow.core.registry.SoundEventRegistry;
-import net.satisfy.meadow.core.util.GeneralUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -97,7 +97,7 @@ public class CookingCauldronBlock extends BaseEntityBlock {
                 ? NORMAL_POT_SHAPE
                 : BASE_POT_SHAPE;
 
-        return GeneralUtil.rotateShape(Direction.NORTH, state.getValue(FACING), baseShape);
+        return ShapeUtil.rotateShape(Direction.NORTH, state.getValue(FACING), baseShape);
     }
 
     @Override
@@ -175,14 +175,14 @@ public class CookingCauldronBlock extends BaseEntityBlock {
                 for (int i = 0; i < 3; i++) {
                     double offsetX = (random.nextDouble() - 0.5) * 0.4;
                     double offsetZ = (random.nextDouble() - 0.5) * 0.4;
-                    level.addParticle(ParticleTypeRegistry.SOUP_BUBBLE.get(), centerX + offsetX, centerY + 0.15, centerZ + offsetZ, 0.0, 0.03, 0.0);
+                    level.addParticle(FoundationParticles.SOUP_BUBBLE.get(), centerX + offsetX, centerY + 0.15, centerZ + offsetZ, 0.0, 0.03, 0.0);
                 }
             }
 
             if (random.nextInt(100) < 60) {
                 double offsetX = (random.nextDouble() - 0.5) * 0.3;
                 double offsetZ = (random.nextDouble() - 0.5) * 0.3;
-                level.addParticle(ParticleTypeRegistry.SOUP_STEAM.get(), centerX + offsetX, centerY + 0.6, centerZ + offsetZ, 0.0, 0.07, 0.0);
+                level.addParticle(FoundationParticles.SOUP_STEAM.get(), centerX + offsetX, centerY + 0.6, centerZ + offsetZ, 0.0, 0.07, 0.0);
             }
 
             if (random.nextInt(100) < 6) {
@@ -195,7 +195,7 @@ public class CookingCauldronBlock extends BaseEntityBlock {
             if (random.nextInt(100) < 38) {
                 double offsetX = (random.nextDouble() - 0.5) * 0.3;
                 double offsetZ = (random.nextDouble() - 0.5) * 0.3;
-                level.addParticle(ParticleTypeRegistry.SOUP_STEAM.get(), centerX + offsetX, centerY + 0.6, centerZ + offsetZ, 0.0, 0.07, 0.0);
+                level.addParticle(FoundationParticles.SOUP_STEAM.get(), centerX + offsetX, centerY + 0.6, centerZ + offsetZ, 0.0, 0.07, 0.0);
             }
         }
     }

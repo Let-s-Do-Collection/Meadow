@@ -1,5 +1,7 @@
 package net.satisfy.meadow.core.block;
 
+import net.satisfy.foundation.util.ShapeUtil;
+import net.satisfy.foundation.block.FacingBlock;
 import java.util.EnumMap;
 import java.util.Map;
 import net.minecraft.Util;
@@ -33,7 +35,6 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.satisfy.meadow.core.registry.ObjectRegistry;
-import net.satisfy.meadow.core.util.GeneralUtil;
 import org.jetbrains.annotations.NotNull;
 
 public class MilkCanBlock extends FacingBlock {
@@ -52,9 +53,9 @@ public class MilkCanBlock extends FacingBlock {
     private static final Map<Direction, VoxelShape> SHAPES = Util.make(() -> {
         Map<Direction, VoxelShape> shapes = new EnumMap<>(Direction.class);
         shapes.put(Direction.NORTH, BASE_SHAPE);
-        shapes.put(Direction.EAST, GeneralUtil.rotateShape(Direction.NORTH, Direction.EAST, BASE_SHAPE));
-        shapes.put(Direction.SOUTH, GeneralUtil.rotateShape(Direction.NORTH, Direction.SOUTH, BASE_SHAPE));
-        shapes.put(Direction.WEST, GeneralUtil.rotateShape(Direction.NORTH, Direction.WEST, BASE_SHAPE));
+        shapes.put(Direction.EAST, ShapeUtil.rotateShape(Direction.NORTH, Direction.EAST, BASE_SHAPE));
+        shapes.put(Direction.SOUTH, ShapeUtil.rotateShape(Direction.NORTH, Direction.SOUTH, BASE_SHAPE));
+        shapes.put(Direction.WEST, ShapeUtil.rotateShape(Direction.NORTH, Direction.WEST, BASE_SHAPE));
         return shapes;
     });
 

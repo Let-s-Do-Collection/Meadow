@@ -50,12 +50,4 @@ public class FurChestplateModel<T extends LivingEntity> extends HumanoidModel<T>
     public void setupAnim(@NotNull T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
         super.setupAnim(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
     }
-
-    public void copyBody(ModelPart baseBody, ModelPart baseLeftArm, ModelPart baseRightArm, ModelPart baseLeftLeg, ModelPart baseRightLeg) {
-        this.body.copyFrom(baseBody);
-        this.leftArm.copyFrom(baseLeftArm);
-        this.rightArm.copyFrom(baseRightArm);
-        this.leftLeg.copyFrom(baseLeftLeg);
-        this.rightLeg.copyFrom(baseRightLeg);
-    }
 }

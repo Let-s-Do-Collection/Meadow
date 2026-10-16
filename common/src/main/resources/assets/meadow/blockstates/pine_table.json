@@ -1,64 +1,332 @@
 {
-  "variants": {
-    "facing=north,type=none": {
-      "model": "meadow:block/pine_table_single"
+  "multipart": [
+    {
+      "when": {
+        "facing": "north",
+        "type": "none"
+      },
+      "apply": {
+        "model": "meadow:block/pine_table"
+      }
     },
-    "facing=east,type=none": {
-      "model": "meadow:block/pine_table_single",
-      "y": 90
+    {
+      "when": {
+        "facing": "north",
+        "type": "none",
+        "tablecloth": "white|orange|magenta|light_blue|yellow|lime|pink|gray|light_gray|cyan|purple|blue|brown|green|red|black"
+      },
+      "apply": {
+        "model": "foundation:block/template_tablecloth_single"
+      }
     },
-    "facing=south,type=none": {
-      "model": "meadow:block/pine_table_single",
-      "y": 180
+    {
+      "when": {
+        "facing": "east",
+        "type": "none"
+      },
+      "apply": {
+        "model": "meadow:block/pine_table",
+        "y": 90
+      }
     },
-    "facing=west,type=none": {
-      "model": "meadow:block/pine_table_single",
-      "y": 270
+    {
+      "when": {
+        "facing": "east",
+        "type": "none",
+        "tablecloth": "white|orange|magenta|light_blue|yellow|lime|pink|gray|light_gray|cyan|purple|blue|brown|green|red|black"
+      },
+      "apply": {
+        "model": "foundation:block/template_tablecloth_single",
+        "y": 90
+      }
     },
-    "facing=north,type=middle": {
-      "model": "meadow:block/pine_table_connected_middle"
+    {
+      "when": {
+        "facing": "south",
+        "type": "none"
+      },
+      "apply": {
+        "model": "meadow:block/pine_table",
+        "y": 180
+      }
     },
-    "facing=east,type=middle": {
-      "model": "meadow:block/pine_table_connected_middle",
-      "y": 90
+    {
+      "when": {
+        "facing": "south",
+        "type": "none",
+        "tablecloth": "white|orange|magenta|light_blue|yellow|lime|pink|gray|light_gray|cyan|purple|blue|brown|green|red|black"
+      },
+      "apply": {
+        "model": "foundation:block/template_tablecloth_single",
+        "y": 180
+      }
     },
-    "facing=south,type=middle": {
-      "model": "meadow:block/pine_table_connected_middle",
-      "y": 180
+    {
+      "when": {
+        "facing": "west",
+        "type": "none"
+      },
+      "apply": {
+        "model": "meadow:block/pine_table",
+        "y": 270
+      }
     },
-    "facing=west,type=middle": {
-      "model": "meadow:block/pine_table_connected_middle",
-      "y": 270
+    {
+      "when": {
+        "facing": "west",
+        "type": "none",
+        "tablecloth": "white|orange|magenta|light_blue|yellow|lime|pink|gray|light_gray|cyan|purple|blue|brown|green|red|black"
+      },
+      "apply": {
+        "model": "foundation:block/template_tablecloth_single",
+        "y": 270
+      }
     },
-    "facing=north,type=left": {
-      "model": "meadow:block/pine_table_connected_left"
+    {
+      "when": {
+        "facing": "north",
+        "type": "middle"
+      },
+      "apply": {
+        "model": "meadow:block/pine_table_middle"
+      }
     },
-    "facing=east,type=left": {
-      "model": "meadow:block/pine_table_connected_left",
-      "y": 90
+    {
+      "when": {
+        "facing": "north",
+        "type": "middle",
+        "tablecloth": "white|orange|magenta|light_blue|yellow|lime|pink|gray|light_gray|cyan|purple|blue|brown|green|red|black"
+      },
+      "apply": {
+        "model": "foundation:block/template_tablecloth_middle"
+      }
     },
-    "facing=south,type=left": {
-      "model": "meadow:block/pine_table_connected_left",
-      "y": 180
+    {
+      "when": {
+        "facing": "east",
+        "type": "middle"
+      },
+      "apply": {
+        "model": "meadow:block/pine_table_middle",
+        "y": 90
+      }
     },
-    "facing=west,type=left": {
-      "model": "meadow:block/pine_table_connected_left",
-      "y": 270
+    {
+      "when": {
+        "facing": "east",
+        "type": "middle",
+        "tablecloth": "white|orange|magenta|light_blue|yellow|lime|pink|gray|light_gray|cyan|purple|blue|brown|green|red|black"
+      },
+      "apply": {
+        "model": "foundation:block/template_tablecloth_middle",
+        "y": 90
+      }
     },
-    "facing=north,type=right": {
-      "model": "meadow:block/pine_table_connected_right",
-      "y": 180
+    {
+      "when": {
+        "facing": "south",
+        "type": "middle"
+      },
+      "apply": {
+        "model": "meadow:block/pine_table_middle",
+        "y": 180
+      }
     },
-    "facing=east,type=right": {
-      "model": "meadow:block/pine_table_connected_right",
-      "y": 270
+    {
+      "when": {
+        "facing": "south",
+        "type": "middle",
+        "tablecloth": "white|orange|magenta|light_blue|yellow|lime|pink|gray|light_gray|cyan|purple|blue|brown|green|red|black"
+      },
+      "apply": {
+        "model": "foundation:block/template_tablecloth_middle",
+        "y": 180
+      }
     },
-    "facing=south,type=right": {
-      "model": "meadow:block/pine_table_connected_right"
+    {
+      "when": {
+        "facing": "west",
+        "type": "middle"
+      },
+      "apply": {
+        "model": "meadow:block/pine_table_middle",
+        "y": 270
+      }
     },
-    "facing=west,type=right": {
-      "model": "meadow:block/pine_table_connected_right",
-      "y": 90
+    {
+      "when": {
+        "facing": "west",
+        "type": "middle",
+        "tablecloth": "white|orange|magenta|light_blue|yellow|lime|pink|gray|light_gray|cyan|purple|blue|brown|green|red|black"
+      },
+      "apply": {
+        "model": "foundation:block/template_tablecloth_middle",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "north",
+        "type": "left"
+      },
+      "apply": {
+        "model": "meadow:block/pine_table_connected_support"
+      }
+    },
+    {
+      "when": {
+        "facing": "north",
+        "type": "left",
+        "tablecloth": "white|orange|magenta|light_blue|yellow|lime|pink|gray|light_gray|cyan|purple|blue|brown|green|red|black"
+      },
+      "apply": {
+        "model": "foundation:block/template_tablecloth_end"
+      }
+    },
+    {
+      "when": {
+        "facing": "east",
+        "type": "left"
+      },
+      "apply": {
+        "model": "meadow:block/pine_table_connected_support",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "east",
+        "type": "left",
+        "tablecloth": "white|orange|magenta|light_blue|yellow|lime|pink|gray|light_gray|cyan|purple|blue|brown|green|red|black"
+      },
+      "apply": {
+        "model": "foundation:block/template_tablecloth_end",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "south",
+        "type": "left"
+      },
+      "apply": {
+        "model": "meadow:block/pine_table_connected_support",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "facing": "south",
+        "type": "left",
+        "tablecloth": "white|orange|magenta|light_blue|yellow|lime|pink|gray|light_gray|cyan|purple|blue|brown|green|red|black"
+      },
+      "apply": {
+        "model": "foundation:block/template_tablecloth_end",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "facing": "west",
+        "type": "left"
+      },
+      "apply": {
+        "model": "meadow:block/pine_table_connected_support",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "west",
+        "type": "left",
+        "tablecloth": "white|orange|magenta|light_blue|yellow|lime|pink|gray|light_gray|cyan|purple|blue|brown|green|red|black"
+      },
+      "apply": {
+        "model": "foundation:block/template_tablecloth_end",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "north",
+        "type": "right"
+      },
+      "apply": {
+        "model": "meadow:block/pine_table_connected_support",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "facing": "north",
+        "type": "right",
+        "tablecloth": "white|orange|magenta|light_blue|yellow|lime|pink|gray|light_gray|cyan|purple|blue|brown|green|red|black"
+      },
+      "apply": {
+        "model": "foundation:block/template_tablecloth_end",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "facing": "east",
+        "type": "right"
+      },
+      "apply": {
+        "model": "meadow:block/pine_table_connected_support",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "east",
+        "type": "right",
+        "tablecloth": "white|orange|magenta|light_blue|yellow|lime|pink|gray|light_gray|cyan|purple|blue|brown|green|red|black"
+      },
+      "apply": {
+        "model": "foundation:block/template_tablecloth_end",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "south",
+        "type": "right"
+      },
+      "apply": {
+        "model": "meadow:block/pine_table_connected_support"
+      }
+    },
+    {
+      "when": {
+        "facing": "south",
+        "type": "right",
+        "tablecloth": "white|orange|magenta|light_blue|yellow|lime|pink|gray|light_gray|cyan|purple|blue|brown|green|red|black"
+      },
+      "apply": {
+        "model": "foundation:block/template_tablecloth_end"
+      }
+    },
+    {
+      "when": {
+        "facing": "west",
+        "type": "right"
+      },
+      "apply": {
+        "model": "meadow:block/pine_table_connected_support",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "west",
+        "type": "right",
+        "tablecloth": "white|orange|magenta|light_blue|yellow|lime|pink|gray|light_gray|cyan|purple|blue|brown|green|red|black"
+      },
+      "apply": {
+        "model": "foundation:block/template_tablecloth_end",
+        "y": 90
+      }
     }
-  }
+  ]
 }

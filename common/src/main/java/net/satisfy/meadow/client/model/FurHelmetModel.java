@@ -54,8 +54,4 @@ public class FurHelmetModel<T extends LivingEntity> extends HumanoidModel<T> {
         super.renderToBuffer(poseStack, vertexConsumer, packedLight, packedOverlay, packedColor);
         poseStack.popPose();
     }
-
-    public void copyHead(ModelPart model) {
-        head.copyFrom(model);
-    }
 }

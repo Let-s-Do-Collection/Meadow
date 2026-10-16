@@ -54,13 +54,4 @@ public class FurLeggingsModel<T extends LivingEntity> extends HumanoidModel<T> {
         leftLeg.visible = true;
         super.renderToBuffer(poseStack, vertexConsumer, packedLight, packedOverlay, packedColor);
     }
-
-    public void copyBody(ModelPart bodyModel) {
-        body.copyFrom(bodyModel);
-    }
-
-    public void copyLegs(ModelPart rightLegModel, ModelPart leftLegModel) {
-        rightLeg.copyFrom(rightLegModel);
-        leftLeg.copyFrom(leftLegModel);
-    }
 }

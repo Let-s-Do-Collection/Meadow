@@ -1,0 +1,7 @@
+{
+  "parent": "foundation:block/template_table_middle",
+  "textures": {
+    "top": "meadow:block/pine_table_middle",
+    "side": "meadow:block/pine_table"
+  }
+}

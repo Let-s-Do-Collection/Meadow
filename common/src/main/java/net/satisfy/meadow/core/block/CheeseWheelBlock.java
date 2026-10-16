@@ -1,5 +1,7 @@
 package net.satisfy.meadow.core.block;
 
+import net.satisfy.foundation.util.ShapeUtil;
+import net.satisfy.foundation.block.FacingBlock;
 import dev.architectury.registry.registries.RegistrySupplier;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -24,7 +26,6 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.satisfy.meadow.core.util.GeneralUtil;
 import org.jetbrains.annotations.NotNull;
 
 @SuppressWarnings("deprecation")
@@ -218,12 +219,12 @@ public class CheeseWheelBlock extends FacingBlock {
         for (Direction facing : Direction.Plane.HORIZONTAL) {
             int facingIndex = facing.get2DDataValue();
             for (int cuts = 0; cuts <= 3; cuts++) {
-                WARPED_SHAPES_BY_FACING_AND_CUTS[facingIndex][cuts] = GeneralUtil.rotateShape(Direction.NORTH, facing, WARPED_SHAPES_BY_CUTS[cuts]);
-                BUFFALO_GOAT_SHAPES_BY_FACING_AND_CUTS[facingIndex][cuts] = GeneralUtil.rotateShape(Direction.NORTH, facing, BUFFALO_GOAT_SHAPES_BY_CUTS[cuts]);
-                CHEESE_AMETHYST_SHAPES_BY_FACING_AND_CUTS[facingIndex][cuts] = GeneralUtil.rotateShape(Direction.NORTH, facing, CHEESE_AMETHYST_SHAPES_BY_CUTS[cuts]);
-                SHEEP_SHAPES_BY_FACING_AND_CUTS[facingIndex][cuts] = GeneralUtil.rotateShape(Direction.NORTH, facing, SHEEP_SHAPES_BY_CUTS[cuts]);
-                CHEESECAKE_SHAPES_BY_FACING_AND_CUTS[facingIndex][cuts] = GeneralUtil.rotateShape(Direction.NORTH, facing, CHEESECAKE_SHAPES_BY_CUTS[cuts]);
-                CHEESE_TART_SHAPES_BY_FACING_AND_CUTS[facingIndex][cuts] = GeneralUtil.rotateShape(Direction.NORTH, facing, CHEESE_TART_SHAPES_BY_CUTS[cuts]);
+                WARPED_SHAPES_BY_FACING_AND_CUTS[facingIndex][cuts] = ShapeUtil.rotateShape(Direction.NORTH, facing, WARPED_SHAPES_BY_CUTS[cuts]);
+                BUFFALO_GOAT_SHAPES_BY_FACING_AND_CUTS[facingIndex][cuts] = ShapeUtil.rotateShape(Direction.NORTH, facing, BUFFALO_GOAT_SHAPES_BY_CUTS[cuts]);
+                CHEESE_AMETHYST_SHAPES_BY_FACING_AND_CUTS[facingIndex][cuts] = ShapeUtil.rotateShape(Direction.NORTH, facing, CHEESE_AMETHYST_SHAPES_BY_CUTS[cuts]);
+                SHEEP_SHAPES_BY_FACING_AND_CUTS[facingIndex][cuts] = ShapeUtil.rotateShape(Direction.NORTH, facing, SHEEP_SHAPES_BY_CUTS[cuts]);
+                CHEESECAKE_SHAPES_BY_FACING_AND_CUTS[facingIndex][cuts] = ShapeUtil.rotateShape(Direction.NORTH, facing, CHEESECAKE_SHAPES_BY_CUTS[cuts]);
+                CHEESE_TART_SHAPES_BY_FACING_AND_CUTS[facingIndex][cuts] = ShapeUtil.rotateShape(Direction.NORTH, facing, CHEESE_TART_SHAPES_BY_CUTS[cuts]);
             }
         }
     }
@@ -255,8 +256,8 @@ public class CheeseWheelBlock extends FacingBlock {
             case BUFFALO, GOAT -> BUFFALO_GOAT_SHAPES_BY_FACING_AND_CUTS[facingIndex][cuts];
             case SHEEP -> SHEEP_SHAPES_BY_FACING_AND_CUTS[facingIndex][cuts];
             case REGULAR, AMETHYST -> CHEESE_AMETHYST_SHAPES_BY_FACING_AND_CUTS[facingIndex][cuts];
-            case GRAIN -> GeneralUtil.rotateShape(Direction.NORTH, facing, SHAPE_GRAIN);
-            case CAKE -> GeneralUtil.rotateShape(Direction.NORTH, facing, Block.box(2, 0, 2, 14, 4, 14));
+            case GRAIN -> ShapeUtil.rotateShape(Direction.NORTH, facing, SHAPE_GRAIN);
+            case CAKE -> ShapeUtil.rotateShape(Direction.NORTH, facing, Block.box(2, 0, 2, 14, 4, 14));
             case CHEESECAKE -> CHEESECAKE_SHAPES_BY_FACING_AND_CUTS[facingIndex][cuts];
             case CHEESE_TART -> CHEESE_TART_SHAPES_BY_FACING_AND_CUTS[facingIndex][cuts];
         };

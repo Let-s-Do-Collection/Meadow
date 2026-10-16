@@ -1,5 +1,6 @@
 package net.satisfy.meadow.core.block;
 
+import net.satisfy.foundation.seat.SeatUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -14,7 +15,6 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.satisfy.meadow.core.util.GeneralUtil;
 import org.jetbrains.annotations.NotNull;
 
 public class TiledStoveBlockBench extends Block {
@@ -33,7 +33,7 @@ public class TiledStoveBlockBench extends Block {
 
     @Override
     public @NotNull ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
-        ItemInteractionResult result = GeneralUtil.onUse(level, player, hand, hit, 0.1);
+        ItemInteractionResult result = SeatUtil.onUse(level, player, hand, hit, 0.1);
         if (result == ItemInteractionResult.SUCCESS) {
             return ItemInteractionResult.sidedSuccess(level.isClientSide);
         }
@@ -42,7 +42,7 @@ public class TiledStoveBlockBench extends Block {
 
     @Override
     public @NotNull InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hit) {
-        ItemInteractionResult result = GeneralUtil.onUse(level, player, InteractionHand.MAIN_HAND, hit, 0.1);
+        ItemInteractionResult result = SeatUtil.onUse(level, player, InteractionHand.MAIN_HAND, hit, 0.1);
         if (result == ItemInteractionResult.SUCCESS) {
             return InteractionResult.sidedSuccess(level.isClientSide);
         }
@@ -52,6 +52,6 @@ public class TiledStoveBlockBench extends Block {
     @Override
     public void onRemove(BlockState state, Level world, BlockPos pos, BlockState newState, boolean moved) {
         super.onRemove(state, world, pos, newState, moved);
-        GeneralUtil.onStateReplaced(world, pos);
+        SeatUtil.onStateReplaced(world, pos);
     }
 }

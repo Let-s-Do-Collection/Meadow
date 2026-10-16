@@ -1,87 +1,14 @@
 package net.satisfy.meadow.core.registry;
 
-import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.FireBlock;
+import net.satisfy.foundation.flammable.FoundationFlammables;
+
+import static net.satisfy.meadow.core.registry.ObjectRegistry.*;
 
 public class FlammableBlockRegistry {
     public static void init() {
-        addFlammable(5, 20,
-                ObjectRegistry.RECLAIMED_PINE_TRAPDOOR.get(),
-                ObjectRegistry.PINE_BEAM.get(),
-                ObjectRegistry.RECLAIMED_PINE_DOOR.get(),
-                ObjectRegistry.PINE_DOOR.get(),
-                ObjectRegistry.PINE_FENCE_GATE.get(),
-                ObjectRegistry.PINE_BUTTON.get(),
-                ObjectRegistry.PINE_LOG.get(),
-                ObjectRegistry.PINE_PLANKS.get(),
-                ObjectRegistry.PINE_FENCE.get(),
-                ObjectRegistry.PINE_RAILING.get(),
-                ObjectRegistry.PINE_PRESSURE_PLATE.get(),
-                ObjectRegistry.PINE_SLAB.get(),
-                ObjectRegistry.PINE_STAIRS.get(),
-                ObjectRegistry.PINE_WOOD.get(),
-                ObjectRegistry.PINE_TRAPDOOR.get(),
-                ObjectRegistry.STRIPPED_PINE_LOG.get(),
-                ObjectRegistry.STRIPPED_PINE_WOOD.get()
-        );
-
-        addFlammable(30, 60,
-                ObjectRegistry.PINE_LEAVES.get(),
-                ObjectRegistry.YELLOW_PINE_LEAVES.get(),
-                ObjectRegistry.PINE_SHUTTER.get()
-        );
-
-        addFlammable(10, 40,
-                ObjectRegistry.WOODCUTTER.get(),
-                ObjectRegistry.PINE_CHEESE_RACK.get(),
-                ObjectRegistry.PINE_CABINET.get(),
-                ObjectRegistry.PINE_WALL_CABINET.get(),
-                ObjectRegistry.PINE_TABLE.get(),
-                ObjectRegistry.PINE_CHAIR.get(),
-                ObjectRegistry.PINE_WARDROBE.get(),
-                ObjectRegistry.WOODEN_CAULDRON.get(),
-                ObjectRegistry.WATERING_CAN.get(),
-                ObjectRegistry.COOKING_FRAME.get(),
-                ObjectRegistry.FIREWOOD.get(),
-                ObjectRegistry.WOODEN_FLOWER_BOX.get(),
-                ObjectRegistry.WOODEN_FLOWER_POT_SMALL.get(),
-                ObjectRegistry.WOODEN_FLOWER_POT_BIG.get()
-        );
-
-        addFlammable(5, 20,
-                ObjectRegistry.PLAID_BED.get(),
-                ObjectRegistry.PLAID_CARPET.get(),
-                ObjectRegistry.PLAID_WOOL.get(),
-                ObjectRegistry.WARPED_BED.get(),
-                ObjectRegistry.WARPED_CARPET.get(),
-                ObjectRegistry.WARPED_WOOL.get(),
-                ObjectRegistry.STRAW_BED.get(),
-                ObjectRegistry.RUSTIC_BED.get(),
-                ObjectRegistry.RUSTIC_CARPET.get(),
-                ObjectRegistry.RUSTIC_WOOL.get(),
-                ObjectRegistry.LINEN_BED.get(),
-                ObjectRegistry.LINEN_CARPET.get(),
-                ObjectRegistry.LINEN.get(),
-                ObjectRegistry.JACQUARD_BED.get(),
-                ObjectRegistry.JACQUARD_CARPET.get(),
-                ObjectRegistry.JACQUARD_WOOL.get(),
-                ObjectRegistry.CHAMBRAY_BED.get(),
-                ObjectRegistry.CHAMBRAY_CARPET.get(),
-                ObjectRegistry.CHAMBRAY_WOOL.get(),
-                ObjectRegistry.TWEED_BED.get(),
-                ObjectRegistry.TWEED_CARPET.get(),
-                ObjectRegistry.TWEED_WOOL.get()
-        );
-    }
-
-    public static void addFlammable(int burnOdd, int igniteOdd, Block... blocks) {
-        FireBlock fireBlock = (FireBlock) Blocks.FIRE;
-        for (Block block : blocks) {
-            if ("meadow".equals(BuiltInRegistries.BLOCK.getKey(block).getNamespace())) {
-                fireBlock.setFlammable(block, burnOdd, igniteOdd);
-            }
-        }
+        FoundationFlammables.register(5, 20, RECLAIMED_PINE_TRAPDOOR, PINE_BEAM, RECLAIMED_PINE_DOOR, PINE_DOOR, PINE_FENCE_GATE, PINE_BUTTON, PINE_LOG, PINE_PLANKS, PINE_FENCE, PINE_RAILING, PINE_PRESSURE_PLATE, PINE_SLAB, PINE_STAIRS, PINE_WOOD, PINE_TRAPDOOR, STRIPPED_PINE_LOG, STRIPPED_PINE_WOOD);
+        FoundationFlammables.register(30, 60, PINE_LEAVES, YELLOW_PINE_LEAVES, PINE_SHUTTER);
+        FoundationFlammables.register(10, 40, WOODCUTTER, PINE_CHEESE_RACK, PINE_CABINET, PINE_WALL_CABINET, PINE_TABLE, PINE_CHAIR, PINE_WARDROBE, WOODEN_CAULDRON, WATERING_CAN, COOKING_FRAME, FIREWOOD, WOODEN_FLOWER_BOX, WOODEN_FLOWER_POT_SMALL, WOODEN_FLOWER_POT_BIG);
+        FoundationFlammables.register(5, 20, PLAID_BED, PLAID_CARPET, PLAID_WOOL, WARPED_BED, WARPED_CARPET, WARPED_WOOL, STRAW_BED, RUSTIC_BED, RUSTIC_CARPET, RUSTIC_WOOL, LINEN_BED, LINEN_CARPET, LINEN, JACQUARD_BED, JACQUARD_CARPET, JACQUARD_WOOL, CHAMBRAY_BED, CHAMBRAY_CARPET, CHAMBRAY_WOOL, TWEED_BED, TWEED_CARPET, TWEED_WOOL);
     }
 }

@@ -1,5 +1,7 @@
 package net.satisfy.meadow.core.block;
 
+import net.satisfy.foundation.util.ShapeUtil;
+import net.satisfy.foundation.block.FacingBlock;
 import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -22,7 +24,6 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.satisfy.meadow.core.registry.ObjectRegistry;
-import net.satisfy.meadow.core.util.GeneralUtil;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
@@ -34,7 +35,7 @@ public class FirewoodBlock extends FacingBlock {
     public static final Map<Direction, VoxelShape> SHAPE = Util.make(new HashMap<>(), map -> {
         VoxelShape baseShape = makeDefaultShape();
         for (Direction direction : Direction.Plane.HORIZONTAL) {
-            map.put(direction, GeneralUtil.rotateShape(Direction.NORTH, direction, baseShape));
+            map.put(direction, ShapeUtil.rotateShape(Direction.NORTH, direction, baseShape));
         }
     });
 
@@ -53,7 +54,7 @@ public class FirewoodBlock extends FacingBlock {
             case 3 -> makeBigShape();
             default -> makeAxeShape();
         };
-        return GeneralUtil.rotateShape(Direction.NORTH, facing, shape);
+        return ShapeUtil.rotateShape(Direction.NORTH, facing, shape);
     }
 
     private static VoxelShape makeDefaultShape() {

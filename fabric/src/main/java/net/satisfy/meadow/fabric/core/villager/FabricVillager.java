@@ -8,21 +8,14 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.RandomSource;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.ai.village.poi.PoiType;
 import net.minecraft.world.entity.npc.VillagerProfession;
-import net.minecraft.world.entity.npc.VillagerTrades;
 import net.minecraft.world.entity.npc.VillagerType;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.item.trading.ItemCost;
-import net.minecraft.world.item.trading.MerchantOffer;
-import net.minecraft.world.level.ItemLike;
-import net.minecraft.world.level.block.Block;
 import net.satisfy.meadow.Meadow;
 import net.satisfy.meadow.core.registry.ObjectRegistry;
+import net.satisfy.foundation.trade.BuyForOneEmeraldFactory;
+import net.satisfy.foundation.trade.SellItemFactory;
 
 @SuppressWarnings("deprecation, unused")
 public class FabricVillager {
@@ -36,7 +29,6 @@ public class FabricVillager {
     public static final VillagerProfession HERMIT = Registry.register(BuiltInRegistries.VILLAGER_PROFESSION, Meadow.identifier("hermit"), VillagerProfessionBuilder.create().id(Meadow.identifier("hermit")).workstation(ResourceKey.create(Registries.POINT_OF_INTEREST_TYPE, HERMIT_POI_IDENTIFIER)).build());
 
     public static final VillagerType MEADOW = Registry.register(BuiltInRegistries.VILLAGER_TYPE, Meadow.identifier("meadow"), new VillagerType("meadow"));
-
 
     public static void init() {
 
@@ -55,7 +47,6 @@ public class FabricVillager {
             factories.add(new SellItemFactory(ObjectRegistry.WOODEN_WARPED_MILK_BUCKET.get(), 18, 2, 15));
 
         });
-
 
         TradeOfferHelper.registerVillagerOffers(HERMIT, 1, factories -> {
             factories.add(new BuyForOneEmeraldFactory(ObjectRegistry.PINE_BENCH.get(), 15, 4, 5));
@@ -87,69 +78,5 @@ public class FabricVillager {
 
         VillagerType.BY_BIOME.put(ResourceKey.create(Registries.BIOME, Meadow.identifier("meadow")), MEADOW);
 
-    }
-
-    static class BuyForOneEmeraldFactory implements VillagerTrades.ItemListing {
-        private final Item buy;
-        private final int price;
-        private final int maxUses;
-        private final int experience;
-        private final float multiplier;
-
-        public BuyForOneEmeraldFactory(ItemLike item, int price, int maxUses, int experience) {
-            this.buy = item.asItem();
-            this.price = price;
-            this.maxUses = maxUses;
-            this.experience = experience;
-            this.multiplier = 0.05F;
-        }
-
-        @Override
-        public MerchantOffer getOffer(Entity entity, RandomSource random) {
-            return new MerchantOffer(new ItemCost(this.buy, this.price), new ItemStack(Items.EMERALD), this.maxUses, this.experience, this.multiplier);
-        }
-    }
-
-    static class SellItemFactory implements VillagerTrades.ItemListing {
-        private final ItemStack sell;
-        private final int price;
-        private final int count;
-        private final int maxUses;
-        private final int experience;
-        private final float multiplier;
-
-        public SellItemFactory(Block block, int price, int count, int maxUses, int experience) {
-            this(new ItemStack(block), price, count, maxUses, experience);
-        }
-
-        public SellItemFactory(Block item, int price, int count, int experience) {
-            this(new ItemStack(item), price, count, 12, experience);
-        }
-
-        public SellItemFactory(Item item, int price, int count, int experience) {
-            this(new ItemStack(item), price, count, 12, experience);
-        }
-
-        public SellItemFactory(Item item, int price, int count, int maxUses, int experience) {
-            this(new ItemStack(item), price, count, maxUses, experience);
-        }
-
-        public SellItemFactory(ItemStack stack, int price, int count, int maxUses, int experience) {
-            this(stack, price, count, maxUses, experience, 0.05F);
-        }
-
-        public SellItemFactory(ItemStack stack, int price, int count, int maxUses, int experience, float multiplier) {
-            this.sell = stack;
-            this.price = price;
-            this.count = count;
-            this.maxUses = maxUses;
-            this.experience = experience;
-            this.multiplier = multiplier;
-        }
-
-        @Override
-        public MerchantOffer getOffer(Entity entity, RandomSource random) {
-            return new MerchantOffer(new ItemCost(Items.EMERALD, this.price), new ItemStack(this.sell.getItem(), this.count), this.maxUses, this.experience, this.multiplier);
-        }
     }
 }

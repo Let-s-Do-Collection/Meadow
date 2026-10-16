@@ -1,5 +1,7 @@
 package net.satisfy.meadow.core.block;
 
+import net.satisfy.foundation.util.ShapeUtil;
+import net.satisfy.foundation.block.FacingBlock;
 import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -26,7 +28,6 @@ import net.satisfy.meadow.core.registry.ObjectRegistry;
 import net.satisfy.meadow.core.registry.ParticleTypeRegistry;
 import net.satisfy.meadow.core.registry.SoundEventRegistry;
 import net.satisfy.meadow.core.registry.TagRegistry;
-import net.satisfy.meadow.core.util.GeneralUtil;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.EnumMap;
@@ -44,7 +45,7 @@ public class FonduePotBlock extends FacingBlock {
 
     public static final Map<Direction, VoxelShape> SHAPE = Util.make(new EnumMap<>(Direction.class), map -> {
         for (Direction direction : Direction.Plane.HORIZONTAL) {
-            map.put(direction, GeneralUtil.rotateShape(Direction.NORTH, direction, SHAPE_NORTH));
+            map.put(direction, ShapeUtil.rotateShape(Direction.NORTH, direction, SHAPE_NORTH));
         }
     });
 

@@ -11,7 +11,6 @@ import net.neoforged.fml.config.ModConfig;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.neoforge.event.AddPackFindersEvent;
 import net.satisfy.meadow.Meadow;
-import net.satisfy.meadow.core.registry.CompostableRegistry;
 import net.satisfy.meadow.neoforge.core.config.MeadowNeoForgeConfig;
 import net.satisfy.meadow.neoforge.core.registry.MeadowBiomeModifiers;
 import net.satisfy.meadow.neoforge.core.registry.MeadowForgeVillagers;
@@ -41,7 +40,6 @@ public class MeadowNeoForge {
     }
 
     private void commonSetup(FMLCommonSetupEvent event) {
-        event.enqueueWork(CompostableRegistry::registerCompostable);
     }
 
     private void addPackFinders(AddPackFindersEvent event) {

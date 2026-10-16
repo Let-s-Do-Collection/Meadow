@@ -1,5 +1,8 @@
 package net.satisfy.meadow.core.block;
 
+import net.satisfy.foundation.util.ShapeUtil;
+import net.satisfy.foundation.seat.SeatUtil;
+import net.satisfy.foundation.block.LineConnectingBlock;
 import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -19,7 +22,6 @@ import net.minecraft.world.phys.shapes.BooleanOp;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.satisfy.meadow.core.util.GeneralUtil;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
@@ -90,7 +92,7 @@ public class SofaBlock extends LineConnectingBlock {
 
     @Override
     protected @NotNull ItemInteractionResult useItemOn(ItemStack itemStack, BlockState blockState, Level level, BlockPos blockPos, Player player, InteractionHand interactionHand, BlockHitResult blockHitResult) {
-        return GeneralUtil.onUse(level, player, interactionHand, blockHitResult, -0.3);
+        return SeatUtil.onUse(level, player, interactionHand, blockHitResult, -0.3);
     }
 
     @Override
@@ -117,28 +119,28 @@ public class SofaBlock extends LineConnectingBlock {
 
     @Override
     public void onRemove(BlockState state, Level world, BlockPos pos, BlockState newState, boolean moved) {
-        GeneralUtil.onStateReplaced(world, pos);
+        SeatUtil.onStateReplaced(world, pos);
     }
 
     static {
         SHAPE = Util.make(new HashMap<>(), map -> {
             for (Direction direction : Direction.Plane.HORIZONTAL.stream().toList()) {
-                map.put(direction, GeneralUtil.rotateShape(Direction.NORTH, direction, noneShapeSupplier.get()));
+                map.put(direction, ShapeUtil.rotateShape(Direction.NORTH, direction, noneShapeSupplier.get()));
             }
         });
         MIDDLE_SHAPE = Util.make(new HashMap<>(), map -> {
             for (Direction direction : Direction.Plane.HORIZONTAL.stream().toList()) {
-                map.put(direction, GeneralUtil.rotateShape(Direction.NORTH, direction, middleShapeSupplier.get()));
+                map.put(direction, ShapeUtil.rotateShape(Direction.NORTH, direction, middleShapeSupplier.get()));
             }
         });
         LEFT_SHAPE = Util.make(new HashMap<>(), map -> {
             for (Direction direction : Direction.Plane.HORIZONTAL.stream().toList()) {
-                map.put(direction, GeneralUtil.rotateShape(Direction.NORTH, direction, leftShapeSupplier.get()));
+                map.put(direction, ShapeUtil.rotateShape(Direction.NORTH, direction, leftShapeSupplier.get()));
             }
         });
         RIGHT_SHAPE = Util.make(new HashMap<>(), map -> {
             for (Direction direction : Direction.Plane.HORIZONTAL.stream().toList()) {
-                map.put(direction, GeneralUtil.rotateShape(Direction.NORTH, direction, rightShapeSupplier.get()));
+                map.put(direction, ShapeUtil.rotateShape(Direction.NORTH, direction, rightShapeSupplier.get()));
             }
         });
     }
