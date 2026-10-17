@@ -41,6 +41,7 @@ public class CheeseRackInfoProvider implements BlockInfoProvider {
     }
 
     private static int hoveredSection(CheeseRackBlock rack, BlockState state, BlockHitResult hit, StorageBlockEntity storage) {
+        Optional<Tuple<Float, Float>> coordinates = ShapeUtil.getRelativeHitCoordinatesForBlockFace(hit, state.getValue(CheeseRackBlock.FACING), rack.unAllowedDirections());
         if (coordinates.isEmpty()) {
             return -1;
         }
