@@ -2,9 +2,6 @@
   "type": "meadow:cooking",
   "ingredients": [
     {
-      "item": "minecraft:bowl"
-    },
-    {
       "item": "minecraft:beetroot"
     },
     {
@@ -20,12 +17,14 @@
       "item": "minecraft:beetroot"
     }
   ],
-  "fluid_amount": 10,
+  "liquid": {
+    "id": "meadow:water",
+    "amount": 1
+  },
+  "container": "minecraft:bowl",
   "crafting_duration": 30,
   "result": {
     "id": "minecraft:beetroot_soup",
     "count": 2
   }
 }
-
-

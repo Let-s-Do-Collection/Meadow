@@ -11,12 +11,13 @@
       "tag": "c:cheese"
     }
   ],
-  "fluid_amount": 2,
+  "liquid": {
+    "id": "meadow:water",
+    "amount": 1
+  },
   "crafting_duration": 120,
   "result": {
     "id": "meadow:sausage_with_cheese",
     "count": 2
   }
 }
-
-

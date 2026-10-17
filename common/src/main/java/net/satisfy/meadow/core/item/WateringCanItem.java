@@ -3,6 +3,7 @@ package net.satisfy.meadow.core.item;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
@@ -82,6 +83,7 @@ public class WateringCanItem extends BlockItem {
         if (WateringCanItem.useOnFertilizable(stack, world, blockPos, playerEntity)) {
             if (!world.isClientSide) {
                 world.levelEvent(LevelEvent.PARTICLES_AND_SOUND_PLANT_GROWTH, blockPos, 0);
+                spawnWaterParticles((ServerLevel) world, blockPos);
             }
             return InteractionResult.sidedSuccess(world.isClientSide);
         }
@@ -91,6 +93,7 @@ public class WateringCanItem extends BlockItem {
         if (bl && WateringCanItem.useOnGround(stack, world, blockPos2, context.getClickedFace(), playerEntity)) {
             if (!world.isClientSide) {
                 world.levelEvent(LevelEvent.PARTICLES_AND_SOUND_PLANT_GROWTH, blockPos2, 0);
+                spawnWaterParticles((ServerLevel) world, blockPos2);
             }
             return InteractionResult.sidedSuccess(world.isClientSide);
         }
@@ -155,6 +158,15 @@ public class WateringCanItem extends BlockItem {
         }
         damage(stack, playerEntity);
         return true;
+    }
+
+    private static void spawnWaterParticles(ServerLevel level, BlockPos pos) {
+        double x = pos.getX() + 0.5;
+        double y = pos.getY() + 1.0;
+        double z = pos.getZ() + 0.5;
+        level.sendParticles(ParticleTypes.FALLING_WATER, x, y + 0.4, z, 12, 0.3, 0.15, 0.3, 0.0);
+        level.sendParticles(ParticleTypes.SPLASH, x, y, z, 16, 0.3, 0.05, 0.3, 0.1);
+        level.playSound(null, pos, SoundEvents.WEATHER_RAIN, SoundSource.BLOCKS, 0.3F, 1.6F);
     }
 
     public static void damage(ItemStack stack, Player entity) {

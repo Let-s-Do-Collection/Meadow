@@ -11,11 +11,11 @@ import me.shedaniel.rei.api.common.category.CategoryIdentifier;
 import me.shedaniel.rei.api.common.util.EntryStacks;
 import net.minecraft.network.chat.Component;
 import net.satisfy.meadow.Meadow;
-import net.satisfy.meadow.core.block.entity.CheeseFormBlockEntity;
 import net.satisfy.meadow.core.compat.rei.display.CheeseFormDisplay;
 import net.satisfy.meadow.core.registry.ObjectRegistry;
 
 import java.util.List;
+import net.satisfy.meadow.platform.PlatformHelper;
 
 public class CheeseFormCategory implements DisplayCategory<CheeseFormDisplay> {
 
@@ -53,7 +53,7 @@ public class CheeseFormCategory implements DisplayCategory<CheeseFormDisplay> {
         List<Widget> widgets = Lists.newArrayList();
         widgets.add(Widgets.createRecipeBase(bounds));
         widgets.add(Widgets.createArrow(new Point(startPoint.x + 41, startPoint.y))
-                .animationDurationTicks(CheeseFormBlockEntity.COOKING_TIME_IN_TICKS));
+                .animationDurationTicks(PlatformHelper.getCheesePressDuration()));
         widgets.add(Widgets.createResultSlotBackground(new Point(startPoint.x + 74, startPoint.y)));
         widgets.add(Widgets.createSlot(new Point(startPoint.x + 74, startPoint.y)).entries(display.getOutputEntries().get(0)).disableBackground().markOutput());
 

@@ -2,13 +2,16 @@ package net.satisfy.meadow.core.block;
 
 import net.satisfy.foundation.util.ShapeUtil;
 import net.satisfy.foundation.block.FacingBlock;
+import net.satisfy.foundation.registry.FoundationParticles;
 import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.particles.ColorParticleOption;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.ItemInteractionResult;
@@ -17,25 +20,28 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.EntityBlock;
+import net.minecraft.world.level.block.RenderShape;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityTicker;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.StateDefinition;
-import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import net.satisfy.meadow.core.block.entity.FonduePotBlockEntity;
+import net.satisfy.meadow.core.registry.EntityTypeRegistry;
 import net.satisfy.meadow.core.registry.ObjectRegistry;
-import net.satisfy.meadow.core.registry.ParticleTypeRegistry;
 import net.satisfy.meadow.core.registry.SoundEventRegistry;
 import net.satisfy.meadow.core.registry.TagRegistry;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.EnumMap;
 import java.util.Map;
 
-public class FonduePotBlock extends FacingBlock {
-    public static final IntegerProperty FILL_AMOUNT = IntegerProperty.create("fill_amount", 0, 3);
-
+public class FonduePotBlock extends FacingBlock implements EntityBlock {
     private static final VoxelShape SHAPE_NORTH = Shapes.or(
             Block.box(3.0, 0.0, 3.0, 13.0, 6.0, 13.0),
             Block.box(2.0, 6.0, 2.0, 14.0, 8.0, 14.0),
@@ -51,13 +57,6 @@ public class FonduePotBlock extends FacingBlock {
 
     public FonduePotBlock(Properties properties) {
         super(properties);
-        this.registerDefaultState(this.defaultBlockState().setValue(FILL_AMOUNT, 0));
-    }
-
-    @Override
-    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        super.createBlockStateDefinition(builder);
-        builder.add(FILL_AMOUNT);
     }
 
     @Override
@@ -68,47 +67,32 @@ public class FonduePotBlock extends FacingBlock {
 
     @Override
     public @NotNull ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
-        if (!isHeated(level, pos)) {
+        if (stack.isEmpty() || !isHeated(level, pos) || !(level.getBlockEntity(pos) instanceof FonduePotBlockEntity pot)) {
             return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
         }
 
-        int fillAmount = state.getValue(FILL_AMOUNT);
-
-        if (stack.is(TagRegistry.BREAD) && fillAmount > 0) {
-            if (!level.isClientSide) {
-                level.setBlock(pos, state.setValue(FILL_AMOUNT, fillAmount - 1), 11);
-
+        if (stack.is(TagRegistry.BREAD) && !pot.getPortions().isEmpty() && pot.getMelting().isEmpty()) {
+            if (level.isClientSide) {
+                pot.splash(level, 4);
+            } else {
+                pot.takePortion();
                 ItemStack cheeseStick = ObjectRegistry.CHEESE_STICK.get().getDefaultInstance();
-                if (!player.getAbilities().instabuild) {
-                    if (!player.getInventory().add(cheeseStick)) {
-                        player.drop(cheeseStick, false);
-                    }
-                    stack.shrink(1);
-                } else {
-                    if (!player.getInventory().add(cheeseStick)) {
-                        player.drop(cheeseStick, false);
-                    }
+                if (!player.getInventory().add(cheeseStick)) {
+                    player.drop(cheeseStick, false);
                 }
+                stack.consume(1, player);
+                shake(level, pos);
+                level.playSound(null, pos, SoundEvents.HONEY_BLOCK_SLIDE, SoundSource.BLOCKS, 0.8F, 1.2F);
             }
             return ItemInteractionResult.sidedSuccess(level.isClientSide);
         }
 
-        if (fillAmount < 3 && stack.is(TagRegistry.CHEESE_WHEELS)) {
+        if (pot.canAccept(stack)) {
             if (!level.isClientSide) {
-                level.setBlock(pos, state.setValue(FILL_AMOUNT, 3), 11);
-                if (!player.getAbilities().instabuild) {
-                    stack.shrink(1);
-                }
-            }
-            return ItemInteractionResult.sidedSuccess(level.isClientSide);
-        }
-
-        if (fillAmount < 3 && stack.is(TagRegistry.CHEESE)) {
-            if (!level.isClientSide) {
-                level.setBlock(pos, state.setValue(FILL_AMOUNT, fillAmount + 1), 11);
-                if (!player.getAbilities().instabuild) {
-                    stack.shrink(1);
-                }
+                pot.insert(stack);
+                stack.consume(1, player);
+                shake(level, pos);
+                level.playSound(null, pos, SoundEvents.HONEY_BLOCK_PLACE, SoundSource.BLOCKS, 0.8F, 1.0F);
             }
             return ItemInteractionResult.sidedSuccess(level.isClientSide);
         }
@@ -118,54 +102,115 @@ public class FonduePotBlock extends FacingBlock {
 
     @Override
     public @NotNull InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hit) {
-        return InteractionResult.PASS;
+        if (!player.getMainHandItem().isEmpty() || !(level.getBlockEntity(pos) instanceof FonduePotBlockEntity pot)) {
+            return InteractionResult.PASS;
+        }
+        pot.stir();
+        if (!level.isClientSide) {
+            shake(level, pos);
+        }
+        if (!level.isClientSide && pot.hasContents() && level.random.nextInt(4) == 0) {
+            level.playSound(null, pos, SoundEvents.HONEY_BLOCK_SLIDE, SoundSource.BLOCKS, 0.4F, 0.8F + level.random.nextFloat() * 0.4F);
+        }
+        return InteractionResult.sidedSuccess(level.isClientSide);
+    }
+
+    private void shake(Level level, BlockPos pos) {
+        level.blockEvent(pos, this, FonduePotBlockEntity.SHAKE_EVENT, 0);
+    }
+
+    @Override
+    protected boolean triggerEvent(BlockState state, Level level, BlockPos pos, int id, int param) {
+        BlockEntity blockEntity = level.getBlockEntity(pos);
+        return blockEntity != null && blockEntity.triggerEvent(id, param);
+    }
+
+    @Override
+    protected @NotNull RenderShape getRenderShape(BlockState state) {
+        return RenderShape.ENTITYBLOCK_ANIMATED;
+    }
+
+    @Override
+    protected void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean moved) {
+        if (!state.is(newState.getBlock()) && level.getBlockEntity(pos) instanceof FonduePotBlockEntity pot) {
+            Containers.dropContents(level, pos, pot.drops());
+        }
+        super.onRemove(state, level, pos, newState, moved);
+    }
+
+    @Override
+    public @Nullable BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+        return new FonduePotBlockEntity(pos, state);
+    }
+
+    @Override
+    @SuppressWarnings("unchecked")
+    public <T extends BlockEntity> @Nullable BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
+        return type == EntityTypeRegistry.FONDUE_POT_BLOCK_ENTITY.get() ? (BlockEntityTicker<T>) (BlockEntityTicker<FonduePotBlockEntity>) FonduePotBlockEntity::tick : null;
     }
 
     @Override
     public void animateTick(BlockState state, Level level, BlockPos pos, RandomSource random) {
         super.animateTick(state, level, pos, random);
 
-        if (!isHeated(level, pos)) {
+        if (!isHeated(level, pos) || !(level.getBlockEntity(pos) instanceof FonduePotBlockEntity pot)) {
             return;
         }
 
-        int fillAmount = state.getValue(FILL_AMOUNT);
-
-        if (fillAmount >= 1 && random.nextInt(100) < 5) {
-            level.playLocalSound(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, SoundEventRegistry.COOKING_POT_BOILING.get(), SoundSource.BLOCKS, 0.75F, 0.75F, false);
-        }
+        double centerX = pos.getX() + 0.5;
+        double centerZ = pos.getZ() + 0.5;
+        double surfaceY = pos.getY() + pot.surfaceY();
 
         if (random.nextInt(100) < 10) {
-            level.playLocalSound(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, SoundEvents.CAMPFIRE_CRACKLE, SoundSource.BLOCKS, 1.0F, 1.0F, false);
+            level.playLocalSound(centerX, pos.getY() + 0.2, centerZ, SoundEvents.CAMPFIRE_CRACKLE, SoundSource.BLOCKS, 0.6F, 1.0F, false);
         }
 
-        int smokeChance = fillAmount == 0 ? 35 : 20;
-        if (random.nextInt(100) < smokeChance) {
-            level.addParticle(ParticleTypes.SMOKE, pos.getX() + 0.5 + (random.nextDouble() - 0.5) * 0.2, pos.getY() + 1.0, pos.getZ() + 0.5 + (random.nextDouble() - 0.5) * 0.2, 0.0, 0.07, 0.0);
-        }
-
-        if (fillAmount > 0) {
-            if (random.nextInt(100) < 28) {
-                int bubbleCount = fillAmount + 1;
-
-                double baseSurfaceY = pos.getY() + 0.9;
-                double pixelOffsetPerLevel = 0.125;
-                double surfaceY = baseSurfaceY - ((3 - fillAmount) * pixelOffsetPerLevel);
-
-                for (int i = 0; i < bubbleCount; i++) {
-                    double offsetX = (random.nextDouble() - 0.5) * 0.35;
-                    double offsetZ = (random.nextDouble() - 0.5) * 0.35;
-                    double velocityX = (random.nextDouble() - 0.5) * 0.01;
-                    double velocityZ = (random.nextDouble() - 0.5) * 0.01;
-                    double velocityY = 0.03 + random.nextDouble() * 0.03;
-
-                    level.addParticle(ParticleTypeRegistry.FONDUE_BUBBLE.get(), pos.getX() + 0.5 + offsetX, surfaceY, pos.getZ() + 0.5 + offsetZ, velocityX, velocityY, velocityZ);
-                }
+        if (pot.getPortions().isEmpty() && pot.getMelting().isEmpty()) {
+            if (random.nextInt(100) < 18) {
+                level.addParticle(ParticleTypes.SMOKE, centerX, pos.getY() + 0.6, centerZ, 0.0, 0.05, 0.0);
             }
+            return;
+        }
+
+        int color = 0xFF000000 | FonduePotBlockEntity.colorProvider.applyAsInt(pot);
+        if (!pot.getPortions().isEmpty() && random.nextInt(100) < 95) {
+            int bubbles = 1 + random.nextInt(2) + pot.getPortions().size() / 2;
+            for (int i = 0; i < bubbles; i++) {
+                double x = centerX + (random.nextDouble() - 0.5) * 0.35;
+                double z = centerZ + (random.nextDouble() - 0.5) * 0.35;
+                level.addParticle(ColorParticleOption.create(FoundationParticles.COLORED_SOUP_BUBBLE.get(), color), x, surfaceY, z, 0.0, 0.0, 0.0);
+                level.addParticle(ColorParticleOption.create(FoundationParticles.COLORED_SOUP_COOKING_BUBBLE.get(), color), x, surfaceY, z, 0.0, 0.0, 0.0);
+            }
+        }
+
+        int steamChance = pot.getMelting().isEmpty() ? 45 : 80;
+        if (random.nextInt(100) < steamChance) {
+            int steam = 1 + random.nextInt(pot.getMelting().isEmpty() ? 2 : 3);
+            for (int i = 0; i < steam; i++) {
+                double x = centerX + (random.nextDouble() - 0.5) * 0.3;
+                double z = centerZ + (random.nextDouble() - 0.5) * 0.3;
+                level.addParticle(FoundationParticles.SOUP_STEAM.get(), x, surfaceY + 0.2, z, 0.0, 0.07, 0.0);
+            }
+        }
+
+        if (random.nextInt(100) < 15) {
+            level.addParticle(ParticleTypes.SMOKE, centerX, surfaceY + 0.4, centerZ, 0.0, 0.06, 0.0);
+        }
+
+        if (!pot.getPortions().isEmpty() && random.nextInt(100) < 6) {
+            level.playLocalSound(centerX, surfaceY, centerZ, SoundEventRegistry.COOKING_POT_BOILING.get(), SoundSource.BLOCKS, 0.75F, 0.75F, false);
+        }
+
+        if (!pot.getPortions().isEmpty() && random.nextInt(100) < 4) {
+            level.playLocalSound(centerX, surfaceY, centerZ, SoundEvents.BUBBLE_COLUMN_BUBBLE_POP, SoundSource.BLOCKS, 0.4F, 0.7F + random.nextFloat() * 0.3F, false);
         }
     }
 
-    private static boolean isHeated(Level level, BlockPos pos) {
+    public static float surfaceHeight(float fill) {
+        return 1.0F + fill * 1.5F;
+    }
+
+    public static boolean isHeated(Level level, BlockPos pos) {
         return level.getBlockState(pos.below()).is(TagRegistry.ALLOWS_COOKING);
     }
 }

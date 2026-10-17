@@ -9,10 +9,8 @@ import net.satisfy.foundation.block.WardrobeBlock;
 import net.satisfy.foundation.block.TableBlock;
 import net.satisfy.foundation.block.ShutterBlock;
 import net.satisfy.foundation.block.DresserBlock;
-import net.satisfy.foundation.block.ChairBlock;
 import net.satisfy.foundation.armor.TexturedArmorItem;
 import net.satisfy.foundation.block.CabinetBlock;
-import net.satisfy.foundation.block.CabinetWallBlock;
 import net.satisfy.foundation.banner.BannerSettings;
 import net.satisfy.foundation.wood.WoodBoatItem;
 import net.satisfy.foundation.wood.WoodCeilingHangingSignBlock;
@@ -20,7 +18,6 @@ import net.satisfy.foundation.wood.WoodStandingSignBlock;
 import net.satisfy.foundation.wood.WoodWallHangingSignBlock;
 import net.satisfy.foundation.wood.WoodWallSignBlock;
 import net.satisfy.meadow.platform.PlatformHelper;
-import net.satisfy.foundation.block.BenchBlock;
 import dev.architectury.core.item.ArchitecturySpawnEggItem;
 import dev.architectury.registry.fuel.FuelRegistry;
 import dev.architectury.registry.registries.DeferredRegister;
@@ -131,11 +128,11 @@ public class ObjectRegistry {
     public static final RegistrySupplier<Block> PINE_FENCE_GATE = registerWithItem("pine_fence_gate", () -> new FenceGateBlock(WoodType.OAK, BlockBehaviour.Properties.of().strength(2.0f, 3.0f).sound(SoundType.WOOD).mapColor(PINE_PLANKS.get().defaultMapColor())));
     public static final RegistrySupplier<Block> PINE_RAILING = registerWithItem("pine_railing", () -> new FenceBlock(BlockBehaviour.Properties.of().strength(2.0f, 3.0f).sound(SoundType.WOOD)));
     public static final RegistrySupplier<Block> PINE_CABINET = registerWithItem("pine_cabinet", () -> new CabinetBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS), EntityTypeRegistry.CABINET_BLOCK_ENTITY, SoundEvents.WOODEN_TRAPDOOR_OPEN, SoundEvents.WOODEN_TRAPDOOR_CLOSE));
-    public static final RegistrySupplier<Block> PINE_WALL_CABINET = registerWithItem("pine_wall_cabinet", () -> new CabinetWallBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS), EntityTypeRegistry.CABINET_BLOCK_ENTITY, SoundEvents.WOODEN_TRAPDOOR_OPEN, SoundEvents.WOODEN_TRAPDOOR_CLOSE));
+    public static final RegistrySupplier<Block> PINE_WALL_CABINET = registerWithItem("pine_wall_cabinet", () -> new PineWallCabinetBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS), EntityTypeRegistry.CABINET_BLOCK_ENTITY, SoundEvents.WOODEN_TRAPDOOR_OPEN, SoundEvents.WOODEN_TRAPDOOR_CLOSE));
     public static final RegistrySupplier<Block> PINE_CHEESE_RACK = registerWithItem("pine_cheese_rack", () -> new CheeseRackBlock(BlockBehaviour.Properties.of().strength(2.0F, 3.0F).sound(SoundType.WOOD).noOcclusion()));
-    public static final RegistrySupplier<Block> PINE_CHAIR = registerWithItem("pine_chair", () -> new ChairBlock(BlockBehaviour.Properties.of().strength(2.0f, 3.0f).sound(SoundType.WOOD)));
+    public static final RegistrySupplier<Block> PINE_CHAIR = registerWithItem("pine_chair", () -> new PineChairBlock(BlockBehaviour.Properties.of().strength(2.0f, 3.0f).sound(SoundType.WOOD)));
     public static final RegistrySupplier<Block> PINE_TABLE = registerWithItem("pine_table", () -> new TableBlock(BlockBehaviour.Properties.of().requiresCorrectToolForDrops().strength(3.5F).sound(SoundType.WOOD).noOcclusion()));
-    public static final RegistrySupplier<Block> PINE_BENCH = registerWithItem("pine_bench", () -> new BenchBlock(BlockBehaviour.Properties.of().strength(2.0f, 3.0f).sound(SoundType.WOOD)));
+    public static final RegistrySupplier<Block> PINE_BENCH = registerWithItem("pine_bench", () -> new SeatBenchBlock(BlockBehaviour.Properties.of().strength(2.0f, 3.0f).sound(SoundType.WOOD)));
     public static final RegistrySupplier<Block> PINE_SOFA_RUSTIC = registerWithItem("pine_sofa_rustic", () -> new SofaBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).sound(SoundType.WOOD).mapColor(MapColor.COLOR_BROWN)));
     public static final RegistrySupplier<Block> PINE_SOFA_LINEN = registerWithItem("pine_sofa_linen", () -> new SofaBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).sound(SoundType.WOOD).mapColor(MapColor.COLOR_GRAY)));
     public static final RegistrySupplier<Block> PINE_SOFA_JACQUARD = registerWithItem("pine_sofa_jacquard", () -> new SofaBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).sound(SoundType.WOOD).mapColor(MapColor.COLOR_BLUE)));
@@ -149,7 +146,7 @@ public class ObjectRegistry {
     public static final RegistrySupplier<Block> PINE_WINDOW_PANE = registerWithItem("pine_window_pane", () -> new WindowBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.GLASS_PANE)));
     public static final RegistrySupplier<Block> PINE_SHUTTER = registerWithItem("pine_shutter", () -> new ShutterBlock(BlockBehaviour.Properties.of().strength(1.0F).sound(SoundType.WOOD)));
     public static final RegistrySupplier<Block> STONE_TABLE = registerWithItem("stone_table", () -> new TableBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.STONE).strength(4f, 0.0f).sound(SoundType.STONE).noOcclusion()));
-    public static final RegistrySupplier<Block> STONE_BENCH = registerWithItem("stone_bench", () -> new BenchBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.STONE).strength(4f, 0.0f).sound(SoundType.STONE)));
+    public static final RegistrySupplier<Block> STONE_BENCH = registerWithItem("stone_bench", () -> new SeatBenchBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.STONE).strength(4f, 0.0f).sound(SoundType.STONE)));
     public static final RegistrySupplier<Block> TILED_STOVE = registerWithItem("stove_tiles", () -> new TiledStoveBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.BRICKS)));
     public static final RegistrySupplier<Block> TILED_STOVE_FIREPLACE = registerWithItem("stove_tiles_wood", () -> new TiledStoveBlockFireplace(BlockBehaviour.Properties.ofFullCopy(Blocks.BRICKS).lightLevel(s -> s.getValue(TiledStoveBlock.LIT) ? 13 : 0).randomTicks()));
     public static final RegistrySupplier<Block> TILED_STOVE_SMOKER = registerWithItem("stove_tiles_lid", () -> new TiledStoveBlockSmoker(BlockBehaviour.Properties.ofFullCopy(Blocks.SMOKER), Direction.UP));
@@ -200,7 +197,7 @@ public class ObjectRegistry {
     public static final RegistrySupplier<Block> WOODEN_FLOWER_POT_BIG = registerWithItem("wooden_flower_pot_big", () -> new FlowerPotBigBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).instabreak()));
     public static final RegistrySupplier<Block> WOODEN_FLOWER_POT_SMALL = registerWithItem("wooden_flower_pot_small", () -> new FlowerPotSmallBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).instabreak()));
     public static final RegistrySupplier<Block> WOODEN_FLOWER_BOX = registerWithItem("wooden_flower_box", () -> new FlowerBoxBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).instabreak()));
-    public static final RegistrySupplier<Item> FUR_HELMET = registerItem("fur_helmet", () -> new TexturedArmorItem(BuiltInRegistries.ARMOR_MATERIAL.wrapAsHolder(ArmorMaterialRegistry.FUR_ARMOR), ArmorItem.Type.HELMET, getSettings().rarity(Rarity.EPIC).durability(ArmorItem.Type.HELMET.getDurability(15)).stacksTo(1), Meadow.identifier("textures/models/armor/fur.png")));
+    public static final RegistrySupplier<Item> FUR_HELMET = registerItem("fur_helmet", () -> new TexturedArmorItem(BuiltInRegistries.ARMOR_MATERIAL.wrapAsHolder(ArmorMaterialRegistry.FUR_ARMOR), ArmorItem.Type.HELMET, getSettings().rarity(Rarity.RARE).durability(ArmorItem.Type.HELMET.getDurability(15)).stacksTo(1), Meadow.identifier("textures/models/armor/fur.png")));
     public static final RegistrySupplier<Item> FUR_CHESTPLATE = registerItem("fur_chestplate", () -> new TexturedArmorItem(BuiltInRegistries.ARMOR_MATERIAL.wrapAsHolder(ArmorMaterialRegistry.FUR_ARMOR), ArmorItem.Type.CHESTPLATE, getSettings().rarity(Rarity.RARE).durability(ArmorItem.Type.CHESTPLATE.getDurability(15)).stacksTo(1), Meadow.identifier("textures/models/armor/fur.png")));
     public static final RegistrySupplier<Item> FUR_LEGGINGS = registerItem("fur_leggings", () -> new TexturedArmorItem(BuiltInRegistries.ARMOR_MATERIAL.wrapAsHolder(ArmorMaterialRegistry.FUR_ARMOR), ArmorItem.Type.LEGGINGS, getSettings().rarity(Rarity.RARE).durability(ArmorItem.Type.LEGGINGS.getDurability(15)).stacksTo(1), Meadow.identifier("textures/models/armor/fur.png")));
     public static final RegistrySupplier<Item> FUR_BOOTS = registerItem("fur_boots", () -> new TexturedArmorItem(BuiltInRegistries.ARMOR_MATERIAL.wrapAsHolder(ArmorMaterialRegistry.FUR_ARMOR), ArmorItem.Type.BOOTS, getSettings().rarity(Rarity.RARE).durability(ArmorItem.Type.BOOTS.getDurability(15)).stacksTo(1), Meadow.identifier("textures/models/armor/fur.png")));
@@ -212,15 +209,15 @@ public class ObjectRegistry {
     public static final RegistrySupplier<Block> FIRE_LILY = registerWithItem("fire_lily", () -> new FlowerBlock(MobEffects.HEAL, 1, BlockBehaviour.Properties.ofFullCopy(Blocks.DANDELION)));
     public static final RegistrySupplier<Block> ERIOPHORUM = registerWithItem("eriophorum", () -> new FlowerBlock(MobEffects.HEAL, 1, BlockBehaviour.Properties.ofFullCopy(Blocks.DANDELION)));
     public static final RegistrySupplier<Block> TALL_ERIOPHORUM = registerWithItem("tall_eriophorum", () -> new TallFlowerBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.ROSE_BUSH)));
-    public static final RegistrySupplier<Item> CHEESECAKE_SLICE = registerItem("cheesecake_slice", () -> new Item(getSettings().food(new FoodProperties.Builder().nutrition(7).saturationModifier(0.8f).build())));
-    public static final RegistrySupplier<Item> CHEESE_TART_SLICE = registerItem("cheese_tart_slice", () -> new Item(getSettings().food(new FoodProperties.Builder().nutrition(7).saturationModifier(0.8f).build())));
-    public static final RegistrySupplier<Item> CHEESE_SLICE = registerItem("cheese_slice", () -> new Item(getSettings().food(new FoodProperties.Builder().nutrition(6).saturationModifier(0.8f).build())));
-    public static final RegistrySupplier<Item> SHEEP_CHEESE_SLICE = registerItem("sheep_cheese_slice", () -> new Item(getSettings().food(new FoodProperties.Builder().nutrition(6).saturationModifier(0.8f).build())));
-    public static final RegistrySupplier<Item> GRAIN_CHEESE_SLICE = registerItem("grain_cheese_slice", () -> new Item(getSettings().food(new FoodProperties.Builder().nutrition(6).saturationModifier(0.8f).build())));
-    public static final RegistrySupplier<Item> AMETHYST_CHEESE_SLICE = registerItem("amethyst_cheese_slice", () -> new Item(getSettings().food(new FoodProperties.Builder().nutrition(6).saturationModifier(0.8f).build())));
-    public static final RegistrySupplier<Item> BUFFALO_CHEESE_SLICE = registerItem("buffalo_cheese_slice", () -> new Item(getSettings().food(new FoodProperties.Builder().nutrition(6).saturationModifier(0.8f).build())));
-    public static final RegistrySupplier<Item> GOAT_CHEESE_SLICE = registerItem("goat_cheese_slice", () -> new Item(getSettings().food(new FoodProperties.Builder().nutrition(6).saturationModifier(0.8f).build())));
-    public static final RegistrySupplier<Item> WARPED_CHEESE_SLICE = registerItem("warped_cheese_slice", () -> new Item(getSettings().food(new FoodProperties.Builder().nutrition(6).saturationModifier(0.8f).effect(new MobEffectInstance(MobEffects.FIRE_RESISTANCE, 300, 1), 1.0F).build())));
+    public static final RegistrySupplier<Item> CHEESECAKE_SLICE = registerItem("cheesecake_slice", () -> new Item(getSettings().food(new FoodProperties.Builder().nutrition(PlatformHelper.getNutrition("cheesecake_slice")).saturationModifier(PlatformHelper.getSaturation("cheesecake_slice")).build())));
+    public static final RegistrySupplier<Item> CHEESE_TART_SLICE = registerItem("cheese_tart_slice", () -> new Item(getSettings().food(new FoodProperties.Builder().nutrition(PlatformHelper.getNutrition("cheese_tart_slice")).saturationModifier(PlatformHelper.getSaturation("cheese_tart_slice")).build())));
+    public static final RegistrySupplier<Item> CHEESE_SLICE = registerItem("cheese_slice", () -> new Item(getSettings().food(new FoodProperties.Builder().nutrition(PlatformHelper.getNutrition("cheese_slice")).saturationModifier(PlatformHelper.getSaturation("cheese_slice")).build())));
+    public static final RegistrySupplier<Item> SHEEP_CHEESE_SLICE = registerItem("sheep_cheese_slice", () -> new Item(getSettings().food(new FoodProperties.Builder().nutrition(PlatformHelper.getNutrition("sheep_cheese_slice")).saturationModifier(PlatformHelper.getSaturation("sheep_cheese_slice")).build())));
+    public static final RegistrySupplier<Item> GRAIN_CHEESE_SLICE = registerItem("grain_cheese_slice", () -> new Item(getSettings().food(new FoodProperties.Builder().nutrition(PlatformHelper.getNutrition("grain_cheese_slice")).saturationModifier(PlatformHelper.getSaturation("grain_cheese_slice")).build())));
+    public static final RegistrySupplier<Item> AMETHYST_CHEESE_SLICE = registerItem("amethyst_cheese_slice", () -> new Item(getSettings().food(new FoodProperties.Builder().nutrition(PlatformHelper.getNutrition("amethyst_cheese_slice")).saturationModifier(PlatformHelper.getSaturation("amethyst_cheese_slice")).build())));
+    public static final RegistrySupplier<Item> BUFFALO_CHEESE_SLICE = registerItem("buffalo_cheese_slice", () -> new Item(getSettings().food(new FoodProperties.Builder().nutrition(PlatformHelper.getNutrition("buffalo_cheese_slice")).saturationModifier(PlatformHelper.getSaturation("buffalo_cheese_slice")).build())));
+    public static final RegistrySupplier<Item> GOAT_CHEESE_SLICE = registerItem("goat_cheese_slice", () -> new Item(getSettings().food(new FoodProperties.Builder().nutrition(PlatformHelper.getNutrition("goat_cheese_slice")).saturationModifier(PlatformHelper.getSaturation("goat_cheese_slice")).build())));
+    public static final RegistrySupplier<Item> WARPED_CHEESE_SLICE = registerItem("warped_cheese_slice", () -> new Item(getSettings().food(new FoodProperties.Builder().nutrition(PlatformHelper.getNutrition("warped_cheese_slice")).saturationModifier(PlatformHelper.getSaturation("warped_cheese_slice")).effect(new MobEffectInstance(MobEffects.FIRE_RESISTANCE, PlatformHelper.getEffectDuration("warped_cheese_slice"), 1), 1.0F).build())));
     public static final RegistrySupplier<Block> CHEESECAKE = registerWithItem("cheesecake", () -> new CheeseWheelBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.CAKE), ObjectRegistry.CHEESECAKE_SLICE, CheeseWheelBlock.CheeseType.CHEESECAKE));
     public static final RegistrySupplier<Block> CHEESE_TART = registerWithItem("cheese_tart", () -> new CheeseWheelBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.CAKE), ObjectRegistry.CHEESE_TART_SLICE, CheeseWheelBlock.CheeseType.CHEESE_TART));
     public static final RegistrySupplier<Block> CHEESE_WHEEL = registerWithItem("cheese_wheel", () -> new CheeseWheelBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.CAKE), ObjectRegistry.CHEESE_SLICE, CheeseWheelBlock.CheeseType.REGULAR));
@@ -231,14 +228,16 @@ public class ObjectRegistry {
     public static final RegistrySupplier<Block> SHEEP_CHEESE_WHEEL = registerWithItem("sheep_cheese_wheel", () -> new CheeseWheelBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.CAKE), ObjectRegistry.SHEEP_CHEESE_SLICE, CheeseWheelBlock.CheeseType.SHEEP));
     public static final RegistrySupplier<Block> GOAT_CHEESE_WHEEL = registerWithItem("goat_cheese_wheel", () -> new CheeseWheelBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.CAKE), ObjectRegistry.GOAT_CHEESE_SLICE, CheeseWheelBlock.CheeseType.GOAT));
     public static final RegistrySupplier<Item> ALPINE_SALT = registerItem("alpine_salt", () -> new Item(getSettings()));
+    public static final RegistrySupplier<Block> PHOTO_FRAME = registerWithoutItem("photo_frame", () -> new PhotoFrameBlock(BlockBehaviour.Properties.of().noOcclusion().noCollission().noLootTable().strength(0.3F).sound(SoundType.WOOD)));
+    public static final RegistrySupplier<Item> PHOTO = registerItem("photo", () -> new PhotoItem(getSettings().stacksTo(1)));
     public static final RegistrySupplier<Item> RENNET = registerItem("rennet", () -> new Item(getSettings().craftRemainder(Items.GLASS_BOTTLE)));
-    public static final RegistrySupplier<Item> CHEESE_SANDWICH = registerItem("cheese_sandwich", () -> new Item(getSettings().food(new FoodProperties.Builder().nutrition(7).saturationModifier(0.7f).build())));
-    public static final RegistrySupplier<Item> CHEESE_ROLL = registerItem("cheese_roll", () -> new Item(getSettings().food(new FoodProperties.Builder().nutrition(7).saturationModifier(0.8f).build())));
-    public static final RegistrySupplier<Item> CHEESE_STICK = registerItem("cheese_stick", () -> new Item(getSettings().food(new FoodProperties.Builder().nutrition(6).saturationModifier(0.6f).build())));
-    public static final RegistrySupplier<Item> RAW_BUFFALO_MEAT = registerItem("raw_buffalo_meat", () -> new Item(getSettings().food(new FoodProperties.Builder().nutrition(2).saturationModifier(0.3f).build())));
-    public static final RegistrySupplier<Item> COOKED_BUFFALO_MEAT = registerItem("cooked_buffalo_meat", () -> new Item(getSettings().food(new FoodProperties.Builder().nutrition(8).saturationModifier(0.8f).build())));
-    public static final RegistrySupplier<Block> ROASTED_BUFFALO_HAM = registerWithItem("roasted_buffalo_ham", () -> new FoodBlock(Block.Properties.of(), 4, new FoodProperties.Builder().nutrition(8).saturationModifier(0.9f).effect(new MobEffectInstance(MobEffects.REGENERATION, 600, 1), 1.0f).build()));
-    public static final RegistrySupplier<Item> SAUSAGE_WITH_CHEESE = registerItem("sausage_with_cheese", () -> new Item(getSettings().food(new FoodProperties.Builder().nutrition(8).saturationModifier(0.9f).build())));
+    public static final RegistrySupplier<Item> CHEESE_SANDWICH = registerItem("cheese_sandwich", () -> new Item(getSettings().food(new FoodProperties.Builder().nutrition(PlatformHelper.getNutrition("cheese_sandwich")).saturationModifier(PlatformHelper.getSaturation("cheese_sandwich")).build())));
+    public static final RegistrySupplier<Item> CHEESE_ROLL = registerItem("cheese_roll", () -> new Item(getSettings().food(new FoodProperties.Builder().nutrition(PlatformHelper.getNutrition("cheese_roll")).saturationModifier(PlatformHelper.getSaturation("cheese_roll")).build())));
+    public static final RegistrySupplier<Item> CHEESE_STICK = registerItem("cheese_stick", () -> new Item(getSettings().food(new FoodProperties.Builder().nutrition(PlatformHelper.getNutrition("cheese_stick")).saturationModifier(PlatformHelper.getSaturation("cheese_stick")).build())));
+    public static final RegistrySupplier<Item> RAW_BUFFALO_MEAT = registerItem("raw_buffalo_meat", () -> new Item(getSettings().food(new FoodProperties.Builder().nutrition(PlatformHelper.getNutrition("raw_buffalo_meat")).saturationModifier(PlatformHelper.getSaturation("raw_buffalo_meat")).build())));
+    public static final RegistrySupplier<Item> COOKED_BUFFALO_MEAT = registerItem("cooked_buffalo_meat", () -> new Item(getSettings().food(new FoodProperties.Builder().nutrition(PlatformHelper.getNutrition("cooked_buffalo_meat")).saturationModifier(PlatformHelper.getSaturation("cooked_buffalo_meat")).build())));
+    public static final RegistrySupplier<Block> ROASTED_BUFFALO_HAM = registerWithItem("roasted_buffalo_ham", () -> new FoodBlock(Block.Properties.of(), 4, new FoodProperties.Builder().nutrition(PlatformHelper.getNutrition("roasted_buffalo_ham")).saturationModifier(PlatformHelper.getSaturation("roasted_buffalo_ham")).effect(new MobEffectInstance(MobEffects.REGENERATION, PlatformHelper.getEffectDuration("roasted_buffalo_ham"), 1), 1.0f).build()));
+    public static final RegistrySupplier<Item> SAUSAGE_WITH_CHEESE = registerItem("sausage_with_cheese", () -> new Item(getSettings().food(new FoodProperties.Builder().nutrition(PlatformHelper.getNutrition("sausage_with_cheese")).saturationModifier(PlatformHelper.getSaturation("sausage_with_cheese")).build())));
     public static final RegistrySupplier<Item> WOODEN_BUCKET = registerItem("wooden_bucket", () -> new WoodenBucket(Fluids.EMPTY, getSettings().stacksTo(16)));
     public static final RegistrySupplier<Item> WOODEN_WATER_BUCKET = registerItem("wooden_water_bucket", () -> new WoodenBucket(Fluids.WATER, getSettings().stacksTo(1).craftRemainder(ObjectRegistry.WOODEN_BUCKET.get())));
     public static final RegistrySupplier<Item> WOODEN_MILK_BUCKET = registerItem("wooden_milk_bucket", () -> new WoodenMilkBucket(getSettings().stacksTo(1).craftRemainder(ObjectRegistry.WOODEN_BUCKET.get())));
@@ -269,8 +268,8 @@ public class ObjectRegistry {
             Meadow.identifier("textures/banner/meadow_banner.png"),
             "tooltip.meadow.banner",
             MobEffects.DIG_SPEED,
-            () -> PlatformHelper.shouldGiveEffect() ? 8 : 0,
-            () -> 1);
+            () -> PlatformHelper.shouldGiveEffect() ? PlatformHelper.getBannerEffectRadius() : 0,
+            PlatformHelper::getBannerEffectAmplifier);
     public static final RegistrySupplier<Block> MEADOW_BANNER = registerWithItem("meadow_banner", () -> new CompletionistBannerBlock(BlockBehaviour.Properties.of().strength(1F).instrument(NoteBlockInstrument.BASS).noCollission().sound(SoundType.WOOD), BANNER_SETTINGS));
     public static final RegistrySupplier<Block> MEADOW_WALL_BANNER = registerWithoutItem("meadow_wall_banner", () -> new CompletionistWallBannerBlock(BlockBehaviour.Properties.of().strength(1F).instrument(NoteBlockInstrument.BASS).noCollission().sound(SoundType.WOOD), BANNER_SETTINGS));
     public static final RegistrySupplier<Item> FELTING_NEEDLE = registerItem("felting_needle", () -> new FeltingNeedleItem(getSettings().durability(128)));

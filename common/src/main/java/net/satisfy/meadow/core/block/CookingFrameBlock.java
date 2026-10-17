@@ -1,6 +1,5 @@
 package net.satisfy.meadow.core.block;
 
-import net.satisfy.foundation.registry.FoundationParticles;
 import net.satisfy.foundation.util.ShapeUtil;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.Util;
@@ -10,8 +9,9 @@ import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.InteractionResult;
-import net.minecraft.world.MenuProvider;
+import net.minecraft.world.Containers;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -35,7 +35,6 @@ import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.satisfy.meadow.core.block.entity.CookingCauldronBlockEntity;
 import net.satisfy.meadow.core.registry.EntityTypeRegistry;
-import net.satisfy.meadow.core.registry.SoundEventRegistry;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -88,50 +87,44 @@ public class CookingFrameBlock extends BaseEntityBlock {
     @Override
     public void animateTick(BlockState state, Level level, BlockPos pos, RandomSource random) {
         if (state.getValue(HALF) == DoubleBlockHalf.LOWER) {
+            double x = pos.getX() + 0.5;
+            double z = pos.getZ() + 0.5;
             if (random.nextInt(10) == 0) {
-                level.playSound(null, pos, SoundEvents.CAMPFIRE_CRACKLE, SoundSource.BLOCKS, 0.5f, 1.0f);
+                level.playLocalSound(x, pos.getY() + 0.3, z, SoundEvents.CAMPFIRE_CRACKLE, SoundSource.BLOCKS, 0.5F + random.nextFloat(), 0.6F + random.nextFloat() * 0.7F, false);
             }
-
-            if (random.nextInt(5) == 0) {
-                for (int i = 0; i < random.nextInt(1) + 1; i++) {
-                    level.addParticle(ParticleTypes.LAVA, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, random.nextFloat() / 2.0f, 5.0E-5, random.nextFloat() / 2.0f);
-                }
+            int flames = 1 + random.nextInt(3);
+            for (int i = 0; i < flames; i++) {
+                level.addParticle(ParticleTypes.SMALL_FLAME, x + (random.nextDouble() - 0.5) * 0.35, pos.getY() + 0.2 + random.nextDouble() * 0.1, z + (random.nextDouble() - 0.5) * 0.35, 0.0, 0.005 + random.nextDouble() * 0.01, 0.0);
+            }
+            if (random.nextInt(3) == 0) {
+                level.addParticle(ParticleTypes.FLAME, x + (random.nextDouble() - 0.5) * 0.2, pos.getY() + 0.22, z + (random.nextDouble() - 0.5) * 0.2, 0.0, 0.004, 0.0);
+            }
+            if (random.nextInt(4) == 0) {
+                Direction spark = random.nextBoolean() ? state.getValue(FACING) : state.getValue(FACING).getOpposite();
+                level.addParticle(ParticleTypes.SMALL_FLAME, x, pos.getY() + 0.3, z, spark.getStepX() * (0.03 + random.nextDouble() * 0.03), 0.05 + random.nextDouble() * 0.03, spark.getStepZ() * (0.03 + random.nextDouble() * 0.03));
+            }
+            if (random.nextInt(6) == 0) {
+                level.addParticle(ParticleTypes.WHITE_ASH, x + (random.nextDouble() - 0.5) * 0.4, pos.getY() + 0.3, z + (random.nextDouble() - 0.5) * 0.4, 0.0, 0.0, 0.0);
+            }
+            if (random.nextInt(4) == 0) {
+                Direction drift = random.nextBoolean() ? state.getValue(FACING) : state.getValue(FACING).getOpposite();
+                level.addParticle(ParticleTypes.SMOKE, x + (random.nextDouble() - 0.5) * 0.2, pos.getY() + 0.4, z + (random.nextDouble() - 0.5) * 0.2, drift.getStepX() * 0.02, 0.02, drift.getStepZ() * 0.02);
             }
             return;
         }
 
-        double centerX = pos.getX() + 0.5;
-        double centerY = pos.getY() + 0.4;
-        double centerZ = pos.getZ() + 0.5;
-
-        if (random.nextInt(100) < 35) {
-            for (int i = 0; i < 3; i++) {
-                double offsetX = (random.nextDouble() - 0.5) * 0.4;
-                double offsetZ = (random.nextDouble() - 0.5) * 0.4;
-                level.addParticle(FoundationParticles.SOUP_BUBBLE.get(), centerX + offsetX, centerY, centerZ + offsetZ, 0.0, 0.03, 0.0);
-            }
-        }
-
-        if (random.nextInt(100) < 60) {
-            double offsetX = (random.nextDouble() - 0.5) * 0.3;
-            double offsetZ = (random.nextDouble() - 0.5) * 0.3;
-            level.addParticle(FoundationParticles.SOUP_STEAM.get(), centerX + offsetX, centerY + 0.3, centerZ + offsetZ, 0.0, 0.07, 0.0);
-        }
-
-        if (random.nextInt(100) < 6) {
-            level.playLocalSound(centerX, centerY, centerZ, SoundEventRegistry.COOKING_POT_BOILING.get(), SoundSource.BLOCKS, 0.75F, 0.75F, false);
+        if (level.getBlockEntity(pos.below()) instanceof CookingCauldronBlockEntity pot) {
+            CookingPotEffects.animate(level, pos.below(), random, pot);
         }
     }
 
     @Override
-    protected @NotNull InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hit) {
-        BlockPos menuPos = state.getValue(HALF) == DoubleBlockHalf.UPPER ? pos.below() : pos;
-        BlockEntity blockEntity = level.getBlockEntity(menuPos);
-        if (blockEntity instanceof MenuProvider provider) {
-            player.openMenu(provider);
-            return InteractionResult.SUCCESS;
+    protected @NotNull ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
+        BlockPos potPos = state.getValue(HALF) == DoubleBlockHalf.UPPER ? pos.below() : pos;
+        if (level.getBlockEntity(potPos) instanceof CookingCauldronBlockEntity pot) {
+            return pot.interact(level, player, hand, stack);
         }
-        return InteractionResult.PASS;
+        return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
     }
 
     @Override
@@ -162,7 +155,8 @@ public class CookingFrameBlock extends BaseEntityBlock {
             BlockPos basePos = half == DoubleBlockHalf.LOWER ? pos : pos.below();
             BlockEntity blockEntity = level.getBlockEntity(basePos);
             if (blockEntity instanceof CookingCauldronBlockEntity cookingCauldronBlockEntity) {
-                cookingCauldronBlockEntity.dropContents();
+                Containers.dropContents(level, basePos, cookingCauldronBlockEntity.drops());
+                cookingCauldronBlockEntity.clearContent();
             }
             BlockPos otherPos = half == DoubleBlockHalf.LOWER ? pos.above() : pos.below();
             BlockState otherState = level.getBlockState(otherPos);
@@ -198,7 +192,7 @@ public class CookingFrameBlock extends BaseEntityBlock {
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
         if (state.getValue(HALF) != DoubleBlockHalf.LOWER) return null;
-        return createTickerHelper(type, EntityTypeRegistry.COOKING_CAULDRON.get(), (lvl, blockPos, blockState, blockEntity) -> blockEntity.tick(lvl));
+        return createTickerHelper(type, EntityTypeRegistry.COOKING_CAULDRON.get(), CookingCauldronBlockEntity::tick);
     }
 
     private static VoxelShape makeTopShape() {

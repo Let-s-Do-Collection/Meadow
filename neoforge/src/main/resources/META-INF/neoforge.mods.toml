@@ -3,6 +3,12 @@ loaderVersion = "[4,)"
 license = "Custom"
 issueTrackerURL = "https://github.com/satisfyu/Let-s-Do-Hub"
 
+[[accessTransformers]]
+file = "META-INF/accesstransformer.cfg"
+
+[[mixins]]
+config = "meadow-common.mixins.json"
+
 [[mixins]]
 config = "meadow.mixins.json"
 
@@ -15,7 +21,7 @@ credits = "MissLilitu"
 logoFile = "pack.png"
 displayURL = "https://www.lets-do.ch"
 description = '''
-Hey Wanderer! Sit down, enjoy a piece of cheese, and take a look at the new mountain pasture - cliffs, beautiful forests, clearings, and lots of colorful flowers!
+Cowbells on the alpine pasture, pine forests and meadows full of flowers. Milk your cows, press your own cheese wheels, stir a bubbling fondue and snap a photo of it all with your old camera.
 
 Website: https://www.lets-do.ch
 Wiki: https://lets-do.ch/wiki/meadow/

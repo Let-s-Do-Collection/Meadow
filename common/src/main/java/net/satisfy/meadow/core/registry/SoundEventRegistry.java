@@ -17,6 +17,7 @@ public class SoundEventRegistry {
     public static final RegistrySupplier<SoundEvent> BUFFALO_HURT = create("buffalo_hurt");
     public static final RegistrySupplier<SoundEvent> BUFFALO_DEATH = create("buffalo_death");
     public static final RegistrySupplier<SoundEvent> COOKING_POT_BOILING = create("cooking_pot_boiling");
+    public static final RegistrySupplier<SoundEvent> FONDUE_STIRRING = create("fondue_stirring");
     public static final RegistrySupplier<SoundEvent> CABINET_OPEN = create("cabinet_open");
     public static final RegistrySupplier<SoundEvent> CABINET_CLOSE = create("cabinet_close");
 

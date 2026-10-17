@@ -8,7 +8,10 @@
       "tag": "c:salts"
     }
   ],
-  "fluid_amount": 12,
+  "liquid": {
+    "id": "meadow:water",
+    "amount": 1
+  },
   "crafting_duration": 20,
   "result": {
     "id": "minecraft:cooked_cod",

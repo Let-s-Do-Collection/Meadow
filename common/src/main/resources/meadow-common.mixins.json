@@ -1,0 +1,20 @@
+{
+  "required": true,
+  "package": "net.satisfy.meadow.core.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "minVersion": "0.8",
+  "client": [
+    "CameraMixin",
+    "GameRendererMixin",
+    "ItemInHandRendererMixin"
+  ],
+  "mixins": [
+    "CowMixin",
+    "GoatMixin",
+    "NetherPortalBlockMixin",
+    "SheepMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

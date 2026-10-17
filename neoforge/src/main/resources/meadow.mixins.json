@@ -3,16 +3,9 @@
   "package": "net.satisfy.meadow.neoforge.core.mixin",
   "compatibilityLevel": "JAVA_21",
   "minVersion": "0.8",
-  "client": [
-    "ItemInHandRendererMixin"
-  ],
   "mixins": [
-    "CowMixin",
     "DataFixerMixin",
-    "FluidDecrementMixin",
-    "GoatMixin",
-    "NetherPortalBlockMixin",
-    "SheepMixin"
+    "FluidDecrementMixin"
   ],
   "injectors": {
     "defaultRequire": 1

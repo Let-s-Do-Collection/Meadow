@@ -30,15 +30,20 @@ import net.minecraft.world.item.ItemUtils;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.ServerLevelAccessor;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.satisfy.meadow.Meadow;
 import net.satisfy.meadow.core.registry.EntityTypeRegistry;
 import net.satisfy.meadow.core.registry.ObjectRegistry;
+import net.satisfy.meadow.core.registry.TagRegistry;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import net.satisfy.meadow.platform.PlatformHelper;
 
 public class WoolyCowEntity extends Animal implements Shearable, VariantHolder<WoolyCowVariant> {
     private static final EntityDataAccessor<Boolean> IS_SHEARED = SynchedEntityData.defineId(WoolyCowEntity.class, EntityDataSerializers.BOOLEAN);
@@ -88,7 +93,7 @@ public class WoolyCowEntity extends Animal implements Shearable, VariantHolder<W
     public void shear(@NotNull SoundSource shearedSoundCategory) {
         this.level().playSound(null, this, SoundEvents.SHEEP_SHEAR, shearedSoundCategory, 1.0f, 1.0f);
         this.setSheared(true);
-        int i = 1 + this.random.nextInt(3);
+        int i = 1 + this.random.nextInt(PlatformHelper.getWoolyCowMaxWool());
         for (int j = 0; j < i; ++j) {
             ItemEntity itemEntity = this.spawnAtLocation(getVariant().getWool(), 1);
             if (itemEntity == null) continue;
@@ -204,6 +209,21 @@ public class WoolyCowEntity extends Animal implements Shearable, VariantHolder<W
         }
         cow.setVariant(var);
         return cow;
+    }
+
+    public static boolean checkWoolyCowSpawnRules(EntityType<WoolyCowEntity> type, LevelAccessor level, MobSpawnType spawnType, BlockPos pos, RandomSource random) {
+        if (level.getBiome(pos).is(TagRegistry.SPAWNS_WARPED_COW)) {
+            return level.getBlockState(pos.below()).is(Blocks.WARPED_NYLIUM);
+        }
+        return Animal.checkAnimalSpawnRules(type, level, spawnType, pos, random);
+    }
+
+    @Override
+    public float getWalkTargetValue(BlockPos pos, LevelReader level) {
+        if (level.getBlockState(pos.below()).is(Blocks.WARPED_NYLIUM)) {
+            return 10.0F;
+        }
+        return super.getWalkTargetValue(pos, level);
     }
 
     @Override

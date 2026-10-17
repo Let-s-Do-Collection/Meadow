@@ -6,17 +6,16 @@
     },
     {
       "tag": "c:salts"
-    },
-    {
-      "item": "minecraft:glass_bottle"
     }
   ],
-  "fluid_amount": 25,
+  "liquid": {
+    "id": "meadow:water",
+    "amount": 1
+  },
+  "container": "minecraft:glass_bottle",
   "crafting_duration": 60,
   "result": {
     "id": "meadow:rennet",
     "count": 2
   }
 }
-
-

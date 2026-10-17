@@ -6,13 +6,14 @@ import net.minecraft.world.entity.SpawnPlacements;
 import net.minecraft.world.entity.SpawnPlacementTypes;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.level.levelgen.Heightmap;
+import net.satisfy.meadow.core.entity.WoolyCowEntity;
 import net.satisfy.meadow.core.registry.EntityTypeRegistry;
 
 import java.util.function.Supplier;
 
 public final class MeadowSpawns {
     public static void init() {
-        registerAnimal(EntityTypeRegistry.WOOLY_COW, Animal::checkAnimalSpawnRules);
+        registerAnimal(EntityTypeRegistry.WOOLY_COW, WoolyCowEntity::checkWoolyCowSpawnRules);
         registerAnimal(EntityTypeRegistry.WATER_BUFFALO, Animal::checkAnimalSpawnRules);
     }
 

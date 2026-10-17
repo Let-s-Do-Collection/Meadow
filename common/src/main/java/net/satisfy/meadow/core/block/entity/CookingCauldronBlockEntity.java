@@ -1,28 +1,37 @@
 package net.satisfy.meadow.core.block.entity;
 
-import net.satisfy.foundation.util.ImplementedInventory;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;
-import net.minecraft.core.RegistryAccess;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.chat.Component;
+import net.minecraft.network.protocol.Packet;
+import net.minecraft.network.protocol.game.ClientGamePacketListener;
+import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.ContainerHelper;
-import net.minecraft.world.MenuProvider;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.item.ItemEntity;
-import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.inventory.AbstractContainerMenu;
-import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.CraftingInput;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import net.satisfy.meadow.client.gui.handler.CookingCauldronGuiHandler;
+import net.minecraft.world.phys.AABB;
+import net.satisfy.foundation.registry.FoundationParticles;
+import net.satisfy.foundation.util.ImplementedInventory;
+import net.satisfy.foundation.util.LibUtil;
+import net.satisfy.meadow.core.cooking.CookingLiquid;
+import net.satisfy.meadow.core.cooking.CookingLiquids;
 import net.satisfy.meadow.core.recipes.CookingCauldronRecipe;
 import net.satisfy.meadow.core.registry.EntityTypeRegistry;
 import net.satisfy.meadow.core.registry.ObjectRegistry;
@@ -31,343 +40,434 @@ import net.satisfy.meadow.core.registry.TagRegistry;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.Objects;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import net.satisfy.meadow.platform.PlatformHelper;
 
-public class CookingCauldronBlockEntity extends BlockEntity implements ImplementedInventory, MenuProvider {
-    private static final int MAX_CAPACITY = 8;
-    private static final int OUTPUT_SLOT = 0;
-    public static final int MAX_COOKING_TIME = 200;
-    private static final int INGREDIENTS_START = 1;
-    private static final int INGREDIENTS_END = 6;
-    private static final int FLUID_INPUT_SLOT = 7;
-    private static final int[] SLOTS_FOR_REST = {1, 2, 3, 4, 5, 6};
-    private static final int[] SLOTS_FOR_DOWN = {0, 7};
+public class CookingCauldronBlockEntity extends BlockEntity implements ImplementedInventory {
+    public static final int INGREDIENT_SLOTS = 4;
+    public static final int RESULT_SLOT = 4;
+    public static final int MAX_STACK = 64;
+    private static final int[] SLOTS_FOR_DOWN = {RESULT_SLOT};
+    private static final int[] SLOTS_FOR_REST = {0, 1, 2, 3};
+    private static final int FOAM_MIN_TICKS = 100;
+    private static final int FOAM_MAX_TICKS = 200;
+    private static final int SYNC_INTERVAL = 10;
 
-    private final NonNullList<ItemStack> inventory = NonNullList.withSize(MAX_CAPACITY, ItemStack.EMPTY);
+    private final NonNullList<ItemStack> inventory = NonNullList.withSize(INGREDIENT_SLOTS + 1, ItemStack.EMPTY);
 
-    private int cookingTime;
-    private boolean isBeingBurned;
-    private int fluidLevel;
-    private int currentCraftingDuration;
-    private boolean fluidInputProcessed;
+    @Nullable
+    private ResourceLocation liquid;
+    private int liquidAmount;
+    private int liquidColor = 0xFF3F76E4;
+    private boolean liquidBiomeTint;
+    private ResourceLocation liquidTexture = CookingLiquid.DEFAULT_TEXTURE;
 
-    private final ContainerData delegate = new ContainerData() {
-        @Override
-        public int get(int index) {
-            return switch (index) {
-                case 0 -> cookingTime;
-                case 1 -> isBeingBurned ? 1 : 0;
-                case 2 -> fluidLevel;
-                case 3 -> currentCraftingDuration;
-                default -> 0;
-            };
-        }
-
-        @Override
-        public void set(int index, int value) {
-            switch (index) {
-                case 0 -> cookingTime = value;
-                case 1 -> isBeingBurned = value != 0;
-                case 2 -> fluidLevel = value;
-                case 3 -> currentCraftingDuration = value;
-            }
-        }
-
-        @Override
-        public int getCount() {
-            return 4;
-        }
-    };
+    private ItemStack resultContainer = ItemStack.EMPTY;
+    private int cookProgress;
+    private int cookTotal;
+    private boolean foam;
+    private int foamTimer;
+    private long foamSince;
+    private long lastSkim = Long.MIN_VALUE / 2;
+    private boolean recipeDirty = true;
+    @Nullable
+    private CookingCauldronRecipe recipe;
 
     public CookingCauldronBlockEntity(BlockPos pos, BlockState state) {
         super(EntityTypeRegistry.COOKING_CAULDRON.get(), pos, state);
     }
 
-    private RegistryAccess registries() {
-        return this.level != null ? this.level.registryAccess() : RegistryAccess.EMPTY;
+    public static void tick(Level level, BlockPos pos, BlockState state, CookingCauldronBlockEntity pot) {
+        if (level.isClientSide()) {
+            return;
+        }
+        if (pot.recipeDirty) {
+            CookingCauldronRecipe found = pot.findRecipe(level);
+            if (found != pot.recipe) {
+                pot.cookProgress = 0;
+                pot.cookTotal = 0;
+                pot.foam = false;
+            }
+            pot.recipe = found;
+            pot.recipeDirty = false;
+        }
+        CookingCauldronRecipe recipe = pot.recipe;
+        if (recipe == null || !pot.isHeated() || !pot.hasLiquidFor(recipe) || !pot.resultFits(recipe)) {
+            if (pot.cookTotal != 0 || pot.foam) {
+                pot.cookProgress = 0;
+                pot.cookTotal = 0;
+                pot.foam = false;
+                pot.sync();
+            }
+            return;
+        }
+        if (pot.cookTotal == 0) {
+            pot.cookTotal = Math.max(1, recipe.getCraftingDuration() * 20) * 2;
+            pot.foamTimer = nextFoam(level);
+            pot.sync();
+        }
+        pot.cookProgress += pot.foam ? 1 : 2;
+        if (!pot.foam && --pot.foamTimer <= 0) {
+            pot.foam = true;
+            pot.foamSince = level.getGameTime();
+            level.playSound(null, pos, SoundEvents.BUBBLE_COLUMN_UPWARDS_INSIDE, SoundSource.BLOCKS, 0.7F, 0.9F);
+            pot.sync();
+        }
+        if (pot.cookProgress >= pot.cookTotal) {
+            pot.finish(level, recipe);
+        } else if (level.getGameTime() % SYNC_INTERVAL == 0) {
+            pot.sync();
+        }
     }
 
-    @Override
-    public int @NotNull [] getSlotsForFace(Direction side) {
-        return side == Direction.DOWN ? SLOTS_FOR_DOWN : SLOTS_FOR_REST;
+    private static int nextFoam(Level level) {
+        return FOAM_MIN_TICKS + level.random.nextInt(FOAM_MAX_TICKS - FOAM_MIN_TICKS);
     }
 
-    @Override
-    protected void loadAdditional(CompoundTag compoundTag, HolderLookup.Provider provider) {
-        super.loadAdditional(compoundTag, provider);
-        ContainerHelper.loadAllItems(compoundTag, inventory, provider);
-        cookingTime = compoundTag.getInt("CookingTime");
-        isBeingBurned = compoundTag.getBoolean("IsBeingBurned");
-        fluidLevel = compoundTag.getInt("FluidLevel");
-        currentCraftingDuration = compoundTag.getInt("CurrentCraftingDuration");
-        fluidInputProcessed = compoundTag.getBoolean("FluidInputProcessed");
-    }
-
-    @Override
-    protected void saveAdditional(CompoundTag compoundTag, HolderLookup.Provider provider) {
-        super.saveAdditional(compoundTag, provider);
-        ContainerHelper.saveAllItems(compoundTag, inventory, provider);
-        compoundTag.putInt("CookingTime", cookingTime);
-        compoundTag.putBoolean("IsBeingBurned", isBeingBurned);
-        compoundTag.putInt("FluidLevel", fluidLevel);
-        compoundTag.putInt("CurrentCraftingDuration", currentCraftingDuration);
-        compoundTag.putBoolean("FluidInputProcessed", fluidInputProcessed);
-    }
-
-    public boolean isBeingBurned() {
-        Level currentLevel = getLevel();
-        if (currentLevel == null) return false;
-        if (getBlockState().is(ObjectRegistry.COOKING_FRAME.get())) return true;
-        return currentLevel.getBlockState(getBlockPos().below()).is(TagRegistry.ALLOWS_COOKING);
-    }
-
-    public boolean isBoiling() {
-        return cookingTime > 0 && currentCraftingDuration > 0;
-    }
-
-    public boolean isFinished() {
-        return !getItem(OUTPUT_SLOT).isEmpty();
-    }
-
-    private boolean canCraft(CookingCauldronRecipe recipe) {
-        if (recipe == null || recipe.getResultItem(registries()).isEmpty()) return false;
-        ItemStack outputSlotStack = getItem(OUTPUT_SLOT);
-        ItemStack recipeResult = recipe.getResultItem(registries());
-        return outputSlotStack.isEmpty() || (ItemStack.isSameItem(outputSlotStack, recipeResult) && outputSlotStack.getCount() < outputSlotStack.getMaxStackSize());
-    }
-
-    private void craft(CookingCauldronRecipe recipe) {
-        if (!canCraft(recipe)) return;
-
-        ItemStack recipeOutput = recipe.assemble();
-        ItemStack outputSlotStack = getItem(OUTPUT_SLOT);
-
-        if (outputSlotStack.isEmpty()) {
-            setItem(OUTPUT_SLOT, recipeOutput.copy());
+    private void finish(Level level, CookingCauldronRecipe recipe) {
+        List<ItemStack> slots = inventory.subList(0, INGREDIENT_SLOTS);
+        ItemStack result = recipe.getResultItem();
+        ItemStack current = inventory.get(RESULT_SLOT);
+        int space = result.getMaxStackSize() - current.getCount();
+        int batch = Math.max(1, Math.min(recipe.maxBatch(slots), space / Math.max(1, result.getCount())));
+        NonNullList<ItemStack> remainders = NonNullList.create();
+        for (ItemStack stack : slots) {
+            if (!stack.isEmpty() && stack.getItem().hasCraftingRemainingItem()) {
+                remainders.add(new ItemStack(stack.getItem().getCraftingRemainingItem(), batch));
+            }
+        }
+        recipe.consume(slots, batch);
+        result.setCount(result.getCount() * batch);
+        recipe.getLiquid().ifPresent(requirement -> drainLiquid(requirement.amount()));
+        if (current.isEmpty()) {
+            inventory.set(RESULT_SLOT, result);
         } else {
-            outputSlotStack.grow(recipeOutput.getCount());
+            current.grow(result.getCount());
+        }
+        resultContainer = recipe.getContainer().copyWithCount(1);
+        for (ItemStack remainder : remainders) {
+            while (!remainder.isEmpty()) {
+                popOut(level, remainder.split(remainder.getMaxStackSize()));
+            }
+        }
+        cookProgress = 0;
+        cookTotal = 0;
+        foam = false;
+        recipeDirty = true;
+        level.playSound(null, worldPosition, SoundEvents.EXPERIENCE_ORB_PICKUP, SoundSource.BLOCKS, 0.5F, 1.2F);
+        if (level instanceof ServerLevel serverLevel) {
+            serverLevel.sendParticles(FoundationParticles.SOUP_STEAM.get(), worldPosition.getX() + 0.5, worldPosition.getY() + surfaceY(), worldPosition.getZ() + 0.5, 4, 0.12, 0.02, 0.12, 0.02);
+        }
+        sync();
+    }
+
+    public ItemInteractionResult interact(Level level, Player player, InteractionHand hand, ItemStack stack) {
+        if (foam && (stack.isEmpty() || stack.is(Items.BOWL))) {
+            if (!level.isClientSide()) {
+                skim(level);
+            }
+            return ItemInteractionResult.sidedSuccess(level.isClientSide());
         }
 
-        boolean[] ingredientUsed = new boolean[INGREDIENTS_END + 1];
+        ItemStack result = inventory.get(RESULT_SLOT);
+        if (!result.isEmpty()) {
+            if (!resultContainer.isEmpty() && ItemStack.isSameItem(stack, resultContainer)) {
+                if (!level.isClientSide()) {
+                    stack.consume(1, player);
+                    give(player, result.split(1));
+                    afterTake(level);
+                }
+                return ItemInteractionResult.sidedSuccess(level.isClientSide());
+            }
+            if (resultContainer.isEmpty() && stack.isEmpty() && !player.isShiftKeyDown()) {
+                if (!level.isClientSide()) {
+                    give(player, result.copy());
+                    result.setCount(0);
+                    afterTake(level);
+                }
+                return ItemInteractionResult.sidedSuccess(level.isClientSide());
+            }
+        }
 
-        for (Ingredient ingredient : recipe.getIngredients()) {
-            for (int slotIndex = INGREDIENTS_START; slotIndex <= INGREDIENTS_END; slotIndex++) {
-                if (!ingredientUsed[slotIndex] && ingredient.test(getItem(slotIndex))) {
-                    ingredientUsed[slotIndex] = true;
-
-                    ItemStack stackInSlot = getItem(slotIndex);
-                    ItemStack remainderStack = getRemainderItem(stackInSlot);
-
-                    stackInSlot.shrink(1);
-
-                    if (!remainderStack.isEmpty()) {
-                        handleRemainder(remainderStack, slotIndex);
-                    } else if (stackInSlot.isEmpty()) {
-                        setItem(slotIndex, ItemStack.EMPTY);
+        if (stack.isEmpty() && player.isShiftKeyDown()) {
+            for (int i = INGREDIENT_SLOTS - 1; i >= 0; i--) {
+                if (!inventory.get(i).isEmpty()) {
+                    if (!level.isClientSide()) {
+                        give(player, inventory.get(i).copy());
+                        inventory.set(i, ItemStack.EMPTY);
+                        level.playSound(null, worldPosition, SoundEvents.ITEM_PICKUP, SoundSource.BLOCKS, 0.4F, 1.0F);
+                        changed();
                     }
+                    return ItemInteractionResult.sidedSuccess(level.isClientSide());
+                }
+            }
+            return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+        }
 
-                    break;
+        if (stack.isEmpty()) {
+            return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+        }
+
+        Optional<Map.Entry<ResourceLocation, CookingLiquid.Fill>> fill = CookingLiquids.findFill(stack);
+        if (fill.isPresent()) {
+            ResourceLocation id = fill.get().getKey();
+            CookingLiquid.Fill entry = fill.get().getValue();
+            if ((liquid == null || liquid.equals(id)) && liquidAmount + entry.amount() <= CookingLiquids.CAPACITY) {
+                if (!level.isClientSide()) {
+                    CookingLiquid definition = CookingLiquids.get(id);
+                    liquid = id;
+                    liquidAmount += entry.amount();
+                    if (definition != null) {
+                        liquidColor = definition.color();
+                        liquidBiomeTint = definition.biomeTint();
+                        liquidTexture = definition.texture();
+                    }
+                    ItemStack remainder = entry.remainderStack();
+                    stack.consume(1, player);
+                    if (!remainder.isEmpty()) {
+                        give(player, remainder);
+                    }
+                    level.playSound(null, worldPosition, entry.amount() >= CookingLiquids.CAPACITY ? SoundEvents.BUCKET_EMPTY : SoundEvents.BOTTLE_EMPTY, SoundSource.BLOCKS, 0.8F, 1.0F);
+                    changed();
+                }
+                return ItemInteractionResult.sidedSuccess(level.isClientSide());
+            }
+        }
+
+        if (isIngredient(level, stack)) {
+            int amount = player.isShiftKeyDown() ? stack.getCount() : 1;
+            int inserted = insert(stack, amount);
+            if (inserted > 0) {
+                if (!level.isClientSide()) {
+                    ItemStack added = stack.copyWithCount(1);
+                    if (!player.getAbilities().instabuild) {
+                        stack.shrink(inserted);
+                    }
+                    level.playSound(null, worldPosition, liquid != null ? SoundEvents.GENERIC_SPLASH : SoundEvents.ITEM_PICKUP, SoundSource.BLOCKS, 0.4F, 1.3F + level.random.nextFloat() * 0.2F);
+                    if (level instanceof ServerLevel serverLevel && liquid != null) {
+                        serverLevel.sendParticles(ParticleTypes.SPLASH, worldPosition.getX() + 0.5, worldPosition.getY() + surfaceY(), worldPosition.getZ() + 0.5, 6, 0.1, 0.02, 0.1, 0.05);
+                    }
+                    changed();
+                }
+                return ItemInteractionResult.sidedSuccess(level.isClientSide());
+            }
+        }
+        return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+    }
+
+    private void skim(Level level) {
+        foam = false;
+        cookProgress = Math.min(cookTotal - 1, cookProgress + Math.round(cookTotal * PlatformHelper.getCookingPotSkimBonus()));
+        foamTimer = nextFoam(level);
+        lastSkim = level.getGameTime();
+        level.playSound(null, worldPosition, SoundEvents.BUCKET_FILL, SoundSource.BLOCKS, 0.5F, 1.4F);
+        if (level instanceof ServerLevel serverLevel) {
+            serverLevel.sendParticles(ParticleTypes.SPLASH, worldPosition.getX() + 0.5, worldPosition.getY() + surfaceY(), worldPosition.getZ() + 0.5, 8, 0.12, 0.02, 0.12, 0.05);
+        }
+        sync();
+    }
+
+    private void afterTake(Level level) {
+        if (inventory.get(RESULT_SLOT).isEmpty()) {
+            inventory.set(RESULT_SLOT, ItemStack.EMPTY);
+            resultContainer = ItemStack.EMPTY;
+        }
+        level.playSound(null, worldPosition, SoundEvents.ITEM_PICKUP, SoundSource.BLOCKS, 0.5F, 1.0F);
+        recipeDirty = true;
+        sync();
+    }
+
+    private int insert(ItemStack stack, int amount) {
+        for (int i = 0; i < INGREDIENT_SLOTS; i++) {
+            ItemStack slot = inventory.get(i);
+            if (!slot.isEmpty() && ItemStack.isSameItemSameComponents(slot, stack)) {
+                int moved = Math.min(amount, MAX_STACK - slot.getCount());
+                if (moved > 0) {
+                    slot.grow(moved);
+                    return moved;
+                }
+                return 0;
+            }
+        }
+        for (int i = 0; i < INGREDIENT_SLOTS; i++) {
+            if (inventory.get(i).isEmpty()) {
+                int moved = Math.min(amount, MAX_STACK);
+                inventory.set(i, stack.copyWithCount(moved));
+                return moved;
+            }
+        }
+        return 0;
+    }
+
+    private void drainLiquid(int amount) {
+        liquidAmount = Math.max(0, liquidAmount - amount);
+        if (liquidAmount == 0) {
+            liquid = null;
+        }
+    }
+
+    private void give(Player player, ItemStack stack) {
+        if (!player.getInventory().add(stack)) {
+            player.drop(stack, false);
+        }
+    }
+
+    private void popOut(Level level, ItemStack stack) {
+        ItemEntity entity = new ItemEntity(level, worldPosition.getX() + 0.5, worldPosition.getY() + 0.8, worldPosition.getZ() + 0.5, stack);
+        entity.setDeltaMovement(level.random.nextGaussian() * 0.05, 0.25, level.random.nextGaussian() * 0.05);
+        level.addFreshEntity(entity);
+    }
+
+    public static boolean isIngredient(Level level, ItemStack stack) {
+        for (RecipeHolder<CookingCauldronRecipe> holder : level.getRecipeManager().getAllRecipesFor(RecipeRegistry.COOKING.get())) {
+            for (Ingredient ingredient : holder.value().getIngredients()) {
+                if (ingredient.test(stack)) {
+                    return true;
                 }
             }
         }
-
-        consumeFluid(recipe.getFluidAmount());
-        setChanged();
-    }
-
-    private void handleRemainder(ItemStack remainderStack, int originalSlot) {
-        if (remainderStack.isEmpty()) {
-            return;
-        }
-
-        if (tryPlaceRemainderIntoSlot(remainderStack, originalSlot)) {
-            return;
-        }
-
-        for (int slotIndex = INGREDIENTS_START; slotIndex <= INGREDIENTS_END; slotIndex++) {
-            if (slotIndex == originalSlot) {
-                continue;
-            }
-            if (getItem(slotIndex).isEmpty()) {
-                setItem(slotIndex, remainderStack.copy());
-                return;
-            }
-        }
-
-        if (originalSlot != FLUID_INPUT_SLOT && getItem(FLUID_INPUT_SLOT).isEmpty()) {
-            setItem(FLUID_INPUT_SLOT, remainderStack.copy());
-            return;
-        }
-
-        dropItemIntoWorld(remainderStack, worldPosition);
-    }
-
-    private boolean tryPlaceRemainderIntoSlot(ItemStack remainderStack, int targetSlot) {
-        if (targetSlot == OUTPUT_SLOT) {
-            return false;
-        }
-
-        ItemStack targetStack = getItem(targetSlot);
-
-        if (targetStack.isEmpty()) {
-            setItem(targetSlot, remainderStack.copy());
-            return true;
-        }
-
-        if (ItemStack.isSameItem(targetStack, remainderStack) && targetStack.getCount() < targetStack.getMaxStackSize()) {
-            int space = targetStack.getMaxStackSize() - targetStack.getCount();
-            int toMove = Math.min(space, remainderStack.getCount());
-            targetStack.grow(toMove);
-            return toMove == remainderStack.getCount();
-        }
-
         return false;
     }
 
-    private ItemStack getRemainderItem(ItemStack stack) {
-        if (stack.getItem().hasCraftingRemainingItem()) {
-            return new ItemStack(Objects.requireNonNull(stack.getItem().getCraftingRemainingItem()));
+    @Nullable
+    private CookingCauldronRecipe findRecipe(Level level) {
+        CookingCauldronRecipe best = null;
+        for (RecipeHolder<CookingCauldronRecipe> holder : level.getRecipeManager().getAllRecipesFor(RecipeRegistry.COOKING.get())) {
+            CookingCauldronRecipe candidate = holder.value();
+            if (candidate.matches(inventory.subList(0, INGREDIENT_SLOTS)) && (best == null || candidate.getIngredients().size() > best.getIngredients().size())) {
+                best = candidate;
+            }
         }
-        return ItemStack.EMPTY;
+        return best;
     }
 
-    private void dropItemIntoWorld(ItemStack itemStack, BlockPos pos) {
-        if (level == null || level.isClientSide()) return;
-
-        double offsetX = level.random.nextDouble() * 0.7 + 0.15;
-        double offsetY = level.random.nextDouble() * 0.5 + 0.1;
-        double offsetZ = level.random.nextDouble() * 0.7 + 0.15;
-
-        ItemEntity itemEntity = new ItemEntity(level, pos.getX() + offsetX, pos.getY() + offsetY, pos.getZ() + offsetZ, itemStack);
-        level.addFreshEntity(itemEntity);
+    public boolean hasLiquidFor(CookingCauldronRecipe recipe) {
+        return recipe.getLiquid().map(requirement -> requirement.id().equals(liquid) && liquidAmount >= requirement.amount()).orElse(true);
     }
 
-    public void dropContents() {
-        if (level == null || level.isClientSide()) return;
+    private boolean resultFits(CookingCauldronRecipe recipe) {
+        ItemStack current = inventory.get(RESULT_SLOT);
+        if (current.isEmpty()) {
+            return true;
+        }
+        ItemStack result = recipe.getResultItem();
+        return ItemStack.isSameItemSameComponents(current, result)
+                && ItemStack.isSameItem(resultContainer, recipe.getContainer())
+                && current.getCount() + result.getCount() <= current.getMaxStackSize();
+    }
 
-        for (int slotIndex = 0; slotIndex < inventory.size(); slotIndex++) {
-            ItemStack stack = inventory.get(slotIndex);
+    public boolean isHeated() {
+        if (level == null) {
+            return false;
+        }
+        if (getBlockState().is(ObjectRegistry.COOKING_FRAME.get())) {
+            return true;
+        }
+        return level.getBlockState(worldPosition.below()).is(TagRegistry.ALLOWS_COOKING);
+    }
+
+    public boolean isCooking() {
+        return cookTotal > 0;
+    }
+
+    public boolean isPotEmpty() {
+        return liquid == null && inventory.stream().allMatch(ItemStack::isEmpty);
+    }
+
+    public float cookProgress() {
+        return cookTotal <= 0 ? 0.0F : Math.min(1.0F, cookProgress / (float) cookTotal);
+    }
+
+    public boolean hasFoam() {
+        return foam;
+    }
+
+    public long getFoamSince() {
+        return foamSince;
+    }
+
+    public long getLastSkim() {
+        return lastSkim;
+    }
+
+    public NonNullList<ItemStack> getIngredients() {
+        NonNullList<ItemStack> list = NonNullList.create();
+        for (int i = 0; i < INGREDIENT_SLOTS; i++) {
+            if (!inventory.get(i).isEmpty()) {
+                list.add(inventory.get(i));
+            }
+        }
+        return list;
+    }
+
+    public ItemStack getResult() {
+        return inventory.get(RESULT_SLOT);
+    }
+
+    public ItemStack getResultContainer() {
+        return resultContainer;
+    }
+
+    @Nullable
+    public ResourceLocation getLiquid() {
+        return liquid;
+    }
+
+    public int getLiquidAmount() {
+        return liquidAmount;
+    }
+
+    public int getLiquidColor() {
+        return liquidColor;
+    }
+
+    public boolean isLiquidBiomeTint() {
+        return liquidBiomeTint;
+    }
+
+    public ResourceLocation getLiquidTexture() {
+        return liquidTexture;
+    }
+
+    @Nullable
+    public CookingCauldronRecipe getRecipe() {
+        if (recipeDirty && level != null && level.isClientSide()) {
+            recipe = findRecipe(level);
+            recipeDirty = false;
+        }
+        return recipe;
+    }
+
+    public double surfaceY() {
+        return getBlockState().is(ObjectRegistry.COOKING_FRAME.get())
+                ? (11.05 + 6.5 * liquidAmount / CookingLiquids.CAPACITY) / 16.0
+                : (1.0 + 7.0 * liquidAmount / CookingLiquids.CAPACITY) / 16.0;
+    }
+
+    public NonNullList<ItemStack> drops() {
+        NonNullList<ItemStack> drops = NonNullList.create();
+        for (ItemStack stack : inventory) {
             if (!stack.isEmpty()) {
-                dropItemIntoWorld(stack.copy(), worldPosition);
-                inventory.set(slotIndex, ItemStack.EMPTY);
+                drops.add(stack.copy());
             }
         }
+        return drops;
+    }
 
+    private void changed() {
+        recipeDirty = true;
+        sync();
+    }
+
+    private void sync() {
         setChanged();
-    }
-
-    private void processFluidInput() {
-        ItemStack fluidItem = getItem(FLUID_INPUT_SLOT);
-        if (fluidItem.isEmpty()) return;
-
-        int fluidAmount;
-        if (fluidItem.is(TagRegistry.SMALL_WATER_FILL)) {
-            fluidAmount = 25;
-        } else if (fluidItem.is(TagRegistry.LARGE_WATER_FILL)) {
-            fluidAmount = 50;
-        } else {
-            return;
-        }
-
-        ItemStack consumedItem = fluidItem.split(1);
-        setItem(FLUID_INPUT_SLOT, fluidItem);
-
-        ItemStack remainder = getRemainderItem(consumedItem);
-        if (!remainder.isEmpty()) {
-            handleRemainder(remainder, FLUID_INPUT_SLOT);
-        }
-
-        addFluid(fluidAmount);
-        setChanged();
-    }
-
-    private CookingCauldronRecipe findMostSpecificRecipe(Level world) {
-        var allRecipes = world.getRecipeManager().getAllRecipesFor(RecipeRegistry.COOKING.get());
-        CookingCauldronRecipe bestRecipe = null;
-        int maxIngredients = 0;
-
-        for (RecipeHolder<CookingCauldronRecipe> recipeHolder : allRecipes) {
-            CookingCauldronRecipe recipe = recipeHolder.value();
-            if (matchesRecipe(recipe)) {
-                int ingredientCount = recipe.getIngredients().size();
-                if (ingredientCount > maxIngredients) {
-                    maxIngredients = ingredientCount;
-                    bestRecipe = recipe;
-                }
+        if (level instanceof ServerLevel serverLevel) {
+            Packet<ClientGamePacketListener> packet = getUpdatePacket();
+            for (ServerPlayer player : LibUtil.tracking(serverLevel, worldPosition)) {
+                player.connection.send(packet);
             }
-        }
-
-        return bestRecipe;
-    }
-
-    private boolean matchesRecipe(CookingCauldronRecipe recipe) {
-        boolean[] ingredientUsed = new boolean[INGREDIENTS_END + 1];
-
-        for (Ingredient ingredient : recipe.getIngredients()) {
-            boolean found = false;
-            for (int slotIndex = INGREDIENTS_START; slotIndex <= INGREDIENTS_END; slotIndex++) {
-                if (!ingredientUsed[slotIndex] && ingredient.test(getItem(slotIndex))) {
-                    ingredientUsed[slotIndex] = true;
-                    found = true;
-                    break;
-                }
-            }
-            if (!found) return false;
-        }
-
-        for (int slotIndex = INGREDIENTS_START; slotIndex <= INGREDIENTS_END; slotIndex++) {
-            if (!ingredientUsed[slotIndex] && !getItem(slotIndex).isEmpty()) {
-                return false;
-            }
-        }
-
-        return true;
-    }
-
-    public void tick(Level world) {
-        if (world.isClientSide()) return;
-
-        if (!fluidInputProcessed) {
-            processFluidInput();
-            fluidInputProcessed = true;
-        }
-
-        ItemStack fluidItem = getItem(FLUID_INPUT_SLOT);
-        if (fluidItem.isEmpty() || (!fluidItem.is(TagRegistry.SMALL_WATER_FILL) && !fluidItem.is(TagRegistry.LARGE_WATER_FILL))) {
-            fluidInputProcessed = false;
-        }
-
-        isBeingBurned = isBeingBurned();
-
-        CookingCauldronRecipe recipe = findMostSpecificRecipe(world);
-
-        if (isBeingBurned && canCraft(recipe) && fluidLevel >= recipe.getFluidAmount()) {
-            if (currentCraftingDuration == 0 && cookingTime == 0) {
-                currentCraftingDuration = recipe.getCraftingDuration() * 20;
-                delegate.set(3, currentCraftingDuration);
-            }
-
-            cookingTime++;
-            delegate.set(0, cookingTime);
-
-            if (cookingTime >= currentCraftingDuration) {
-                cookingTime = 0;
-                currentCraftingDuration = 0;
-                delegate.set(0, cookingTime);
-                delegate.set(3, currentCraftingDuration);
-                craft(recipe);
-            }
-
-            setChanged();
-            return;
-        }
-
-        if (cookingTime != 0 || currentCraftingDuration != 0) {
-            cookingTime = 0;
-            currentCraftingDuration = 0;
-            delegate.set(0, cookingTime);
-            delegate.set(3, currentCraftingDuration);
-            setChanged();
         }
     }
 
@@ -377,27 +477,119 @@ public class CookingCauldronBlockEntity extends BlockEntity implements Implement
     }
 
     @Override
-    public boolean stillValid(Player player) {
-        return player.distanceToSqr(worldPosition.getX() + 0.5, worldPosition.getY() + 0.5, worldPosition.getZ() + 0.5) <= 64.0;
+    public void setItem(int slot, ItemStack stack) {
+        inventory.set(slot, stack);
+        if (slot == RESULT_SLOT && stack.isEmpty()) {
+            resultContainer = ItemStack.EMPTY;
+        }
+        changed();
     }
 
     @Override
-    public @NotNull Component getDisplayName() {
-        return ObjectRegistry.COOKING_CAULDRON.get().getName();
+    public @NotNull ItemStack removeItem(int slot, int count) {
+        ItemStack removed = ContainerHelper.removeItem(inventory, slot, count);
+        if (!removed.isEmpty()) {
+            if (slot == RESULT_SLOT && inventory.get(RESULT_SLOT).isEmpty()) {
+                resultContainer = ItemStack.EMPTY;
+            }
+            changed();
+        }
+        return removed;
     }
 
     @Override
-    public @Nullable AbstractContainerMenu createMenu(int syncId, @NotNull Inventory inv, @NotNull Player player) {
-        return new CookingCauldronGuiHandler(syncId, inv, this, delegate);
+    public int getMaxStackSize() {
+        return MAX_STACK;
     }
 
-    private void addFluid(int amount) {
-        fluidLevel = Math.min(fluidLevel + amount, 100);
-        delegate.set(2, fluidLevel);
+    @Override
+    public int @NotNull [] getSlotsForFace(Direction side) {
+        return side == Direction.DOWN ? SLOTS_FOR_DOWN : SLOTS_FOR_REST;
     }
 
-    private void consumeFluid(int amount) {
-        fluidLevel = Math.max(fluidLevel - amount, 0);
-        delegate.set(2, fluidLevel);
+    @Override
+    public boolean canPlaceItemThroughFace(int slot, ItemStack stack, @Nullable Direction side) {
+        if (slot >= INGREDIENT_SLOTS || level == null || !isIngredient(level, stack)) {
+            return false;
+        }
+        ItemStack current = inventory.get(slot);
+        if (current.isEmpty()) {
+            for (int i = 0; i < INGREDIENT_SLOTS; i++) {
+                if (i != slot && ItemStack.isSameItemSameComponents(inventory.get(i), stack)) {
+                    return false;
+                }
+            }
+            return true;
+        }
+        return ItemStack.isSameItemSameComponents(current, stack);
+    }
+
+    @Override
+    public boolean canTakeItemThroughFace(int slot, ItemStack stack, Direction side) {
+        return slot == RESULT_SLOT && resultContainer.isEmpty();
+    }
+
+    @Override
+    public boolean canPlaceItem(int slot, ItemStack stack) {
+        return slot < INGREDIENT_SLOTS;
+    }
+
+    @Override
+    protected void loadAdditional(CompoundTag tag, HolderLookup.Provider provider) {
+        super.loadAdditional(tag, provider);
+        for (int i = 0; i < inventory.size(); i++) {
+            inventory.set(i, ItemStack.EMPTY);
+        }
+        ContainerHelper.loadAllItems(tag, inventory, provider);
+        liquid = tag.contains("Liquid") ? ResourceLocation.tryParse(tag.getString("Liquid")) : null;
+        liquidAmount = tag.getInt("LiquidAmount");
+        liquidColor = tag.contains("LiquidColor") ? tag.getInt("LiquidColor") : 0xFF3F76E4;
+        liquidBiomeTint = tag.getBoolean("LiquidBiomeTint");
+        ResourceLocation texture = tag.contains("LiquidTexture") ? ResourceLocation.tryParse(tag.getString("LiquidTexture")) : null;
+        liquidTexture = texture != null ? texture : CookingLiquid.DEFAULT_TEXTURE;
+        resultContainer = tag.contains("ResultContainer") ? ItemStack.parseOptional(provider, tag.getCompound("ResultContainer")) : ItemStack.EMPTY;
+        cookProgress = tag.getInt("CookProgress");
+        cookTotal = tag.getInt("CookTotal");
+        foam = tag.getBoolean("Foam");
+        foamTimer = tag.getInt("FoamTimer");
+        foamSince = tag.getLong("FoamSince");
+        lastSkim = tag.contains("LastSkim") ? tag.getLong("LastSkim") : Long.MIN_VALUE / 2;
+        recipeDirty = true;
+    }
+
+    @Override
+    protected void saveAdditional(CompoundTag tag, HolderLookup.Provider provider) {
+        super.saveAdditional(tag, provider);
+        ContainerHelper.saveAllItems(tag, inventory, provider);
+        if (liquid != null) {
+            tag.putString("Liquid", liquid.toString());
+        }
+        tag.putInt("LiquidAmount", liquidAmount);
+        tag.putInt("LiquidColor", liquidColor);
+        tag.putBoolean("LiquidBiomeTint", liquidBiomeTint);
+        tag.putString("LiquidTexture", liquidTexture.toString());
+        if (!resultContainer.isEmpty()) {
+            tag.put("ResultContainer", resultContainer.save(provider));
+        }
+        tag.putInt("CookProgress", cookProgress);
+        tag.putInt("CookTotal", cookTotal);
+        tag.putBoolean("Foam", foam);
+        tag.putInt("FoamTimer", foamTimer);
+        tag.putLong("FoamSince", foamSince);
+        tag.putLong("LastSkim", lastSkim);
+    }
+
+    public AABB getRenderBoundingBox() {
+        return new AABB(worldPosition).expandTowards(0, 1, 0);
+    }
+
+    @Override
+    public ClientboundBlockEntityDataPacket getUpdatePacket() {
+        return ClientboundBlockEntityDataPacket.create(this);
+    }
+
+    @Override
+    public @NotNull CompoundTag getUpdateTag(HolderLookup.Provider provider) {
+        return saveWithoutMetadata(provider);
     }
 }

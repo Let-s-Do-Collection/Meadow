@@ -9,17 +9,16 @@
     },
     {
       "tag": "c:wheat"
-    },
-    {
-      "item": "meadow:wooden_bucket"
     }
   ],
-  "fluid_amount": 20,
+  "liquid": {
+    "id": "meadow:water",
+    "amount": 1
+  },
+  "container": "meadow:wooden_bucket",
   "crafting_duration": 100,
   "result": {
     "id": "meadow:wooden_grain_milk_bucket",
     "count": 1
   }
 }
-
-

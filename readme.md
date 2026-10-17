@@ -34,11 +34,11 @@ Meadow is one of the oldest mods of the Let's Do collection and serves to give p
 
 <br>
 
-- Variety of new animals including variants of cows  
-- More milk for all of your cheesy desires  
-- A felting needle to felt wool into beautiful *new* wool  
-- A Watering Can to speed up crop growth  
-- A Woodcutter that works similarly to Vanilla's Stonecutter  
+- Variety of new animals including variants of cows
+- More milk for all of your cheesy desires
+- A felting needle to felt wool into beautiful *new* wool
+- A Watering Can to speed up crop growth
+- A Woodcutter that works similarly to Vanilla's Stonecutter
 
 <br>
 
@@ -50,10 +50,10 @@ Grab your bucket, get to milking.
 
 <br>
 
-- A variety of cheeses to savor all your cheese needs  
-- A Fondue to dip your bread in  
-- A Cheesepress to press your milk into cheese  
-- A Cooking Cauldron to cook some delicious meals  
+- A variety of cheeses to savor all your cheese needs
+- A Fondue to dip your bread in
+- A Cheesepress to press your milk into cheese
+- A Cooking Cauldron to cook some delicious meals
 
 <br>
 
@@ -65,11 +65,11 @@ The only acceptable reinvention of the wheel is a wheel of cheese.
 
 <br>
 
-- A set of Pine Wood including various furniture elements  
-- Some leaded glass with fancy patterns  
-- A wheel barrow, milk cans, fire logs, and many more thematical decorations  
-- A variety of new bed types made from the new felted wool  
-- A handful of flora to brighten up your world  
+- A set of Pine Wood including various furniture elements
+- Some leaded glass with fancy patterns
+- A wheel barrow, milk cans, fire logs, and many more thematical decorations
+- A variety of new bed types made from the new felted wool
+- A handful of flora to brighten up your world
 
 <br>
 
@@ -119,6 +119,6 @@ The only acceptable reinvention of the wheel is a wheel of cheese.
 
 <p align="center">
   <a href="https://github.com/Let-s-Do-Collection/Let-s-Do-Collection">GitHub</a> •
-  <a href="https://discord.gg/Jb2bgpYr">Discord</a> •
+  <a href="https://discord.gg/ffwfbjhBHr">Discord</a> •
   <a href="https://www.patreon.com/c/u78595058">Patreon</a>
 </p>

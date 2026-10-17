@@ -9,15 +9,12 @@ import net.minecraft.world.entity.MobCategory;
 import net.satisfy.meadow.core.registry.EntityTypeRegistry;
 import net.satisfy.meadow.core.registry.TagRegistry;
 import net.satisfy.meadow.core.world.CommonSpawnUtil;
+import net.satisfy.meadow.platform.PlatformHelper;
 
 import java.util.function.Predicate;
 
 public class FeatureModification {
     public static void init() {
-        int meadowSpawnWeight = 3;
-        int meadowPackSizeMin = 2;
-        int meadowPackSizeMax = 3;
-
         Predicate<BiomeSelectionContext> buffalo = (ctx -> ctx.hasTag(BiomeTags.IS_RIVER) || ctx.hasTag(BiomeTags.IS_SAVANNA));
 
 
@@ -29,10 +26,20 @@ public class FeatureModification {
                 CommonSpawnUtil.cowSpawnWeight, CommonSpawnUtil.cowPackSizeMin, CommonSpawnUtil.cowPackSizeMax);
 
         Predicate<BiomeSelectionContext> shearableVarCows = (ctx -> ctx.hasTag(TagRegistry.IS_MEADOW) || ctx.hasTag(TagRegistry.SPAWNS_UMBRA_COW));
-        BiomeModifications.addSpawn(shearableVarCows, MobCategory.CREATURE, EntityTypeRegistry.WOOLY_COW.get(),
-                10, meadowPackSizeMin, meadowPackSizeMax);
+        addSpawn(shearableVarCows, EntityTypeRegistry.WOOLY_COW.get(),
+                PlatformHelper.getWoolyCowSpawnWeight(), PlatformHelper.getWoolyCowMinGroupSize(), PlatformHelper.getWoolyCowMaxGroupSize());
 
-        BiomeModifications.addSpawn(buffalo, MobCategory.CREATURE, EntityTypeRegistry.WATER_BUFFALO.get(),
-                meadowSpawnWeight, meadowPackSizeMin, meadowPackSizeMax);
+        addSpawn(ctx -> ctx.hasTag(TagRegistry.SPAWNS_WARPED_COW), EntityTypeRegistry.WOOLY_COW.get(),
+                PlatformHelper.getWarpedCowSpawnWeight(), PlatformHelper.getWarpedCowMinGroupSize(), PlatformHelper.getWarpedCowMaxGroupSize());
+
+        addSpawn(buffalo, EntityTypeRegistry.WATER_BUFFALO.get(),
+                PlatformHelper.getWaterBuffaloSpawnWeight(), PlatformHelper.getWaterBuffaloMinGroupSize(), PlatformHelper.getWaterBuffaloMaxGroupSize());
+    }
+
+    private static void addSpawn(Predicate<BiomeSelectionContext> biomes, EntityType<?> entityType, int weight, int minGroupSize, int maxGroupSize) {
+        if (weight <= 0) {
+            return;
+        }
+        BiomeModifications.addSpawn(biomes, MobCategory.CREATURE, entityType, weight, minGroupSize, Math.max(minGroupSize, maxGroupSize));
     }
 }

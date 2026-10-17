@@ -36,6 +36,7 @@ import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.satisfy.meadow.core.registry.ObjectRegistry;
 import org.jetbrains.annotations.NotNull;
+import net.satisfy.meadow.platform.PlatformHelper;
 
 public class MilkCanBlock extends FacingBlock {
     public static final IntegerProperty FILL_LEVEL = IntegerProperty.create("fill_level", 0, 3);
@@ -130,12 +131,12 @@ public class MilkCanBlock extends FacingBlock {
             return;
         }
 
-        AABB searchBox = new AABB(blockPos).inflate(3.0);
+        AABB searchBox = new AABB(blockPos).inflate(PlatformHelper.getMilkCanCowRange());
         if (level.getEntities(EntityType.COW, searchBox, cow -> true).isEmpty()) {
             return;
         }
 
-        if (random.nextFloat() < 0.02f) {
+        if (random.nextFloat() < PlatformHelper.getMilkCanFillChance()) {
             level.setBlockAndUpdate(blockPos, state.setValue(FILL_LEVEL, fillLevel + 1));
             level.gameEvent(null, GameEvent.FLUID_PLACE, blockPos);
         }

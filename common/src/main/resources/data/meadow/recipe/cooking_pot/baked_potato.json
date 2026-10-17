@@ -8,7 +8,10 @@
       "tag": "c:salts"
     }
   ],
-  "fluid_amount": 10,
+  "liquid": {
+    "id": "meadow:water",
+    "amount": 1
+  },
   "crafting_duration": 30,
   "result": {
     "id": "minecraft:baked_potato",

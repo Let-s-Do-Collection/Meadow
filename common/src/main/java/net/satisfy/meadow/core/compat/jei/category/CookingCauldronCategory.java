@@ -15,7 +15,9 @@ import net.minecraft.core.NonNullList;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.client.Minecraft;
 import net.satisfy.meadow.Meadow;
+import net.satisfy.meadow.core.cooking.CookingLiquids;
 import net.satisfy.meadow.core.recipes.CookingCauldronRecipe;
 import net.satisfy.meadow.core.registry.ObjectRegistry;
 import org.jetbrains.annotations.NotNull;
@@ -40,10 +42,6 @@ public class CookingCauldronCategory implements IRecipeCategory<CookingCauldronR
     private final IDrawableAnimated arrow;
     private final Component localizedName;
 
-    private static final int FLUID_X = 173;
-    private static final int FLUID_Y = 23;
-    private static final int FLUID_WIDTH = 8;
-    private static final int FLUID_HEIGHT = 43;
 
     private final ResourceLocation texture = Meadow.identifier("textures/gui/cooking_cauldron_gui.png");
 
@@ -65,23 +63,17 @@ public class CookingCauldronCategory implements IRecipeCategory<CookingCauldronR
         }
         builder.addSlot(RecipeIngredientRole.OUTPUT, 123 - WIDTH_OF, 27 - HEIGHT_OF)
                 .addItemStack(recipe.getResultItem());
+        if (!recipe.getContainer().isEmpty()) {
+            builder.addSlot(RecipeIngredientRole.CATALYST, 123 - WIDTH_OF, 7 - HEIGHT_OF + 52)
+                    .addItemStack(recipe.getContainer());
+        }
     }
 
     @Override
     public void draw(CookingCauldronRecipe recipe, IRecipeSlotsView recipeSlotsView, GuiGraphics guiGraphics, double mouseX, double mouseY) {
         arrow.draw(guiGraphics, 86 - WIDTH_OF, 27 - HEIGHT_OF);
-        burnIcon.draw(guiGraphics, 124 - WIDTH_OF, 52 - HEIGHT_OF);
-
-        drawFluid(guiGraphics, recipe.getFluidAmount());
-    }
-
-    private void drawFluid(GuiGraphics guiGraphics, int fluidAmount) {
-        int filledHeight = Math.min(fluidAmount, 100) * FLUID_HEIGHT / 100;
-
-        int x = FLUID_X - WIDTH_OF;
-        int y = FLUID_Y - HEIGHT_OF + (FLUID_HEIGHT - filledHeight);
-
-        guiGraphics.blit(texture, x, y, 176, 31 + (FLUID_HEIGHT - filledHeight), FLUID_WIDTH, filledHeight);
+        burnIcon.draw(guiGraphics, 60, 52 - HEIGHT_OF);
+        recipe.getLiquid().ifPresent(liquid -> guiGraphics.drawString(Minecraft.getInstance().font, CookingLiquids.describe(liquid.id(), liquid.amount()), 1, 52, 0xFF404040, false));
     }
 
     @Override

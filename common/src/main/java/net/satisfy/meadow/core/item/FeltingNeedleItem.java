@@ -24,9 +24,9 @@ import net.satisfy.meadow.core.registry.RecipeRegistry;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Optional;
+import net.satisfy.meadow.platform.PlatformHelper;
 
 public class FeltingNeedleItem extends Item {
-    private static final int USE_DURATION = 120;
     private static final String FELTING_KEY = "Felting";
 
     public FeltingNeedleItem(Properties properties) {
@@ -40,7 +40,7 @@ public class FeltingNeedleItem extends Item {
 
     @Override
     public int getUseDuration(ItemStack stack, LivingEntity entity) {
-        return USE_DURATION;
+        return PlatformHelper.getFeltingNeedleUseDuration();
     }
 
     @Override

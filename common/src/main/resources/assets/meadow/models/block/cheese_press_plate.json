@@ -1,0 +1,21 @@
+{
+	"textures": {
+		"0": "meadow:block/cheese_press_parts",
+		"2": "meadow:block/cheese_press_top",
+		"particle": "meadow:block/cheese_press_parts"
+	},
+	"elements": [
+		{
+			"from": [4, 9, 4],
+			"to": [12, 10, 12],
+			"faces": {
+				"north": {"uv": [10, 13, 2, 12], "texture": "#0"},
+				"east": {"uv": [10, 13, 2, 12], "texture": "#0"},
+				"south": {"uv": [10, 13, 2, 12], "texture": "#0"},
+				"west": {"uv": [10, 13, 2, 12], "texture": "#0"},
+				"up": {"uv": [12, 12, 4, 4], "texture": "#2"},
+				"down": {"uv": [12, 12, 4, 4], "texture": "#2"}
+			}
+		}
+	]
+}

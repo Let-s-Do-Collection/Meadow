@@ -20,13 +20,13 @@
       "item": "minecraft:carrot"
     }
   ],
-  "fluid_amount": 5,
+  "liquid": {
+    "id": "meadow:water",
+    "amount": 1
+  },
   "crafting_duration": 40,
   "result": {
     "id": "meadow:roasted_buffalo_ham",
     "count": 2
   }
 }
-
-
-

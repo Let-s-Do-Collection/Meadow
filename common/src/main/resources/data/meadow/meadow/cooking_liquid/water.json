@@ -1,0 +1,22 @@
+{
+  "color": "#3F76E4",
+  "biome_tint": true,
+  "fill": [
+    {
+      "item": "minecraft:water_bucket",
+      "amount": 4,
+      "remainder": "minecraft:bucket"
+    },
+    {
+      "item": "meadow:wooden_water_bucket",
+      "amount": 4,
+      "remainder": "meadow:wooden_bucket"
+    },
+    {
+      "item": "minecraft:potion",
+      "potion": "minecraft:water",
+      "amount": 1,
+      "remainder": "minecraft:glass_bottle"
+    }
+  ]
+}

@@ -12,6 +12,7 @@ import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.level.levelgen.GenerationStep;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.satisfy.meadow.Meadow;
+import net.satisfy.meadow.core.entity.WoolyCowEntity;
 import net.satisfy.meadow.core.registry.EntityTypeRegistry;
 import net.satisfy.meadow.core.world.MeadowPlacedFeature;
 
@@ -60,7 +61,7 @@ public class MeadowBiomeModification {
     public static class FabricEntitySpawn {
         public static void registerEntitySpawn() {
             SpawnPlacements.register(EntityTypeRegistry.WATER_BUFFALO.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING, Animal::checkAnimalSpawnRules);
-            SpawnPlacements.register(EntityTypeRegistry.WOOLY_COW.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Animal::checkAnimalSpawnRules);
+            SpawnPlacements.register(EntityTypeRegistry.WOOLY_COW.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, WoolyCowEntity::checkWoolyCowSpawnRules);
         }
     }
 }

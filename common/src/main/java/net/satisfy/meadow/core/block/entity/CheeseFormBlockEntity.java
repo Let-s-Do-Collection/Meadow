@@ -1,300 +1,309 @@
 package net.satisfy.meadow.core.block.entity;
 
-import net.satisfy.foundation.util.ImplementedInventory;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;
-import net.minecraft.core.RegistryAccess;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.chat.Component;
-import net.minecraft.world.ContainerHelper;
-import net.minecraft.world.MenuProvider;
-import net.minecraft.world.entity.item.ItemEntity;
-import net.minecraft.world.entity.player.Inventory;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.inventory.AbstractContainerMenu;
-import net.minecraft.world.inventory.ContainerData;
+import net.minecraft.network.protocol.Packet;
+import net.minecraft.network.protocol.game.ClientGamePacketListener;
+import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeHolder;
-import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import net.satisfy.meadow.client.gui.handler.CheeseFormGuiHandler;
-import net.satisfy.meadow.core.block.CheeseFormBlock;
+import net.satisfy.foundation.util.LibUtil;
 import net.satisfy.meadow.core.recipes.CheeseFormRecipe;
 import net.satisfy.meadow.core.registry.EntityTypeRegistry;
-import net.satisfy.meadow.core.registry.ObjectRegistry;
 import net.satisfy.meadow.core.registry.RecipeRegistry;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import net.satisfy.meadow.platform.PlatformHelper;
 
-import java.util.List;
-import java.util.Objects;
+public class CheeseFormBlockEntity extends BlockEntity {
+    public static final int MAX_MILK = 4;
+    public static final int CRANK_TICKS = 40;
+    private static final int CRANK_HOLD_TICKS = 6;
+    private static final int CRANK_SOUND_INTERVAL = 5;
+    private static final int SYNC_INTERVAL = 20;
 
-public class CheeseFormBlockEntity extends BlockEntity implements MenuProvider, ImplementedInventory {
-
-    private NonNullList<ItemStack> inventory;
-    public static final int CAPACITY = 3;
-    public static final int COOKING_TIME_IN_TICKS = 1800;
-    private static final int OUTPUT_SLOT = 0;
-    private static final int FIRST_INPUT_SLOT = 1;
-    private static final int SECOND_INPUT_SLOT = 2;
-    private int fermentationTime = 0;
-    protected float experience;
-
-    private static final int[] SLOTS_FOR_SIDE = new int[]{SECOND_INPUT_SLOT};
-    private static final int[] SLOTS_FOR_UP = new int[]{FIRST_INPUT_SLOT};
-    private static final int[] SLOTS_FOR_DOWN = new int[]{OUTPUT_SLOT};
-
-    private final ContainerData propertyDelegate = new ContainerData() {
-
-        @Override
-        public int get(int index) {
-            if (index == 0) {
-                return fermentationTime;
-            }
-            if (index == 1) {
-                return COOKING_TIME_IN_TICKS;
-            }
-            return 0;
-        }
-
-        @Override
-        public void set(int index, int value) {
-            if (index == 0) {
-                fermentationTime = value;
-            }
-        }
-
-        @Override
-        public int getCount() {
-            return 2;
-        }
-    };
+    private ItemStack milk = ItemStack.EMPTY;
+    private int milkCount;
+    private ItemStack rennet = ItemStack.EMPTY;
+    private ItemStack result = ItemStack.EMPTY;
+    private int resultCount;
+    private int crank;
+    private int crankTicks;
+    private int pressTicks;
 
     public CheeseFormBlockEntity(BlockPos pos, BlockState state) {
         super(EntityTypeRegistry.CHEESE_FORM_BLOCK_ENTITY.get(), pos, state);
-        this.inventory = NonNullList.withSize(CAPACITY, ItemStack.EMPTY);
     }
 
-    public void tick(Level world, BlockPos pos, BlockState state) {
-        if (world.isClientSide()) {
+    public static void tick(Level level, BlockPos pos, BlockState state, CheeseFormBlockEntity press) {
+        if (!level.isClientSide() && press.crank > 0 && press.pressTicks == 0 && (press.milkCount == 0 || press.rennet.isEmpty())) {
+            press.crank = 0;
+            press.crankTicks = 0;
+            press.setChanged();
+        }
+        if (press.crankTicks > 0) {
+            press.crankTicks--;
+            press.turn(level, pos);
+        }
+        if (press.isPressed() && !press.isReady()) {
+            press.pressTicks++;
+            if (!level.isClientSide()) {
+                if (press.isReady()) {
+                    level.playSound(null, pos, SoundEvents.SLIME_SQUISH_SMALL, SoundSource.BLOCKS, 0.6F, 0.8F);
+                    press.setChanged();
+                } else if (press.pressTicks % SYNC_INTERVAL == 0) {
+                    press.setChanged();
+                }
+            }
+        }
+    }
+
+    private void turn(Level level, BlockPos pos) {
+        boolean up = isReady();
+        if (!up && (milkCount == 0 || rennet.isEmpty())) {
+            crankTicks = 0;
             return;
         }
-
-        RecipeManager recipeManager = world.getRecipeManager();
-        List<RecipeHolder<CheeseFormRecipe>> recipes = recipeManager.getAllRecipesFor(RecipeRegistry.CHEESE.get());
-        CheeseFormRecipe matchedRecipe = getRecipe(recipes, inventory);
-
-        RegistryAccess access = world.registryAccess();
-        boolean working = canCraft(matchedRecipe, access);
-
-        if (working) {
-            fermentationTime++;
-
-            if (fermentationTime >= COOKING_TIME_IN_TICKS) {
-                fermentationTime = 0;
-                craft(matchedRecipe, access);
-                setChanged();
-            } else {
-                setChanged();
-            }
-        } else if (fermentationTime != 0) {
-            fermentationTime = 0;
+        int before = crank;
+        crank = Math.max(0, Math.min(CRANK_TICKS, crank + (up ? -1 : 1)));
+        if (crank == before) {
+            crankTicks = 0;
+            return;
+        }
+        if (level.isClientSide()) {
+            return;
+        }
+        if (crank % CRANK_SOUND_INTERVAL == 0) {
+            level.playSound(null, pos, SoundEvents.WOODEN_BUTTON_CLICK_ON, SoundSource.BLOCKS, 0.3F, 0.6F + level.random.nextFloat() * 0.2F);
+        }
+        if (crank == CRANK_TICKS) {
+            level.playSound(null, pos, SoundEvents.WOOD_PLACE, SoundSource.BLOCKS, 0.8F, 0.7F);
+            setChanged();
+        } else if (up && crank == 0) {
+            finish(level);
+        } else if (crank % CRANK_SOUND_INTERVAL == 0) {
             setChanged();
         }
-
-        boolean done = !inventory.getFirst().isEmpty();
-
-        if (state.getValue(CheeseFormBlock.WORKING) != working || state.getValue(CheeseFormBlock.DONE) != done) {
-            world.setBlockAndUpdate(pos, state.setValue(CheeseFormBlock.WORKING, working).setValue(CheeseFormBlock.DONE, done));
-        }
     }
 
-    @Override
-    public int @NotNull [] getSlotsForFace(Direction side) {
-        if (side.equals(Direction.UP)) {
-            return SLOTS_FOR_UP;
-        } else if (side.equals(Direction.DOWN)) {
-            return SLOTS_FOR_DOWN;
-        } else {
-            return SLOTS_FOR_SIDE;
-        }
+    private void finish(Level level) {
+        CheeseFormRecipe recipe = recipeFor(level, milk);
+        result = recipe == null ? ItemStack.EMPTY : recipe.getResultItem(level.registryAccess()).copy();
+        resultCount = result.getCount() * milkCount;
+        result.setCount(1);
+        milk = ItemStack.EMPTY;
+        milkCount = 0;
+        rennet = ItemStack.EMPTY;
+        pressTicks = 0;
+        crank = 0;
+        crankTicks = 0;
+        level.playSound(null, worldPosition, SoundEvents.ITEM_FRAME_REMOVE_ITEM, SoundSource.BLOCKS, 0.8F, 0.8F);
+        setChanged();
     }
 
-    @Override
-    protected void loadAdditional(CompoundTag compoundTag, HolderLookup.Provider provider) {
-        super.loadAdditional(compoundTag, provider);
-        this.inventory = NonNullList.withSize(this.getContainerSize(), ItemStack.EMPTY);
-        ContainerHelper.loadAllItems(compoundTag, this.inventory, provider);
-        this.fermentationTime = compoundTag.getShort("fermentationTime");
-        this.experience = compoundTag.getFloat("experience");
-    }
-
-    @Override
-    protected void saveAdditional(CompoundTag compoundTag, HolderLookup.Provider provider) {
-        super.saveAdditional(compoundTag, provider);
-        ContainerHelper.saveAllItems(compoundTag, this.inventory, provider);
-        compoundTag.putShort("fermentationTime", (short) this.fermentationTime);
-        compoundTag.putFloat("experience", this.experience);
-    }
-
-    private CheeseFormRecipe getRecipe(List<RecipeHolder<CheeseFormRecipe>> recipes, NonNullList<ItemStack> inventory) {
-        recipeLoop:
-        for (RecipeHolder<CheeseFormRecipe> recipeHolder : recipes) {
-            CheeseFormRecipe recipe = recipeHolder.value();
-            for (Ingredient ingredient : recipe.getIngredients()) {
-                boolean ingredientFound = false;
-                for (int slotIndex = FIRST_INPUT_SLOT; slotIndex < inventory.size(); slotIndex++) {
-                    ItemStack slotItem = inventory.get(slotIndex);
-                    if (ingredient.test(slotItem)) {
-                        ingredientFound = true;
-                        break;
-                    }
-                }
-                if (!ingredientFound) {
-                    continue recipeLoop;
-                }
-            }
-            return recipe;
-        }
-        return null;
-    }
-
-    private boolean canCraft(CheeseFormRecipe recipe, RegistryAccess access) {
-        if (recipe == null || recipe.getResultItem(access).isEmpty()) {
+    public boolean crank() {
+        if (!canCrank()) {
             return false;
         }
-        if (areInputsEmpty()) {
+        boolean started = crankTicks <= 0;
+        crankTicks = CRANK_HOLD_TICKS;
+        if (started) {
+            setChanged();
+        }
+        return true;
+    }
+
+    public boolean canCrank() {
+        if (!result.isEmpty()) {
             return false;
         }
-        ItemStack outputStack = this.getItem(OUTPUT_SLOT);
-        return outputStack.isEmpty() || outputStack.is(recipe.getResultItem(access).getItem());
+        if (isReady()) {
+            return crank > 0;
+        }
+        return crank < CRANK_TICKS && milkCount > 0 && !rennet.isEmpty();
     }
 
-    private boolean areInputsEmpty() {
-        return this.getItem(FIRST_INPUT_SLOT).isEmpty() && this.getItem(SECOND_INPUT_SLOT).isEmpty();
-    }
-
-    private void craft(CheeseFormRecipe recipe, RegistryAccess access) {
-        if (!canCraft(recipe, access)) {
-            return;
-        }
-
-        ItemStack recipeOutput = recipe.getResultItem(access);
-        ItemStack outputSlotStack = this.getItem(OUTPUT_SLOT);
-
-        if (outputSlotStack.isEmpty()) {
-            setItem(OUTPUT_SLOT, recipeOutput.copy());
-        } else if (outputSlotStack.is(recipeOutput.getItem())) {
-            outputSlotStack.grow(recipeOutput.getCount());
-        }
-
-        consumeOneAndReturnRemainderIfAny(recipe, FIRST_INPUT_SLOT);
-        consumeOneAndReturnRemainderIfAny(recipe, SECOND_INPUT_SLOT);
-    }
-
-    private void consumeOneAndReturnRemainderIfAny(CheeseFormRecipe recipe, int slotIndex) {
-        ItemStack slotStack = this.getItem(slotIndex);
-        if (slotStack.isEmpty()) {
-            return;
-        }
-
-        boolean matches = recipe.getIngredients().stream().anyMatch(ingredient -> ingredient.test(slotStack));
-        if (!matches) {
-            return;
-        }
-
-        ItemStack remainderStack = ItemStack.EMPTY;
-        if (slotStack.getItem().hasCraftingRemainingItem()) {
-            remainderStack = new ItemStack(Objects.requireNonNull(slotStack.getItem().getCraftingRemainingItem()));
-        }
-
-        slotStack.shrink(1);
-
-        if (!remainderStack.isEmpty()) {
-            if (slotStack.isEmpty()) {
-                this.setItem(slotIndex, remainderStack);
-            } else {
-                tryInsertRemainder(remainderStack);
-            }
-        } else {
-            if (slotStack.isEmpty()) {
-                this.setItem(slotIndex, ItemStack.EMPTY);
-            }
-        }
-    }
-
-    private void tryInsertRemainder(ItemStack remainderStack) {
-        if (remainderStack.isEmpty()) {
-            return;
-        }
-
-        if (this.getItem(FIRST_INPUT_SLOT).isEmpty()) {
-            this.setItem(FIRST_INPUT_SLOT, remainderStack);
-            return;
-        }
-
-        if (this.getItem(SECOND_INPUT_SLOT).isEmpty()) {
-            this.setItem(SECOND_INPUT_SLOT, remainderStack);
-            return;
-        }
-
-        if (this.level == null) {
-            return;
-        }
-
-        ItemEntity itemEntity = new ItemEntity(this.level, this.worldPosition.getX() + 0.5, this.worldPosition.getY() + 0.5, this.worldPosition.getZ() + 0.5, remainderStack);
-        itemEntity.setDefaultPickUpDelay();
-        this.level.addFreshEntity(itemEntity);
-    }
-
-    @Override
-    public NonNullList<ItemStack> getItems() {
-        return inventory;
-    }
-
-    @Override
-    public void setItem(int slot, ItemStack stack) {
-        ItemStack stackInSlot = this.inventory.get(slot);
-        boolean dirty = !stack.isEmpty() && ItemStack.isSameItem(stack, stackInSlot) && ItemStack.matches(stack, stackInSlot);
-
-        this.inventory.set(slot, stack);
-
-        if (stack.getCount() > this.getMaxStackSize()) {
-            stack.setCount(this.getMaxStackSize());
-        }
-
-        if (slot == FIRST_INPUT_SLOT || slot == SECOND_INPUT_SLOT) {
-            if (!dirty) {
-                this.fermentationTime = 0;
-                setChanged();
-            }
-        }
-    }
-
-    @Override
-    public boolean stillValid(Player player) {
-        if (this.level == null) {
+    public boolean canAddMilk(Level level, ItemStack stack) {
+        if (!isOpen() || milkCount >= MAX_MILK || (!milk.isEmpty() && !ItemStack.isSameItem(milk, stack))) {
             return false;
         }
-        if (this.level.getBlockEntity(this.worldPosition) != this) {
-            return false;
-        }
-        return player.distanceToSqr(this.worldPosition.getX() + 0.5, this.worldPosition.getY() + 0.5, this.worldPosition.getZ() + 0.5) <= 64.0;
+        CheeseFormRecipe recipe = recipeFor(level, stack);
+        return recipe != null && (rennet.isEmpty() || recipe.ingredient().test(rennet));
     }
 
-    @Override
-    public @NotNull Component getDisplayName() {
-        return ObjectRegistry.CHEESE_FORM.get().getName();
+    public boolean canAddRennet(Level level, ItemStack stack) {
+        if (!isOpen() || !rennet.isEmpty()) {
+            return false;
+        }
+        for (RecipeHolder<CheeseFormRecipe> holder : level.getRecipeManager().getAllRecipesFor(RecipeRegistry.CHEESE.get())) {
+            CheeseFormRecipe recipe = holder.value();
+            if (recipe.ingredient().test(stack) && (milk.isEmpty() || recipe.bucket().test(milk))) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void addMilk(ItemStack stack) {
+        if (milk.isEmpty()) {
+            milk = stack.copyWithCount(1);
+        }
+        milkCount++;
+        setChanged();
+    }
+
+    public void addRennet(ItemStack stack) {
+        rennet = stack.copyWithCount(1);
+        setChanged();
+    }
+
+    public NonNullList<ItemStack> takeResult() {
+        NonNullList<ItemStack> taken = NonNullList.create();
+        for (int i = 0; i < resultCount; i++) {
+            taken.add(result.copyWithCount(1));
+        }
+        result = ItemStack.EMPTY;
+        resultCount = 0;
+        setChanged();
+        return taken;
     }
 
     @Nullable
+    public static CheeseFormRecipe recipeFor(Level level, ItemStack milk) {
+        if (milk.isEmpty()) {
+            return null;
+        }
+        CheeseFormRecipe best = null;
+        int bestChoices = Integer.MAX_VALUE;
+        for (RecipeHolder<CheeseFormRecipe> holder : level.getRecipeManager().getAllRecipesFor(RecipeRegistry.CHEESE.get())) {
+            CheeseFormRecipe recipe = holder.value();
+            int choices = recipe.bucket().getItems().length;
+            if (recipe.bucket().test(milk) && choices < bestChoices) {
+                best = recipe;
+                bestChoices = choices;
+            }
+        }
+        return best;
+    }
+
+    public boolean isOpen() {
+        return crank == 0 && pressTicks == 0 && result.isEmpty();
+    }
+
+    public boolean isPressed() {
+        return crank >= CRANK_TICKS || pressTicks > 0;
+    }
+
+    public boolean isReady() {
+        return pressTicks >= PlatformHelper.getCheesePressDuration();
+    }
+
+    public boolean isCranking() {
+        return crankTicks > 0;
+    }
+
+    public float crankProgress(float partialTick) {
+        float step = crankTicks > 0 ? (isReady() ? -partialTick : partialTick) : 0.0F;
+        return Math.max(0.0F, Math.min(1.0F, (crank + step) / CRANK_TICKS));
+    }
+
+    public float pressProgress() {
+        return Math.min(1.0F, (float) pressTicks / PlatformHelper.getCheesePressDuration());
+    }
+
+    public ItemStack getMilk() {
+        return milk;
+    }
+
+    public int getMilkCount() {
+        return milkCount;
+    }
+
+    public ItemStack getRennet() {
+        return rennet;
+    }
+
+    public ItemStack getResult() {
+        return result;
+    }
+
+    public int getResultCount() {
+        return resultCount;
+    }
+
+    public NonNullList<ItemStack> drops() {
+        NonNullList<ItemStack> drops = NonNullList.create();
+        for (int i = 0; i < resultCount; i++) {
+            drops.add(result.copyWithCount(1));
+        }
+        if (!rennet.isEmpty()) {
+            drops.add(rennet.copy());
+        }
+        for (int i = 0; i < milkCount; i++) {
+            drops.add(milk.copyWithCount(1));
+        }
+        return drops;
+    }
+
     @Override
-    public AbstractContainerMenu createMenu(int syncId, Inventory inv, Player player) {
-        return new CheeseFormGuiHandler(syncId, inv, this, this.propertyDelegate);
+    protected void loadAdditional(CompoundTag tag, HolderLookup.Provider provider) {
+        super.loadAdditional(tag, provider);
+        milk = tag.contains("Milk") ? ItemStack.parse(provider, tag.getCompound("Milk")).orElse(ItemStack.EMPTY) : ItemStack.EMPTY;
+        rennet = tag.contains("Rennet") ? ItemStack.parse(provider, tag.getCompound("Rennet")).orElse(ItemStack.EMPTY) : ItemStack.EMPTY;
+        result = tag.contains("Result") ? ItemStack.parse(provider, tag.getCompound("Result")).orElse(ItemStack.EMPTY) : ItemStack.EMPTY;
+        milkCount = milk.isEmpty() ? 0 : tag.getInt("MilkCount");
+        resultCount = result.isEmpty() ? 0 : tag.getInt("ResultCount");
+        crank = tag.getInt("Crank");
+        crankTicks = tag.getInt("CrankTicks");
+        pressTicks = tag.getInt("PressTicks");
+    }
+
+    @Override
+    protected void saveAdditional(CompoundTag tag, HolderLookup.Provider provider) {
+        super.saveAdditional(tag, provider);
+        if (!milk.isEmpty()) {
+            tag.put("Milk", milk.save(provider));
+        }
+        if (!rennet.isEmpty()) {
+            tag.put("Rennet", rennet.save(provider));
+        }
+        if (!result.isEmpty()) {
+            tag.put("Result", result.save(provider));
+        }
+        tag.putInt("MilkCount", milkCount);
+        tag.putInt("ResultCount", resultCount);
+        tag.putInt("Crank", crank);
+        tag.putInt("CrankTicks", crankTicks);
+        tag.putInt("PressTicks", pressTicks);
+    }
+
+    @Override
+    public ClientboundBlockEntityDataPacket getUpdatePacket() {
+        return ClientboundBlockEntityDataPacket.create(this);
+    }
+
+    @Override
+    public @NotNull CompoundTag getUpdateTag(HolderLookup.Provider provider) {
+        return saveWithoutMetadata(provider);
+    }
+
+    @Override
+    public void setChanged() {
+        if (level instanceof ServerLevel serverLevel) {
+            Packet<ClientGamePacketListener> packet = getUpdatePacket();
+            for (ServerPlayer player : LibUtil.tracking(serverLevel, getBlockPos())) {
+                player.connection.send(packet);
+            }
+        }
+        super.setChanged();
     }
 }

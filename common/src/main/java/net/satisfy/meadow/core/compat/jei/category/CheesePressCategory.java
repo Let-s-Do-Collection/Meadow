@@ -13,14 +13,14 @@ import mezz.jei.api.recipe.category.IRecipeCategory;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.core.NonNullList;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.satisfy.meadow.Meadow;
-import net.satisfy.meadow.client.gui.CheeseFormGui;
-import net.satisfy.meadow.core.block.entity.CheeseFormBlockEntity;
 import net.satisfy.meadow.core.compat.jei.MeadowJEIPlugin;
 import net.satisfy.meadow.core.recipes.CheeseFormRecipe;
 import net.satisfy.meadow.core.registry.ObjectRegistry;
 import org.jetbrains.annotations.NotNull;
+import net.satisfy.meadow.platform.PlatformHelper;
 
 public class CheesePressCategory implements IRecipeCategory<CheeseFormRecipe> {
     public static final RecipeType<CheeseFormRecipe> CHEESE_PRESS = RecipeType.create(Meadow.MOD_ID, "cheese", CheeseFormRecipe.class);
@@ -28,6 +28,7 @@ public class CheesePressCategory implements IRecipeCategory<CheeseFormRecipe> {
     public static final int HEIGHT = 55;
     public static final int WIDTH_OF = 26;
     public static final int HEIGHT_OF = 7;
+    private static final ResourceLocation BACKGROUND = Meadow.identifier("textures/gui/cheese_form_gui.png");
     private final IDrawable background;
     private final IDrawable icon;
     private final IDrawableAnimated arrow;
@@ -35,11 +36,11 @@ public class CheesePressCategory implements IRecipeCategory<CheeseFormRecipe> {
     private final Component localizedName;
 
     public CheesePressCategory(IGuiHelper helper) {
-        this.background = helper.createDrawable(CheeseFormGui.BACKGROUND, WIDTH_OF, HEIGHT_OF, WIDTH, HEIGHT);
-        this.arrow = helper.drawableBuilder(CheeseFormGui.BACKGROUND, 176, 4, 24, 10)
-                .buildAnimated(CheeseFormBlockEntity.COOKING_TIME_IN_TICKS, IDrawableAnimated.StartDirection.LEFT, false);
-        this.time = helper.drawableBuilder(CheeseFormGui.BACKGROUND, 180, 22, 16, 25)
-                .buildAnimated(CheeseFormBlockEntity.COOKING_TIME_IN_TICKS, IDrawableAnimated.StartDirection.TOP, false);
+        this.background = helper.createDrawable(BACKGROUND, WIDTH_OF, HEIGHT_OF, WIDTH, HEIGHT);
+        this.arrow = helper.drawableBuilder(BACKGROUND, 176, 4, 24, 10)
+                .buildAnimated(PlatformHelper.getCheesePressDuration(), IDrawableAnimated.StartDirection.LEFT, false);
+        this.time = helper.drawableBuilder(BACKGROUND, 180, 22, 16, 25)
+                .buildAnimated(PlatformHelper.getCheesePressDuration(), IDrawableAnimated.StartDirection.TOP, false);
         this.icon = helper.createDrawableIngredient(VanillaTypes.ITEM_STACK, ObjectRegistry.CHEESE_FORM.get().asItem().getDefaultInstance());
         this.localizedName = ObjectRegistry.CHEESE_FORM.get().getName();
     }
@@ -57,8 +58,8 @@ public class CheesePressCategory implements IRecipeCategory<CheeseFormRecipe> {
 
     @Override
     public void draw(CheeseFormRecipe recipe, IRecipeSlotsView recipeSlotsView, GuiGraphics guiGraphics, double mouseX, double mouseY) {
-        arrow.draw(guiGraphics, CheeseFormGui.ARROW_X - WIDTH_OF, CheeseFormGui.ARROW_Y - HEIGHT_OF);
-        time.draw(guiGraphics, CheeseFormGui.TIME_X - WIDTH_OF, CheeseFormGui.TIME_Y - HEIGHT_OF);
+        arrow.draw(guiGraphics, 78 - WIDTH_OF, 36 - HEIGHT_OF);
+        time.draw(guiGraphics, 81 - WIDTH_OF, 8 - HEIGHT_OF);
     }
 
     @Override

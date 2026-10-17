@@ -1,63 +1,18 @@
 {
   "variants": {
-    "facing=north,done=false,working=false": {
+    "facing=north": {
       "model": "meadow:block/cheese_form"
     },
-    "facing=south,done=false,working=false": {
+    "facing=south": {
       "model": "meadow:block/cheese_form",
       "y": 180
     },
-    "facing=west,done=false,working=false": {
+    "facing=west": {
       "model": "meadow:block/cheese_form",
       "y": 270
     },
-    "facing=east,done=false,working=false": {
+    "facing=east": {
       "model": "meadow:block/cheese_form",
-      "y": 90
-    },
-    "facing=north,done=true,working=false": {
-      "model": "meadow:block/cheese_form_done"
-    },
-    "facing=south,done=true,working=false": {
-      "model": "meadow:block/cheese_form_done",
-      "y": 180
-    },
-    "facing=west,done=true,working=false": {
-      "model": "meadow:block/cheese_form_done",
-      "y": 270
-    },
-    "facing=east,done=true,working=false": {
-      "model": "meadow:block/cheese_form_done",
-      "y": 90
-    },
-    "facing=north,done=false,working=true": {
-      "model": "meadow:block/cheese_form_working"
-    },
-    "facing=south,done=false,working=true": {
-      "model": "meadow:block/cheese_form_working",
-      "y": 180
-    },
-    "facing=west,done=false,working=true": {
-      "model": "meadow:block/cheese_form_working",
-      "y": 270
-    },
-    "facing=east,done=false,working=true": {
-      "model": "meadow:block/cheese_form_working",
-      "y": 90
-    },
-    "facing=north,done=true,working=true": {
-      "model": "meadow:block/cheese_form_working"
-    },
-    "facing=south,done=true,working=true": {
-      "model": "meadow:block/cheese_form_working",
-      "y": 180
-    },
-    "facing=west,done=true,working=true": {
-      "model": "meadow:block/cheese_form_working",
-      "y": 270
-    },
-    "facing=east,done=true,working=true": {
-      "model": "meadow:block/cheese_form_working",
       "y": 90
     }
   }

@@ -3,7 +3,7 @@
   "id": "meadow",
   "version": "${version}",
   "name": "[Let's Do] Meadow",
-  "description": "Hey Wanderer! Sit down, enjoy a piece of cheese, and take a look at the new mountain pasture - cliffs, beautiful forests, clearings, and lots of colorful flowers!",
+  "description": "Cowbells on the alpine pasture, pine forests and meadows full of flowers. Milk your cows, press your own cheese wheels, stir a bubbling fondue and snap a photo of it all with your old camera.",
   "authors": [
     "satisfy",
     "Jason13Official"
@@ -30,6 +30,9 @@
     "rei_client": [
       "net.satisfy.meadow.fabric.core.rei.MeadowReiClientPluginFabric"
     ],
+    "emi": [
+      "net.satisfy.meadow.core.compat.emi.MeadowEmiPlugin"
+    ],
     "jei_mod_plugin": [
       "net.satisfy.meadow.core.compat.jei.MeadowJEIPlugin"
     ],
@@ -38,6 +41,7 @@
     ]
   },
   "mixins": [
+    "meadow-common.mixins.json",
     "meadow.mixins.json"
   ],
   "depends": {

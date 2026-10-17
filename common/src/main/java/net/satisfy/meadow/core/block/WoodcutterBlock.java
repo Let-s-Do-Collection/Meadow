@@ -11,6 +11,10 @@ import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityTicker;
+import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.satisfy.meadow.core.registry.EntityTypeRegistry;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
@@ -18,10 +22,11 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.satisfy.meadow.client.gui.handler.WoodcutterGuiHandler;
+import net.satisfy.meadow.core.block.entity.WoodcutterBlockEntity;
 import net.satisfy.meadow.core.registry.ObjectRegistry;
 import org.jetbrains.annotations.NotNull;
 
-public class WoodcutterBlock extends Block {
+public class WoodcutterBlock extends Block implements EntityBlock {
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
     protected static final VoxelShape SHAPE = Block.box(2, 0, 2, 14, 16, 14);
 
@@ -53,7 +58,28 @@ public class WoodcutterBlock extends Block {
     public MenuProvider getMenuProvider(BlockState state, Level world, BlockPos pos) {
         Component title = ObjectRegistry.WOODCUTTER.get().getName();
         return new SimpleMenuProvider((i, playerInventory, playerEntity) ->
-                new WoodcutterGuiHandler(i, playerInventory, ContainerLevelAccess.create(world, pos)), title);
+                new WoodcutterGuiHandler(i, playerInventory, ContainerLevelAccess.create(world, pos), world.getBlockEntity(pos) instanceof WoodcutterBlockEntity cutter ? cutter.getInventory() : null), title);
+    }
+
+    @Override
+    protected void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean movedByPiston) {
+        if (!state.is(newState.getBlock()) && level.getBlockEntity(pos) instanceof WoodcutterBlockEntity cutter) {
+            Containers.dropContents(level, pos, cutter.getInventory());
+        }
+        super.onRemove(state, level, pos, newState, movedByPiston);
+    }
+
+    @Override
+    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
+        if (!level.isClientSide || type != EntityTypeRegistry.WOODCUTTER_BLOCK_ENTITY.get()) {
+            return null;
+        }
+        return (tickLevel, pos, tickState, entity) -> WoodcutterBlockEntity.clientTick(tickLevel, pos, tickState, (WoodcutterBlockEntity) entity);
+    }
+
+    @Override
+    public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+        return new WoodcutterBlockEntity(pos, state);
     }
 
     @Override

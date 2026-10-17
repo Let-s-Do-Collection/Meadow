@@ -3,6 +3,7 @@ package net.satisfy.meadow.client.gui.handler;
 import com.google.common.collect.Lists;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.Container;
+import net.minecraft.world.ContainerListener;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -12,12 +13,14 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.SingleRecipeInput;
 import net.minecraft.world.level.Level;
+import net.satisfy.meadow.core.block.entity.WoodcutterBlockEntity;
 import net.satisfy.meadow.core.recipes.WoodcuttingRecipe;
 import net.satisfy.meadow.core.registry.ObjectRegistry;
 import net.satisfy.meadow.core.registry.RecipeRegistry;
 import net.satisfy.meadow.core.registry.ScreenHandlerRegistry;
 import net.satisfy.meadow.core.registry.SoundEventRegistry;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
@@ -32,27 +35,29 @@ public class WoodcutterGuiHandler extends AbstractContainerMenu {
     private Slot outputSlot;
     Runnable contentsChangedListener = () -> {
     };
-    public final Container input = new SimpleContainer(1) {
-        @Override
-        public void setChanged() {
-            super.setChanged();
-            WoodcutterGuiHandler.this.slotsChanged(this);
-            WoodcutterGuiHandler.this.contentsChangedListener.run();
-        }
+    public final SimpleContainer input;
+    private final boolean sharedInput;
+    private final ContainerListener inputListener = container -> {
+        this.slotsChanged(container);
+        this.contentsChangedListener.run();
     };
     final ResultContainer output = new ResultContainer();
 
     public WoodcutterGuiHandler(int syncId, Inventory playerInventory) {
-        this(syncId, playerInventory, ContainerLevelAccess.NULL);
+        this(syncId, playerInventory, ContainerLevelAccess.NULL, null);
     }
 
-    public WoodcutterGuiHandler(int syncId, Inventory playerInventory, final ContainerLevelAccess context) {
+    public WoodcutterGuiHandler(int syncId, Inventory playerInventory, final ContainerLevelAccess context, @Nullable SimpleContainer sharedInput) {
         super(ScreenHandlerRegistry.WOODCUTTER_SCREEN_HANDLER.get(), syncId);
         this.context = context;
+        this.sharedInput = sharedInput != null;
+        this.input = sharedInput != null ? sharedInput : new SimpleContainer(1);
+        this.input.addListener(this.inputListener);
         this.world = playerInventory.player.level();
 
         buildBlockEntityContainer(playerInventory);
         buildPlayerContainer(playerInventory);
+        this.slotsChanged(this.input);
 
         this.addDataSlot(this.selectedRecipe);
     }
@@ -71,6 +76,9 @@ public class WoodcutterGuiHandler extends AbstractContainerMenu {
                 }
                 context.execute((world, pos) -> {
                     long l = world.getGameTime();
+                    if (world.getBlockEntity(pos) instanceof WoodcutterBlockEntity cutter) {
+                        cutter.chop(itemStack);
+                    }
                     if (WoodcutterGuiHandler.this.lastTakeTime != l) {
                         world.playSound(null, pos, SoundEventRegistry.WOODCUTTER.get(), SoundSource.BLOCKS, 1.0f, 1.0f);
                         WoodcutterGuiHandler.this.lastTakeTime = l;
@@ -220,6 +228,9 @@ public class WoodcutterGuiHandler extends AbstractContainerMenu {
     public void removed(Player player) {
         super.removed(player);
         this.output.removeItemNoUpdate(1);
-        this.context.execute((world, pos) -> this.clearContainer(player, this.input));
+        this.input.removeListener(this.inputListener);
+        if (!this.sharedInput) {
+            this.context.execute((world, pos) -> this.clearContainer(player, this.input));
+        }
     }
 }

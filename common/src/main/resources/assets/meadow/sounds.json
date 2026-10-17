@@ -55,5 +55,11 @@
     "sounds": [
       "meadow:cabinet_close"
     ]
+  },
+  "fondue_stirring": {
+    "subtitle": "subtitles.meadow.fondue_stirring",
+    "sounds": [
+      "meadow:fondue_stirring"
+    ]
   }
 }

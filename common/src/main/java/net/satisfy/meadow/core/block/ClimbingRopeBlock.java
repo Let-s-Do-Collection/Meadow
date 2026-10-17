@@ -19,12 +19,12 @@ import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import net.satisfy.meadow.platform.PlatformHelper;
 
 public class ClimbingRopeBlock extends Block {
 
     public static final EnumProperty<RopePart> PART = EnumProperty.create("part", RopePart.class);
 
-    private static final int MAX_LENGTH = 12;
 
     private static final VoxelShape SEGMENT_SHAPE = Block.box(7, 0, 7, 9, 16, 9);
     private static final VoxelShape TOP_SHAPE = Shapes.or(
@@ -59,7 +59,7 @@ public class ClimbingRopeBlock extends Block {
 
         BlockState segmentState = this.defaultBlockState().setValue(PART, RopePart.SEGMENT);
 
-        for (int i = 1; i <= MAX_LENGTH; i++) {
+        for (int i = 1; i <= PlatformHelper.getClimbingRopeMaxLength(); i++) {
             BlockPos ropePos = pos.below(i);
             if (!level.isLoaded(ropePos)) {
                 break;

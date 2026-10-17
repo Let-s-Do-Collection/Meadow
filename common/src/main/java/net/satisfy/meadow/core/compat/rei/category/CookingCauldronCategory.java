@@ -11,7 +11,7 @@ import me.shedaniel.rei.api.common.category.CategoryIdentifier;
 import me.shedaniel.rei.api.common.util.EntryStacks;
 import net.minecraft.network.chat.Component;
 import net.satisfy.meadow.Meadow;
-import net.satisfy.meadow.core.block.entity.CookingCauldronBlockEntity;
+import me.shedaniel.rei.api.common.util.EntryIngredients;
 import net.satisfy.meadow.core.compat.rei.display.CookingCauldronDisplay;
 import net.satisfy.meadow.core.registry.ObjectRegistry;
 
@@ -47,7 +47,13 @@ public class CookingCauldronCategory implements DisplayCategory<CookingCauldronD
         Point startPoint = new Point(bounds.getX() + 16, bounds.getCenterY() - 18);
         List<Widget> widgets = Lists.newArrayList();
         widgets.add(Widgets.createRecipeBase(bounds));
-        widgets.add(Widgets.createArrow(new Point(startPoint.x + 60, startPoint.y + 9)).animationDurationTicks(CookingCauldronBlockEntity.MAX_COOKING_TIME));
+        widgets.add(Widgets.createArrow(new Point(startPoint.x + 60, startPoint.y + 9)).animationDurationTicks(display.getDuration()));
+        if (display.getLiquid() != null) {
+            widgets.add(Widgets.createLabel(new Point(startPoint.x, startPoint.y + 40), display.getLiquid()).leftAligned().noShadow().color(0xFF404040, 0xFFBBBBBB));
+        }
+        if (!display.getContainer().isEmpty()) {
+            widgets.add(Widgets.createSlot(new Point(startPoint.x + 96, startPoint.y + 31)).entries(EntryIngredients.of(display.getContainer())).markInput());
+        }
 
         widgets.add(Widgets.createResultSlotBackground(new Point(startPoint.x + 96, startPoint.y + 9)));
         widgets.add(Widgets.createSlot(new Point(startPoint.x + 96, startPoint.y + 9)).entries(display.getOutputEntries().get(0)).disableBackground().markOutput());

@@ -5,7 +5,10 @@
       "item": "meadow:limestone"
     }
   ],
-  "fluid_amount": 50,
+  "liquid": {
+    "id": "meadow:water",
+    "amount": 2
+  },
   "crafting_duration": 150,
   "result": {
     "id": "meadow:alpine_salt",

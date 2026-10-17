@@ -8,12 +8,13 @@
       "tag": "c:salts"
     }
   ],
-  "fluid_amount": 10,
+  "liquid": {
+    "id": "meadow:water",
+    "amount": 1
+  },
   "crafting_duration": 40,
   "result": {
     "id": "minecraft:cooked_rabbit",
     "count": 2
   }
 }
-
-

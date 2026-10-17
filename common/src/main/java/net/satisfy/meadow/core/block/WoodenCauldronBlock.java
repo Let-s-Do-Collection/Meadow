@@ -13,6 +13,7 @@ import net.minecraft.world.level.material.Fluids;
 import net.satisfy.meadow.core.registry.ObjectRegistry;
 import net.satisfy.meadow.core.util.WoodenCauldronBehavior;
 import org.jetbrains.annotations.NotNull;
+import net.satisfy.meadow.platform.PlatformHelper;
 
 public class WoodenCauldronBlock extends AbstractCauldronBlock {
     public static final MapCodec<WoodenCauldronBlock> CODEC = simpleCodec(WoodenCauldronBlock::new);
@@ -33,10 +34,10 @@ public class WoodenCauldronBlock extends AbstractCauldronBlock {
 
     protected static boolean canFillWithPrecipitation(Level world, Biome.Precipitation precipitation) {
         if (precipitation == Biome.Precipitation.RAIN) {
-            return world.getRandom().nextFloat() < 0.05f;
+            return world.getRandom().nextFloat() < PlatformHelper.getWoodenCauldronRainFillChance();
         }
         if (precipitation == Biome.Precipitation.SNOW) {
-            return world.getRandom().nextFloat() < 0.1f;
+            return world.getRandom().nextFloat() < PlatformHelper.getWoodenCauldronSnowFillChance();
         }
         return false;
     }

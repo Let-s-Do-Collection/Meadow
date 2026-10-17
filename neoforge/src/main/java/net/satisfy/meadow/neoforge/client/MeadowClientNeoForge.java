@@ -1,22 +1,23 @@
 package net.satisfy.meadow.neoforge.client;
 
+import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.neoforged.api.distmarker.Dist;
+import net.neoforged.neoforge.client.event.ModelEvent;
+import net.satisfy.meadow.client.ExtraModels;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
-import net.neoforged.neoforge.client.event.RegisterParticleProvidersEvent;
+import net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsEvent;
+import net.satisfy.foundation.neoforge.client.FoundationArmorExtensions;
 import net.neoforged.neoforge.registries.RegisterEvent;
 import net.satisfy.meadow.Meadow;
 import net.satisfy.meadow.client.MeadowClient;
-import net.satisfy.meadow.client.gui.CheeseFormGui;
-import net.satisfy.meadow.client.gui.CookingCauldronGui;
 import net.satisfy.meadow.client.gui.WoodcutterGui;
-import net.satisfy.meadow.client.particle.FondueBubbleParticle;
-import net.satisfy.meadow.core.registry.ParticleTypeRegistry;
+import net.satisfy.meadow.core.registry.ObjectRegistry;
 import net.satisfy.meadow.core.registry.ScreenHandlerRegistry;
 
-@EventBusSubscriber(modid = Meadow.MOD_ID, value = Dist.CLIENT, bus = EventBusSubscriber.Bus.MOD)
+@EventBusSubscriber(modid = Meadow.MOD_ID, value = Dist.CLIENT)
 
 
 public class MeadowClientNeoForge {
@@ -33,13 +34,16 @@ public class MeadowClientNeoForge {
 
     @SubscribeEvent
     public static void onClientSetup(RegisterMenuScreensEvent event) {
-        event.register(ScreenHandlerRegistry.CHEESE_FORM_SCREEN_HANDLER.get(), CheeseFormGui::new);
         event.register(ScreenHandlerRegistry.WOODCUTTER_SCREEN_HANDLER.get(), WoodcutterGui::new);
-        event.register(ScreenHandlerRegistry.COOKING_CAULDRON_SCREEN_HANDLER.get(), CookingCauldronGui::new);
     }
 
     @SubscribeEvent
-    public static void registerParticleProviders(RegisterParticleProvidersEvent event) {
-        event.registerSpriteSet(ParticleTypeRegistry.FONDUE_BUBBLE.get(), FondueBubbleParticle.Provider::new);
+    public static void registerAdditionalModels(ModelEvent.RegisterAdditional event) {
+        ExtraModels.all().forEach(id -> event.register(ModelResourceLocation.standalone(id)));
+    }
+
+    @SubscribeEvent
+    public static void registerClientExtensions(RegisterClientExtensionsEvent event) {
+        event.registerItem(FoundationArmorExtensions.INSTANCE, ObjectRegistry.FUR_HELMET.get(), ObjectRegistry.FUR_CHESTPLATE.get(), ObjectRegistry.FUR_LEGGINGS.get(), ObjectRegistry.FUR_BOOTS.get());
     }
 }

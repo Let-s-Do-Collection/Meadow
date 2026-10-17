@@ -11,7 +11,10 @@
       "tag": "c:milks"
     }
   ],
-  "fluid_amount": 2,
+  "liquid": {
+    "id": "meadow:water",
+    "amount": 1
+  },
   "crafting_duration": 30,
   "result": {
     "id": "meadow:wooden_amethyst_milk_bucket",

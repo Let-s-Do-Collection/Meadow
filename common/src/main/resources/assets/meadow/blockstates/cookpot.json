@@ -33,35 +33,35 @@
       "y": 270
     },
     "facing=north,stage=cooking": {
-      "model": "meadow:block/cookpot_filled",
+      "model": "meadow:block/cookpot_warm",
       "y": 0
     },
     "facing=east,stage=cooking": {
-      "model": "meadow:block/cookpot_filled",
+      "model": "meadow:block/cookpot_warm",
       "y": 90
     },
     "facing=south,stage=cooking": {
-      "model": "meadow:block/cookpot_filled",
+      "model": "meadow:block/cookpot_warm",
       "y": 180
     },
     "facing=west,stage=cooking": {
-      "model": "meadow:block/cookpot_filled",
+      "model": "meadow:block/cookpot_warm",
       "y": 270
     },
     "facing=north,stage=filled": {
-      "model": "meadow:block/cookpot_filled",
+      "model": "meadow:block/cookpot_warm",
       "y": 0
     },
     "facing=east,stage=filled": {
-      "model": "meadow:block/cookpot_filled",
+      "model": "meadow:block/cookpot_warm",
       "y": 90
     },
     "facing=south,stage=filled": {
-      "model": "meadow:block/cookpot_filled",
+      "model": "meadow:block/cookpot_warm",
       "y": 180
     },
     "facing=west,stage=filled": {
-      "model": "meadow:block/cookpot_filled",
+      "model": "meadow:block/cookpot_warm",
       "y": 270
     }
   }

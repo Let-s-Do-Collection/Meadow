@@ -1,17 +1,10 @@
 {
   "required": true,
   "package": "net.satisfy.meadow.fabric.core.mixin",
-  "compatibilityLevel": "JAVA_17",
+  "compatibilityLevel": "JAVA_21",
   "minVersion": "0.8",
-  "client": [
-    "ItemInHandRendererMixin"
-  ],
   "mixins": [
-    "CowMixin",
-    "FluidDecrementMixin",
-    "GoatMixin",
-    "NetherPortalBlockMixin",
-    "SheepMixin"
+    "FluidDecrementMixin"
   ],
   "injectors": {
     "defaultRequire": 1

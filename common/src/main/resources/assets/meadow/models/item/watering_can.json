@@ -2,5 +2,13 @@
   "parent": "item/generated",
   "textures": {
     "layer0": "meadow:item/wooden_watering_can"
-  }
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "meadow:empty": 1
+      },
+      "model": "meadow:item/watering_can_empty"
+    }
+  ]
 }

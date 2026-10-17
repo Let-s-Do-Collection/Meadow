@@ -1,16 +1,14 @@
 package net.satisfy.meadow.core.block;
 
-import net.satisfy.foundation.registry.FoundationParticles;
 import net.satisfy.foundation.util.ShapeUtil;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
 import net.minecraft.util.StringRepresentable;
-import net.minecraft.world.InteractionResult;
-import net.minecraft.world.MenuProvider;
+import net.minecraft.world.Containers;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
@@ -35,7 +33,6 @@ import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.satisfy.meadow.core.block.entity.CookingCauldronBlockEntity;
 import net.satisfy.meadow.core.registry.EntityTypeRegistry;
-import net.satisfy.meadow.core.registry.SoundEventRegistry;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -106,13 +103,11 @@ public class CookingCauldronBlock extends BaseEntityBlock {
     }
 
     @Override
-    protected @NotNull InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hit) {
-        BlockEntity blockEntity = level.getBlockEntity(pos);
-        if (blockEntity instanceof MenuProvider provider) {
-            player.openMenu(provider);
-            return InteractionResult.SUCCESS;
+    protected @NotNull ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
+        if (level.getBlockEntity(pos) instanceof CookingCauldronBlockEntity pot) {
+            return pot.interact(level, player, hand, stack);
         }
-        return super.useWithoutItem(state, level, pos, player, hit);
+        return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
     }
 
     @Override
@@ -127,16 +122,14 @@ public class CookingCauldronBlock extends BaseEntityBlock {
 
         BlockState currentState = level.getBlockState(pos);
 
-        boolean heated = cookingCauldron.isBeingBurned();
-        boolean boiling = cookingCauldron.isBoiling();
-        boolean finished = cookingCauldron.isFinished();
+        boolean heated = cookingCauldron.isHeated();
 
         CookpotStage stage;
         if (!heated) {
             stage = CookpotStage.NORMAL;
-        } else if (boiling) {
+        } else if (cookingCauldron.isCooking()) {
             stage = CookpotStage.COOKING;
-        } else if (finished) {
+        } else if (!cookingCauldron.getResult().isEmpty()) {
             stage = CookpotStage.FILLED;
         } else {
             stage = CookpotStage.WARM;
@@ -156,47 +149,8 @@ public class CookingCauldronBlock extends BaseEntityBlock {
 
     @Override
     public void animateTick(BlockState state, Level level, BlockPos pos, RandomSource random) {
-        CookpotStage stage = state.getValue(STAGE);
-        if (stage == CookpotStage.NORMAL) return;
-
-        double centerX = pos.getX() + 0.5;
-        double centerY = pos.getY() + 0.7;
-        double centerZ = pos.getZ() + 0.5;
-
-        if (stage == CookpotStage.WARM) {
-            if (random.nextInt(100) < 18) {
-                level.addParticle(ParticleTypes.SMOKE, centerX, centerY + 0.4, centerZ, 0.0, 0.05, 0.0);
-            }
-            return;
-        }
-
-        if (stage == CookpotStage.COOKING) {
-            if (random.nextInt(100) < 35) {
-                for (int i = 0; i < 3; i++) {
-                    double offsetX = (random.nextDouble() - 0.5) * 0.4;
-                    double offsetZ = (random.nextDouble() - 0.5) * 0.4;
-                    level.addParticle(FoundationParticles.SOUP_BUBBLE.get(), centerX + offsetX, centerY + 0.15, centerZ + offsetZ, 0.0, 0.03, 0.0);
-                }
-            }
-
-            if (random.nextInt(100) < 60) {
-                double offsetX = (random.nextDouble() - 0.5) * 0.3;
-                double offsetZ = (random.nextDouble() - 0.5) * 0.3;
-                level.addParticle(FoundationParticles.SOUP_STEAM.get(), centerX + offsetX, centerY + 0.6, centerZ + offsetZ, 0.0, 0.07, 0.0);
-            }
-
-            if (random.nextInt(100) < 6) {
-                level.playLocalSound(centerX, centerY, centerZ, SoundEventRegistry.COOKING_POT_BOILING.get(), SoundSource.BLOCKS, 0.75F, 0.75F, false);
-            }
-            return;
-        }
-
-        if (stage == CookpotStage.FILLED) {
-            if (random.nextInt(100) < 38) {
-                double offsetX = (random.nextDouble() - 0.5) * 0.3;
-                double offsetZ = (random.nextDouble() - 0.5) * 0.3;
-                level.addParticle(FoundationParticles.SOUP_STEAM.get(), centerX + offsetX, centerY + 0.6, centerZ + offsetZ, 0.0, 0.07, 0.0);
-            }
+        if (level.getBlockEntity(pos) instanceof CookingCauldronBlockEntity pot) {
+            CookingPotEffects.animate(level, pos, random, pot);
         }
     }
 
@@ -209,7 +163,7 @@ public class CookingCauldronBlock extends BaseEntityBlock {
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
         return createTickerHelper(type, EntityTypeRegistry.COOKING_CAULDRON.get(), (lvl, pos, st, be) -> {
-            be.tick(lvl);
+            CookingCauldronBlockEntity.tick(lvl, pos, st, be);
             if (!lvl.isClientSide()) updateHeatState(lvl, pos);
         });
     }
@@ -225,7 +179,7 @@ public class CookingCauldronBlock extends BaseEntityBlock {
         if (!state.is(newState.getBlock())) {
             BlockEntity blockEntity = level.getBlockEntity(pos);
             if (blockEntity instanceof CookingCauldronBlockEntity cookingCauldron) {
-                cookingCauldron.dropContents();
+                Containers.dropContents(level, pos, cookingCauldron.drops());
             }
         }
         super.onRemove(state, level, pos, newState, movedByPiston);
