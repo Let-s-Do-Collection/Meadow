@@ -169,6 +169,10 @@ public class PlatformHelperImpl {
         return MeadowNeoForgeConfig.climbingRopeMaxLength;
     }
 
+    public static boolean enableLimestoneCliffs() {
+        return MeadowNeoForgeConfig.enableLimestoneCliffs;
+    }
+
     public static boolean isFurSetBonusEnabled() {
         return MeadowNeoForgeConfig.enableFurSetBonus;
     }

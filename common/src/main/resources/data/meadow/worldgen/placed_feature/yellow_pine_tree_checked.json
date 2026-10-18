@@ -12,6 +12,170 @@
           }
         }
       }
+    },
+    {
+      "type": "minecraft:block_predicate_filter",
+      "predicate": {
+        "type": "minecraft:not",
+        "predicate": {
+          "type": "minecraft:any_of",
+          "predicates": [
+            {
+              "type": "minecraft:matching_block_tag",
+              "tag": "minecraft:leaves",
+              "offset": [
+                0,
+                3,
+                0
+              ]
+            },
+            {
+              "type": "minecraft:matching_block_tag",
+              "tag": "minecraft:leaves",
+              "offset": [
+                0,
+                6,
+                0
+              ]
+            },
+            {
+              "type": "minecraft:matching_block_tag",
+              "tag": "minecraft:leaves",
+              "offset": [
+                0,
+                9,
+                0
+              ]
+            },
+            {
+              "type": "minecraft:matching_block_tag",
+              "tag": "minecraft:leaves",
+              "offset": [
+                0,
+                12,
+                0
+              ]
+            },
+            {
+              "type": "minecraft:matching_block_tag",
+              "tag": "minecraft:leaves",
+              "offset": [
+                0,
+                15,
+                0
+              ]
+            },
+            {
+              "type": "minecraft:matching_block_tag",
+              "tag": "minecraft:leaves",
+              "offset": [
+                2,
+                4,
+                0
+              ]
+            },
+            {
+              "type": "minecraft:matching_block_tag",
+              "tag": "minecraft:leaves",
+              "offset": [
+                -2,
+                4,
+                0
+              ]
+            },
+            {
+              "type": "minecraft:matching_block_tag",
+              "tag": "minecraft:leaves",
+              "offset": [
+                0,
+                4,
+                2
+              ]
+            },
+            {
+              "type": "minecraft:matching_block_tag",
+              "tag": "minecraft:leaves",
+              "offset": [
+                0,
+                4,
+                -2
+              ]
+            },
+            {
+              "type": "minecraft:matching_block_tag",
+              "tag": "minecraft:leaves",
+              "offset": [
+                2,
+                8,
+                0
+              ]
+            },
+            {
+              "type": "minecraft:matching_block_tag",
+              "tag": "minecraft:leaves",
+              "offset": [
+                -2,
+                8,
+                0
+              ]
+            },
+            {
+              "type": "minecraft:matching_block_tag",
+              "tag": "minecraft:leaves",
+              "offset": [
+                0,
+                8,
+                2
+              ]
+            },
+            {
+              "type": "minecraft:matching_block_tag",
+              "tag": "minecraft:leaves",
+              "offset": [
+                0,
+                8,
+                -2
+              ]
+            },
+            {
+              "type": "minecraft:matching_block_tag",
+              "tag": "minecraft:leaves",
+              "offset": [
+                2,
+                12,
+                0
+              ]
+            },
+            {
+              "type": "minecraft:matching_block_tag",
+              "tag": "minecraft:leaves",
+              "offset": [
+                -2,
+                12,
+                0
+              ]
+            },
+            {
+              "type": "minecraft:matching_block_tag",
+              "tag": "minecraft:leaves",
+              "offset": [
+                0,
+                12,
+                2
+              ]
+            },
+            {
+              "type": "minecraft:matching_block_tag",
+              "tag": "minecraft:leaves",
+              "offset": [
+                0,
+                12,
+                -2
+              ]
+            }
+          ]
+        }
+      }
     }
   ]
 }

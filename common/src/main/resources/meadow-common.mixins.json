@@ -12,7 +12,8 @@
     "CowMixin",
     "GoatMixin",
     "NetherPortalBlockMixin",
-    "SheepMixin"
+    "SheepMixin",
+    "SurfaceSystemMixin"
   ],
   "injectors": {
     "defaultRequire": 1

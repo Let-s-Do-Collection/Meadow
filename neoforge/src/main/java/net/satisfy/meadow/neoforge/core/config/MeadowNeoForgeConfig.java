@@ -35,6 +35,7 @@ public class MeadowNeoForgeConfig {
     public static final ModConfigSpec.IntValue CLIMBING_ROPE_MAX_LENGTH;
     public static final ModConfigSpec.BooleanValue ENABLE_FUR_SET_BONUS;
     public static final ModConfigSpec.IntValue FUR_SET_KNOCKBACK_RESISTANCE;
+    public static final ModConfigSpec.BooleanValue ENABLE_LIMESTONE_CLIFFS;
     public static final ModConfigSpec.BooleanValue SHOW_FONDUE_POT_INFO;
     public static final ModConfigSpec.BooleanValue SHOW_CHEESE_RACK_INFO;
     public static final ModConfigSpec.BooleanValue SHOW_COOKING_POT_INFO;
@@ -110,6 +111,7 @@ public class MeadowNeoForgeConfig {
     public static int climbingRopeMaxLength = 12;
     public static boolean enableFurSetBonus = true;
     public static int furSetKnockbackResistance = 20;
+    public static boolean enableLimestoneCliffs = true;
     public static boolean showFonduePotInfo = true;
     public static boolean showCheeseRackInfo = true;
     public static boolean showCookingPotInfo = true;
@@ -203,6 +205,10 @@ public class MeadowNeoForgeConfig {
         builder.comment("The bonus of the fur armor set.").push("Armor");
         ENABLE_FUR_SET_BONUS = builder.comment("Wearing the full fur armor set gives extra knockback resistance.").define("enableFurSetBonus", true);
         FUR_SET_KNOCKBACK_RESISTANCE = builder.comment("Knockback resistance in percent from the full fur armor set.").defineInRange("furSetKnockbackResistance", 20, 0, 100);
+        builder.pop();
+
+        builder.comment("Changes to the landscape of the Meadow biome.").push("World");
+        ENABLE_LIMESTONE_CLIFFS = builder.comment("Steep slopes in the Meadow turn into limestone cliffs. Only affects newly generated chunks.").define("enableLimestoneCliffs", true);
         builder.pop();
 
         builder.comment("Info tooltips that appear when looking at a block. Only affects your own screen.").push("Info Tooltips");
@@ -305,6 +311,7 @@ public class MeadowNeoForgeConfig {
         climbingRopeMaxLength = CLIMBING_ROPE_MAX_LENGTH.get();
         enableFurSetBonus = ENABLE_FUR_SET_BONUS.get();
         furSetKnockbackResistance = FUR_SET_KNOCKBACK_RESISTANCE.get();
+        enableLimestoneCliffs = ENABLE_LIMESTONE_CLIFFS.get();
         showFonduePotInfo = SHOW_FONDUE_POT_INFO.get();
         showCheeseRackInfo = SHOW_CHEESE_RACK_INFO.get();
         showCookingPotInfo = SHOW_COOKING_POT_INFO.get();

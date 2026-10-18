@@ -1,29 +1,34 @@
 [1.4.10]
 
 **Added**
-* Cookpot and Cooking Frame rework: no more GUI. Pour in liquids, add up to 4 ingredients by hand (Shift for the whole stack) and watch them cook in the pot. Whole stacks cook in one go, so 64 ingredients give 64 results while using the liquid only once. Skim off the foam when it rises: every skim pushes the cooking 15% ahead, leaving the foam slows it down. Take the result with an empty hand, or fill it into a bowl, bottle or bucket when the recipe needs one. Hoppers can still insert ingredients and pull out results.
-* Cooking liquids are data-driven (`data/<namespace>/meadow/cooking_liquid/`), so datapacks and other mods can add their own liquids like oil or broth. Cooking recipes can require a liquid and a container.
-* Fondue Pot rework: drop in a Cheese Wheel (fills the pot) or up to 4 Cheese pieces and stir with an empty hand while it melts. The cheese shrinks, the fondue rises smoothly and takes on the color of the cheese used. Bubbles, steam, splashes and stirring sounds match the cheese color, like the Bakery Cooking Pot.
-* Cheese Press rework: no more GUI. Pour in up to 4 buckets of the same milk and add one Rennet, then hold right-click with an empty hand to crank the press down. The plate sinks onto the milk, whey drips out and after 2 minutes the curd has turned into cheese. Crank it back up and take out one Cheese Wheel per bucket.
-* Camera rework: load it with up to 16 Paper and every shot prints a photo that pops out of the lens. The photo shows what the camera sees, developed in old sepia tones, and can be hung on a wall with right-click, where it sits in a Photo Frame (break it to get the photo back). A full-size copy is also saved to your screenshots folder. Shift right-click starts a self-timer, so you can step in front of the lens yourself, and a redstone signal fires the camera too.
-* Camera flash dazzles monsters in front of the lens: they stop, lose their target and glow for a moment. Players looking into the lens get a short white flash. Range and duration can be set in the config.
-* Woodcutter now shows the log you put in on top of the block, and the axe swings down with every cut :D
-* Info panels for the Cooking Pot, Fondue Pot, Cheese Rack, Cheese Press, Milk Can and Camera, each with its own toggle in the config.
-* Side tabs in the creative tab: Cheese & Kitchen, Pine & Furniture and Nature & Stone.
-* Doormats can be labeled: right-click with an empty hand to write two lines of up to 12 characters on them. Dye changes the text color with a splash, a Glow Ink Sac makes it glow and an Ink Sac turns the glow off again.
-* EMI support: Cooking Pot, Cheese Press and Woodcutter recipes are now shown in EMI.
-* Warped Cows now also rarely spawn naturally on Warped Nylium in the Warped Forest. Spawn weight and group size can be set in the config.
-* Watering Can now splashes some water when you use it and looks empty when it's empty, finally!
-* Way more config options: cheese press time, fondue melt time, skim bonus, milk can chance and range, wooden cauldron rain/snow chance, wooly cow wool drops, spawn weights for all the cows and buffalos, felting needle time, climbing rope length, fur set bonus, banner effect and lots of camera stuff. Fabric and NeoForge have the same options now.
+* The Cookpot & Cooking Frame got a complete rework! No more GUI. Pour in your liquid, toss in up to 4 ingredients by hand (Shift-click to add the whole stack) and watch them cook. Got 64 ingredients? You'll get 64 results in one go, and the liquid is only used once. When foam rises to the surface, skim it off to speed things up by 15%. Leave it there and cooking slows down. Once everything is ready, grab the result with an empty hand or fill it into a bowl, bottle or bucket if the recipe calls for one. Hoppers still work too, so your automated kitchens aren't going anywhere!
+* Cooking liquids are now data-driven. Datapacks and other mods can add their own liquids through `data/<namespace>/meadow/cooking_liquid/`. Recipes can also require a specific liquid and container, opening up plenty of possibilities for future recipes and addons.
+* The Fondue Pot got a makeover! Drop in a Cheese Wheel to fill the pot, or add up to 4 individual Cheese pieces. Then grab an empty hand and start stirring! The cheese gradually melts away as the fondue rises, taking on the color of the cheese you used. Bubbles, steam, splashes and stirring sounds all match the cheese color, just like the Bakery Cooking Pot. Because even fondue deserves a little attention to detail.
+* The Cheese Press is now fully physical, too! Pour in up to 4 buckets of the same milk, add a Rennet and hold right-click with an empty hand to crank the press down. Watch the plate sink, the whey drip out and the curd slowly turn into cheese over the next 2 minutes. Once it's ready, crank the press back up and collect one Cheese Wheel per bucket of milk.
+* The Camera got a complete rework! Load it with up to 16 Paper and start taking pictures. Every shot produces a photo that pops right out of the lens, complete with that lovely old-school sepia look. Hang your favorite shots on the wall with a right-click, where they'll sit in their own Photo Frame. Break the frame whenever you want your photo back. A full-size copy is also saved to your screenshots folder, so your best moments aren't stuck in-game. Want to get in the picture yourself? Shift-right-click starts a self-timer. You can also trigger the camera with redstone!
+* Say cheese! The Camera's flash now dazzles monsters in front of the lens, stopping them in their tracks, making them lose their target and causing them to glow briefly. Players who look directly into the lens get a short white flash, too. Range and duration can be adjusted in the config.
+* The Woodcutter finally looks the part! The log you put in now sits on top of the block, and the axe swings down with every cut. :D
+* New info panels! The Cooking Pot, Fondue Pot, Cheese Rack, Cheese Press, Milk Can and Camera now have their own info panels. Each one can be toggled individually in the config.
+* The creative tab got a little tidier. Content is now organized into three side tabs: Cheese & Kitchen, Pine & Furniture, and Nature & Stone.
+* Doormats are now customizable! Right-click with an empty hand to add two lines of text, with up to 12 characters per line. Want some color? Use dye to change the text color (yes, it makes a huge splash). A Glow Ink Sac makes the text glow, and a regular Ink Sac turns the glow off again.
+* EMI support is here! Cooking Pot, Cheese Press and Woodcutter recipes are now available in EMI.
+* Warped Cows can now spawn naturally! Keep an eye out for them in the Warped Forest. Spawn weight and group size are configurable, so you can adjust how often they appear.
+* The Watering Can finally feels like a Watering Can! Using it now splashes water, and it'll actually look empty when there's no water left. Small detail, much better feel.
+* More helpful tooltips! The Milk Can, Climbing Rope, Watering Can, Felting Needle, all placeable blocks and all cheeses now explain what they do. No more guessing!
+* Item rarities are here! Cheeses, tools, Fur Armor, the Camera, spawn eggs and the Meadow Banner now display their rarity colors in their names.
+* Not a fan of limestone cliffs? You can now disable them in the config under the World group. This only affects newly generated chunks, though, so existing cliffs won't disappear. :D 
+* The config got a lot more options! You can now tweak cheese press time, fondue melt time, the cooking skim bonus, Milk Can chance and range, rain and snow chances for the Wooden Cauldron, Wooly Cow wool drops, spawn weights for all the cows and buffalos, Felting Needle time, Climbing Rope length, the Fur Armor set bonus, banner effects and plenty of Camera settings. Fabric and NeoForge now offer the same options, too!
 
 **Changed**
-* Fur Armor set tooltip now uses the shared armor set display.
-* Cooking Pot recipes got reworked for the new pot, all of them are still there.
-* Updated it_it translation (thanks to Serena).
+* Fur Armor's full-set tooltip now uses the shared armor set display.
+* Cooking Pot recipes have been updated for the new cooking system. All existing recipes are still there, so nothing got lost in the process!
+* Meadow worldgen got a fresh coat of paint. Trees now grow in natural-looking groves with open meadows in between. Flowers bloom in colorful drifts, with grass and ferns filling the gaps. And where the terrain gets steep, you'll find limestone cliffs with calcite streaks and cobbled patches. The meadows should feel a lot more natural now.
+* Sofas now seat you at the right height. No more awkward floating or sinking into the cushions!
+* Updated the Italian translation (thanks to Serena!).
 
 **Fixed**
-* Fur Armor full set bonus now actually grants Knockback Resistance +2.
-* Pine Wall Cabinet hitbox now matches its model.
+* Fur Armor's full-set bonus now actually grants Knockback Resistance +2. It was supposed to do that all along!
+* Pine Wall Cabinet hitbox now matches its model, so what you see is finally what you hit.
 
 ***
 

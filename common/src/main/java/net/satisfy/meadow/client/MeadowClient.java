@@ -85,6 +85,7 @@ public class MeadowClient {
 
         registerBlockEntityRenderer();
         registerArmorModels();
+        MeadowTooltips.init();
         BlockInfoOverlay.registerProvider(new FonduePotInfoProvider());
         BlockInfoOverlay.registerProvider(new CheeseRackInfoProvider());
         BlockInfoOverlay.registerProvider(new CookingPotInfoProvider());

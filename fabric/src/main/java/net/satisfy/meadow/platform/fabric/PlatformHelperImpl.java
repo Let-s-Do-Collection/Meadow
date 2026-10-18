@@ -173,6 +173,10 @@ public class PlatformHelperImpl extends PlatformHelper {
         return config().tools.climbingRopeMaxLength;
     }
 
+    public static boolean enableLimestoneCliffs() {
+        return config().world.enableLimestoneCliffs;
+    }
+
     public static boolean isFurSetBonusEnabled() {
         return config().armor.enableFurSetBonus;
     }

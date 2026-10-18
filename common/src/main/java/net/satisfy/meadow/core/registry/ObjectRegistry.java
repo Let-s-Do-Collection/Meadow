@@ -42,6 +42,8 @@ import net.minecraft.world.level.block.grower.TreeGrower;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
 import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
+import net.minecraft.world.phys.shapes.Shapes;
+import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraft.world.level.block.state.properties.WoodType;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.material.Fluids;
@@ -236,7 +238,7 @@ public class ObjectRegistry {
     public static final RegistrySupplier<Item> CHEESE_STICK = registerItem("cheese_stick", () -> new Item(getSettings().food(new FoodProperties.Builder().nutrition(PlatformHelper.getNutrition("cheese_stick")).saturationModifier(PlatformHelper.getSaturation("cheese_stick")).build())));
     public static final RegistrySupplier<Item> RAW_BUFFALO_MEAT = registerItem("raw_buffalo_meat", () -> new Item(getSettings().food(new FoodProperties.Builder().nutrition(PlatformHelper.getNutrition("raw_buffalo_meat")).saturationModifier(PlatformHelper.getSaturation("raw_buffalo_meat")).build())));
     public static final RegistrySupplier<Item> COOKED_BUFFALO_MEAT = registerItem("cooked_buffalo_meat", () -> new Item(getSettings().food(new FoodProperties.Builder().nutrition(PlatformHelper.getNutrition("cooked_buffalo_meat")).saturationModifier(PlatformHelper.getSaturation("cooked_buffalo_meat")).build())));
-    public static final RegistrySupplier<Block> ROASTED_BUFFALO_HAM = registerWithItem("roasted_buffalo_ham", () -> new FoodBlock(Block.Properties.of(), 4, new FoodProperties.Builder().nutrition(PlatformHelper.getNutrition("roasted_buffalo_ham")).saturationModifier(PlatformHelper.getSaturation("roasted_buffalo_ham")).effect(new MobEffectInstance(MobEffects.REGENERATION, PlatformHelper.getEffectDuration("roasted_buffalo_ham"), 1), 1.0f).build()));
+    public static final RegistrySupplier<Block> ROASTED_BUFFALO_HAM = registerWithItem("roasted_buffalo_ham", () -> new FoodBlock(Block.Properties.of(), 4, new FoodProperties.Builder().nutrition(PlatformHelper.getNutrition("roasted_buffalo_ham")).saturationModifier(PlatformHelper.getSaturation("roasted_buffalo_ham")).effect(new MobEffectInstance(MobEffects.REGENERATION, PlatformHelper.getEffectDuration("roasted_buffalo_ham"), 1), 1.0f).build(), roastedBuffaloHamShapes()));
     public static final RegistrySupplier<Item> SAUSAGE_WITH_CHEESE = registerItem("sausage_with_cheese", () -> new Item(getSettings().food(new FoodProperties.Builder().nutrition(PlatformHelper.getNutrition("sausage_with_cheese")).saturationModifier(PlatformHelper.getSaturation("sausage_with_cheese")).build())));
     public static final RegistrySupplier<Item> WOODEN_BUCKET = registerItem("wooden_bucket", () -> new WoodenBucket(Fluids.EMPTY, getSettings().stacksTo(16)));
     public static final RegistrySupplier<Item> WOODEN_WATER_BUCKET = registerItem("wooden_water_bucket", () -> new WoodenBucket(Fluids.WATER, getSettings().stacksTo(1).craftRemainder(ObjectRegistry.WOODEN_BUCKET.get())));
@@ -336,5 +338,16 @@ public class ObjectRegistry {
 
     public static <T extends Item> RegistrySupplier<T> registerItem(String path, Supplier<T> itemSupplier) {
         return RegistryUtil.registerItem(ITEMS, ITEM_REGISTRAR, Meadow.identifier(path), itemSupplier);
+    }
+
+    private static VoxelShape[] roastedBuffaloHamShapes() {
+        VoxelShape board = Block.box(1, 0, 1, 15, 1, 15);
+        VoxelShape bone = Block.box(0, 5, 7, 4, 7, 9);
+        return new VoxelShape[]{
+                Shapes.or(board, Block.box(4, 1, 4, 14, 9, 12), bone),
+                Shapes.or(board, Block.box(4, 1, 4, 11, 9, 12), bone),
+                Shapes.or(board, Block.box(4, 1, 4, 8, 9, 12), bone),
+                board
+        };
     }
 }

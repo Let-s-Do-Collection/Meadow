@@ -204,6 +204,11 @@ public class PlatformHelper {
     }
 
     @ExpectPlatform
+    public static boolean enableLimestoneCliffs() {
+        throw new AssertionError();
+    }
+
+    @ExpectPlatform
     public static boolean isFurSetBonusEnabled() {
         throw new AssertionError();
     }

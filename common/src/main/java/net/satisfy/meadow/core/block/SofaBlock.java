@@ -92,7 +92,7 @@ public class SofaBlock extends LineConnectingBlock {
 
     @Override
     protected @NotNull ItemInteractionResult useItemOn(ItemStack itemStack, BlockState blockState, Level level, BlockPos blockPos, Player player, InteractionHand interactionHand, BlockHitResult blockHitResult) {
-        return SeatUtil.onUse(level, player, interactionHand, blockHitResult, -0.3);
+        return SeatUtil.onUse(level, player, interactionHand, blockHitResult, 0.2);
     }
 
     @Override

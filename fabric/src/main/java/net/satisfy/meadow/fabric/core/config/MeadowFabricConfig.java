@@ -26,6 +26,9 @@ public class MeadowFabricConfig implements ConfigData {
     public ArmorSettings armor = new ArmorSettings();
 
     @ConfigEntry.Gui.CollapsibleObject
+    public WorldSettings world = new WorldSettings();
+
+    @ConfigEntry.Gui.CollapsibleObject
     public InfoTooltipSettings infoTooltips = new InfoTooltipSettings();
 
     @ConfigEntry.Gui.CollapsibleObject
@@ -164,6 +167,11 @@ public class MeadowFabricConfig implements ConfigData {
         @ConfigEntry.Gui.Tooltip
         @ConfigEntry.BoundedDiscrete(min = 0, max = 100)
         public int furSetKnockbackResistance = 20;
+    }
+
+    public static class WorldSettings {
+        @ConfigEntry.Gui.Tooltip
+        public boolean enableLimestoneCliffs = true;
     }
 
     public static class InfoTooltipSettings {

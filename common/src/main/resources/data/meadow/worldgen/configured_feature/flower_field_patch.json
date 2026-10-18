@@ -1,31 +1,73 @@
 {
-  "type": "minecraft:simple_block",
+  "type": "minecraft:random_patch",
   "config": {
-    "to_place": {
-      "type": "minecraft:noise_provider",
-      "noise": {
-        "amplitudes": [
-          1.0
-        ],
-        "firstOctave": 0
+    "tries": 72,
+    "xz_spread": 6,
+    "y_spread": 3,
+    "feature": {
+      "feature": {
+        "type": "minecraft:simple_block",
+        "config": {
+          "to_place": {
+            "type": "minecraft:noise_provider",
+            "noise": {
+              "amplitudes": [
+                1.0
+              ],
+              "firstOctave": 0
+            },
+            "scale": 0.030833334,
+            "seed": 4885,
+            "states": [
+              {
+                "Name": "meadow:saxifrage"
+              },
+              {
+                "Name": "meadow:alpine_poppy"
+              },
+              {
+                "Name": "meadow:enzian"
+              },
+              {
+                "Name": "meadow:delphinium"
+              },
+              {
+                "Name": "meadow:fire_lily"
+              }
+            ]
+          }
+        }
       },
-      "scale": 0.030833334,
-      "seed": 4885,
-      "states": [
+      "placement": [
         {
-          "Name": "meadow:saxifrage"
-        },
-        {
-          "Name": "meadow:alpine_poppy"
-        },
-        {
-          "Name": "meadow:enzian"
-        },
-        {
-          "Name": "meadow:delphinium"
-        },
-        {
-          "Name": "meadow:fire_lily"
+          "type": "minecraft:block_predicate_filter",
+          "predicate": {
+            "type": "minecraft:all_of",
+            "predicates": [
+              {
+                "type": "minecraft:matching_blocks",
+                "offset": [
+                  0,
+                  0,
+                  0
+                ],
+                "blocks": [
+                  "minecraft:air"
+                ]
+              },
+              {
+                "type": "minecraft:matching_blocks",
+                "offset": [
+                  0,
+                  -1,
+                  0
+                ],
+                "blocks": [
+                  "minecraft:grass_block"
+                ]
+              }
+            ]
+          }
         }
       ]
     }

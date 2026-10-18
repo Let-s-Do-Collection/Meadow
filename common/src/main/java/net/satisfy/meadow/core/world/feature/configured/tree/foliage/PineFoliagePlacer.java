@@ -3,7 +3,6 @@ package net.satisfy.meadow.core.world.feature.configured.tree.foliage;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
 import net.minecraft.util.RandomSource;
 import net.minecraft.util.valueproviders.IntProvider;
 import net.minecraft.world.level.LevelSimulatedReader;
@@ -22,6 +21,14 @@ public class PineFoliagePlacer extends FoliagePlacer {
             ).apply(instance, PineFoliagePlacer::new)
     );
 
+    private static final int ROWS_PER_TIER = 3;
+    private static final int SPIRE_ROWS = 1;
+    private static final int SPIRE_TOP = 0;
+    private static final int MIN_CROWN_ROWS = 9;
+    private static final float TIER_SHRINK_CHANCE = 0.25F;
+    private static final float TIER_SHIFT_CHANCE = 0.3F;
+    private static final float[] EDGE_DROP = {0.1F, 0.25F, 0.45F};
+
     private final IntProvider trunkHeight;
 
     public PineFoliagePlacer(IntProvider radius, IntProvider offset, IntProvider trunkHeight) {
@@ -35,118 +42,67 @@ public class PineFoliagePlacer extends FoliagePlacer {
     }
 
     @Override
-    protected void createFoliage(@NotNull LevelSimulatedReader level, @NotNull FoliageSetter setter, @NotNull RandomSource random, @NotNull TreeConfiguration config, int trunkHeight, @NotNull FoliageAttachment attachment, int foliageHeight, int radius, int topOffset) {
+    protected void createFoliage(@NotNull LevelSimulatedReader level, @NotNull FoliageSetter setter, @NotNull RandomSource random, @NotNull TreeConfiguration config, int treeHeight, @NotNull FoliageAttachment attachment, int foliageHeight, int radius, int offset) {
         BlockPos anchor = attachment.pos();
-        BlockPos.MutableBlockPos mutablePos = anchor.mutable();
+        int tierRadius = 0;
+        int shiftX = 0;
+        int shiftZ = 0;
 
-        topOffset -= 1;
+        for (int row = 0; row < foliageHeight; row++) {
+            int rowRadius = 0;
+            float drop = 0.0F;
 
-        int[] radii = new int[]{0, 0, 1, 1, 1, 2, 2, 2, 2, 2, 3, 3, 2, 1};
-        int layers = radii.length;
-        int topEnd = topOffset - (layers - 1);
+            if (row >= SPIRE_ROWS) {
+                int body = row - SPIRE_ROWS;
+                int tier = body / ROWS_PER_TIER + 1;
+                int rowInTier = body % ROWS_PER_TIER;
 
-        for (int y = topOffset; y >= topEnd; y--) {
-            int layerIndex = topOffset - y;
-            int ringRadius = radii[layerIndex];
-
-            if (ringRadius == 0) {
-                mutablePos.setWithOffset(anchor, 0, y, 0);
-                tryPlaceLeaf(level, setter, random, config, mutablePos);
-                if (layerIndex <= 2 && random.nextInt(4) == 0) {
-                    Direction direction = Direction.Plane.HORIZONTAL.getRandomDirection(random);
-                    Direction secondDirection = random.nextBoolean() ? direction.getClockWise() : direction.getCounterClockWise();
-                    tryPlaceLeaf(level, setter, random, config, mutablePos.relative(direction, 1).relative(secondDirection, 1));
+                if (rowInTier == 0) {
+                    tierRadius = Math.min(radius, tier + 1);
+                    if (tierRadius > 2 && random.nextFloat() < TIER_SHRINK_CHANCE) {
+                        tierRadius--;
+                    }
+                    boolean shifted = tierRadius >= 2 && random.nextFloat() < TIER_SHIFT_CHANCE;
+                    shiftX = shifted ? random.nextInt(3) - 1 : 0;
+                    shiftZ = shifted ? random.nextInt(3) - 1 : 0;
                 }
-                continue;
+
+                rowRadius = rowInTier == 0 ? Math.max(tier > 1 ? 2 : 1, tierRadius - 1) : tierRadius;
+                drop = EDGE_DROP[rowInTier];
             }
 
-            placeRing(level, setter, random, config, anchor, ringRadius, y, attachment.doubleTrunk(), layerIndex, random);
-        }
-
-        int radiusStep = random.nextInt(2);
-        int maxRadius = 1;
-        int previousRadius = 0;
-
-        int bottomLimit = -2;
-        int lowestRelativeY = Math.max(-foliageHeight, bottomLimit);
-
-        for (int relativeY = topEnd - 1; relativeY >= lowestRelativeY; --relativeY) {
-            placeLeavesRow(level, setter, random, config, anchor, radiusStep, relativeY, attachment.doubleTrunk());
-            if (radiusStep >= maxRadius) {
-                radiusStep = previousRadius;
-                previousRadius = 1;
-                maxRadius = Math.min(maxRadius + 1, radius + attachment.radiusOffset());
-            } else {
-                ++radiusStep;
-            }
+            BlockPos center = anchor.offset(shiftX, SPIRE_TOP + offset - row, shiftZ);
+            placeDisc(level, setter, random, config, center, rowRadius, drop);
         }
     }
 
-    private void placeRing(LevelSimulatedReader level, FoliageSetter setter, RandomSource random, TreeConfiguration config, BlockPos center, int ringRadius, int relativeY, boolean doubleTrunk, int layerIndex, RandomSource rng) {
-        int inflate = doubleTrunk ? 1 : 0;
-        BlockPos.MutableBlockPos mutablePos = new BlockPos.MutableBlockPos();
+    private void placeDisc(LevelSimulatedReader level, FoliageSetter setter, RandomSource random, TreeConfiguration config, BlockPos center, int radius, float dropChance) {
+        BlockPos.MutableBlockPos pos = new BlockPos.MutableBlockPos();
+        float outer = radius <= 1 ? 1.5F : (radius + 0.5F) * (radius + 0.5F);
+        float inner = (radius - 0.5F) * (radius - 0.5F);
 
-        boolean thinRing = ringRadius == 1;
-        boolean midRing = ringRadius == 2;
-        boolean forceCardinals = layerIndex <= 4;
-        int skipOdds = thinRing ? 4 : (midRing ? 6 : 7);
-
-        for (int offsetX = -ringRadius; offsetX <= ringRadius + inflate; offsetX++) {
-            for (int offsetZ = -ringRadius; offsetZ <= ringRadius + inflate; offsetZ++) {
-                if (offsetX == 0 && offsetZ == 0) {
+        for (int dx = -radius; dx <= radius; dx++) {
+            for (int dz = -radius; dz <= radius; dz++) {
+                float distance = dx * dx + dz * dz;
+                if (distance > outer) {
                     continue;
                 }
-
-                int absX = Math.abs(offsetX);
-                int absZ = Math.abs(offsetZ);
-                if ((float) (absX * absX + absZ * absZ) > (ringRadius + 0.25F) * (ringRadius + 0.25F)) {
+                if (radius > 1 && distance > inner && random.nextFloat() < dropChance) {
                     continue;
                 }
-
-                boolean nearTrunk = absX <= 1 && absZ <= 1;
-                if (nearTrunk) {
-                    mutablePos.setWithOffset(center, offsetX, relativeY, offsetZ);
-                    tryPlaceLeaf(level, setter, random, config, mutablePos);
-                    continue;
-                }
-
-                boolean cardinal = absX + absZ == 1;
-
-                if (!forceCardinals) {
-                    if (thinRing) {
-                        if (cardinal && rng.nextInt(skipOdds + 1) == 0) {
-                            continue;
-                        }
-                        if (absX == 1 && absZ == 1 && rng.nextInt(skipOdds + 2) == 0) {
-                            continue;
-                        }
-                    } else if (midRing) {
-                        if ((absX == ringRadius || absZ == ringRadius) && rng.nextInt(skipOdds + 1) == 0) {
-                            continue;
-                        }
-                    } else {
-                        if ((absX == ringRadius && absZ == ringRadius) || rng.nextInt(skipOdds + 2) == 0) {
-                            continue;
-                        }
-                    }
-                } else if (!cardinal && thinRing && rng.nextInt(skipOdds + 2) == 0) {
-                    continue;
-                }
-
-                mutablePos.setWithOffset(center, offsetX, relativeY, offsetZ);
-                tryPlaceLeaf(level, setter, random, config, mutablePos);
+                pos.setWithOffset(center, dx, 0, dz);
+                tryPlaceLeaf(level, setter, random, config, pos);
             }
         }
     }
 
     @Override
     public int foliageHeight(@NotNull RandomSource random, int height, @NotNull TreeConfiguration config) {
-        int sampled = height - this.trunkHeight.sample(random);
-        return Math.max(4, sampled - 2);
+        return Math.max(MIN_CROWN_ROWS, height - this.trunkHeight.sample(random));
     }
 
     @Override
     protected boolean shouldSkipLocation(@NotNull RandomSource random, int localX, int localY, int localZ, int range, boolean large) {
-        return localX == range && localZ == range && range > 0;
+        return false;
     }
 }

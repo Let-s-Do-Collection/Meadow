@@ -29,13 +29,17 @@ public class MeadowBiomeModification {
                     gen.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, MeadowPlacedFeature.FLOWER_FIELD_PATCH_PLACED);
                     gen.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, MeadowPlacedFeature.FOREST_TREES_PLACED);
                     gen.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, MeadowPlacedFeature.MEADOW_TREES_PLACED);
+                    gen.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, MeadowPlacedFeature.MEADOW_GRASS_PATCH_PLACED);
                     gen.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, MeadowPlacedFeature.SMALL_FIR_PATCH_PLACED);
                     gen.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, MeadowPlacedFeature.ORE_LIMESTONE_KEY);
                     gen.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, MeadowPlacedFeature.ORE_SALT_UPPER_KEY);
                     gen.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, MeadowPlacedFeature.ORE_SALT_BURIED_KEY);
                     gen.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, MeadowPlacedFeature.BOULDERS_KEY);
                     gen.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, MeadowPlacedFeature.LIMESTONE_SLAB_KEY);
+                    gen.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, MeadowPlacedFeature.LIMESTONE_CLIFF_BAND_KEY);
                     gen.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, MeadowPlacedFeature.REPLACE_STONE_WITH_LIMESTONE_KEY);
+                    gen.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, MeadowPlacedFeature.LIMESTONE_CALCITE_STREAK_KEY);
+                    gen.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, MeadowPlacedFeature.LIMESTONE_COBBLED_PATCH_KEY);
                     gen.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, MeadowPlacedFeature.REPLACE_GRASS_WITH_COBBLED_LIMESTONE_KEY);
                     gen.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, MeadowPlacedFeature.REPLACE_GRASS_WITH_COARSE_DIRT_KEY);
                     gen.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, MeadowPlacedFeature.REPLACE_GRASS_WITH_MOSSY_COBBLED_LIMESTONE_KEY);
