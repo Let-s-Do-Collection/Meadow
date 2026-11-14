@@ -1,7 +1,7 @@
 {
   "type": "meadow:felting",
   "ingredient": {
-    "item": "minecraft:light_gray_wool"
+    "item": "minecraft:yellow_wool"
   },
   "result": {
     "id": "meadow:linen",

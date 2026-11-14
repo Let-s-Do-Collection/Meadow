@@ -1,0 +1,10 @@
+{
+  "type": "meadow:woodcutting",
+  "inputItem": {
+    "tag": "minecraft:bamboo_blocks"
+  },
+  "outputItem": {
+    "count": 9,
+    "id": "minecraft:bamboo_slab"
+  }
+}

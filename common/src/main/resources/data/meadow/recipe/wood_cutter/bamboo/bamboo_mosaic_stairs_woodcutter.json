@@ -1,0 +1,10 @@
+{
+  "type": "meadow:woodcutting",
+  "inputItem": {
+    "tag": "minecraft:bamboo_blocks"
+  },
+  "outputItem": {
+    "count": 4,
+    "id": "minecraft:bamboo_mosaic_stairs"
+  }
+}
