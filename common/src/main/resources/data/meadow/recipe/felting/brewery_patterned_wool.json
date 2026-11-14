@@ -1,11 +1,10 @@
 {
   "type": "meadow:felting",
   "fabric:load_conditions": [
-    { "condition": "fabric:all_mods_loaded", "values": ["brewery", "farm_and_charm"] }
+    { "condition": "fabric:all_mods_loaded", "values": ["brewery"] }
   ],
   "neoforge:conditions": [
-    { "type": "neoforge:mod_loaded", "modid": "brewery" },
-    { "type": "neoforge:mod_loaded", "modid": "farm_and_charm" }
+    { "type": "neoforge:mod_loaded", "modid": "brewery" }
   ],
   "ingredient": {
     "item": "minecraft:light_blue_wool"
