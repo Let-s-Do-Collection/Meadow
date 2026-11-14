@@ -1,0 +1,16 @@
+{
+  "type": "meadow:woodcutting",
+  "fabric:load_conditions": [
+    { "condition": "fabric:all_mods_loaded", "values": ["bloomingnature"] }
+  ],
+  "neoforge:conditions": [
+    { "type": "neoforge:mod_loaded", "modid": "bloomingnature" }
+  ],
+  "inputItem": {
+    "tag": "bloomingnature:aspen_logs"
+  },
+  "outputItem": {
+      "count": 4,
+      "id": "bloomingnature:aspen_stairs"
+  }
+}
