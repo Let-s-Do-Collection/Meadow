@@ -7,10 +7,10 @@
     { "type": "neoforge:mod_loaded", "modid": "bloomingnature" }
   ],
   "inputItem": {
-    "tag": "minecraft:aspen_logs"
+    "tag": "bloomingnature:aspen_logs"
   },
   "outputItem": {
       "count": 4,
-      "id": "minecraft:aspen_planks"
+      "id": "bloomingnature:aspen_planks"
   }
 }
