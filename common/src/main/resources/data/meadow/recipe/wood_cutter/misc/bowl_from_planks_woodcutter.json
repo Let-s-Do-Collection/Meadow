@@ -1,0 +1,10 @@
+{
+  "type": "meadow:woodcutting",
+  "inputItem": {
+    "tag": "minecraft:planks"
+  },
+  "outputItem": {
+    "count": 1,
+    "id": "minecraft:bowl"
+  }
+}
