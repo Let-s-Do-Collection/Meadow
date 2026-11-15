@@ -10,7 +10,7 @@
     "tag": "minecraft:bamboo_blocks"
   },
   "outputItem": {
-    "count": 9,
+    "count": 5,
     "id": "vinery:bamboo_lattice"
   }
 }
