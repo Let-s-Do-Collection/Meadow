@@ -1,0 +1,16 @@
+{
+  "type": "meadow:woodcutting",
+  "fabric:load_conditions": [
+    { "condition": "fabric:all_mods_loaded", "values": ["vinery"] }
+  ],
+  "neoforge:conditions": [
+    { "type": "neoforge:mod_loaded", "modid": "vinery" }
+  ],
+  "inputItem": {
+    "tag": "minecraft:mangrove_logs"
+  },
+  "outputItem": {
+    "count": 9,
+    "id": "vinery:mangrove_lattice"
+  }
+}
