@@ -10,7 +10,7 @@
     "tag": "minecraft:logs"
   },
   "outputItem": {
-    "count": 2,
+    "count": 1,
     "id": "vinery:stackable_log"
   }
 }
