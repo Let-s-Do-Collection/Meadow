@@ -1,0 +1,10 @@
+{
+  "type": "meadow:woodcutting",
+  "inputItem": {
+    "item": "minecraft:dark_oak_log"
+  },
+  "outputItem": {
+    "count": 1,
+    "id": "minecraft:stripped_dark_oak_log"
+  }
+}
