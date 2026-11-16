@@ -1,0 +1,10 @@
+{
+  "type": "meadow:woodcutting",
+  "inputItem": {
+    "item": "minecraft:cherry_log"
+  },
+  "outputItem": {
+    "count": 1,
+    "id": "minecraft:stripped_cherry_log"
+  }
+}
