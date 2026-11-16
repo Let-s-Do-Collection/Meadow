@@ -1,7 +1,7 @@
 {
   "type": "meadow:woodcutting",
   "inputItem": {
-    "item": "minecraft:dark_oak_plankss"
+    "item": "minecraft:dark_oak_planks"
   },
   "outputItem": {
     "count": 1,
