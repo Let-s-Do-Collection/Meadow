@@ -1,0 +1,10 @@
+{
+  "type": "meadow:woodcutting",
+  "inputItem": {
+    "item": "minecraft:bamboo_block"
+  },
+  "outputItem": {
+    "count": 9,
+    "id": "minecraft:bamboo"
+  }
+}
