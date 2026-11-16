@@ -1,0 +1,10 @@
+{
+  "type": "meadow:woodcutting",
+  "inputItem": {
+    "item,": "minecraft:acacia_planks"
+  },
+  "outputItem": {
+    "count": 2,
+    "id": "minecraft:acacia_slab"
+  }
+}
