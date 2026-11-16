@@ -1,7 +1,7 @@
 {
   "type": "meadow:woodcutting",
   "inputItem": {
-    "ite ": "minecraft:crimson_planks"
+    "item": "minecraft:crimson_planks"
   },
   "outputItem": {
     "count": 1,
