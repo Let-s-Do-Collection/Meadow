@@ -7,11 +7,11 @@
   ],
   "key": {
     "#": {
-      "tag": "meadow:pine_logs"
+      "item": "meadow:stripped_pine_log"
     }
   },
   "result": {
     "id": "meadow:pine_beam",
-    "count": 3
+    "count": 2
   }
 }
