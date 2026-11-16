@@ -1,8 +1,10 @@
 {
   "type": "meadow:woodcutting",
-  "inputItem": {
-    "tag": "meadow:cuttable_into_stripped_acacia_log"
-  },
+  "inputItem": [
+    {"item": "minecraft:acacia_log"},
+    {"item": "minecraft:acacia_wood"},
+    {"item": "minecraft:stripped_acacia_wood"},
+  ],
   "outputItem": {
     "count": 1,
     "id": "minecraft:stripped_acacia_log"
