@@ -1,0 +1,10 @@
+{
+  "type": "meadow:woodcutting",
+  "inputItem": {
+    "item": "meadow:pine_log"
+  },
+  "outputItem": {
+    "count": 1,
+    "id": "meadow:stripped_pine_log"
+  }
+}
