@@ -3,7 +3,7 @@
   "inputItem": [
     {"item": "minecraft:acacia_log"},
     {"item": "minecraft:acacia_wood"},
-    {"item": "minecraft:stripped_acacia_wood"},
+    {"item": "minecraft:stripped_acacia_wood"}
   ],
   "outputItem": {
     "count": 1,
