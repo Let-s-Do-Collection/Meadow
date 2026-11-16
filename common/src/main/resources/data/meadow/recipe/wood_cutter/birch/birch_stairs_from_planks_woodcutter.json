@@ -1,0 +1,10 @@
+{
+  "type": "meadow:woodcutting",
+  "inputItem": {
+    "item": "minecraft:birch_planks"
+  },
+  "outputItem": {
+    "count": 1,
+    "id": "minecraft:birch_stairs"
+  }
+}
