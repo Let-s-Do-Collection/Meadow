@@ -1,0 +1,16 @@
+{
+  "type": "meadow:woodcutting",
+  "fabric:load_conditions": [
+    { "condition": "fabric:all_mods_loaded", "values": ["alpinewhispers"] }
+  ],
+  "neoforge:conditions": [
+    { "type": "neoforge:mod_loaded", "modid": "alpinewhispers" }
+  ],
+  "inputItem": {
+    "item": "alpinewhispers:arolla_pine_wood"
+  },
+  "outputItem": {
+    "count": 1,
+    "id": "alpinewhispers:stripped_arolla_pine_wood"
+  }
+}
