@@ -1,0 +1,10 @@
+{
+  "type": "meadow:woodcutting",
+  "inputItem": {
+    "item": "minecraft:crimson_hyphae"
+  },
+  "outputItem": {
+    "count": 1,
+    "id": "minecraft:crimson_stem"
+  }
+}
