@@ -1,8 +1,9 @@
 {
   "type": "meadow:woodcutting",
-  "inputItem": {
-    "item": "minecraft:bamboo_planks"
-  },
+  "inputItem": [
+    {"item": "minecraft:bamboo_planks"},
+    {"item": "minecraftf:bamboo_mosaic"}
+  ],
   "outputItem": {
     "count": 1,
     "id": "minecraft:bamboo_mosaic_stairs"
