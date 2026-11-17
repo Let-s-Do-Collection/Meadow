@@ -1,0 +1,10 @@
+{
+  "type": "meadow:woodcutting",
+  "inputItem": {
+    "tag": "minecraft:logs"
+  },
+  "outputItem": {
+    "count": 2,
+    "id": "meadow:firewood"
+  }
+}
