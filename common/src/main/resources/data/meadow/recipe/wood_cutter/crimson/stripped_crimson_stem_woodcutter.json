@@ -1,8 +1,10 @@
 {
   "type": "meadow:woodcutting",
-  "inputItem": {
-    "item": "minecraft:crimson_stem"
-  },
+  "inputItem": [
+    {"item": "minecraft:crimson_stem"},
+    {"item": "minecraft:crimson_hyphae"},
+    {"item": "minecraft:stripped_crimson_hyphae"}
+  ],
   "outputItem": {
     "count": 1,
     "id": "minecraft:stripped_crimson_stem"
