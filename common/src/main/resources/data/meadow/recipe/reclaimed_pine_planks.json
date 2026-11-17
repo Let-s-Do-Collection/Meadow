@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "_",
+    "_"
+  ],
+  "key": {
+    "_": {
+      "item": "meadow:pine_slab"
+    }
+  },
+  "result": {
+    "id": "meadow:reclaimed_pine_planks",
+    "count": 1
+  }
+}
