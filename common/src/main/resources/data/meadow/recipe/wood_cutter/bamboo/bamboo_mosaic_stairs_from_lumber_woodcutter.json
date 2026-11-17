@@ -2,7 +2,7 @@
   "type": "meadow:woodcutting",
   "inputItem": [
     {"item": "minecraft:bamboo_planks"},
-    {"item": "minecraftf:bamboo_mosaic"}
+    {"item": "minecraft:bamboo_mosaic"}
   ],
   "outputItem": {
     "count": 1,
