@@ -2,18 +2,16 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "meadow:fire_log"
+      "meadow:firewood"
     ]
   },
   "criteria": {
-    "has_pine_log": {
+    "has_log": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
-            "items": [
-              "meadow:pine_log"
-            ]
+            "items": "#minecraft:logs"
           }
         ]
       }
@@ -21,13 +19,13 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "meadow:fire_log"
+        "recipe": "meadow:firewood"
       }
     }
   },
   "requirements": [
     [
-      "has_pine_log",
+      "has_log",
       "has_the_recipe"
     ]
   ]
