@@ -1,8 +1,10 @@
 {
   "type": "meadow:woodcutting",
-  "inputItem": {
-    "item": "minecraft:birch_log"
-  },
+  "inputItem": [
+    {"item": "minecraft:birch_log"},
+    {"item": "minecraft:birch_wood"},
+    {"item": "minecraft:stripped_birch_wood"}
+  ],
   "outputItem": {
     "count": 1,
     "id": "minecraft:stripped_birch_log"
