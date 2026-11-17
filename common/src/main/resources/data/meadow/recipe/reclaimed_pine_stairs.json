@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "stairs",
+  "pattern": [
+    "#  ",
+    "## ",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "meadow:reclaimed_pine_planks"
+    }
+  },
+  "result": {
+    "id": "meadow:reclaimed_pine_stairs",
+    "count": 4
+  }
+}
