@@ -21,7 +21,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "meadow:reclaimed_pine_door"
+        "recipe": "meadow:reclaimed_pine_stairs"
       }
     }
   },
