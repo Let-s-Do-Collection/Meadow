@@ -1,0 +1,18 @@
+{
+  "type": "meadow:woodcutting",
+  "fabric:load_conditions": [
+    { "condition": "fabric:all_mods_loaded", "values": ["bloomingnature"] }
+  ],
+  "neoforge:conditions": [
+    { "type": "neoforge:mod_loaded", "modid": "bloomingnature" }
+  ],
+  "inputItem": [
+    {"item": "bloomingnature:ebony_log"},
+    {"item": "bloomingnature:ebony_wood"},
+    {"item": "bloomingnature:stripped_ebony_wood"}
+  ],
+  "outputItem": {
+    "count": 1,
+    "id": "bloomingnature:stripped_ebony_log"
+  }
+}
