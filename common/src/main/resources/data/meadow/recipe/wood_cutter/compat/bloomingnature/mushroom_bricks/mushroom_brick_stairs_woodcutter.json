@@ -6,9 +6,10 @@
   "neoforge:conditions": [
     { "type": "neoforge:mod_loaded", "modid": "bloomingnature" }
   ],
-  "inputItem": {
-    "item": "minecraft:mushroom_stem"
-  },
+  "inputItem": [
+    {"item": "minecraft:mushroom_stem"},
+    {"item": "bloomingnature:mushroom_bricks"}
+  ],
   "outputItem": {
     "count": 1,
     "id": "bloomingnature:mushroom_brick_stairs"
