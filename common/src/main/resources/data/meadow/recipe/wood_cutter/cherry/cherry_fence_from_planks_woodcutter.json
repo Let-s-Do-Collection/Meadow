@@ -1,0 +1,10 @@
+{
+  "type": "meadow:woodcutting",
+  "inputItem": {
+    "item": "minecraft:cherry_planks"
+  },
+  "outputItem": {
+    "count": 1,
+    "id": "minecraft:cherry_fence"
+  }
+}

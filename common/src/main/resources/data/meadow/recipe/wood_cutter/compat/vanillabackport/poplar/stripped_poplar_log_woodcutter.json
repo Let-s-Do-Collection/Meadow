@@ -1,0 +1,18 @@
+{
+  "type": "meadow:woodcutting",
+  "fabric:load_conditions": [
+    { "condition": "fabric:all_mods_loaded", "values": ["vanillabackport"] }
+  ],
+  "neoforge:conditions": [
+    { "type": "neoforge:mod_loaded", "modid": "vanillabackport" }
+  ],
+  "inputItem": [
+    {"item": "minecraft:poplar_log"},
+    {"item": "minecraft:poplar_wood"},
+    {"item": "minecraft:stripped_poplar_wood"}
+  ],
+  "outputItem": {
+    "count": 1,
+    "id": "minecraft:stripped_poplar_log"
+  }
+}

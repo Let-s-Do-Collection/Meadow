@@ -1,0 +1,17 @@
+{
+  "type": "meadow:woodcutting",
+  "fabric:load_conditions": [
+    { "condition": "fabric:all_mods_loaded", "values": ["farm_and_charm", "bloomingnature"] }
+  ],
+  "neoforge:conditions": [
+    { "type": "neoforge:mod_loaded", "modid": "farm_and_charm" },
+    { "type": "neoforge:mod_loaded", "modid": "bloomingnature" }
+  ],
+  "inputItem": {
+    "tag": "bloomingnature:cactus"
+  },
+  "outputItem": {
+    "count": 3,
+    "id": "farm_and_charm:sturdy_ladder"
+  }
+}
