@@ -1,0 +1,17 @@
+{
+  "type": "meadow:woodcutting",
+  "fabric:load_conditions": [
+    { "condition": "fabric:all_mods_loaded", "values": ["hearth_and_timber"] }
+  ],
+  "neoforge:conditions": [
+    { "type": "neoforge:mod_loaded", "modid": "hearth_and_timber" }
+  ],
+  "inputItem": [
+{"item": "minecraft:jungle_planks"},
+{"item": "hearth_and_timber:jungle_shingles"}
+],
+  "outputItem": {
+    "count": 1,
+    "id": "hearth_and_timber:jungle_shingle_stairs"
+  }
+}

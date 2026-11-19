@@ -1,0 +1,17 @@
+{
+  "type": "meadow:woodcutting",
+  "fabric:load_conditions": [
+    { "condition": "fabric:all_mods_loaded", "values": ["hearth_and_timber"] }
+  ],
+  "neoforge:conditions": [
+    { "type": "neoforge:mod_loaded", "modid": "hearth_and_timber" }
+  ],
+  "inputItem": [
+{"item": "minecraft:birch_planks"},
+{"item": "hearth_and_timber:birch_shingles"}
+],
+  "outputItem": {
+    "count": 2,
+    "id": "hearth_and_timber:birch_shingle_slab"
+  }
+}
