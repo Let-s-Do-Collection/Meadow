@@ -1,0 +1,16 @@
+{
+  "type": "meadow:woodcutting",
+  "fabric:load_conditions": [
+    { "condition": "fabric:all_mods_loaded", "values": ["biomeswevegone"] }
+  ],
+  "neoforge:conditions": [
+    { "type": "neoforge:mod_loaded", "modid": "biomeswevegone" }
+  ],
+  "inputItem": {
+    "tag": "biomeswevegone:maple_logs"
+  },
+  "outputItem": {
+      "count": 4,
+      "id": "biomeswevegone:maple_stairs"
+  }
+}
