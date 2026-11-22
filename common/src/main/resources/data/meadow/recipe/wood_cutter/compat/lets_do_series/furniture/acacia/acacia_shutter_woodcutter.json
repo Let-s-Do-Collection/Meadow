@@ -10,7 +10,7 @@
     "tag": "minecraft:acacia_logs"
   },
   "outputItem": {
-    "count": 5,
+    "count": 6,
     "id": "furniture:acacia_shutter"
   }
 }
