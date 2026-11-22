@@ -1,0 +1,16 @@
+{
+  "type": "meadow:woodcutting",
+  "fabric:load_conditions": [
+    { "condition": "fabric:all_mods_loaded", "values": ["regions_unexplored"] }
+  ],
+  "neoforge:conditions": [
+    { "type": "neoforge:mod_loaded", "modid": "regions_unexplored" }
+  ],
+  "inputItem": {
+    "tag": "regions_unexplored:larch_logs"
+  },
+  "outputItem": {
+      "count": 2,
+      "id": "regions_unexplored:larch_door"
+  }
+}

@@ -3,7 +3,8 @@
   "inputItem": [
     {"item": "minecraft:birch_log"},
     {"item": "minecraft:birch_wood"},
-    {"item": "minecraft:stripped_birch_wood"}
+    {"item": "minecraft:stripped_birch_wood"},
+    {"item": "meadow:alpine_birch_log"}
   ],
   "outputItem": {
     "count": 1,
