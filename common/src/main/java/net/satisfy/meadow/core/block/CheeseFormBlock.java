@@ -105,7 +105,7 @@ public class CheeseFormBlock extends FacingBlock implements EntityBlock {
         if (!player.getMainHandItem().isEmpty() || !(level.getBlockEntity(pos) instanceof CheeseFormBlockEntity press)) {
             return InteractionResult.PASS;
         }
-        if (press.getResultCount() > 0) {
+        if (press.getResultCount() > 0 || press.hasLeftovers()) {
             if (!level.isClientSide) {
                 for (ItemStack cheese : press.takeResult()) {
                     if (!player.getInventory().add(cheese)) {
@@ -128,6 +128,16 @@ public class CheeseFormBlock extends FacingBlock implements EntityBlock {
             Containers.dropContents(level, pos, press.drops());
         }
         super.onRemove(state, level, pos, newState, moved);
+    }
+
+    @Override
+    protected boolean hasAnalogOutputSignal(BlockState state) {
+        return true;
+    }
+
+    @Override
+    protected int getAnalogOutputSignal(BlockState state, Level level, BlockPos pos) {
+        return level.getBlockEntity(pos) instanceof CheeseFormBlockEntity press ? press.getAnalogSignal() : 0;
     }
 
     @Override

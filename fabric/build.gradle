@@ -46,7 +46,7 @@ dependencies {
     modImplementation("me.shedaniel:RoughlyEnoughItems-fabric:$rei_version") { exclude group: 'net.fabricmc', module: 'fabric-loader' }
     modApi("net.fabricmc.fabric-api:fabric-api:${rootProject.fabric_api_version}"){ exclude group: 'net.fabricmc', module: 'fabric-loader' }
     modApi("dev.architectury:architectury-fabric:${rootProject.architectury_version}"){ exclude group: 'net.fabricmc', module: 'fabric-loader' }
-    include(modImplementation("net.satisfy.foundation:foundation-fabric:${rootProject.foundation_version}") { transitive = false })
+    modImplementation("net.satisfy.foundation:foundation-fabric:${rootProject.foundation_version}") { transitive = false }
     modCompileOnlyApi("mezz.jei:jei-${minecraft_version}-common-api:${jei_version}")
     modCompileOnlyApi("mezz.jei:jei-${minecraft_version}-fabric-api:${jei_version}")
     modRuntimeOnly("mezz.jei:jei-${minecraft_version}-fabric:${jei_version}")
@@ -122,6 +122,7 @@ modrinth {
     additionalFiles = [tasks.sourcesJar.archiveFile]
 
     dependencies {
+        required.project "lets-do-foundation"
         required.project "architectury-api"
         required.project "cloth-config"
     }
@@ -139,6 +140,7 @@ tasks.register("curseforge821483", net.darkhax.curseforgegradle.TaskPublishCurse
     mainFile.addGameVersion(rootProject.minecraft_version)
     mainFile.addModLoader("Fabric")
     mainFile.addEnvironment("Client", "Server")
+    mainFile.addRequirement("lets-do-foundation")
     mainFile.addRequirement("architectury-api")
     mainFile.addRequirement("cloth-config")
 }

@@ -406,6 +406,19 @@ public class CookingCauldronBlockEntity extends BlockEntity implements Implement
         return inventory.get(RESULT_SLOT);
     }
 
+    public int getAnalogSignal() {
+        if (!inventory.get(RESULT_SLOT).isEmpty()) {
+            return 15;
+        }
+        int filled = 0;
+        for (int i = 0; i < INGREDIENT_SLOTS; i++) {
+            if (!inventory.get(i).isEmpty()) {
+                filled++;
+            }
+        }
+        return filled * 3;
+    }
+
     public ItemStack getResultContainer() {
         return resultContainer;
     }

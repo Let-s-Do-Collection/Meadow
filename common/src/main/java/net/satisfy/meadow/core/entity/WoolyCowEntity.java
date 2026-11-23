@@ -255,6 +255,15 @@ public class WoolyCowEntity extends Animal implements Shearable, VariantHolder<W
         return WoolyCowVariant.byId(getTypeVariant() & 255);
     }
 
+    @Override
+    public @Nullable ItemStack getPickResult() {
+        return (switch (getVariant()) {
+            case HIGHLAND -> ObjectRegistry.HIGHLAND_WOOLY_COW_SPAWN_EGG;
+            case UMBRA -> ObjectRegistry.UMBRA_WOOLY_COW_SPAWN_EGG;
+            case WARPED -> ObjectRegistry.WARPED_WOOLY_COW_SPAWN_EGG;
+        }).get().getDefaultInstance();
+    }
+
     private void setTypeVariant(int i) {
         entityData.set(DATA_ID_TYPE_VARIANT, i);
     }

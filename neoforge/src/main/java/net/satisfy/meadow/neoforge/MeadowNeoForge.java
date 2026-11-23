@@ -40,6 +40,10 @@ public class MeadowNeoForge {
         bus.addListener(this::addPackFinders);
 
         modContainer.registerConfig(ModConfig.Type.COMMON, MeadowNeoForgeConfig.COMMON_CONFIG);
+
+        modContainer.registerConfig(ModConfig.Type.STARTUP, MeadowNeoForgeConfig.STARTUP_CONFIG);
+
+        MeadowNeoForgeConfig.syncFood();
         bus.addListener(MeadowNeoForgeConfig::onLoad);
         bus.addListener(MeadowNeoForgeConfig::onReload);
         bus.addListener(MeadowNeoForge::reapplyFoodConfig);
@@ -101,7 +105,7 @@ public class MeadowNeoForge {
 
         FoodProperties updated = new FoodProperties(
                 PlatformHelperImpl.getNutrition(key),
-                PlatformHelperImpl.getSaturation(key),
+                PlatformHelperImpl.getNutrition(key) * PlatformHelperImpl.getSaturation(key) * 2.0F,
                 current.canAlwaysEat(),
                 current.eatSeconds(),
                 current.usingConvertsTo(),

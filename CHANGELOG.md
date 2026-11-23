@@ -1,3 +1,26 @@
+[1.4.11]
+
+**Added**
+* Hoppers can now fill the Cheese Form with milk and rennet from the top or the sides. Finished cheese and empty buckets and bottles come out from the bottom
+* A redstone signal turns the crank of the Cheese Form
+* Hoppers can put cheese and bread into a heated (or not heated) Fondue Pot. Cheese Sticks come out at the bottom, or take them out with an empty hand
+* A redstone signal can stir the Fondue Pot 
+* Comparators read the Cheese Form, the Fondue Pot, the Cooking Cauldron and the Cooking Frame and give a full signal once something is ready to take. On the Cheese Rack, the Wheelbarrow and the flower pots and boxes they show how full it is
+
+**Fixed**
+* On NeoForge, food gives its full saturation again instead of almost none
+* Sitting on a Pine Chair no longer leaves you floating above it
+* On Fabric, the Fur Armor shows its own model again instead of rendering broken
+* "Say Cheese!" is now granted for your first cheese wheel of any kind instead of only after collecting all of them
+* Picking a Wooly Cow with the middle mouse button gives the spawn egg of its own kind instead of always the Warped one
+* Connected Pine Tables show their tabletop the right way round again
+
+**Changed**
+* Foundation is no longer bundled inside the mod
+* The creative tab tooltip now has a colored frame and shows the mod id, like the other Let's Do mods
+
+***
+
 [1.4.10]
 
 **Added**

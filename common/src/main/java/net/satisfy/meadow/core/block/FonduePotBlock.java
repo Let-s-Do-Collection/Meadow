@@ -105,6 +105,16 @@ public class FonduePotBlock extends FacingBlock implements EntityBlock {
         if (!player.getMainHandItem().isEmpty() || !(level.getBlockEntity(pos) instanceof FonduePotBlockEntity pot)) {
             return InteractionResult.PASS;
         }
+        if (pot.hasSticks()) {
+            if (!level.isClientSide) {
+                ItemStack stack = new ItemStack(ObjectRegistry.CHEESE_STICK.get(), pot.takeSticks());
+                if (!player.getInventory().add(stack)) {
+                    player.drop(stack, false);
+                }
+                level.playSound(null, pos, SoundEvents.ITEM_PICKUP, SoundSource.BLOCKS, 0.6F, 1.0F);
+            }
+            return InteractionResult.sidedSuccess(level.isClientSide);
+        }
         pot.stir();
         if (!level.isClientSide) {
             shake(level, pos);
@@ -113,6 +123,16 @@ public class FonduePotBlock extends FacingBlock implements EntityBlock {
             level.playSound(null, pos, SoundEvents.HONEY_BLOCK_SLIDE, SoundSource.BLOCKS, 0.4F, 0.8F + level.random.nextFloat() * 0.4F);
         }
         return InteractionResult.sidedSuccess(level.isClientSide);
+    }
+
+    @Override
+    protected boolean hasAnalogOutputSignal(BlockState state) {
+        return true;
+    }
+
+    @Override
+    protected int getAnalogOutputSignal(BlockState state, Level level, BlockPos pos) {
+        return level.getBlockEntity(pos) instanceof FonduePotBlockEntity pot ? pot.getAnalogSignal() : 0;
     }
 
     private void shake(Level level, BlockPos pos) {

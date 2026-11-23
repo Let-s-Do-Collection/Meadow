@@ -23,6 +23,6 @@ public class PineChairBlock extends ChairBlock {
         if (hand == InteractionHand.OFF_HAND || state.getValue(HALF) != DoubleBlockHalf.LOWER) {
             return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
         }
-        return SeatUtil.onUse(level, player, hand, hit, 0.325);
+        return SeatUtil.onUse(level, player, hand, hit, -0.15);
     }
 }

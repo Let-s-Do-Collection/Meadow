@@ -4,6 +4,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.state.BlockState;
+import net.satisfy.foundation.storage.StorageBlock;
 import net.satisfy.foundation.storage.StorageBlockEntity;
 import net.satisfy.foundation.util.ImplementedInventory;
 import net.satisfy.meadow.core.registry.EntityTypeRegistry;
@@ -20,5 +21,15 @@ public class MeadowStorageBlockEntity extends StorageBlockEntity implements Impl
     @Override
     public NonNullList<ItemStack> getItems() {
         return getInventory();
+    }
+
+    @Override
+    public int getMaxStackSize() {
+        return 1;
+    }
+
+    @Override
+    public boolean canPlaceItem(int slot, ItemStack stack) {
+        return slot >= 0 && slot < getItems().size() && getItems().get(slot).isEmpty() && getBlockState().getBlock() instanceof StorageBlock storage && storage.canInsertStack(stack);
     }
 }

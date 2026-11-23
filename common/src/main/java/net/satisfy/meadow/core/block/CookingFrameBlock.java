@@ -188,6 +188,16 @@ public class CookingFrameBlock extends BaseEntityBlock {
         return state.getValue(HALF) == DoubleBlockHalf.LOWER ? new CookingCauldronBlockEntity(pos, state) : null;
     }
 
+    @Override
+    protected boolean hasAnalogOutputSignal(BlockState state) {
+        return true;
+    }
+
+    @Override
+    protected int getAnalogOutputSignal(BlockState state, Level level, BlockPos pos) {
+        return level.getBlockEntity(state.getValue(HALF) == DoubleBlockHalf.LOWER ? pos : pos.below()) instanceof CookingCauldronBlockEntity cauldron ? cauldron.getAnalogSignal() : 0;
+    }
+
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {

@@ -4,6 +4,9 @@ import net.neoforged.fml.event.config.ModConfigEvent;
 import net.neoforged.neoforge.common.ModConfigSpec;
 
 public class MeadowNeoForgeConfig {
+    public static final ModConfigSpec.Builder STARTUP_BUILDER = new ModConfigSpec.Builder();
+    public static final ModConfigSpec STARTUP_CONFIG;
+
     public static final ModConfigSpec COMMON_CONFIG;
     public static final ModConfigSpec.IntValue CHEESE_PRESS_DURATION;
     public static final ModConfigSpec.IntValue FONDUE_WHEEL_MELT_DURATION;
@@ -232,52 +235,58 @@ public class MeadowNeoForgeConfig {
         ANIMATIONS = builder.comment("Blocks of this mod are animated.").define("animations", true);
         builder.pop();
 
-        builder.comment("Hunger, saturation and effect duration in ticks of the food items. Changes need a game restart.").push("Food");
-        CHEESECAKE_SLICE_NUTRITION = builder.comment("Hunger points restored by Cheesecake Slice. 2 points = 1 drumstick.").defineInRange("cheesecakeSliceNutrition", 7, 0, 20);
-        CHEESECAKE_SLICE_SATURATION = builder.comment("Saturation given by Cheesecake Slice, multiplied with its hunger points.").defineInRange("cheesecakeSliceSaturation", 0.8, 0.0, 2.0);
-        CHEESE_TART_SLICE_NUTRITION = builder.comment("Hunger points restored by Cheese Tart Slice. 2 points = 1 drumstick.").defineInRange("cheeseTartSliceNutrition", 7, 0, 20);
-        CHEESE_TART_SLICE_SATURATION = builder.comment("Saturation given by Cheese Tart Slice, multiplied with its hunger points.").defineInRange("cheeseTartSliceSaturation", 0.8, 0.0, 2.0);
-        CHEESE_SLICE_NUTRITION = builder.comment("Hunger points restored by Cheese Slice. 2 points = 1 drumstick.").defineInRange("cheeseSliceNutrition", 6, 0, 20);
-        CHEESE_SLICE_SATURATION = builder.comment("Saturation given by Cheese Slice, multiplied with its hunger points.").defineInRange("cheeseSliceSaturation", 0.8, 0.0, 2.0);
-        SHEEP_CHEESE_SLICE_NUTRITION = builder.comment("Hunger points restored by Sheep Cheese Slice. 2 points = 1 drumstick.").defineInRange("sheepCheeseSliceNutrition", 6, 0, 20);
-        SHEEP_CHEESE_SLICE_SATURATION = builder.comment("Saturation given by Sheep Cheese Slice, multiplied with its hunger points.").defineInRange("sheepCheeseSliceSaturation", 0.8, 0.0, 2.0);
-        GRAIN_CHEESE_SLICE_NUTRITION = builder.comment("Hunger points restored by Grain Cheese Slice. 2 points = 1 drumstick.").defineInRange("grainCheeseSliceNutrition", 6, 0, 20);
-        GRAIN_CHEESE_SLICE_SATURATION = builder.comment("Saturation given by Grain Cheese Slice, multiplied with its hunger points.").defineInRange("grainCheeseSliceSaturation", 0.8, 0.0, 2.0);
-        AMETHYST_CHEESE_SLICE_NUTRITION = builder.comment("Hunger points restored by Amethyst Cheese Slice. 2 points = 1 drumstick.").defineInRange("amethystCheeseSliceNutrition", 6, 0, 20);
-        AMETHYST_CHEESE_SLICE_SATURATION = builder.comment("Saturation given by Amethyst Cheese Slice, multiplied with its hunger points.").defineInRange("amethystCheeseSliceSaturation", 0.8, 0.0, 2.0);
-        BUFFALO_CHEESE_SLICE_NUTRITION = builder.comment("Hunger points restored by Buffalo Cheese Slice. 2 points = 1 drumstick.").defineInRange("buffaloCheeseSliceNutrition", 6, 0, 20);
-        BUFFALO_CHEESE_SLICE_SATURATION = builder.comment("Saturation given by Buffalo Cheese Slice, multiplied with its hunger points.").defineInRange("buffaloCheeseSliceSaturation", 0.8, 0.0, 2.0);
-        GOAT_CHEESE_SLICE_NUTRITION = builder.comment("Hunger points restored by Goat Cheese Slice. 2 points = 1 drumstick.").defineInRange("goatCheeseSliceNutrition", 6, 0, 20);
-        GOAT_CHEESE_SLICE_SATURATION = builder.comment("Saturation given by Goat Cheese Slice, multiplied with its hunger points.").defineInRange("goatCheeseSliceSaturation", 0.8, 0.0, 2.0);
-        WARPED_CHEESE_SLICE_NUTRITION = builder.comment("Hunger points restored by Warped Cheese Slice. 2 points = 1 drumstick.").defineInRange("warpedCheeseSliceNutrition", 6, 0, 20);
-        WARPED_CHEESE_SLICE_SATURATION = builder.comment("Saturation given by Warped Cheese Slice, multiplied with its hunger points.").defineInRange("warpedCheeseSliceSaturation", 0.8, 0.0, 2.0);
-        WARPED_CHEESE_SLICE_EFFECT_DURATION = builder.comment("How long the effect of Warped Cheese Slice lasts in ticks. 20 ticks = 1 second.").defineInRange("warpedCheeseSliceEffectDuration", 300, 0, 72000);
-        CHEESE_SANDWICH_NUTRITION = builder.comment("Hunger points restored by Cheese Sandwich. 2 points = 1 drumstick.").defineInRange("cheeseSandwichNutrition", 7, 0, 20);
-        CHEESE_SANDWICH_SATURATION = builder.comment("Saturation given by Cheese Sandwich, multiplied with its hunger points.").defineInRange("cheeseSandwichSaturation", 0.7, 0.0, 2.0);
-        CHEESE_ROLL_NUTRITION = builder.comment("Hunger points restored by Cheese Roll. 2 points = 1 drumstick.").defineInRange("cheeseRollNutrition", 7, 0, 20);
-        CHEESE_ROLL_SATURATION = builder.comment("Saturation given by Cheese Roll, multiplied with its hunger points.").defineInRange("cheeseRollSaturation", 0.8, 0.0, 2.0);
-        CHEESE_STICK_NUTRITION = builder.comment("Hunger points restored by Cheese Stick. 2 points = 1 drumstick.").defineInRange("cheeseStickNutrition", 6, 0, 20);
-        CHEESE_STICK_SATURATION = builder.comment("Saturation given by Cheese Stick, multiplied with its hunger points.").defineInRange("cheeseStickSaturation", 0.6, 0.0, 2.0);
-        RAW_BUFFALO_MEAT_NUTRITION = builder.comment("Hunger points restored by Raw Buffalo Meat. 2 points = 1 drumstick.").defineInRange("rawBuffaloMeatNutrition", 2, 0, 20);
-        RAW_BUFFALO_MEAT_SATURATION = builder.comment("Saturation given by Raw Buffalo Meat, multiplied with its hunger points.").defineInRange("rawBuffaloMeatSaturation", 0.3, 0.0, 2.0);
-        COOKED_BUFFALO_MEAT_NUTRITION = builder.comment("Hunger points restored by Cooked Buffalo Meat. 2 points = 1 drumstick.").defineInRange("cookedBuffaloMeatNutrition", 8, 0, 20);
-        COOKED_BUFFALO_MEAT_SATURATION = builder.comment("Saturation given by Cooked Buffalo Meat, multiplied with its hunger points.").defineInRange("cookedBuffaloMeatSaturation", 0.8, 0.0, 2.0);
-        ROASTED_BUFFALO_HAM_NUTRITION = builder.comment("Hunger points restored by Roasted Buffalo Ham. 2 points = 1 drumstick.").defineInRange("roastedBuffaloHamNutrition", 8, 0, 20);
-        ROASTED_BUFFALO_HAM_SATURATION = builder.comment("Saturation given by Roasted Buffalo Ham, multiplied with its hunger points.").defineInRange("roastedBuffaloHamSaturation", 0.9, 0.0, 2.0);
-        ROASTED_BUFFALO_HAM_EFFECT_DURATION = builder.comment("How long the effect of Roasted Buffalo Ham lasts in ticks. 20 ticks = 1 second.").defineInRange("roastedBuffaloHamEffectDuration", 600, 0, 72000);
-        SAUSAGE_WITH_CHEESE_NUTRITION = builder.comment("Hunger points restored by Buffalo Sausage with Cheese. 2 points = 1 drumstick.").defineInRange("sausageWithCheeseNutrition", 8, 0, 20);
-        SAUSAGE_WITH_CHEESE_SATURATION = builder.comment("Saturation given by Buffalo Sausage with Cheese, multiplied with its hunger points.").defineInRange("sausageWithCheeseSaturation", 0.9, 0.0, 2.0);
-        builder.pop();
+        STARTUP_BUILDER.comment("Hunger, saturation and effect duration in ticks of the food items. Changes need a game restart.").push("Food");
+        CHEESECAKE_SLICE_NUTRITION = STARTUP_BUILDER.comment("Hunger points restored by Cheesecake Slice. 2 points = 1 drumstick.").defineInRange("cheesecakeSliceNutrition", 7, 0, 20);
+        CHEESECAKE_SLICE_SATURATION = STARTUP_BUILDER.comment("Saturation given by Cheesecake Slice, multiplied with its hunger points.").defineInRange("cheesecakeSliceSaturation", 0.8, 0.0, 2.0);
+        CHEESE_TART_SLICE_NUTRITION = STARTUP_BUILDER.comment("Hunger points restored by Cheese Tart Slice. 2 points = 1 drumstick.").defineInRange("cheeseTartSliceNutrition", 7, 0, 20);
+        CHEESE_TART_SLICE_SATURATION = STARTUP_BUILDER.comment("Saturation given by Cheese Tart Slice, multiplied with its hunger points.").defineInRange("cheeseTartSliceSaturation", 0.8, 0.0, 2.0);
+        CHEESE_SLICE_NUTRITION = STARTUP_BUILDER.comment("Hunger points restored by Cheese Slice. 2 points = 1 drumstick.").defineInRange("cheeseSliceNutrition", 6, 0, 20);
+        CHEESE_SLICE_SATURATION = STARTUP_BUILDER.comment("Saturation given by Cheese Slice, multiplied with its hunger points.").defineInRange("cheeseSliceSaturation", 0.8, 0.0, 2.0);
+        SHEEP_CHEESE_SLICE_NUTRITION = STARTUP_BUILDER.comment("Hunger points restored by Sheep Cheese Slice. 2 points = 1 drumstick.").defineInRange("sheepCheeseSliceNutrition", 6, 0, 20);
+        SHEEP_CHEESE_SLICE_SATURATION = STARTUP_BUILDER.comment("Saturation given by Sheep Cheese Slice, multiplied with its hunger points.").defineInRange("sheepCheeseSliceSaturation", 0.8, 0.0, 2.0);
+        GRAIN_CHEESE_SLICE_NUTRITION = STARTUP_BUILDER.comment("Hunger points restored by Grain Cheese Slice. 2 points = 1 drumstick.").defineInRange("grainCheeseSliceNutrition", 6, 0, 20);
+        GRAIN_CHEESE_SLICE_SATURATION = STARTUP_BUILDER.comment("Saturation given by Grain Cheese Slice, multiplied with its hunger points.").defineInRange("grainCheeseSliceSaturation", 0.8, 0.0, 2.0);
+        AMETHYST_CHEESE_SLICE_NUTRITION = STARTUP_BUILDER.comment("Hunger points restored by Amethyst Cheese Slice. 2 points = 1 drumstick.").defineInRange("amethystCheeseSliceNutrition", 6, 0, 20);
+        AMETHYST_CHEESE_SLICE_SATURATION = STARTUP_BUILDER.comment("Saturation given by Amethyst Cheese Slice, multiplied with its hunger points.").defineInRange("amethystCheeseSliceSaturation", 0.8, 0.0, 2.0);
+        BUFFALO_CHEESE_SLICE_NUTRITION = STARTUP_BUILDER.comment("Hunger points restored by Buffalo Cheese Slice. 2 points = 1 drumstick.").defineInRange("buffaloCheeseSliceNutrition", 6, 0, 20);
+        BUFFALO_CHEESE_SLICE_SATURATION = STARTUP_BUILDER.comment("Saturation given by Buffalo Cheese Slice, multiplied with its hunger points.").defineInRange("buffaloCheeseSliceSaturation", 0.8, 0.0, 2.0);
+        GOAT_CHEESE_SLICE_NUTRITION = STARTUP_BUILDER.comment("Hunger points restored by Goat Cheese Slice. 2 points = 1 drumstick.").defineInRange("goatCheeseSliceNutrition", 6, 0, 20);
+        GOAT_CHEESE_SLICE_SATURATION = STARTUP_BUILDER.comment("Saturation given by Goat Cheese Slice, multiplied with its hunger points.").defineInRange("goatCheeseSliceSaturation", 0.8, 0.0, 2.0);
+        WARPED_CHEESE_SLICE_NUTRITION = STARTUP_BUILDER.comment("Hunger points restored by Warped Cheese Slice. 2 points = 1 drumstick.").defineInRange("warpedCheeseSliceNutrition", 6, 0, 20);
+        WARPED_CHEESE_SLICE_SATURATION = STARTUP_BUILDER.comment("Saturation given by Warped Cheese Slice, multiplied with its hunger points.").defineInRange("warpedCheeseSliceSaturation", 0.8, 0.0, 2.0);
+        WARPED_CHEESE_SLICE_EFFECT_DURATION = STARTUP_BUILDER.comment("How long the effect of Warped Cheese Slice lasts in ticks. 20 ticks = 1 second.").defineInRange("warpedCheeseSliceEffectDuration", 300, 0, 72000);
+        CHEESE_SANDWICH_NUTRITION = STARTUP_BUILDER.comment("Hunger points restored by Cheese Sandwich. 2 points = 1 drumstick.").defineInRange("cheeseSandwichNutrition", 7, 0, 20);
+        CHEESE_SANDWICH_SATURATION = STARTUP_BUILDER.comment("Saturation given by Cheese Sandwich, multiplied with its hunger points.").defineInRange("cheeseSandwichSaturation", 0.7, 0.0, 2.0);
+        CHEESE_ROLL_NUTRITION = STARTUP_BUILDER.comment("Hunger points restored by Cheese Roll. 2 points = 1 drumstick.").defineInRange("cheeseRollNutrition", 7, 0, 20);
+        CHEESE_ROLL_SATURATION = STARTUP_BUILDER.comment("Saturation given by Cheese Roll, multiplied with its hunger points.").defineInRange("cheeseRollSaturation", 0.8, 0.0, 2.0);
+        CHEESE_STICK_NUTRITION = STARTUP_BUILDER.comment("Hunger points restored by Cheese Stick. 2 points = 1 drumstick.").defineInRange("cheeseStickNutrition", 6, 0, 20);
+        CHEESE_STICK_SATURATION = STARTUP_BUILDER.comment("Saturation given by Cheese Stick, multiplied with its hunger points.").defineInRange("cheeseStickSaturation", 0.6, 0.0, 2.0);
+        RAW_BUFFALO_MEAT_NUTRITION = STARTUP_BUILDER.comment("Hunger points restored by Raw Buffalo Meat. 2 points = 1 drumstick.").defineInRange("rawBuffaloMeatNutrition", 2, 0, 20);
+        RAW_BUFFALO_MEAT_SATURATION = STARTUP_BUILDER.comment("Saturation given by Raw Buffalo Meat, multiplied with its hunger points.").defineInRange("rawBuffaloMeatSaturation", 0.3, 0.0, 2.0);
+        COOKED_BUFFALO_MEAT_NUTRITION = STARTUP_BUILDER.comment("Hunger points restored by Cooked Buffalo Meat. 2 points = 1 drumstick.").defineInRange("cookedBuffaloMeatNutrition", 8, 0, 20);
+        COOKED_BUFFALO_MEAT_SATURATION = STARTUP_BUILDER.comment("Saturation given by Cooked Buffalo Meat, multiplied with its hunger points.").defineInRange("cookedBuffaloMeatSaturation", 0.8, 0.0, 2.0);
+        ROASTED_BUFFALO_HAM_NUTRITION = STARTUP_BUILDER.comment("Hunger points restored by Roasted Buffalo Ham. 2 points = 1 drumstick.").defineInRange("roastedBuffaloHamNutrition", 8, 0, 20);
+        ROASTED_BUFFALO_HAM_SATURATION = STARTUP_BUILDER.comment("Saturation given by Roasted Buffalo Ham, multiplied with its hunger points.").defineInRange("roastedBuffaloHamSaturation", 0.9, 0.0, 2.0);
+        ROASTED_BUFFALO_HAM_EFFECT_DURATION = STARTUP_BUILDER.comment("How long the effect of Roasted Buffalo Ham lasts in ticks. 20 ticks = 1 second.").defineInRange("roastedBuffaloHamEffectDuration", 600, 0, 72000);
+        SAUSAGE_WITH_CHEESE_NUTRITION = STARTUP_BUILDER.comment("Hunger points restored by Buffalo Sausage with Cheese. 2 points = 1 drumstick.").defineInRange("sausageWithCheeseNutrition", 8, 0, 20);
+        SAUSAGE_WITH_CHEESE_SATURATION = STARTUP_BUILDER.comment("Saturation given by Buffalo Sausage with Cheese, multiplied with its hunger points.").defineInRange("sausageWithCheeseSaturation", 0.9, 0.0, 2.0);
+        STARTUP_BUILDER.pop();
+
+        STARTUP_CONFIG = STARTUP_BUILDER.build();
 
         COMMON_CONFIG = builder.build();
     }
 
     public static void onLoad(ModConfigEvent.Loading event) {
-        sync();
+        if (event.getConfig().getSpec() == COMMON_CONFIG) {
+            sync();
+        }
     }
 
     public static void onReload(ModConfigEvent.Reloading event) {
-        sync();
+        if (event.getConfig().getSpec() == COMMON_CONFIG) {
+            sync();
+        }
     }
 
     public static void sync() {
@@ -322,6 +331,9 @@ public class MeadowNeoForgeConfig {
         bannerEffectRadius = BANNER_EFFECT_RADIUS.get();
         bannerEffectAmplifier = BANNER_EFFECT_AMPLIFIER.get();
         animations = ANIMATIONS.get();
+    }
+
+    public static void syncFood() {
         cheesecakeSliceNutrition = CHEESECAKE_SLICE_NUTRITION.get();
         cheesecakeSliceSaturation = CHEESECAKE_SLICE_SATURATION.get();
         cheeseTartSliceNutrition = CHEESE_TART_SLICE_NUTRITION.get();

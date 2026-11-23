@@ -1,6 +1,6 @@
 modLoader = "javafml"
 loaderVersion = "[4,)"
-license = "Custom"
+license = "All Rights Reserved"
 issueTrackerURL = "https://github.com/satisfyu/Let-s-Do-Hub"
 
 [[accessTransformers]]
@@ -53,6 +53,6 @@ side = "BOTH"
 [[dependencies.meadow]]
 modId = "foundation"
 type = "required"
-versionRange = "[1.0.9,)"
+versionRange = "[1.1.0,)"
 ordering = "AFTER"
 side = "BOTH"

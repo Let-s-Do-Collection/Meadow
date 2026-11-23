@@ -29,7 +29,7 @@ allprojects {
         exclusiveContent {
             forRepositories(mavenLocal(), maven {
                 name = "Let's Do Maven"
-                url = "https://raw.githubusercontent.com/Let-s-Do-Collection/Foundation/1.21.1/maven"
+                url = "file:///Users/marco/.m2/repository"
             })
             filter {
                 includeGroup "net.satisfy.foundation"
@@ -64,4 +64,18 @@ allprojects {
     java {
         withSourcesJar()
     }
+}
+tasks.register("publishModrinth") {
+    group = "publishing"
+    dependsOn([":fabric", ":neoforge"].collect { path -> project(path).tasks.matching { it.name == "modrinth" } })
+}
+
+tasks.register("publishCurseForge") {
+    group = "publishing"
+    dependsOn([":fabric", ":neoforge"].collect { path -> project(path).tasks.matching { it.name.startsWith("curseforge") } })
+}
+
+tasks.register("publishAll") {
+    group = "publishing"
+    dependsOn "publishModrinth", "publishCurseForge"
 }

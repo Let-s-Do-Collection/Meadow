@@ -17,7 +17,7 @@
     "sources": "https://github.com/Let-s-Do-Collection/Meadow",
     "issues": "https://github.com/satisfyu/Let-s-Do-Hub"
   },
-  "license": "Custom",
+  "license": "All-Rights-Reserved",
   "icon": "pack.png",
   "environment": "*",
   "entrypoints": {
@@ -49,7 +49,7 @@
     "fabric-api": "*",
     "minecraft": "~1.21.1",
     "architectury": ">=13.0.8",
-    "foundation": ">=1.0.9",
+    "foundation": ">=1.1.0",
     "cloth-config": "*"
   }
 }

@@ -1,6 +1,7 @@
 package net.satisfy.meadow.core.block.entity;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.particles.ColorParticleOption;
@@ -16,6 +17,8 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.WorldlyContainer;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -24,27 +27,36 @@ import net.satisfy.foundation.registry.FoundationParticles;
 import net.satisfy.foundation.util.LibUtil;
 import net.satisfy.meadow.core.block.FonduePotBlock;
 import net.satisfy.meadow.core.registry.EntityTypeRegistry;
+import net.satisfy.meadow.core.registry.ObjectRegistry;
 import net.satisfy.meadow.core.registry.SoundEventRegistry;
 import net.satisfy.meadow.core.registry.TagRegistry;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.ToIntFunction;
 import net.satisfy.meadow.platform.PlatformHelper;
 
-public class FonduePotBlockEntity extends BlockEntity {
+public class FonduePotBlockEntity extends BlockEntity implements WorldlyContainer {
     public static final int CAPACITY = 4;
     private static final int STIR_TICKS = 6;
     private static final int SYNC_INTERVAL = 5;
     private static final int STIR_SOUND_INTERVAL = 8;
     public static final int SHAKE_EVENT = 1;
+    public static final int SLOT_CHEESE = 0;
+    public static final int SLOT_BREAD = 1;
+    public static final int SLOT_OUTPUT = 2;
+    private static final int MAX_STICKS = 16;
+    private static final int[] SLOTS_FOR_DOWN = {SLOT_OUTPUT};
+    private static final int[] SLOTS_FOR_REST = {SLOT_CHEESE, SLOT_BREAD};
     public static ToIntFunction<FonduePotBlockEntity> colorProvider = pot -> 0xFFF2C14E;
 
     private final List<ItemStack> portions = new ArrayList<>();
     private ItemStack melting = ItemStack.EMPTY;
     private int meltTicks;
     private int stirTicks;
+    private int sticks;
     private long lastStirTime = Long.MIN_VALUE / 2;
     private long lastStirSound = Long.MIN_VALUE / 2;
     private long lastShakeTime = Long.MIN_VALUE / 2;
@@ -54,6 +66,9 @@ public class FonduePotBlockEntity extends BlockEntity {
     }
 
     public static void tick(Level level, BlockPos pos, BlockState state, FonduePotBlockEntity pot) {
+        if (!level.isClientSide() && !pot.melting.isEmpty() && level.hasNeighborSignal(pos) && FonduePotBlock.isHeated(level, pos)) {
+            pot.stir();
+        }
         if (pot.melting.isEmpty() || pot.stirTicks <= 0 || !FonduePotBlock.isHeated(level, pos)) {
             if (pot.stirTicks > 0) {
                 pot.stirTicks--;
@@ -216,8 +231,22 @@ public class FonduePotBlockEntity extends BlockEntity {
         return lastStirTime;
     }
 
+    public boolean canDip() {
+        return !portions.isEmpty() && melting.isEmpty();
+    }
+
+    public int getAnalogSignal() {
+        if (sticks > 0) {
+            return 15;
+        }
+        return Math.round(portions.size() * 14.0F / CAPACITY);
+    }
+
     public NonNullList<ItemStack> drops() {
         NonNullList<ItemStack> drops = NonNullList.create();
+        for (int i = 0; i < sticks; i++) {
+            drops.add(new ItemStack(ObjectRegistry.CHEESE_STICK.get()));
+        }
         if (!melting.isEmpty()) {
             drops.add(melting.copy());
         }
@@ -234,6 +263,7 @@ public class FonduePotBlockEntity extends BlockEntity {
         }
         melting = tag.contains("Melting") ? ItemStack.parse(provider, tag.getCompound("Melting")).orElse(ItemStack.EMPTY) : ItemStack.EMPTY;
         meltTicks = tag.getInt("MeltTicks");
+        sticks = tag.getInt("Sticks");
         int syncedStir = tag.getInt("StirTicks");
         if (syncedStir > 0 && level != null && level.isClientSide()) {
             lastStirTime = Math.max(lastStirTime, level.getGameTime());
@@ -254,6 +284,128 @@ public class FonduePotBlockEntity extends BlockEntity {
         }
         tag.putInt("MeltTicks", meltTicks);
         tag.putInt("StirTicks", stirTicks);
+        tag.putInt("Sticks", sticks);
+    }
+
+    private boolean isHeated() {
+        return level != null && FonduePotBlock.isHeated(level, worldPosition);
+    }
+
+    @Override
+    public int getContainerSize() {
+        return 3;
+    }
+
+    @Override
+    public boolean isEmpty() {
+        return sticks == 0;
+    }
+
+    @Override
+    public @NotNull ItemStack getItem(int slot) {
+        return slot == SLOT_OUTPUT && sticks > 0 ? new ItemStack(ObjectRegistry.CHEESE_STICK.get()) : ItemStack.EMPTY;
+    }
+
+    @Override
+    public @NotNull ItemStack removeItem(int slot, int amount) {
+        return slot == SLOT_OUTPUT && amount > 0 ? popStick() : ItemStack.EMPTY;
+    }
+
+    @Override
+    public @NotNull ItemStack removeItemNoUpdate(int slot) {
+        return slot == SLOT_OUTPUT ? popStick() : ItemStack.EMPTY;
+    }
+
+    public boolean hasSticks() {
+        return sticks > 0;
+    }
+
+    public int takeSticks() {
+        int taken = sticks;
+        sticks = 0;
+        if (taken > 0) {
+            setChanged();
+        }
+        return taken;
+    }
+
+    private ItemStack popStick() {
+        if (sticks <= 0) {
+            return ItemStack.EMPTY;
+        }
+        sticks--;
+        setChanged();
+        return new ItemStack(ObjectRegistry.CHEESE_STICK.get());
+    }
+
+    @Override
+    public void setItem(int slot, ItemStack stack) {
+        if (slot == SLOT_OUTPUT) {
+            if (stack.isEmpty()) {
+                popStick();
+            } else if (stack.is(ObjectRegistry.CHEESE_STICK.get())) {
+                sticks += stack.getCount();
+                setChanged();
+            }
+            return;
+        }
+        if (stack.isEmpty() || level == null) {
+            return;
+        }
+        if (slot == SLOT_CHEESE && canAccept(stack)) {
+            insert(stack);
+            level.blockEvent(worldPosition, getBlockState().getBlock(), SHAKE_EVENT, 0);
+            level.playSound(null, worldPosition, SoundEvents.HONEY_BLOCK_PLACE, SoundSource.BLOCKS, 0.8F, 1.0F);
+        } else if (slot == SLOT_BREAD && canDip()) {
+            takePortion();
+            sticks++;
+            level.blockEvent(worldPosition, getBlockState().getBlock(), SHAKE_EVENT, 0);
+            level.playSound(null, worldPosition, SoundEvents.HONEY_BLOCK_SLIDE, SoundSource.BLOCKS, 0.8F, 1.2F);
+            setChanged();
+        }
+    }
+
+    @Override
+    public int getMaxStackSize() {
+        return 1;
+    }
+
+    @Override
+    public boolean canPlaceItem(int slot, ItemStack stack) {
+        if (!isHeated()) {
+            return false;
+        }
+        return switch (slot) {
+            case SLOT_CHEESE -> canAccept(stack);
+            case SLOT_BREAD -> stack.is(TagRegistry.BREAD) && canDip() && sticks < MAX_STICKS;
+            default -> false;
+        };
+    }
+
+    @Override
+    public boolean stillValid(Player player) {
+        return true;
+    }
+
+    @Override
+    public void clearContent() {
+        sticks = 0;
+        setChanged();
+    }
+
+    @Override
+    public int @NotNull [] getSlotsForFace(Direction side) {
+        return side == Direction.DOWN ? SLOTS_FOR_DOWN : SLOTS_FOR_REST;
+    }
+
+    @Override
+    public boolean canPlaceItemThroughFace(int slot, ItemStack stack, @Nullable Direction side) {
+        return side != Direction.DOWN && canPlaceItem(slot, stack);
+    }
+
+    @Override
+    public boolean canTakeItemThroughFace(int slot, ItemStack stack, Direction side) {
+        return slot == SLOT_OUTPUT && side == Direction.DOWN;
     }
 
     @Override

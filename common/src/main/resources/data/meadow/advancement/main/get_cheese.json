@@ -104,24 +104,12 @@
   },
   "requirements": [
     [
-      "cheese_wheel"
-    ],
-    [
-      "sheep_cheese_wheel"
-    ],
-    [
-      "grain_cheese_wheel"
-    ],
-    [
-      "buffalo_cheese_wheel"
-    ],
-    [
-      "goat_cheese_wheel"
-    ],
-    [
-      "warped_cheese_wheel"
-    ],
-    [
+      "cheese_wheel",
+      "sheep_cheese_wheel",
+      "grain_cheese_wheel",
+      "buffalo_cheese_wheel",
+      "goat_cheese_wheel",
+      "warped_cheese_wheel",
       "amethyst_cheese_wheel"
     ]
   ]
