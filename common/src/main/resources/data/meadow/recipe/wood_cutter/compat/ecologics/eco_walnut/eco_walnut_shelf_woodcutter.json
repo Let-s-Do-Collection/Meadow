@@ -1,0 +1,17 @@
+{
+  "type": "meadow:woodcutting",
+  "fabric:load_conditions": [
+    { "condition": "fabric:all_mods_loaded", "values": ["ecologics", "vanillabackport"] }
+  ],
+  "neoforge:conditions": [
+    { "type": "neoforge:mod_loaded", "modid": "ecologics" },
+    { "type": "neoforge:mod_loaded", "modid": "vanillabackport" }
+  ],
+  "inputItem": {
+        "tag": "ecologics:walnut_logs"
+},
+  "outputItem": {
+      "count": 1,
+      "id": "ecologics:walnut_shelf"
+  }
+}
