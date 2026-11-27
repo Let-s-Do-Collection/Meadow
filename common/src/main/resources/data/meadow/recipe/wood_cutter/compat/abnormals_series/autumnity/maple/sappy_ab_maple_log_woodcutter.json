@@ -1,0 +1,16 @@
+{
+  "type": "meadow:woodcutting",
+  "fabric:load_conditions": [
+    { "condition": "fabric:all_mods_loaded", "values": ["autumnity"] }
+  ],
+  "neoforge:conditions": [
+    { "type": "neoforge:mod_loaded", "modid": "autumnity" }
+  ],
+  "inputItem": {
+    "item": "autumnity:sappy_maple_wood"
+  },
+  "outputItem": {
+    "count": 1,
+    "id": "autumnity:sappy_maple_log"
+  }
+}

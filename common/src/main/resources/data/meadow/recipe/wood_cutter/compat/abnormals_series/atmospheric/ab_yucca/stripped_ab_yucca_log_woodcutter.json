@@ -1,0 +1,18 @@
+{
+  "type": "meadow:woodcutting",
+  "fabric:load_conditions": [
+    { "condition": "fabric:all_mods_loaded", "values": ["atmospheric"] }
+  ],
+  "neoforge:conditions": [
+    { "type": "neoforge:mod_loaded", "modid": "atmospheric" }
+  ],
+  "inputItem": [
+    {"item": "atmospheric:yucca_log"},
+    {"item": "atmospheric:yucca_wood"},
+    {"item": "atmospheric:stripped_yucca_wood"}
+  ],
+  "outputItem": {
+    "count": 1,
+    "id": "atmospheric:stripped_yucca_log"
+  }
+}

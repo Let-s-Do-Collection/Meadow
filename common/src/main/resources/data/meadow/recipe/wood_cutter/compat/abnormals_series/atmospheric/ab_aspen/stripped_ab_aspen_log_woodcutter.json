@@ -1,0 +1,22 @@
+{
+  "type": "meadow:woodcutting",
+  "fabric:load_conditions": [
+    { "condition": "fabric:all_mods_loaded", "values": ["atmospheric"] }
+  ],
+  "neoforge:conditions": [
+    { "type": "neoforge:mod_loaded", "modid": "atmospheric" }
+  ],
+  "inputItem": [
+    {"item": "atmospheric:aspen_log"},
+    {"item": "atmospheric:aspen_wood"},
+    {"item": "atmospheric:watchful_aspen_log"},
+    {"item": "atmospheric:watchful_aspen_wood"},
+    {"item": "atmospheric:crustose_log"},
+    {"item": "atmospheric:crustose_wood"},
+    {"item": "atmospheric:stripped_aspen_wood"}
+  ],
+  "outputItem": {
+    "count": 1,
+    "id": "atmospheric:stripped_aspen_log"
+  }
+}
