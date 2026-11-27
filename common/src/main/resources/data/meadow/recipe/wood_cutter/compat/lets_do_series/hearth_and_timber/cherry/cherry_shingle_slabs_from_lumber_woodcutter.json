@@ -1,0 +1,17 @@
+{
+  "type": "meadow:woodcutting",
+  "fabric:load_conditions": [
+    { "condition": "fabric:all_mods_loaded", "values": ["hearth_and_timber"] }
+  ],
+  "neoforge:conditions": [
+    { "type": "neoforge:mod_loaded", "modid": "hearth_and_timber" }
+  ],
+  "inputItem": [
+{"item": "minecraft:cherry_planks"},
+{"item": "hearth_and_timber:cherry_shingles"}
+],
+  "outputItem": {
+    "count": 2,
+    "id": "hearth_and_timber:cherry_shingle_slab"
+  }
+}

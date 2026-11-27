@@ -1,7 +1,7 @@
 {
   "type": "meadow:felting",
   "ingredient": {
-    "item": "minecraft:blue_wool"
+    "item": "minecraft:gray_wool"
   },
   "result": {
     "id": "meadow:chambray_wool",

@@ -1,0 +1,10 @@
+{
+  "type": "meadow:woodcutting",
+  "inputItem": {
+    "item": "minecraft:mangrove_roots"
+  },
+  "outputItem": {
+    "count": 4,
+    "id": "minecraft:stick"
+  }
+}

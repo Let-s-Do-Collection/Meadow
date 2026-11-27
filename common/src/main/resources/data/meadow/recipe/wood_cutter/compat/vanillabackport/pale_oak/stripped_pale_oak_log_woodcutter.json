@@ -1,0 +1,18 @@
+{
+  "type": "meadow:woodcutting",
+  "fabric:load_conditions": [
+    { "condition": "fabric:all_mods_loaded", "values": ["vanillabackport"] }
+  ],
+  "neoforge:conditions": [
+    { "type": "neoforge:mod_loaded", "modid": "vanillabackport" }
+  ],
+  "inputItem": [
+    {"item": "minecraft:pale_oak_log"},
+    {"item": "minecraft:pale_oak_wood"},
+    {"item": "minecraft:stripped_pale_oak_wood"}
+  ],
+  "outputItem": {
+    "count": 1,
+    "id": "minecraft:stripped_pale_oak_log"
+  }
+}

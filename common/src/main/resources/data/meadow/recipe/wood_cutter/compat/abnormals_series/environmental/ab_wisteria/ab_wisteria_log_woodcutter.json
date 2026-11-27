@@ -1,0 +1,16 @@
+{
+  "type": "meadow:woodcutting",
+  "fabric:load_conditions": [
+    { "condition": "fabric:all_mods_loaded", "values": ["environmental"] }
+  ],
+  "neoforge:conditions": [
+    { "type": "neoforge:mod_loaded", "modid": "environmental" }
+  ],
+  "inputItem": {
+    "item": "environmental:wisteria_wood"
+  },
+  "outputItem": {
+    "count": 1,
+    "id": "environmental:wisteria_log"
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "meadow:reclaimed_pine_stairs"
+    ]
+  },
+  "criteria": {
+    "has_reclaimed_pine_planks": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "meadow:reclaimed_pine_planks"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "meadow:reclaimed_pine_stairs"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_reclaimed_pine_planks",
+      "has_the_recipe"
+    ]
+  ]
+}

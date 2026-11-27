@@ -1,0 +1,10 @@
+{
+  "type": "meadow:woodcutting",
+  "inputItem": {
+    "item": "minecraft:warped_planks"
+  },
+  "outputItem": {
+    "count": 2,
+    "id": "minecraft:warped_slab"
+  }
+}

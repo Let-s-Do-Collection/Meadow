@@ -1,0 +1,10 @@
+{
+  "type": "meadow:woodcutting",
+  "inputItem": {
+    "item": "minecraft:jungle_planks"
+  },
+  "outputItem": {
+    "count": 1,
+    "id": "minecraft:jungle_button"
+  }
+}

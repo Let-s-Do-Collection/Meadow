@@ -1,0 +1,12 @@
+{
+  "type": "meadow:woodcutting",
+  "inputItem": [
+    {"item": "minecraft:mangrove_log"},
+    {"item": "minecraft:mangrove_wood"},
+    {"item": "minecraft:stripped_mangrove_wood"}
+  ],
+  "outputItem": {
+    "count": 1,
+    "id": "minecraft:stripped_mangrove_log"
+  }
+}

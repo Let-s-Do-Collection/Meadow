@@ -1,0 +1,17 @@
+{
+  "type": "meadow:woodcutting",
+  "fabric:load_conditions": [
+    { "condition": "fabric:all_mods_loaded", "values": ["hearth_and_timber", "biomeswevegone"] }
+  ],
+  "neoforge:conditions": [
+    { "type": "neoforge:mod_loaded", "modid": "hearth_and_timber" },
+    { "type": "neoforge:mod_loaded", "modid": "biomeswevegone" }
+  ],
+  "inputItem": {
+    "tag": "biomeswevegone:palo_verde_logs"
+  },
+  "outputItem": {
+    "count": 16,
+    "id": "hearth_and_timber:birch_board"
+  }
+}

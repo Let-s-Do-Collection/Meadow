@@ -1,0 +1,16 @@
+{
+  "type": "meadow:woodcutting",
+  "fabric:load_conditions": [
+    { "condition": "fabric:all_mods_loaded", "values": ["regions_unexplored"] }
+  ],
+  "neoforge:conditions": [
+    { "type": "neoforge:mod_loaded", "modid": "regions_unexplored" }
+  ],
+  "inputItem": {
+    "item": "regions_unexplored:blue_bioshroom_hyphae"
+  },
+  "outputItem": {
+    "count": 1,
+    "id": "regions_unexplored:blue_bioshroom_stem"
+  }
+}

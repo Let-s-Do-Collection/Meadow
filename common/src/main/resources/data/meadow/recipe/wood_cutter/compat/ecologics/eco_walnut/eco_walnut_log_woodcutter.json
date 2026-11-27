@@ -1,0 +1,17 @@
+{
+  "type": "meadow:woodcutting",
+  "fabric:load_conditions": [
+    { "condition": "fabric:all_mods_loaded", "values": ["ecologics"] }
+  ],
+  "neoforge:conditions": [
+    { "type": "neoforge:mod_loaded", "modid": "ecologics" }
+  ],
+  "inputItem": [
+    {"item": "ecologics:sappy_walnut_log"},
+    {"item": "ecologics:walnut_wood"}
+  ],
+  "outputItem": {
+    "count": 1,
+    "id": "ecologics:walnut_log"
+  }
+}

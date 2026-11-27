@@ -1,0 +1,10 @@
+{
+  "type": "meadow:woodcutting",
+  "inputItem": {
+    "item": "minecraft:spruce_wood"
+  },
+  "outputItem": {
+    "count": 1,
+    "id": "minecraft:spruce_log"
+  }
+}

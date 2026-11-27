@@ -1,0 +1,18 @@
+{
+  "type": "meadow:woodcutting",
+  "fabric:load_conditions": [
+    { "condition": "fabric:all_mods_loaded", "values": ["beachparty"] }
+  ],
+  "neoforge:conditions": [
+    { "type": "neoforge:mod_loaded", "modid": "beachparty" }
+  ],
+  "inputItem": [
+    {"item": "beachparty:palm_log"},
+    {"item": "beachparty:palm_wood"},
+    {"item": "beachparty:stripped_palm_wood"}
+  ],
+  "outputItem": {
+    "count": 1,
+    "id": "beachparty:stripped_palm_log"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "type": "meadow:woodcutting",
+  "fabric:load_conditions": [
+    { "condition": "fabric:all_mods_loaded", "values": ["candlelight"] }
+  ],
+  "neoforge:conditions": [
+    { "type": "neoforge:mod_loaded", "modid": "candlelight" }
+  ],
+  "inputItem": {
+    "tag": "minecraft:bamboo_blocks"
+  },
+  "outputItem": {
+    "count": 1,
+    "id": "candlelight:bamboo_chair"
+  }
+}
